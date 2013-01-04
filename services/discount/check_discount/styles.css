@@ -1,0 +1,58 @@
+/* CSS Document */
+h3
+{
+	margin:10px 0 0 0;
+}
+#check_certificate
+{
+	
+}
+#check_certificate input
+{
+	width:208px;
+	height:22px;
+	border:1px solid #191a1e;
+}
+#check_certificate .clear_both
+{
+	clear:both;
+}
+#check_certificate .form_name
+{
+	margin:15px 0 0 0;
+}
+#check_certificate .form_name span
+{
+	color:#9d020a;
+}
+#check_certificate .form_field
+{
+	margin:2px 0 0 0;
+	text-align:left;
+	vertical-align:top;
+}
+#check_certificate .error input
+{
+	border:1px solid #9d020a;
+}
+#check_certificate .form_error
+{
+	color:#9d020a;
+	margin:2px 0 0 0;
+}
+#check_certificate .form_field_descr
+{
+	font-size:10px;
+	color:#999;
+	text-align:left;
+	vertical-align:top;
+	margin:2px 0 0 0;
+}
+#check_certificate .form_submit
+{
+	margin:20px 0 3px 0;
+}
+#check_certificate .form_submit input
+{
+	height:24px;
+}

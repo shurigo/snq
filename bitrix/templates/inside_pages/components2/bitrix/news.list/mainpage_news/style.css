@@ -1,0 +1,17 @@
+div.news_div
+{
+	padding:10px 0 0 0;
+}
+div.news_body
+{
+	margin:10px 0 0 0;
+}
+div.news_date
+{
+	color:#707070;
+	font-size:11px;
+}
+div.news_title a
+{
+	color:#00244f;
+}

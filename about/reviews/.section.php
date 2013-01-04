@@ -1,0 +1,6 @@
+<?
+$sSectionName = "־בחמנû";
+$arDirProperties = Array(
+
+);
+?>

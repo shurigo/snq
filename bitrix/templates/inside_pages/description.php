@@ -1,0 +1,1 @@
+<?$arTemplate = Array("NAME"=>"Шаблон внутренних страниц", "DESCRIPTION"=>"");?>

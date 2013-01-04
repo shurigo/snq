@@ -1,0 +1,14 @@
+div.breadcrumb
+{
+	margin:20px 45px 0;
+}
+div.breadcrumb span
+{
+	color:#a1a8b1;
+	font-style:italic;
+}
+div.breadcrumb span a
+{
+	color:#a1a8b1;
+	font-style:italic;
+}

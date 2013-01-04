@@ -1,0 +1,116 @@
+div#body_div
+{
+	 background: #e1e1e1;
+	 padding:0;
+	 font-family:Georgia, 'Times New Roman', Times, serif; 
+	 font-style:italic; 
+	 font-size:16px; 
+	 color:#000000;
+	 width:100%;
+}
+div.main_div
+{
+	 position:relative;
+     left:50%;
+     margin-left:-500px;
+	 width:1000px;
+	 height:963px;
+}
+div.page1
+{
+	 background:url(/images/elle_project/page1.jpg) no-repeat;
+}
+div.page2
+{
+	 background:url(/images/elle_project/page2.jpg) no-repeat;
+}
+div.page3
+{
+	 background:url(/images/elle_project/page3.jpg) no-repeat;
+}
+div.page4
+{
+	 background:url(/images/elle_project/page4.jpg) no-repeat;
+}
+div.page5
+{
+	 height:878px;
+	 background:url(/images/elle_project/page5.jpg) no-repeat;
+}
+a
+{
+	color:#000000;
+}
+a:hover
+{
+	color:#9d0d15;
+}
+div.position_relative
+{
+	position:relative;
+}
+div.position_absolute
+{
+	position:absolute;
+}
+div.snowqueen_logo
+{
+	top:10px;
+	left:42px;
+}
+div.main_menu
+{
+	top:26px;
+	left:368px;
+}
+div.main_menu div
+{
+	float:left;
+}
+div#menu1
+{
+	white-space:nowrap;
+}
+div#menu2
+{
+	white-space:nowrap;
+	margin:0 0 0 34px;
+}
+div#menu3
+{
+	white-space:nowrap;
+	margin:0 0 0 34px;
+}
+div#menu4
+{
+	white-space:nowrap;
+	clear:both;
+	margin:11px 0 0 88px;
+}
+div#menu5
+{
+	white-space:nowrap;
+	margin:11px 0 0 40px;
+}
+div.clear_both
+{
+	clear:both;
+}
+div.previuos_page
+{
+	top:408px;
+	left:0px;
+	width:200px;
+	height:33px;
+	cursor:pointer;
+	border:0px solid red;
+}
+div.next_page
+{
+	top:408px;
+	left:800px;
+	width:200px;
+	height:33px;
+	cursor:pointer;
+	border:0px solid red;
+}

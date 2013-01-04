@@ -1,0 +1,24 @@
+User-Agent: *
+Disallow: /bitrix/*
+Disallow: /collection/woman/*
+Disallow: /collection/wleather/*
+Disallow: /collection/wtopclothes/*
+Disallow: /collection/wclothes/*
+Disallow: /collection/waccessories/*
+Disallow: /collection/wfurs/*
+Disallow: /collection/man/*
+Disallow: /collection/mleather/*
+Disallow: /collection/mtopclothes/*
+Disallow: /collection/mclothes/*
+Disallow: /collection/maccessories/*
+Disallow: /collection/brands/*
+Disallow: /our_shops/?c*
+Disallow: /good_prices/*
+Disallow: /anketa/*
+Disallow: /elle_project/*
+Disallow: /fitting-room/*
+Disallow: /collection/wclothes_*
+
+# settings
+Host: snowqueen.ru
+Sitemap: http://snowqueen.ru/sitemap.xml

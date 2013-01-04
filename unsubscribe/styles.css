@@ -1,0 +1,109 @@
+/* CSS Document */
+#unsubscribe
+{
+	
+}
+#unsubscribe h3
+{
+	margin:10px 0 3px 0;
+}
+#unsubscribe input
+{
+	width:350px;
+	height:22px;
+	border:1px solid #191a1e;
+}
+#unsubscribe input.checkbox
+{
+	width:20px;
+	height:16px;
+	border:0px;
+}
+#unsubscribe .checkbox_float
+{
+	margin:10px 0 0 0;
+	float:left;	
+}
+#unsubscribe .checkbox_descr
+{
+	margin:10px 0 0 0;
+	float:left;
+}
+#unsubscribe .checkbox_descr label
+{
+	cursor:pointer;
+}
+#unsubscribe .clear_both
+{
+	clear:both;
+}
+#unsubscribe select
+{
+	margin:2px 0 0 0;
+	width:350px;
+	height:22px;
+	border:1px solid #191a1e;
+}
+#unsubscribe select.select_birth_date
+{
+	width:109px;
+}
+#unsubscribe .form_name
+{
+	margin:15px 0 2px 0;
+}
+#unsubscribe .captcha_descr
+{
+	float:left;
+}
+#unsubscribe .form_name span
+{
+	color:#9d020a;
+}
+#unsubscribe .form_field
+{
+	text-align:left;
+	vertical-align:top;
+}
+#unsubscribe .captcha_input
+{
+	margin:22px 0 0 8px;
+	float:left;
+}
+#unsubscribe .captcha_input input
+{
+	width:160px;
+}
+#unsubscribe .form_field input.phone
+{
+	width:337px;
+}
+#unsubscribe .error input
+{
+	border:1px solid #9d020a;
+}
+#unsubscribe select.error 
+{
+	border:1px solid #9d020a;
+}
+#unsubscribe .form_error
+{
+	color:#9d020a;
+	margin:2px 0 0 0;
+}
+#unsubscribe .form_phone_error
+{
+	margin:2px 0 0 0px;
+}
+#unsubscribe .form_field_descr
+{
+	font-size:10px;
+	color:#999;
+	text-align:left;
+	vertical-align:top;
+	margin:2px 0 0 0;
+}
+#unsubscribe .form_submit
+{
+	margin:30px 0 3px 0;
+}

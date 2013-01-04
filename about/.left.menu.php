@@ -1,0 +1,39 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Интересное о мехе", 
+		"/about/about_fur/", 
+		Array(), 
+		Array("code"=>"about_fur"), 
+		"" 
+	),
+	Array(
+		"Новости и события", 
+		"/about/news/", 
+		Array(), 
+		Array("code"=>"news"), 
+		"" 
+	),
+	Array(
+		"Вакансии", 
+		"/about/vacancies/", 
+		Array(), 
+		Array("code"=>"vacancies"), 
+		"" 
+	),
+	Array(
+		"Сотрудничество", 
+		"/about/collaboration/", 
+		Array(), 
+		Array("code"=>"collaboration"), 
+		"" 
+	),
+	Array(
+		"Контакты", 
+		"/about/contacts/", 
+		Array(), 
+		Array("code"=>"contacts"), 
+		"" 
+	)
+);
+?>

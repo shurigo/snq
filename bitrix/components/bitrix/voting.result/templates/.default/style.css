@@ -1,0 +1,27 @@
+ol.vote-items-list, ol.vote-items-list li {
+	margin: 0; padding: 0; border: none; font-size: 100%; list-style-type: none;}
+ol.vote-items-list li {
+	padding: 0.55em;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;}
+ol.vote-items-list li.vote-item-vote-first{
+	border-top: 1px solid #ccc;}
+
+.vote-item-title{
+	font-weight:bold;}
+div.vote-item-image{
+	float:left;
+	padding-right:0.55em;}
+
+.vote-answer-table, .vote-answer-table td, .vote-bar-table, .vote-bar-table td {
+	font-size:100%; }
+
+.voting-result-box form {
+	margin:0;}
+
+.vote-bar-table{}
+
+.vote-bar-square {
+	width:10px;
+	height:10px;}
