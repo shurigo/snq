@@ -1,10 +1,6 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
-//delayed function must return a string
-
-//echo "<pre>"; print_r($arResult); echo "</pre>";
-
 if(empty($arResult))
 	return "";
 

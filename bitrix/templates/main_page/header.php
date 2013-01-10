@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/js/jquery.ui.core.min.js"></script>
 <script type="text/javascript" src="/js/jquery.ui.widget.min.js"></script>
 <script type="text/javascript" src="/js/jquery.ui.rcarousel.min.js"></script>
-<script type="text/javascript" src="/js/snowfallnew.js"></script>
+<script type="text/javascript" src="/js/snowfall.js"></script>
 <link rel="stylesheet" href="/js/rcarousel.css" type="text/css" />
 </head>
 <body>
@@ -40,13 +40,6 @@
 <div class="clear_both"></div>
 
 <? $APPLICATION->IncludeFile("/bitrix/templates/main_page/include_areas/mainmenu.html", array(), array("MODE"=>"html"));?>
-
-
-
-
-
-
-
 
 <div id="mainPageAdvDiv">
 	<div id="mainPageActionsListDivRelative">

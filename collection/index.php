@@ -8,10 +8,12 @@ if (isset($_GET["price_sort"]) && ($_GET["price_sort"] == "asc" || $_GET["price_
 	if ($_GET["price_sort"] == "asc")
 	{
 		$data_string .= "&price_sort=asc";
+		$_POST['price_sort'] = "asc";
 	}
 	elseif ($_GET["price_sort"] == "desc")
 	{
 		$data_string .= "&price_sort=desc";
+		$_POST['price_sort'] = "desc";
 	}
 }
 if (isset($_GET["PAGEN_1"]))
@@ -76,6 +78,10 @@ a.cat_elem_name {
 	text-decoration:none
 }
 </style>
+<?
+	$url_array = explode("/", $APPLICATION->GetCurPage());
+	if (is_numeric($url_array[3]) && $url_array[3] > 0) {
+?>
 <script type="text/javascript">
 //*
 	$.ajax({
@@ -89,13 +95,15 @@ a.cat_elem_name {
 	})
 //*/
 </script>
+<?
+	}
+?>
 <div style="margin:10px 45px 45px;">
     <noindex>
 		<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
         <div style="float: right;" class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="button" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir"></div> 
     </noindex>
     <h1><?
-		$url_array = explode("/", $APPLICATION->GetCurPage());
 		if ($url_array[1] == "collection")
 		{
 			$APPLICATION->IncludeComponent(
@@ -180,19 +188,13 @@ a.cat_elem_name {
 					"PRICE_SORT" => $_POST["price_sort"]
 				)
 			);
-		}
-		//echo "<pre>"; print_r($url_array); echo "</pre>";
-    ?></h1>
-    <?
-    //echo "<pre>"; print_r($arResult); echo "</pre>";
-    ?>
+		}?>
+    </h1>
     <table style="width:100%;">
         <tr>
             <td style="width:206px; vertical-align:top; padding:10px 0 0 0;">
-                <?
-				//$url_array = explode("/", $APPLICATION->GetCurPage());
-				//echo "<pre>"; print_r($url_array); echo "</pre>";
-				if ($url_array[1] == "collection" && strlen($url_array[2]) > 0)
+      <?
+			if ($url_array[1] == "collection" && strlen($url_array[2]) > 0)
 				{
 					$dbSec = CIBlockSection::GetList(
 						array(), 
@@ -222,10 +224,21 @@ a.cat_elem_name {
 						);
 					}
 				}
-                ?>
+      ?>
             </td>
-            <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
-            	<div id="collection_div"></div>
+						<td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
+						<pre>
+							<? print_r(get_defined_vars()); ?>
+							<? print_r($_GET, true); ?>
+							<? print_r($_POST, true); ?>
+						</pre>
+							<div id="collection_div">
+							<?
+//								require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+//									include($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
+	//							require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+								?>
+							</div>
             </td>
         </tr>
     </table>
@@ -317,7 +330,6 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 										if($arTopDescr = $dbTopDescr->GetNext())
 										{
 											?><div style="margin:0px 0 0 0;"><?=$arTopDescr["PREVIEW_TEXT"]?></div><?
-											//echo "<pre>"; print_r($arTopDescr); echo "</pre>";
 										}
 									}
 								}
