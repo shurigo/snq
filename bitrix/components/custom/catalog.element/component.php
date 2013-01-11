@@ -11,9 +11,7 @@ if (!in_array($arParams["ELEMENT_ID"], $_SESSION["LAST_VIEW"]))
 {
 	$_SESSION["LAST_VIEW"][] = $arParams["ELEMENT_ID"];
 }
-//echo "<pre>"; print_r($_SESSION); echo "</pre>";
 
-//unset($_SESSION["LAST_VIEW"]);
 /*************************************************************************
 	Processing of received parameters
 *************************************************************************/

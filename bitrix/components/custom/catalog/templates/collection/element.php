@@ -28,13 +28,13 @@
 		"LINK_IBLOCK_ID" => $arParams["LINK_IBLOCK_ID"],
 		"LINK_PROPERTY_SID" => $arParams["LINK_PROPERTY_SID"],
 		"LINK_ELEMENTS_URL" => $arParams["LINK_ELEMENTS_URL"],
-
  		"ELEMENT_ID" => $arResult["VARIABLES"]["ELEMENT_ID"],
  		"ELEMENT_CODE" => $arResult["VARIABLES"]["ELEMENT_CODE"],
  		"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
  		"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
 		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
 		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+		"ADD_SECTIONS_CHAIN" => "N"		
 	),
 	$component
 );?>

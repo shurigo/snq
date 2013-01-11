@@ -3,7 +3,6 @@
   if (!(is_numeric($url_array[3]) && $url_array[3] > 0)) {
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   }
-
   $APPLICATION->IncludeComponent(
 	  "custom:catalog",
 	  "collection",
@@ -83,7 +82,9 @@
 			  ),
 		  ),
 		  "COMPONENT_URL" => $_POST["component_url"],
-		  "PRICE_SORT" => $_POST["price_sort"]
+		  "PRICE_SORT" => $_POST["price_sort"],
+		  "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		  "ADD_SECTIONS_CHAIN" => "N"
 	  )
   );
   // ignore the footer for the product page

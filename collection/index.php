@@ -3,9 +3,11 @@
   $APPLICATION->SetTitle("Коллекция");
 
   $data_string = "component_url=".$APPLICATION->GetCurPage(true);
-
+  $_POST['component_url']=$APPLICATION->GetCurPage(true);
+  
   if (isset($_GET["price_sort"]) && in_array($_GET["price_sort"], array("asc", "desc"))) {
-    $data_string .= "&price_sort=".$_GET["price_sort"];
+	$data_string .= "&price_sort=".$_GET["price_sort"];
+	$_POST['price_sort']=$_GET['price_sort'];
   }
 
   if (isset($_GET["PAGEN_1"])) {
@@ -177,7 +179,9 @@ a.cat_elem_name {
 						),
 					),
 					"COMPONENT_URL" => $_POST["component_url"],
-					"PRICE_SORT" => $_POST["price_sort"]
+					"PRICE_SORT" => $_POST["price_sort"],
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+					"ADD_SECTIONS_CHAIN" => "N"
 				)
 			);
 		}?>
@@ -211,6 +215,8 @@ a.cat_elem_name {
 								"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
 								"TOP_DEPTH" => 4,
 								"LEFT_MENU_FLAG" => 1,
+								"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                "ADD_SECTIONS_CHAIN" => "N"
 							)
 						);
 					}
@@ -220,8 +226,8 @@ a.cat_elem_name {
       <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
 		<div id="collection_div">
         <? 
-		  if (is_numeric($url_array[3]) && $url_array[3] > 0) { // render individual product page only
-            require($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
+		  if (is_numeric($url_array[3]) && $url_array[3] > 0) { // render the individual product page only
+			require($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
 		  }
         ?>
 		</div>
@@ -272,11 +278,11 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 			"PAGER_DESC_NUMBERING" => "N",
 			"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
 			"PAGER_SHOW_ALL" => "N",
-			
 			"ELEMENT_ID" => $url_array[3],
 			"LAST_VIEW" => "Y",
-			"VIEW_ELEMENT_COUNT" => "10000"
-			
+			"VIEW_ELEMENT_COUNT" => "10000",
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"ADD_SECTIONS_CHAIN" => "N"
 		),
 		$component
 	);

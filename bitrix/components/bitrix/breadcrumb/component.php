@@ -9,7 +9,6 @@ $templatePath = $template->GetFile();
 $templateFolder = $template->GetFolder();
 
 $APPLICATION->SetAdditionalCSS($templateFolder."/style.css");
-
 //Params
 $arParams["START_FROM"] = (isset($arParams["START_FROM"]) && intval($arParams["START_FROM"]) > 0 ? intval($arParams["START_FROM"]) : 0);
 $arParams["PATH"] = (isset($arParams["PATH"]) && strlen($arParams["PATH"]) > 0 ? htmlspecialchars($arParams["PATH"]) : false);
