@@ -1,29 +1,20 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Коллекция");
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $APPLICATION->SetTitle("Коллекция");
 
-$data_string = "component_url=".$APPLICATION->GetCurPage(true);
-if (isset($_GET["price_sort"]) && ($_GET["price_sort"] == "asc" || $_GET["price_sort"] == "desc"))
-{
-	if ($_GET["price_sort"] == "asc")
-	{
-		$data_string .= "&price_sort=asc";
-		$_POST['price_sort'] = "asc";
-	}
-	elseif ($_GET["price_sort"] == "desc")
-	{
-		$data_string .= "&price_sort=desc";
-		$_POST['price_sort'] = "desc";
-	}
-}
-if (isset($_GET["PAGEN_1"]))
-{
-	$data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
-}
-if (isset($_GET["SHOWALL_1"]))
-{
-	$data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
-}
+  $data_string = "component_url=".$APPLICATION->GetCurPage(true);
+
+  if (isset($_GET["price_sort"]) && ($_GET["price_sort"] == "asc" || $_GET["price_sort"] == "desc")) {
+    $data_string .= "&price_sort=".$_GET["price_sort"];
+  }
+
+  if (isset($_GET["PAGEN_1"])) {
+    $data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
+  }
+  
+  if (isset($_GET["SHOWALL_1"])) {
+    $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
+  }
 ?>
 <style>
 .catalog-price {
