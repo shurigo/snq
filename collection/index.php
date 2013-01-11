@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Коллекция");
+$APPLICATION->SetTitle("РљРѕР»Р»РµРєС†РёСЏ");
 
 $data_string = "component_url=".$APPLICATION->GetCurPage(true);
 if (isset($_GET["price_sort"]) && ($_GET["price_sort"] == "asc" || $_GET["price_sort"] == "desc"))
@@ -80,7 +80,9 @@ a.cat_elem_name {
 </style>
 <?
 	$url_array = explode("/", $APPLICATION->GetCurPage());
-	if (is_numeric($url_array[3]) && $url_array[3] > 0) {
+	// enable ajax on the main collection catalog page only (not on the individual page)
+	if ($url_array[1] == "collection" && strlen($url_array[2]) > 0)
+	{
 ?>
 <script type="text/javascript">
 //*
@@ -153,7 +155,7 @@ a.cat_elem_name {
 					"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
 					"DISPLAY_TOP_PAGER" => "Y",
 					"DISPLAY_BOTTOM_PAGER" => "Y",
-					"PAGER_TITLE" => "Модели",
+					"PAGER_TITLE" => "РњРѕРґРµР»Рё",
 					"PAGER_SHOW_ALWAYS" => "N",
 					"PAGER_TEMPLATE" => "collection",
 					"PAGER_DESC_NUMBERING" => "N",
@@ -191,12 +193,12 @@ a.cat_elem_name {
 		}?>
     </h1>
     <table style="width:100%;">
-        <tr>
-            <td style="width:206px; vertical-align:top; padding:10px 0 0 0;">
-      <?
+	<tr>
+        	<td style="width:206px; vertical-align:top; padding:10px 0 0 0;">
+		<?
 			if ($url_array[1] == "collection" && strlen($url_array[2]) > 0)
-				{
-					$dbSec = CIBlockSection::GetList(
+			{
+				$dbSec = CIBlockSection::GetList(
 						array(), 
 						array(
 							"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -218,30 +220,19 @@ a.cat_elem_name {
 								"CACHE_GROUPS" => "Y",
 								"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
 								"TOP_DEPTH" => 4,
-			
 								"LEFT_MENU_FLAG" => 1,
 							)
 						);
 					}
 				}
       ?>
-            </td>
-						<td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
-						<pre>
-							<? print_r(get_defined_vars()); ?>
-							<? print_r($_GET, true); ?>
-							<? print_r($_POST, true); ?>
-						</pre>
-							<div id="collection_div">
-							<?
-//								require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-//									include($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
-	//							require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
-								?>
-							</div>
-            </td>
-        </tr>
-    </table>
+      </td>
+      <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
+	<div id="collection_div">
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
 <?
 if (is_numeric($url_array[3]) && $url_array[3] > 0)
@@ -280,7 +271,7 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 			"PRICE_VAT_INCLUDE" => "Y",
 			"DISPLAY_TOP_PAGER" => "N",
 			"DISPLAY_BOTTOM_PAGER" => "N",
-			"PAGER_TITLE" => "Модели",
+			"PAGER_TITLE" => "РњРѕРґРµР»Рё",
 			"PAGER_SHOW_ALWAYS" => "N",
 			"PAGER_TEMPLATE" => "",
 			"PAGER_DESC_NUMBERING" => "N",
@@ -301,9 +292,9 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
         <table style="width:100%;">
             <tr>
                 <td style="width:206px;">
-                    <div class="header">Читайте также:</div><br />
-                    <a href="/about/fashion_blog/">Блог модного редактора</a><br />
-                    <a href="/about/about_fur/">Интересное о мехе</a><br />	
+                    <div class="header">Р§РёС‚Р°Р№С‚Рµ С‚Р°РєР¶Рµ:</div><br />
+                    <a href="/about/fashion_blog/">Р‘Р»РѕРі РјРѕРґРЅРѕРіРѕ СЂРµРґР°РєС‚РѕСЂР°</a><br />
+                    <a href="/about/about_fur/">РРЅС‚РµСЂРµСЃРЅРѕРµ Рѕ РјРµС…Рµ</a><br />	
                 </td>
                 <td style="width:auto;">
                     <table class="darkgrey_table">
@@ -334,7 +325,7 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 									}
 								}
                                 ?>
-                                <noindex><div style="margin:5px 0 0 0;"><strong>На сайте представлена лишь часть всего ассортимента. Уточняйте цены по телефону (495) 777-8-999.</strong></div></noindex></td>
+                                <noindex><div style="margin:5px 0 0 0;"><strong>РќР° СЃР°Р№С‚Рµ РїСЂРµРґСЃС‚Р°РІР»РµРЅР° Р»РёС€СЊ С‡Р°СЃС‚СЊ РІСЃРµРіРѕ Р°СЃСЃРѕСЂС‚РёРјРµРЅС‚Р°. РЈС‚РѕС‡РЅСЏР№С‚Рµ С†РµРЅС‹ РїРѕ С‚РµР»РµС„РѕРЅСѓ (495) 777-8-999.</strong></div></noindex></td>
                             <td class="right"></td>
                         </tr>
                         <tr>
