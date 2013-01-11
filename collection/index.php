@@ -4,14 +4,14 @@
 
   $data_string = "component_url=".$APPLICATION->GetCurPage(true);
 
-  if (isset($_GET["price_sort"]) && ($_GET["price_sort"] == "asc" || $_GET["price_sort"] == "desc")) {
+  if (isset($_GET["price_sort"]) && in_array($_GET["price_sort"], array("asc", "desc"))) {
     $data_string .= "&price_sort=".$_GET["price_sort"];
   }
 
   if (isset($_GET["PAGEN_1"])) {
     $data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
   }
-  
+
   if (isset($_GET["SHOWALL_1"])) {
     $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
   }
