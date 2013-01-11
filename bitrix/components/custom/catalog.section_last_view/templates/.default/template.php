@@ -1,7 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <div style="margin:45px;">
 <?
-//echo "<pre>"; print_r($arResult); echo "</pre>";
 if (count($arResult["ITEMS"]) > 0)
 {
 	?><h2>Последние просмотры</h2>

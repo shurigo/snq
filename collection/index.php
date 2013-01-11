@@ -72,8 +72,7 @@ a.cat_elem_name {
 <?
 	$url_array = explode("/", $APPLICATION->GetCurPage());
 	// enable ajax on the main collection catalog page only (not on the individual page)
-	if ($url_array[1] == "collection" && strlen($url_array[2]) > 0)
-	{
+	if (!(is_numeric($url_array[3]) && $url_array[3] > 0)) {
 ?>
 <script type="text/javascript">
 //*
@@ -219,8 +218,13 @@ a.cat_elem_name {
       ?>
       </td>
       <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
-	<div id="collection_div">
-        </div>
+		<div id="collection_div">
+        <? 
+		  if (is_numeric($url_array[3]) && $url_array[3] > 0) { // render individual product page only
+            require($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
+		  }
+        ?>
+		</div>
       </td>
     </tr>
   </table>
@@ -330,4 +334,4 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
         </table>
     </div>
 </div>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
