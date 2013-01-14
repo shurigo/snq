@@ -1,6 +1,6 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("РљРѕР»Р»РµРєС†РёСЏ");
+  $APPLICATION->SetTitle("Коллекция");
 
   $data_string = "component_url=".$APPLICATION->GetCurPage(true);
   $_POST['component_url']=$APPLICATION->GetCurPage(true);
@@ -147,7 +147,7 @@ a.cat_elem_name {
 					"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
 					"DISPLAY_TOP_PAGER" => "Y",
 					"DISPLAY_BOTTOM_PAGER" => "Y",
-					"PAGER_TITLE" => "РњРѕРґРµР»Рё",
+					"PAGER_TITLE" => "Модели",
 					"PAGER_SHOW_ALWAYS" => "N",
 					"PAGER_TEMPLATE" => "collection",
 					"PAGER_DESC_NUMBERING" => "N",
@@ -272,7 +272,7 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 			"PRICE_VAT_INCLUDE" => "Y",
 			"DISPLAY_TOP_PAGER" => "N",
 			"DISPLAY_BOTTOM_PAGER" => "N",
-			"PAGER_TITLE" => "РњРѕРґРµР»Рё",
+			"PAGER_TITLE" => "Модели",
 			"PAGER_SHOW_ALWAYS" => "N",
 			"PAGER_TEMPLATE" => "",
 			"PAGER_DESC_NUMBERING" => "N",
@@ -293,9 +293,9 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
         <table style="width:100%;">
             <tr>
                 <td style="width:206px;">
-                    <div class="header">Р§РёС‚Р°Р№С‚Рµ С‚Р°РєР¶Рµ:</div><br />
-                    <a href="/about/fashion_blog/">Р‘Р»РѕРі РјРѕРґРЅРѕРіРѕ СЂРµРґР°РєС‚РѕСЂР°</a><br />
-                    <a href="/about/about_fur/">РРЅС‚РµСЂРµСЃРЅРѕРµ Рѕ РјРµС…Рµ</a><br />	
+                    <div class="header">Читайте также:</div><br />
+                    <a href="/about/fashion_blog/">Блог модного редактора</a><br />
+                    <a href="/about/about_fur/">Интересное о мехе</a><br />	
                 </td>
                 <td style="width:auto;">
                     <table class="darkgrey_table">
@@ -326,7 +326,7 @@ if (is_numeric($url_array[3]) && $url_array[3] > 0)
 									}
 								}
                                 ?>
-                                <noindex><div style="margin:5px 0 0 0;"><strong>РќР° СЃР°Р№С‚Рµ РїСЂРµРґСЃС‚Р°РІР»РµРЅР° Р»РёС€СЊ С‡Р°СЃС‚СЊ РІСЃРµРіРѕ Р°СЃСЃРѕСЂС‚РёРјРµРЅС‚Р°. РЈС‚РѕС‡РЅСЏР№С‚Рµ С†РµРЅС‹ РїРѕ С‚РµР»РµС„РѕРЅСѓ (495) 777-8-999.</strong></div></noindex></td>
+                                <noindex><div style="margin:5px 0 0 0;"><strong>На сайте представлена лишь часть всего ассортимента. Уточняйте цены по телефону (495) 777-8-999.</strong></div></noindex></td>
                             <td class="right"></td>
                         </tr>
                         <tr>
