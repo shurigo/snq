@@ -3,6 +3,7 @@ Disallow: /bitrix/*
 Disallow: /collection/woman/*
 Disallow: /collection/wleather/*
 Disallow: /collection/wtopclothes/*
+Disallow: /collection/wtopclother/*
 Disallow: /collection/wclothes/*
 Disallow: /collection/waccessories/*
 Disallow: /collection/wfurs/*
