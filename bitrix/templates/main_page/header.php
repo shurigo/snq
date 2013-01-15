@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/js/jquery.ui.core.min.js"></script>
 <script type="text/javascript" src="/js/jquery.ui.widget.min.js"></script>
 <script type="text/javascript" src="/js/jquery.ui.rcarousel.min.js"></script>
-<script type="text/javascript" src="/js/snowfall.js"></script>
+<script type="text/javascript" src="/js/snowfallnew.js"></script>
 <link rel="stylesheet" href="/js/rcarousel.css" type="text/css" />
 </head>
 <body>
@@ -41,6 +41,13 @@
 
 <? $APPLICATION->IncludeFile("/bitrix/templates/main_page/include_areas/mainmenu.html", array(), array("MODE"=>"html"));?>
 
+
+
+
+
+
+
+
 <div id="mainPageAdvDiv">
 	<div id="mainPageActionsListDivRelative">
     	<div id="mainPageActionsListDivAbsolute" align="center">
@@ -53,7 +60,7 @@
 								</tr>
 								<tr>
 										<td class="left"></td>
-										<td class="center" style="height:45px;"><a href="/actions/550126/" rel="nofollow" target="_blank">Скидка 50%<br />на верхнюю одежду!</a></td>
+										<td class="center" style="height:45px;"><a href="/actions/550127/" rel="nofollow" target="_blank">Скидки до 70%<br />на всю коллекцию!</a></td>
 										<td class="right"></td>
 								</tr>
 								<tr>
@@ -64,46 +71,9 @@
 						</table>
 					</div>
 
-				<div align="left">
-            <table class="red_table" style="width:auto; float:left; margin:0 0 0 10px;">
-                <tr>
-                    <td class="left_top"></td>
-                    <td class="top"></td>
-                    <td class="right_top"></td>
-                </tr>
-                <tr>
-                    <td class="left"></td>
-                    <td class="center" style="height:45px;"><a href="/actions/550045/">SALE до 50% <br />на ВСЁ!</a></td>
-                    <td class="right"></td>
-                </tr>
-                <tr>
-                    <td class="left_bot"></td>
-                    <td class="bot"></td>
-                    <td class="right_bot"></td>
-                </tr>
-                       </table>
-            </div>
+				
 
-            <div align="left">
-            <table class="red_table" style="width:auto; float:left; margin:0 0 0 10px;">
-                <tr>
-                    <td class="left_top"></td>
-                    <td class="top"></td>
-                    <td class="right_top"></td>
-                </tr>
-                <tr>
-                    <td class="left"></td>
-                    <td class="center" style="height:45px;"><a href="http://snowqueen.ru/actions/550125/" rel="nofollow" target="_blank">Скидка 50% на весь<br /> текстиль и трикотаж!</a></td>
-                    <td class="right"></td>
-                </tr>
-                <tr>
-                    <td class="left_bot"></td>
-                    <td class="bot"></td>
-                    <td class="right_bot"></td>
-                </tr>
-            </table>
-            </div>
-           
+                     
             <div align="left">
             <table class="red_table" style="width:auto; float:left; margin:0 0 0 10px;">
                 <tr>
@@ -151,7 +121,7 @@
         <div id="ui-carousel-prev-red"><span><a href="#">Следующая акция</a></span></div>
     </div>
 	<div id="topAdvMainPageBlock">
-        <div><a href="/actions/550045/"><img src="/images/mainpics/act550045.jpg" width="1000" height="675" alt="" /></a></div>
+        <div><a href="/actions/550127/"><img src="/images/mainpics/act550127.jpg" width="1000" height="675" alt="" /></a></div>
         <div><a href="http://shop.snq.ru/"><img src="/images/mainpics/internet_shop_new.jpg" width="1000" height="675" alt="" /></a></div>
         <div style="position:relative; background:url(/images/mainpics/catalog.jpg) no-repeat;">
             <div style="position:absolute; top:338px; left:317px;">
