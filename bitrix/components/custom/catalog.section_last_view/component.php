@@ -125,7 +125,6 @@ if (count($_SESSION["LAST_VIEW"]) > 0)
 			{
 				$arItem["DETAIL_PAGE_URL"] = "/collection/" . $arItemSection["CODE"] . "/" . $arItem["ID"] . "/";
 			}
-			
 			$arResult["ITEMS"][]=$arItem;
 			
 		}
@@ -134,7 +133,6 @@ if (count($_SESSION["LAST_VIEW"]) > 0)
 			break;
 		}
 	}
-	//echo "<pre>"; print_r($_SESSION); echo "</pre>";
 	$this->IncludeComponentTemplate();
 }
 ?>
