@@ -19,6 +19,7 @@ Disallow: /anketa/*
 Disallow: /elle_project/*
 Disallow: /fitting-room/*
 Disallow: /collection/wclothes_*
+Disallow: /about/fashion_blog*
 
 # settings
 Host: snowqueen.ru
