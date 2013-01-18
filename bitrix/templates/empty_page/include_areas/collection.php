@@ -1,6 +1,6 @@
 <?
   // ignore the header for the product page
-  if (!(is_numeric($url_array[3]) && $url_array[3] > 0)) {
+  if (!$is_product_page) {
     require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   }
   $APPLICATION->IncludeComponent(
@@ -88,7 +88,7 @@
 	  )
   );
   // ignore the footer for the product page
-  if (!(is_numeric($url_array[3]) && $url_array[3] > 0)) {
+  if (!$is_product_page) {
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
   }
 ?>
