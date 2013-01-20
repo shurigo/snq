@@ -72,9 +72,16 @@ a.cat_elem_name {
 }
 </style>
 <?
-	$url_array = explode("/", $APPLICATION->GetCurPage());
-	// enable ajax on the main collection catalog page only (not on the individual page)
-	if (!(is_numeric($url_array[3]) && $url_array[3] > 0)) {
+  $url_array = explode("/", $APPLICATION->GetCurPage());
+  
+  if($url_array[1] == 'collection' && empty($url_array[2])) { 
+	// Collection root undefined -> redirect to Woman collection
+	LocalRedirect('/collection/woman/', true);
+  }
+  
+  $is_product_page = is_numeric($url_array[3]) && $url_array[3] > 0;
+  // enable ajax on the main collection catalog page only (not on the individual page)
+  if (!$is_product_page) {
 ?>
 <script type="text/javascript">
 //*
@@ -90,7 +97,7 @@ a.cat_elem_name {
 //*/
 </script>
 <?
-	}
+  } // if (!$is_product_page)
 ?>
 <div style="margin:10px 45px 45px;">
     <noindex>
@@ -226,7 +233,7 @@ a.cat_elem_name {
       <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
 		<div id="collection_div">
         <? 
-		  if (is_numeric($url_array[3]) && $url_array[3] > 0) { // render the individual product page only
+		  if ($is_product_page) { // render the individual product page only
 			require($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/empty_page/include_areas/collection.php");
 		  }
         ?>
@@ -236,7 +243,7 @@ a.cat_elem_name {
   </table>
 </div>
 <?
-if (is_numeric($url_array[3]) && $url_array[3] > 0)
+if ($is_product_page)
 {
 	$APPLICATION->IncludeComponent(
 		"custom:catalog.section_last_view",
