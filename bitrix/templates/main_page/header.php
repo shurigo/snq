@@ -51,8 +51,28 @@
 <div id="mainPageAdvDiv">
 	<div id="mainPageActionsListDivRelative">
     	<div id="mainPageActionsListDivAbsolute" align="center">
-					<div align="left">
+					
+<div align="left">
 						<table class="red_table" style="width:auto; float:left;">
+								<tr>
+										<td class="left_top"></td>
+										<td class="top"></td>
+										<td class="right_top"></td>
+								</tr>
+								<tr>
+										<td class="left"></td>
+										<td class="center" style="height:45px;"><a href="/actions/550130/" rel="nofollow" target="_blank">Ñ 25 ןמ 27 ÿםגאנÿ<br>ÑÓÏÅÐ-ÑÊÈÄÊÈ!</a></td>
+										<td class="right"></td>
+								</tr>
+								<tr>
+										<td class="left_bot"></td>
+										<td class="bot"></td>
+										<td class="right_bot"></td>
+								</tr>
+						</table>
+					</div>
+<div align="left">
+						<table class="red_table" style="width:auto; float:left; margin:0 0 0 10px;">
 								<tr>
 										<td class="left_top"></td>
 										<td class="top"></td>
