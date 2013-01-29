@@ -25,7 +25,13 @@
 <div class="mainContent">
 <div id="topLogoDiv"><a href="/"><img src="/images/logo_aw1213.png" width="200" height="41" alt="Снежная Королева" /></a></div>
 <div id="topPhoneDiv"><span id="topPhonePrefix">8 (800)</span> <span id="topPhone">777-8-999</span></div>
+
+<!--GeoIP test. For development only-->
+<? require($_SERVER['DOCUMENT_ROOT'].'/geoip/geohelper.php');?> 
+<div><? $geo = new Geo(); echo 'Мой IP: '.$geo->get_ip(); ?></div>
+<div><? echo 'Мой город: '.$geo->get_value('city'); ?></div>
 <div class="clear_both"></div>
+<!--GeoIP-->
 
 <? $APPLICATION->IncludeFile("/bitrix/templates/main_page/include_areas/mainmenu.html", array(), array("MODE"=>"html"));?>
 
