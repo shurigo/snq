@@ -421,3 +421,9 @@
 2012-07-12 18:15:16 -  - exec CUpdateClient::GetHTTPPage
 2012-07-12 18:15:17 -  - TIME GetUpdatesList(request) 0.809 sec
 2012-07-12 18:15:17 -  - exec CUpdateClient::ParseServerData
+2013-01-31 22:53:54 -  - exec CUpdateClient::GetUpdatesList
+2013-01-31 22:53:54 -  - exec CUpdateClient::CollectRequestData
+2013-01-31 22:53:54 -  - LICENSE_KEY=X&lang=ru&SUPD_VER=9.1.2&VERSION=9.1.2&TYPENC=E&SUPD_STS=1&SUPD_URS=0&SUPD_URSA=5&SUPD_DBS=MYSQL&XE=N&CLIENT_SITE=localhost&CANGZIP=Y&CLIENT_PHPVER=5.4.4&stable=Y&bitm_main=9.1.2&bitm_blog=9.0.6&bitm_compression=9.0.0&bitm_fileman=9.1.0&bitm_form=9.1.0&bitm_forum=9.0.3&bitm_iblock=9.1.0&bitm_perfmon=9.1.0&bitm_photogallery=9.0.5&bitm_search=9.1.0&bitm_security=9.1.0&bitm_seo=9.0.0&bitm_sitecorporate=9.0.1&bitm_sitepersonal=9.0.0&bitm_subscribe=9.1.0&bitm_vote=9.0.0&bitl_en=20070905&bitl_ru=&bith_ru=&bith_en=
+2013-01-31 22:53:54 -  - exec CUpdateClient::GetHTTPPage
+2013-01-31 22:53:55 -  - TIME GetUpdatesList(request) 0.279 sec
+2013-01-31 22:53:55 -  - exec CUpdateClient::ParseServerData

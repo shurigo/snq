@@ -1,0 +1,4 @@
+// cidr_optim.txt
+// 1. replace tab with semicolon
+// 2. add unique id
+awk '$5 != current {gsub(/\t/,";"); id++; current=$5} {print id,";", $0}' upload/cidr_optim.txt > upload/ip-city.csv
