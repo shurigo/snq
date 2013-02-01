@@ -37,14 +37,14 @@ if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($a
 		"IBLOCK_ACTIVE"=>"Y",
 	);
 	$arSections = array();
-	$rsSections = CIBlockSection::GetList(array("SORT"=>"ASC"), $arFilter, false, array("UF_*"));
+	$rsSections = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array("UF_*"));
 	while($arSection = $rsSections->GetNext())
 	{
 		$arSections[$arSection["ID"]] = $arSection;
 		if ($arSection["ID"] == $arParams["SECTION_ID"])
 		{
 			$arSort = array(
-				"SORT" => "ASC"
+				"NAME" => "ASC"
 			);
 			$arrFilter = array(
 				"ACTIVE"=>"Y",
