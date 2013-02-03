@@ -559,7 +559,6 @@
                       width: Math.round(settings.zoomWidth) + 'px' ,
                       borderWidth: thickness + 'px'
                   });
-
                   $('.zoomWrapperImage', this.node).css({
                       width: '100%',
                       height: Math.round(settings.zoomHeight) + 'px'
@@ -577,7 +576,6 @@
                 $obj.setposition();
             };
             this.hide = function () {
-				document.getElementById("jqzoom_icon").style.display = "block";
                 switch (settings.hideEffect) {
                 case 'fadeout':
                     this.node.fadeOut(settings.fadeoutSpeed, function () {});
@@ -589,7 +587,6 @@
                 this.ieframe.hide();
             };
             this.show = function () {
-				document.getElementById("jqzoom_icon").style.display = "none";
                 switch (settings.showEffect) {
                 case 'fadein':
                     this.node.fadeIn();
@@ -706,15 +703,15 @@
             preloadText: 'Loading zoom',
             title: true,
             lens: true,
-            imageOpacity: 1,
+            imageOpacity: 0.4,
             alwaysOn: false,
             showEffect: 'show',
             //show/fadein
             hideEffect: 'hide',
             //hide/fadeout
-            fadeinSpeed: 'fast',
+            fadeinSpeed: 'slow',
             //fast/slow/number
-            fadeoutSpeed: 'fast' //fast/slow/number
+            fadeoutSpeed: '2000' //fast/slow/number
         },
         disable: function (el) {
             var api = $(el).data('jqzoom');
@@ -734,14 +731,3 @@
         }
     };
 })(jQuery);
-
-jQuery(document).ready(function($){
-	$('.jqzoom').jqzoom({
-		zoomType: 'innerzoom',
-		preloadImages: false,
-		alwaysOn:false,
-		showEffect: 'show',
-		hideEffect: 'hide',
-		preloadText: 'Загрузка изображения …'			
-	});
-})
