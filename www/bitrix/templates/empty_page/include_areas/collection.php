@@ -1,5 +1,18 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+  //TODO:check the logic and replace city id with global var
+  $arFilter = Array(
+    'PROPERTY' => Array(
+      '!col_availability' => false,
+      '!col_availability' => 0,
+      Array('LOGIC' => 'OR',
+        'col_availability' => 1,
+	Array('col_availability' => 2, 'col_city' => 12097)
+      )
+    )
+  );
+  
   $APPLICATION->IncludeComponent(
 	  "custom:catalog",
 	  "collection",
@@ -8,7 +21,8 @@
 		  "SEF_MODE" => "Y",
 		  "IBLOCK_TYPE" => "collection",
 		  "IBLOCK_ID" => "1",
-		  "USE_FILTER" => "N",
+		  "USE_FILTER" => "Y",
+		  "FILTER_NAME" => "arFilter",
 		  "USE_REVIEW" => "N",
 		  "USE_COMPARE" => "Y",
 		  "SHOW_TOP_ELEMENTS" => "N",
