@@ -1,0 +1,21 @@
+	
+ID	
+Name	
+Sorting	
+geotargeting	Geotargeting	500	Yes	No
+
+City: ID=13
+  XML_ID=$1
+  NAME=$2
+  Region:String
+  Area:String
+  Latitude:Number
+  Longitude:Number
+
+GeoIP: ID=14
+  XML_ID=$1 (add manually)
+  NAME=$3
+  range_start:Number
+  range_end:Number
+  country_code:String
+  city_id=link to elements by xml_id
