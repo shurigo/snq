@@ -28,7 +28,16 @@
 
 <!--GeoIP test. For debugging only-->
 <? include($_SERVER['DOCUMENT_ROOT'].'/geoip/geohelper.php');?> 
-<div><? echo 'Мой город: '.getMyCity()['city']; ?></div>
+<div>
+<? 
+  if(!isset($_COOKIE['city'])) {
+	echo('point1_'); print_r(getMyCity());
+  }else {
+  echo '<br>';
+  echo('point2_'); print_r($_COOKIE['city']);}
+  //echo 'Мой город: '.getMyCity()['city']; 
+?>
+</div>
 <div class="clear_both"></div>
 <!--GeoIP-->
 
