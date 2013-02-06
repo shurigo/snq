@@ -8,7 +8,7 @@
       '!col_availability' => 0,
       Array('LOGIC' => 'OR',
         'col_availability' => 1,
-	Array('col_availability' => 2, 'col_city' => 12097)
+	Array('col_availability' => 2, 'col_city' => explode(' ', $_COOKIE['city'][0]))
       )
     )
   );

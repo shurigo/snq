@@ -26,17 +26,25 @@
 <div id="topLogoDiv"><a href="/"><img src="/images/logo_aw1213.png" width="200" height="41" alt="Снежная Королева" /></a></div>
 <div id="topPhoneDiv"><span id="topPhonePrefix">8 (800)</span> <span id="topPhone">777-8-999</span></div>
 
-<!--GeoIP test. For debugging only-->
 <? include($_SERVER['DOCUMENT_ROOT'].'/geoip/geohelper.php');?> 
 <div>
-<? 
-  if(!isset($_COOKIE['city'])) {
-	echo('point1_'); print_r(getMyCity());
-  }else {
-  echo '<br>';
-  echo('point2_'); print_r($_COOKIE['city']);}
-  //echo 'Мой город: '.getMyCity()['city']; 
-?>
+<?
+      $city = explode(' ', get_my_city())[1];
+      echo '<pre>Мой город: '.$city.'</pre>'; 
+?>	
+	<form>
+		<fieldset>
+      <select id="city">
+<?
+      $cities = get_available_cities();
+      foreach($cities as $city) {
+				$selected = 'selected="selected"';
+        echo '<option value="'.$city[1].'"'.$city[0] == $city ? 'selected="selected"':''.'>'.$city[0].'</option>';
+      }
+?>  
+      </select>
+    </fieldset>
+  </form>
 </div>
 <div class="clear_both"></div>
 <!--GeoIP-->
