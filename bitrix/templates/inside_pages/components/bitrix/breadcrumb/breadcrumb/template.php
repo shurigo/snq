@@ -3,21 +3,21 @@
 
   if(empty($arResult))
 	return "";
-  
-  $strReturn = '<span><a href="/" rel="nofollow">Главная страница</a></span><span>&nbsp;/&nbsp;</span>';
+
+  $strReturn = '<a href="/">Главная</a> / ';
 
   for($index = 0, $itemSize = count($arResult); $index < $itemSize; $index++)
   {
   	  if($index > 0)
-		$strReturn .= '<span>&nbsp;/&nbsp;</span>';
+		$strReturn .= ' / ';
 
 	  $title = htmlspecialcharsex($arResult[$index]["TITLE"]);
 	  if($arResult[$index]["LINK"] <> CMain::GetCurDir())
-		$strReturn .= '<span><a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" rel="nofollow">'.$title.'</a></span>';
+		$strReturn .= '<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" >'.$title.'</a>';
 	  else
-		$strReturn .= '<span>'.$title.'</span>';
+		$strReturn .= '<strong>'.$title.'</strong>';
   }
 
-  $strReturn = "<noindex><div class='breadcrumb'>".$strReturn."</div></noindex>";
+  $strReturn = "<nav class=\"path\">".$strReturn."</nav> <!-- end .path-->";
   return $strReturn;
 ?>

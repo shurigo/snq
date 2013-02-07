@@ -1,177 +1,122 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div class="catalog-element">
-	<table width="100%" border="0" cellspacing="0" cellpadding="2">
-		<tr>
-		<?if(is_array($arResult["PREVIEW_PICTURE"]) || is_array($arResult["DETAIL_PICTURE"])):?>
-			<td width="0%" valign="top">
-				<?if(is_array($arResult["PREVIEW_PICTURE"]) && is_array($arResult["DETAIL_PICTURE"])):?>
-					<img border="0" src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" width="<?=$arResult["PREVIEW_PICTURE"]["WIDTH"]?>" height="<?=$arResult["PREVIEW_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>" title="<?=$arResult["NAME"]?>" id="image_<?=$arResult["PREVIEW_PICTURE"]["ID"]?>" style="display:block;cursor:pointer;cursor: hand;" OnClick="document.getElementById('image_<?=$arResult["PREVIEW_PICTURE"]["ID"]?>').style.display='none';document.getElementById('image_<?=$arResult["DETAIL_PICTURE"]["ID"]?>').style.display='block'" />
-					<img border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>" height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>" title="<?=$arResult["NAME"]?>" id="image_<?=$arResult["DETAIL_PICTURE"]["ID"]?>" style="display:none;cursor:pointer; cursor: hand;" OnClick="document.getElementById('image_<?=$arResult["DETAIL_PICTURE"]["ID"]?>').style.display='none';document.getElementById('image_<?=$arResult["PREVIEW_PICTURE"]["ID"]?>').style.display='block'" />
-				<?elseif(is_array($arResult["DETAIL_PICTURE"])):?>
-					<img border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>" height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>" title="<?=$arResult["NAME"]?>" />
-				<?elseif(is_array($arResult["PREVIEW_PICTURE"])):?>
-					<img border="0" src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" width="<?=$arResult["PREVIEW_PICTURE"]["WIDTH"]?>" height="<?=$arResult["PREVIEW_PICTURE"]["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>" title="<?=$arResult["NAME"]?>" />
-				<?endif?>
-				<?if(count($arResult["MORE_PHOTO"])>0):?>
-					<br /><a href="#more_photo"><?=GetMessage("CATALOG_MORE_PHOTO")?></a>
-				<?endif;?>
-			</td>
-		<?endif;?>
-			<td width="100%" valign="top">
-				<?foreach($arResult["DISPLAY_PROPERTIES"] as $pid=>$arProperty):?>
-					<?=$arProperty["NAME"]?>:<b>&nbsp;<?
-					if(is_array($arProperty["DISPLAY_VALUE"])):
-						echo implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]);
-					elseif($pid=="MANUAL"):
-						?><a href="<?=$arProperty["VALUE"]?>"><?=GetMessage("CATALOG_DOWNLOAD")?></a><?
-					else:
-						echo $arProperty["DISPLAY_VALUE"];?>
-					<?endif?></b><br />
-				<?endforeach?>
-			</td>
-		</tr>
-	</table>
-		<?foreach($arResult["PRICES"] as $code=>$arPrice):?>
-			<?if($arPrice["CAN_ACCESS"]):?>
-				<p><?=$arResult["CAT_PRICES"][$code]["TITLE"];?>&nbsp;
-				<?if($arParams["PRICE_VAT_SHOW_VALUE"] && ($arPrice["VATRATE_VALUE"] > 0)):?>
-					<?if($arParams["PRICE_VAT_INCLUDE"]):?>
-						(<?echo GetMessage("CATALOG_PRICE_VAT")?>)
-					<?else:?>
-						(<?echo GetMessage("CATALOG_PRICE_NOVAT")?>)
-					<?endif?>
-				<?endif;?>:&nbsp;
-				<?if($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]):?>
-					<s><?=$arPrice["PRINT_VALUE"]?></s> <span class="catalog-price"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?></span>
-					<?if($arParams["PRICE_VAT_SHOW_VALUE"]):?><br />
-						<?=GetMessage("CATALOG_VAT")?>:&nbsp;&nbsp;<span class="catalog-vat catalog-price"><?=$arPrice["DISCOUNT_VATRATE_VALUE"] > 0 ? $arPrice["PRINT_DISCOUNT_VATRATE_VALUE"] : GetMessage("CATALOG_NO_VAT")?></span>
-					<?endif;?>
-				<?else:?>
-					<span class="catalog-price"><?=$arPrice["PRINT_VALUE"]?></span>
-					<?if($arParams["PRICE_VAT_SHOW_VALUE"]):?><br />
-						<?=GetMessage("CATALOG_VAT")?>:&nbsp;&nbsp;<span class="catalog-vat catalog-price"><?=$arPrice["VATRATE_VALUE"] > 0 ? $arPrice["PRINT_VATRATE_VALUE"] : GetMessage("CATALOG_NO_VAT")?></span>
-					<?endif;?>
-				<?endif?>
-				</p>
-			<?endif;?>
-		<?endforeach;?>
-		<?if(is_array($arResult["PRICE_MATRIX"])):?>
-			<table cellpadding="0" cellspacing="0" border="0" width="100%" class="data-table">
-			<thead>
-			<tr>
-				<?if(count($arResult["PRICE_MATRIX"]["ROWS"]) >= 1 && ($arResult["PRICE_MATRIX"]["ROWS"][0]["QUANTITY_FROM"] > 0 || $arResult["PRICE_MATRIX"]["ROWS"][0]["QUANTITY_TO"] > 0)):?>
-					<td><?= GetMessage("CATALOG_QUANTITY") ?></td>
-				<?endif;?>
-				<?foreach($arResult["PRICE_MATRIX"]["COLS"] as $typeID => $arType):?>
-					<td><?= $arType["NAME_LANG"] ?></td>
-				<?endforeach?>
-			</tr>
-			</thead>
-			<?foreach ($arResult["PRICE_MATRIX"]["ROWS"] as $ind => $arQuantity):?>
-			<tr>
-				<?if(count($arResult["PRICE_MATRIX"]["ROWS"]) > 1 || count($arResult["PRICE_MATRIX"]["ROWS"]) == 1 && ($arResult["PRICE_MATRIX"]["ROWS"][0]["QUANTITY_FROM"] > 0 || $arResult["PRICE_MATRIX"]["ROWS"][0]["QUANTITY_TO"] > 0)):?>
-					<th nowrap>
-						<?if(IntVal($arQuantity["QUANTITY_FROM"]) > 0 && IntVal($arQuantity["QUANTITY_TO"]) > 0)
-							echo str_replace("#FROM#", $arQuantity["QUANTITY_FROM"], str_replace("#TO#", $arQuantity["QUANTITY_TO"], GetMessage("CATALOG_QUANTITY_FROM_TO")));
-						elseif(IntVal($arQuantity["QUANTITY_FROM"]) > 0)
-							echo str_replace("#FROM#", $arQuantity["QUANTITY_FROM"], GetMessage("CATALOG_QUANTITY_FROM"));
-						elseif(IntVal($arQuantity["QUANTITY_TO"]) > 0)
-							echo str_replace("#TO#", $arQuantity["QUANTITY_TO"], GetMessage("CATALOG_QUANTITY_TO"));
-						?>
-					</th>
-				<?endif;?>
-				<?foreach($arResult["PRICE_MATRIX"]["COLS"] as $typeID => $arType):?>
-					<td>
-						<?if($arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["DISCOUNT_PRICE"] < $arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["PRICE"])
-							echo '<s>'.FormatCurrency($arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["PRICE"], $arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["CURRENCY"]).'</s> <span class="catalog-price">'.FormatCurrency($arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["DISCOUNT_PRICE"], $arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["CURRENCY"])."</span>";
-						else
-							echo '<span class="catalog-price">'.FormatCurrency($arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["PRICE"], $arResult["PRICE_MATRIX"]["MATRIX"][$typeID][$ind]["CURRENCY"])."</span>";
-						?>
-					</td>
-				<?endforeach?>
-			</tr>
-			<?endforeach?>
-			</table>
-			<?if($arParams["PRICE_VAT_SHOW_VALUE"]):?>
-				<?if($arParams["PRICE_VAT_INCLUDE"]):?>
-					<small><?=GetMessage('CATALOG_VAT_INCLUDED')?></small>
-				<?else:?>
-					<small><?=GetMessage('CATALOG_VAT_NOT_INCLUDED')?></small>
-				<?endif?>
-			<?endif;?><br />
-		<?endif?>
-		<?if($arResult["CAN_BUY"]):?>
-			<?if($arParams["USE_PRODUCT_QUANTITY"] || count($arResult["PRODUCT_PROPERTIES"])):?>
-				<form action="<?=POST_FORM_ACTION_URI?>" method="post" enctype="multipart/form-data">
-				<table border="0" cellspacing="0" cellpadding="2">
-				<?if($arParams["USE_PRODUCT_QUANTITY"]):?>
-					<tr valign="top">
-						<td><?echo GetMessage("CT_BCE_QUANTITY")?>:</td>
-						<td>
-							<input type="text" name="<?echo $arParams["PRODUCT_QUANTITY_VARIABLE"]?>" value="1" size="5">
-						</td>
-					</tr>
-				<?endif;?>
-				<?foreach($arResult["PRODUCT_PROPERTIES"] as $pid => $product_property):?>
-					<tr valign="top">
-						<td><?echo $arResult["PROPERTIES"][$pid]["NAME"]?>:</td>
-						<td>
-						<?if(
-							$arResult["PROPERTIES"][$pid]["PROPERTY_TYPE"] == "L"
-							&& $arResult["PROPERTIES"][$pid]["LIST_TYPE"] == "C"
-						):?>
-							<?foreach($product_property["VALUES"] as $k => $v):?>
-								<label><input type="radio" name="<?echo $arParams["PRODUCT_PROPS_VARIABLE"]?>[<?echo $pid?>]" value="<?echo $k?>" <?if($k == $product_property["SELECTED"]) echo '"checked"'?>><?echo $v?></label><br>
-							<?endforeach;?>
-						<?else:?>
-							<select name="<?echo $arParams["PRODUCT_PROPS_VARIABLE"]?>[<?echo $pid?>]">
-								<?foreach($product_property["VALUES"] as $k => $v):?>
-									<option value="<?echo $k?>" <?if($k == $product_property["SELECTED"]) echo '"selected"'?>><?echo $v?></option>
-								<?endforeach;?>
-							</select>
-						<?endif;?>
-						</td>
-					</tr>
-				<?endforeach;?>
-				</table>
-				<input type="hidden" name="<?echo $arParams["ACTION_VARIABLE"]?>" value="BUY">
-				<input type="hidden" name="<?echo $arParams["PRODUCT_ID_VARIABLE"]?>" value="<?echo $arResult["ID"]?>">
-				<input type="submit" name="<?echo $arParams["ACTION_VARIABLE"]."BUY"?>" value="<?echo GetMessage("CATALOG_BUY")?>">
-				<input type="submit" name="<?echo $arParams["ACTION_VARIABLE"]."ADD2BASKET"?>" value="<?echo GetMessage("CATALOG_ADD_TO_BASKET")?>">
-				</form>
-			<?else:?>
-				<noindex>
-				<a href="<?echo $arResult["BUY_URL"]?>" rel="nofollow"><?echo GetMessage("CATALOG_BUY")?></a>
-				&nbsp;<a href="<?echo $arResult["ADD_URL"]?>" rel="nofollow"><?echo GetMessage("CATALOG_ADD_TO_BASKET")?></a>
-				</noindex>
-			<?endif;?>
-		<?elseif((count($arResult["PRICES"]) > 0) || is_array($arResult["PRICE_MATRIX"])):?>
-			<?=GetMessage("CATALOG_NOT_AVAILABLE")?>
-		<?endif?>
-		<br />
-	<?if($arResult["DETAIL_TEXT"]):?>
-		<br /><?=$arResult["DETAIL_TEXT"]?><br />
-	<?elseif($arResult["PREVIEW_TEXT"]):?>
-		<br /><?=$arResult["PREVIEW_TEXT"]?><br />
-	<?endif;?>
-	<?if(count($arResult["LINKED_ELEMENTS"])>0):?>
-		<br /><b><?=$arResult["LINKED_ELEMENTS"][0]["IBLOCK_NAME"]?>:</b>
-		<ul>
-	<?foreach($arResult["LINKED_ELEMENTS"] as $arElement):?>
-		<li><a href="<?=$arElement["DETAIL_PAGE_URL"]?>"><?=$arElement["NAME"]?></a></li>
-	<?endforeach;?>
-		</ul>
-	<?endif?>
-	<?
-	// additional photos
-	$LINE_ELEMENT_COUNT = 2; // number of elements in a row
-	if(count($arResult["MORE_PHOTO"])>0):?>
-		<a name="more_photo"></a>
-		<?foreach($arResult["MORE_PHOTO"] as $PHOTO):?>
-			<img border="0" src="<?=$PHOTO["SRC"]?>" width="<?=$PHOTO["WIDTH"]?>" height="<?=$PHOTO["HEIGHT"]?>" alt="<?=$arResult["NAME"]?>" title="<?=$arResult["NAME"]?>" /><br />
-		<?endforeach?>
-	<?endif?>
-	<?if(is_array($arResult["SECTION"])):?>
-		<br /><a href="<?=$arResult["SECTION"]["SECTION_PAGE_URL"]?>"><?=GetMessage("CATALOG_BACK")?></a>
-	<?endif?>
-</div>
+<section class="mainContent2">
+<?
+// navigation menu
+if (strpos($APPLICATION->GetCurDir(), "collection") && $APPLICATION->GetCurDir() != "/collection/search/")  $start_from = 1;
+else	$start_from = 0;
+
+$APPLICATION->IncludeComponent(
+    "bitrix:breadcrumb",
+    "breadcrumb",
+    Array(
+        "START_FROM" => $start_from,
+        "PATH" => "",
+        "SITE_ID" => "-"
+    ),
+false
+);
+//print_r($arResult);
+//print_r($arResult["DISPLAY_PROPERTIES"]['add_pic_1']);
+//echo $arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"];
+
+?>
+<article class="item" itemscope itemtype="http://schema.org/Product">
+          <section class="text">
+            <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
+            <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
+            <p>Бренд: <strong><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
+
+            <? if (isset($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"])) {?>
+            <div class="price bg-red"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ')?> руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></del> </div>
+            <?}  else { ?>
+            <? echo '<div class="price"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'руб</span></div>'; } ?>
+            <!-- end .price-->
+
+            <div class="likes">
+              <table>
+                <tr>
+                  <td><img src="/images/temp/fb.png" width="46" height="20" alt=" "></td>
+                  <td class="sep">&nbsp;</td>
+                  <td><img src="/images/temp/tw.png" width="55" height="20" alt=" "></td>
+                  <td class="sep">&nbsp;</td>
+                  <td><img src="/images/temp/pi.png" width="43" height="20" alt=" "></td>
+                  <td class="sep">&nbsp;</td>
+                  <td><img src="/images/temp/fb2.png" width="52" height="20" alt=" "></td>
+                  <td class="sep">&nbsp;</td>
+                  <td><img src="/images/temp/goo.png" width="32" height="20" alt=" "></td>
+                </tr>
+              </table>
+            </div>
+            <!-- end .likes-->
+            <!--
+            <div itemprop="description">
+              <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
+            </div>
+            <ul class="links">
+              <li><a href="#">Купить</a></li>
+              <li><a href="#">Найти в магазине</a></li>
+            </ul>
+            -->
+            <!-- end .links-->
+            <p class="grey">Внимание (!) Цены на сайте могут  отличатьсяот действующих.Точную цену  товара узнавайтев магазинах или уточняйте по телефону (495) 777-8-999.</p>
+          </section>
+          <!-- end .text-->
+          <section class="gallery">
+
+            <div class="big"><a class="zoom-pic" title="IMAGE TITLE" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt=" " width="310px" height="418"><span class="zoom"></span></a></div>
+
+            <!-- end .big-->
+            <div class="slider">
+              <div class="prev"></div>
+              <div class="next"></div>
+              <div class="hold">
+                <ul>
+                  <li><a data-big="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" title="IMAGE TITLE" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+                    <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="75" height="103" alt="">
+                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
+                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]?>" title="IMAGE TITLE 2" href="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+                    <img src="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"]?>" width="63" height="105" alt="">
+                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
+                </ul>
+              </div>
+              <!-- end .hold-->
+            </div>
+            <!-- end .slider-->
+          </section>
+          <!-- end .gallery-->
+</article>
+<!-- end .item-->
+</section>
+<!-- end .mainContent2-->
+
+      <aside class="aside2">
+        <h4>Популярные товары</h4>
+        <nav class="catalog2">
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/1.jpg" width="75" height="103" alt="">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/2.jpg" width="63" height="105" alt="">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/3.jpg" width="73" height="107" alt=" ">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/4.jpg" width="81" height="89" alt="">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/1.jpg" width="75" height="103" alt="">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="img/temp/2.jpg" width="63" height="105" alt="">
+            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
+          <!-- end article-->
+        </nav>
+        <!-- end .catalog2-->
+      </aside>
+      <!-- end .aside2-->

@@ -1,5 +1,6 @@
-<? 
+<?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
 
 if($arParams["USE_FILTER"]=="Y")
 {
@@ -27,6 +28,10 @@ $arComponentVariables = array(
 	"ELEMENT_CODE",
 	"action",
 );
+
+//print_r($arParams);
+
+
 if($arParams["SEF_MODE"] == "Y")
 {
 	$arVariables = array();
@@ -76,6 +81,7 @@ if($arParams["SEF_MODE"] == "Y")
 		"VARIABLES" => $arVariables,
 		"ALIASES" => $arVariableAliases
 	);
+	//print_r($arResult);
 }
 else
 {

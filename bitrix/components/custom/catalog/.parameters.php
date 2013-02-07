@@ -66,6 +66,7 @@ $arAscDesc = array(
 	"desc" => GetMessage("IBLOCK_SORT_DESC"),
 );
 
+
 $arComponentParameters = array(
 	"GROUPS" => array(
 		"FILTER_SETTINGS" => array(

@@ -7,10 +7,10 @@ $(window).load(function(){
 		switcher: 'ul.nav > li',
 		listOfSlides: 'div.hold > ul > li',
 		onChange: function(){
-			jQuery('div.slider1 div.line > div').css({width: 100/(gal.count+1) + '%', left: 100/(gal.count+1)*gal.active + '%'});
+			jQuery('div.slider1 div.line > div').css({left: 100/5*gal.active + '%'});
 		}
 	});
-	jQuery('div.slider1 div.line > div').css({width: 100/(gal.count+1) + '%', left: 100/(gal.count+1)*gal.active + '%'});
+	jQuery('div.slider1 div.line > div').css({left: 100/5*gal.active + '%'});
 	jQuery('div.slider2').gallery({
 		infinite: true,
 		duration: 1200,
