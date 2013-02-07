@@ -11,6 +11,7 @@
 	$ip = '95.24.22.7';// Москва
 	$ip = '195.224.222.227'; // Не Россия
 	$ip = '217.199.218.0'; // Киров
+	$ip = '217.149.188.152'; // Волгоград
 	if(empty($ip)) return $res_default;
 	$ip_long = ip2long($ip);
 	// convert negative values to positive

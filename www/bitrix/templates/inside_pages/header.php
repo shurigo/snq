@@ -29,18 +29,21 @@
 <? include($_SERVER['DOCUMENT_ROOT'].'/geoip/geohelper.php');?> 
 <div>
 <?
-      $city = explode(' ', get_my_city())[1];
-      echo '<pre>Мой город: '.$city.'</pre>'; 
+  $city = explode(' ', get_my_city());
+  $cities = get_available_cities();
+  if(!in_array($city[1], $cities)) {
+	$city = Array(2097, 'Москва');
+  }
+  echo '<pre>Мой город: '.$city[1].'</pre>'; 
 ?>	
 	<form>
 		<fieldset>
-      <select id="city">
+          <select id="city">
 <?
-      $cities = get_available_cities();
-      foreach($cities as $city) {
-				$selected = 'selected="selected"';
-        echo '<option value="'.$city[1].'"'.$city[0] == $city ? 'selected="selected"':''.'>'.$city[0].'</option>';
-      }
+  $cities = get_available_cities();
+  foreach($cities as $c) {
+    echo '<option value="'.$c[1].'"'.($c[0] == $city[1] ? 'selected="selected"':'').'>'.$c[0].'</option>';
+  }
 ?>  
       </select>
     </fieldset>
