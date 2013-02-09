@@ -8,7 +8,7 @@
 
   // Collection root undefined -> redirect to Woman collection
   if($url_array[1] == 'collection' && empty($url_array[2])) {
-	LocalRedirect('/collection/woman/', true);
+	  LocalRedirect('/collection/woman/', true);
   }
 
   if ($url_array[1] == "collection")

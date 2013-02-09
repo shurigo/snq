@@ -1,5 +1,4 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-
 <ul class="side-menu">
 <?
   $CURRENT_DEPTH = $arResult["SECTION"]["DEPTH_LEVEL"] + 1;
@@ -13,5 +12,5 @@
 ?>
     <li><a href="<?=$arSection["SECTION_PAGE_URL"]?>"><?=$arSection["NAME"]?></a></li>
 <?endforeach?>
-  </ul>
+</ul>
 <!-- end .side-menu-->
