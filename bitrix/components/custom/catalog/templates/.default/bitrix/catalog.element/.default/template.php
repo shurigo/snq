@@ -15,10 +15,6 @@ $APPLICATION->IncludeComponent(
     ),
 false
 );
-//print_r($arResult);
-//print_r($arResult["DISPLAY_PROPERTIES"]['add_pic_1']);
-//echo $arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"];
-
 ?>
 <article class="item" itemscope itemtype="http://schema.org/Product">
           <section class="text">
@@ -31,7 +27,7 @@ false
             <?}  else { ?>
             <? echo '<div class="price"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'руб</span></div>'; } ?>
             <!-- end .price-->
-
+           <!--
             <div class="likes">
               <table>
                 <tr>
@@ -47,6 +43,7 @@ false
                 </tr>
               </table>
             </div>
+            -->
             <!-- end .likes-->
             <!--
             <div itemprop="description">
@@ -63,20 +60,33 @@ false
           <!-- end .text-->
           <section class="gallery">
 
-            <div class="big"><a class="zoom-pic" title="IMAGE TITLE" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt=" " width="310px" height="418"><span class="zoom"></span></a></div>
+            <div class="big"><a class="zoom-pic" title="" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt=" " width="310px" height="418"><span class="zoom"></span></a></div>
 
             <!-- end .big-->
             <div class="slider">
+              <!--
               <div class="prev"></div>
               <div class="next"></div>
+              -->
               <div class="hold">
                 <ul>
-                  <li><a data-big="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" title="IMAGE TITLE" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+
+                    <li><a data-big="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" title="" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
                     <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="75" height="103" alt="">
                     <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
-                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]?>" title="IMAGE TITLE 2" href="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+
+                    <? if ($arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]!='')  { ?>
+                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]?>" title="" href="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
                     <img src="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_1"]["FILE_VALUE"]["SRC"]?>" width="63" height="105" alt="">
                     <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
+                    <?} ?>
+
+                   <? if ($arResult["DISPLAY_PROPERTIES"]['add_pic_2']["FILE_VALUE"]["SRC"]!='')  { ?>
+                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_2']["FILE_VALUE"]["SRC"]?>" title="" href="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_2"]["FILE_VALUE"]["SRC"]?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+                    <img src="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_2"]["FILE_VALUE"]["SRC"]?>" width="63" height="105" alt="">
+                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
+                    <?} ?>
+
                 </ul>
               </div>
               <!-- end .hold-->
@@ -89,34 +99,4 @@ false
 </section>
 <!-- end .mainContent2-->
 
-      <aside class="aside2">
-        <h4>Популярные товары</h4>
-        <nav class="catalog2">
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/1.jpg" width="75" height="103" alt="">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/2.jpg" width="63" height="105" alt="">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/3.jpg" width="73" height="107" alt=" ">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/4.jpg" width="81" height="89" alt="">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/1.jpg" width="75" height="103" alt="">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-          <article><a href="#"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="img/temp/2.jpg" width="63" height="105" alt="">
-            <!--[if lte IE 7]></span></span><![endif]--></span></a></article>
-          <!-- end article-->
-        </nav>
-        <!-- end .catalog2-->
-      </aside>
-      <!-- end .aside2-->
+<!-- popular - to be -->

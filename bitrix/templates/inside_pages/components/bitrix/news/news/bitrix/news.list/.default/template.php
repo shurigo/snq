@@ -1,8 +1,12 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
- <h1><?=$arResult["NAME"]?></h1>
+<h1><?=$arResult["NAME"]?></h1>
+
 <table style="width:100%;">
 	<tr>
-    	<td style="width:206px; vertical-align:top;"><?$APPLICATION->IncludeComponent(
+    	<td style="width:206px; vertical-align:top;">
+    	<?
+    	/*
+    	$APPLICATION->IncludeComponent(
             "bitrix:menu",
             "left_menu",
             Array(
@@ -17,7 +21,8 @@
                 "MENU_CACHE_USE_GROUPS" => "Y",
                 "MENU_CACHE_GET_VARS" => ""
             )
-        );?></td>
+        );*/
+        ?></td>
         <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
             <?foreach($arResult["ITEMS"] as $arItem):?>
             <div style="margin:0 0 2px 0;">
@@ -50,8 +55,7 @@
                 <br /><?=$arResult["NAV_STRING"]?>
             <?endif;?><br />
             <br />
-            
-            <a href="/collection/wmink/">Шубы из норки</a> | <a href="/collection/wskincoat/">Дубленки</a> | <a href="/collection/wtopcoat/">Женское пальто</a> | <a href="/collection/mtopcoat/">Мужское пальто</a> | <a href="/collection/wleatherjacket/">Кожаные куртки женские</a>
+
         </td>
     </tr>
 </table>

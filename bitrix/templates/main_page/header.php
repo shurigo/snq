@@ -29,17 +29,11 @@
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
-    <header class="header">
-      <div class="logo"><img src="/images/logo.png" width="200" height="57" alt="Снежная Королева"></div>
-      <!-- end .logo-->
-      <div class="phone">8(800) 777-8-999</div>
-      <!-- end .phone-->
-      <nav class="menu1"><a href="#">Магазины</a> <span>|</span> <a href="#">Контакты</a> <span>|</span> <a href="#">Интересное о мехе</a></nav>
-      <!-- end .menu1-->
-    </header>
-    <!-- end .header-->
 
-    <!-- top manu -->
+    <!-- header -->
+    <? include("/inc/header.php"); ?>
+
+    <!-- top menu -->
     <? include("/inc/topmenu.php"); ?>
 
     <div class="content">
@@ -97,7 +91,8 @@
      <!-- end actions -->
 
 
-      <div class="social-hold">
+     <div class="social-hold">
+     <!--
         <form class="subscr" action="/" method="get">
           <fieldset>
             <span>Подписаться на последние новости и акции</span>
@@ -105,19 +100,25 @@
             <input value="Подписаться" type="submit">
           </fieldset>
         </form>
+        -->
         <!-- end .subscr-->
+        <!--
         <ul class="socials">
           <li>Оставайтесь с нами</li>
           <li><a class="vk" href="#">Вконтакте</a></li>
           <li><a class="fb" href="#">Facebook</a></li>
           <li><a class="tw" href="#">Twitter</a></li>
-        </ul>
+        </ul> -->
         <!-- end .socials-->
+
       </div>
+
       <!-- end .social-hold-->
+
+
       <ul class="info-links">
-        <li><a href="#"><img src="/images/img1.jpg" width="321" height="274" alt=" "><span class="text1">Интернет-магазин</span></a></li>
-        <li><a href="#"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о стиле</span></a></li>
+        <li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow"><img src="/images/img1.jpg" width="321" height="274" alt=" "><span class="text1">Интернет-магазин</span></a></li>
+        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о стиле</span></a></li>
         <li>
                   	<?$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_hot_model", Array(
                     "AJAX_MODE" => "N",	// Включить режим AJAX

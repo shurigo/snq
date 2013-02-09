@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Новости и события");
-?><div style="margin:10px 45px 45px;">		 
+?>
          <?$APPLICATION->IncludeComponent("bitrix:news", "news", Array(
             "DISPLAY_DATE" => "Y",	// Выводить дату элемента
             "DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
@@ -68,6 +68,6 @@ $APPLICATION->SetTitle("Новости и события");
             ),
             false
         );?>
-		
- </div>
+
+
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

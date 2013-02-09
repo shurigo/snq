@@ -29,16 +29,11 @@
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
-    <header class="header">
-      <div class="logo"><a href="/"><img src="/images/logo.png" width="200" height="57" alt="Снежная Королева"></a></div>
-      <!-- end .logo-->
-      <div class="phone">8(800) 777-8-999</div>
-      <!-- end .phone-->
-      <nav class="menu1"><a href="#">Магазины</a> <span>|</span> <a href="#">Контакты</a> <span>|</span> <a href="#">Интересное о мехе</a></nav>
-      <!-- end .menu1-->
-    </header>
-    <!-- end .header-->
 
-    <? include("/../inc/topmenu.php"); ?>
+    <!-- header -->
+    <? include($_SERVER["DOCUMENT_ROOT"]."/inc/header.php"); ?>
+
+    <!-- top menu -->
+    <? include($_SERVER["DOCUMENT_ROOT"]."/inc/topmenu.php"); ?>
 
     <div class="content">
