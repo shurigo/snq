@@ -2,6 +2,10 @@
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
   <?=$arResult["NAV_STRING"]?><br />
 <?endif;?>
+<?
+	setlocale(LC_MONETARY, 'ru_RU.CP1251');
+  $fmt = '%.0n';
+?>
 <?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
 	<article>
 		<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
@@ -26,13 +30,13 @@
 			<!-- end .text -->
 			<?if(is_array($arElement['PROPERTIES']['col_price_new'])):?>
 			<span class="price bg-red">
-				<?=$arElement['PROPERTIES']['col_price_new']['VALUE']?>
+				<?=money_format($fmt, $arElement['PROPERTIES']['col_price_new']['VALUE']);?>
 				<del>
-					<?=$arElement['PROPERTIES']['col_price']['VALUE']?>
+					<?=money_format($fmt, $arElement['PROPERTIES']['col_price']['VALUE']);?>
 				</del>
 			<?else:?>
 			<span class="price">
-				<?$arElement['PROPERTIES']['col_price']['VALUE']?>
+				<?=money_format($fmt, $arElement['PROPERTIES']['col_price']['VALUE']);?>
 			<?endif?>
 			</span>
       <!-- end .price-->
