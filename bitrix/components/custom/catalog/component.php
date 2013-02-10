@@ -1,7 +1,6 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
-
 if($arParams["USE_FILTER"]=="Y")
 {
 	if(strlen($arParams["FILTER_NAME"])<=0 || !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$/", $arParams["FILTER_NAME"]))
@@ -29,16 +28,12 @@ $arComponentVariables = array(
 	"action",
 );
 
-//print_r($arParams);
-
-
 if($arParams["SEF_MODE"] == "Y")
 {
 	$arVariables = array();
 
 	$arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates($arDefaultUrlTemplates404, $arParams["SEF_URL_TEMPLATES"]);
 	$arVariableAliases = CComponentEngine::MakeComponentVariableAliases($arDefaultVariableAliases404, $arParams["VARIABLE_ALIASES"]);
-	//echo "<pre>"; print_r($arParams["COMPONENT_URL"]); echo "</pre>";
     if (strlen($arParams["COMPONENT_URL"]) > 0)
     {
         $componentPage = CComponentEngine::ParseComponentPath(
@@ -81,7 +76,6 @@ if($arParams["SEF_MODE"] == "Y")
 		"VARIABLES" => $arVariables,
 		"ALIASES" => $arVariableAliases
 	);
-	//print_r($arResult);
 }
 else
 {
@@ -126,6 +120,5 @@ else
 		"ALIASES" => $arVariableAliases
 	);
 }
-
 $this->IncludeComponentTemplate($componentPage);
 ?>

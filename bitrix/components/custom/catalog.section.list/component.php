@@ -1,6 +1,5 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
-
 /*************************************************************************
 	Processing of received parameters
 *************************************************************************/
@@ -53,7 +52,6 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 		{
 			$arResult["NAV_SECTION_ARRAY"][] = $arSectionNav["ID"];
 		}
-		//echo "<pre>"; print_r($arResult["NAV_SECTION_ARRAY"]); echo "</pre>";
 		$arFilter["ID"] = $arResult["NAV_SECTION_ARRAY"][0];
 		$rsSections = CIBlockSection::GetList(array(), $arFilter, true);
 		$rsSections->SetUrlTemplates("", $arParams["SECTION_URL"]);
@@ -110,7 +108,6 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 
 		$arResult["SECTIONS"][]=$arSection;
 	}
-
 	$this->IncludeComponentTemplate();
 }
 

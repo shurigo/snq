@@ -8,11 +8,10 @@
 
   // Collection root undefined -> redirect to Woman collection
   if($url_array[1] == 'collection' && empty($url_array[2])) {
-	  LocalRedirect('/collection/woman/', true);
+    LocalRedirect('/collection/woman/', true);
   }
-
   if ($url_array[1] == "collection")
-		{
+		{	
 			$APPLICATION->IncludeComponent(
 				"custom:catalog",
 				"",
@@ -23,7 +22,7 @@
 					"IBLOCK_ID" => "1",
 					"USE_FILTER" => "N",
 					"USE_REVIEW" => "N",
-					"USE_COMPARE" => "Y",
+					"USE_COMPARE" => "N",
 					"SHOW_TOP_ELEMENTS" => "N",
 					"PAGE_ELEMENT_COUNT" => "30",
 					"LINE_ELEMENT_COUNT" => "3",
@@ -58,14 +57,14 @@
 					"LINK_IBLOCK_ID" => "",
 					"LINK_PROPERTY_SID" => "",
 					"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
-					"DISPLAY_TOP_PAGER" => "Y",
-					"DISPLAY_BOTTOM_PAGER" => "Y",
+					"DISPLAY_TOP_PAGER" => "N",
+					"DISPLAY_BOTTOM_PAGER" => "N",
 					"PAGER_TITLE" => "Модели",
 					"PAGER_SHOW_ALWAYS" => "N",
 					"PAGER_TEMPLATE" => "collection",
 					"PAGER_DESC_NUMBERING" => "N",
 					"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-					"PAGER_SHOW_ALL" => "Y",
+					"PAGER_SHOW_ALL" => "N",
 					"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
 					"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
 					"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),
@@ -97,9 +96,7 @@
 					"ADD_SECTIONS_CHAIN" => "N"
 				)
 			);
+
 		}
 
-?>
-
-
-<? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>

@@ -1,7 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div class="catalog-section">
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
-	<?=$arResult["NAV_STRING"]?><br />
+  <?=$arResult["NAV_STRING"]?><br />
 <?endif;?>
 <table cellpadding="0" cellspacing="0" border="0">
 		<?foreach($arResult["ITEMS"] as $cell=>$arElement):?>

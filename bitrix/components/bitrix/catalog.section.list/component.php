@@ -13,7 +13,6 @@ $arParams["SECTION_ID"] = intval($arParams["SECTION_ID"]);
 $arParams["SECTION_CODE"] = trim($arParams["SECTION_CODE"]);
 
 $arParams["SECTION_URL"]=trim($arParams["SECTION_URL"]);
-
 $arParams["TOP_DEPTH"] = intval($arParams["TOP_DEPTH"]);
 if($arParams["TOP_DEPTH"] <= 0)
 	$arParams["TOP_DEPTH"] = 2;
@@ -55,7 +54,6 @@ if($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USER
 		$rsSections->SetUrlTemplates("", $arParams["SECTION_URL"]);
 		$arResult["SECTION"] = $rsSections->GetNext();
 	}
-
 	if(is_array($arResult["SECTION"]))
 	{
 		unset($arFilter["ID"]);

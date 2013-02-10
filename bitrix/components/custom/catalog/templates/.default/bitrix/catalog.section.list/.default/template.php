@@ -6,7 +6,7 @@
     if($CURRENT_DEPTH < $arSection["DEPTH_LEVEL"])
       echo "<ul>";
     elseif($CURRENT_DEPTH > $arSection["DEPTH_LEVEL"])
-      echo str_repeat("</ul>", $CURRENT_DEPTH - $arSection["DEPTH_LEVEL"]);
+     echo str_repeat("</ul>", $CURRENT_DEPTH - $arSection["DEPTH_LEVEL"]);
     
     $CURRENT_DEPTH = $arSection["DEPTH_LEVEL"];
 ?>
