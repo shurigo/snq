@@ -12,5 +12,6 @@
 ?>
     <li><a href="<?=$arSection["SECTION_PAGE_URL"]?>"><?=$arSection["NAME"]?></a></li>
 <?endforeach?>
+  </ul>
 </ul>
 <!-- end .side-menu-->
