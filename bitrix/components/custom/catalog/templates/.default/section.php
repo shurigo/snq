@@ -12,6 +12,16 @@
           </form>
         </div>
         <!-- end .sort-->
+<?$APPLICATION->IncludeComponent(
+    "bitrix:breadcrumb",
+    "breadcrumb",
+    Array(
+        "START_FROM" => $start_from,
+        "PATH" => "",
+        "SITE_ID" => "-"
+    ),
+    false
+)?>
 	<section data-page="inc/file.json" class="catalog">
 <? $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",
@@ -117,16 +127,6 @@ $APPLICATION->IncludeComponent(
 	$component
 );?>
 <?endif?>
-<?$APPLICATION->IncludeComponent(
-    "bitrix:breadcrumb",
-    "breadcrumb",
-    Array(
-        "START_FROM" => $start_from,
-        "PATH" => "",
-        "SITE_ID" => "-"
-    ),
-    false
-)?>
       </aside>
       <!-- end .aside--> 
     </div>
