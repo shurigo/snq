@@ -34,7 +34,7 @@
  		"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
 		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
 		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
-		"ADD_SECTIONS_CHAIN" => "N"		
+		"ADD_SECTIONS_CHAIN" => "Y"
 	),
 	$component
 );?>
