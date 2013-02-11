@@ -1,11 +1,18 @@
-    <div class="menu-place"></div>
+ <div class="menu-place"></div>
     <nav class="menu-hold">
-      <form class="search" action="/" method="get">
+      <div onclick="return {'bg': 'transparent', 'target': '_blank', 'language': 'ru', 'suggest': true, 'tld': 'ru', 'site_suggest': true, 'action': 'http://yandex.ru/sitesearch', 'webopt': true, 'fontsize': 12, 'arrow': false, 'fg': '#000000', 'searchid': '2020669', 'logo': 'rb', 'websearch': false, 'type': 2}">
+      <form class="search" action="http://yandex.ru/sitesearch" method="get" target="_blank">
         <fieldset>
-          <input value="Более 5000 товаров" type="text">
-          <input value="Поиск" type="submit">
+          <input type="hidden" name="searchid" value="2020669" />
+          <input type="hidden" name="l10n" value="ru" />
+		  <input type="hidden" name="reqenc" value="" />
+		  <input type="text" name="text" value="" />
+		  <input type="submit" value="Найти" />
         </fieldset>
       </form>
+      </div>
+      <style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style>
+      <script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;(' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1&&(e.className+=' ya-page_js_yes');s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
       <!-- end .search-->
       <ul class="menu">
         <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>

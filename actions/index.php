@@ -1,7 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Акции");
-?><div style="margin:10px 45px 45px;">
+
+?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news",
 	"actions_active",
@@ -84,4 +85,4 @@ $APPLICATION->SetTitle("Акции");
 		)
 	)
 );?>
- </div><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

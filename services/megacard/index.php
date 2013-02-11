@@ -2,40 +2,19 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Мы принимаем к оплате MEGACARD");
 ?>
-<div style="margin:10px 45px 45px;">
+<section class="mainContent">
 <h1>Мы принимаем к оплате MEGACARD</h1>
-<table style="width:100%;">
-	<tr>
-    	<td style="width:206px; vertical-align:top;"><?$APPLICATION->IncludeComponent(
-            "bitrix:menu",
-            "left_menu",
-            Array(
-                "ROOT_MENU_TYPE" => "left",
-                "MAX_LEVEL" => "1",
-                "CHILD_MENU_TYPE" => "left",
-                "USE_EXT" => "N",
-                "DELAY" => "N",
-                "ALLOW_MULTI_SELECT" => "N",
-                "MENU_CACHE_TYPE" => "N",
-                "MENU_CACHE_TIME" => "3600",
-                "MENU_CACHE_USE_GROUPS" => "Y",
-                "MENU_CACHE_GET_VARS" => ""
-            )
-        );?></td>
-        <td style="width:auto; vertical-align:top; padding:0 0 0 23px;">
-        <div>
-            <img src="/images/megacard.png" width="250" height="158" alt="MEGACARD" align="left" style="margin:0 10px 10px 0;" />
+
+<img src="/images/services/megacard.png" width="250" height="158" alt="MEGACARD" align="left" style="margin:0 10px 10px 0;" />
             <p align="left">Сеть мультибрендовых магазинов модной одежды &laquo;Снежная Королева&raquo; является партнером программы MEGACARD,а это значит, что можно оплатить покупки с помощью карты MEGACARD, а также тратить бонусные баллы в любом из магазинов &laquo;Снежная Королева&raquo;, расположенных в торговых центрах МЕГА.</p>
-            <p align="left"> </p>         
-        </div>
-        <div class="clear_both"></div>
-        <div>
+            <p align="left"> </p>
+
             <p align="left"><b>ПРАВИЛА ОПЛАТЫ КАРТОЙ MEGACARD в МАГАЗИНАХ &laquo;СНЕЖНАЯ КОРОЛЕВА&raquo;:</b></p>
             <p align="left"> </p>
-            <div align="left"> 
-              <ul type="disc"> 
+            <div align="left">
+              <ul type="disc">
                 <li>При оплате картой MEGACARD покупатель может рассчитаться бонусными баллами или оплатить покупку денежными средствами, находящимися на карте.</li>
-                <li>Оплата бонусными баллами за товар, может проводиться частично или полностью. 
+                <li>Оплата бонусными баллами за товар, может проводиться частично или полностью.
                   <br />
                  * при условии, что расходуется как минимум 1 рубль из средств на карте.</li>
                 <li>Начисление бонусных баллов происходит автоматически сразу же после проведения оплаты.</li>
@@ -45,9 +24,9 @@ $APPLICATION->SetTitle("Мы принимаем к оплате MEGACARD");
                 <li>Рассрочка на 3,6 месяцев &laquo;CARD CREDIT&raquo; Кредит Европа Банка по данным картам <u>невозможна.</u></li>
                 <li>В случае возврата товара покупателем, приобретенного в магазине с использованием бонусных баллов, бонусные баллы восстанавливаются при проведении процедуры возврата.</li>
                </ul>
-             </div>
 
-            
+
+
             <p><strong>Адреса магазинов «Снежная Королева», расположенных в  торговых центрах МЕГА:</strong>
                 <ul>
                     <li>Московская область, 14 км МКАД, г. Котельники, ТЦ "Мега Белая Дача"</li>
@@ -60,10 +39,27 @@ $APPLICATION->SetTitle("Мы принимаем к оплате MEGACARD");
                 </ul>
 			</p>
             <p align="left"><a href="http://www.mymegacard.ru/moscow/about/" target="_blank">Подробнее о <b>MEGACARD</b></a>.</p>
-        </div>
-        </td>
-    </tr>
-</table>
+</section>
 
- </div>
+<aside class="aside">
+<?
+$APPLICATION->IncludeComponent(
+	"bitrix:menu",
+	"left_menu",
+	Array(
+		"ROOT_MENU_TYPE" => "left",
+		"MAX_LEVEL" => "1",
+		"CHILD_MENU_TYPE" => "left",
+		"USE_EXT" => "N",
+		"DELAY" => "N",
+		"ALLOW_MULTI_SELECT" => "N",
+		"MENU_CACHE_TYPE" => "N",
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"MENU_CACHE_GET_VARS" => ""
+	)
+);
+?>
+</aside>
+
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -8,7 +8,7 @@
 <footer class="footer">
   <div class="bg">
 
-    <? include("../inc/downmenu.php"); ?>
+    <? include($_SERVER["DOCUMENT_ROOT"]."/inc/downmenu.php"); ?>
 
     <div class="fr">© 2010-2012 Снежная королева</div>
     <!-- end .fr-->
