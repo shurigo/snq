@@ -2,10 +2,6 @@
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
   <?=$arResult["NAV_STRING"]?><br />
 <?endif;?>
-<?
-	setlocale(LC_MONETARY, 'ru_RU.CP1251');
-  $fmt = '%.0n';
-?>
 <?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
 	<article>
 		<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
@@ -28,15 +24,15 @@
 				<?=$arElement['PROPERTIES']['col_title']['VALUE']?>
 			</span>
 			<!-- end .text -->
-			<?if(is_array($arElement['PROPERTIES']['col_price_new'])):?>
+			<?if(!empty($arElement['PROPERTIES']['col_price_new']['VALUE'])):?>
 			<span class="price bg-red">
-				<?=money_format($fmt, $arElement['PROPERTIES']['col_price_new']['VALUE']);?>
+				<?=number_format($arElement['PROPERTIES']['col_price_new']['VALUE'], 0, '.', ' ').' руб.';?>
 				<del>
-					<?=money_format($fmt, $arElement['PROPERTIES']['col_price']['VALUE']);?>
+					<?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' руб.';?>
 				</del>
 			<?else:?>
 			<span class="price">
-				<?=money_format($fmt, $arElement['PROPERTIES']['col_price']['VALUE']);?>
+				<?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' руб.';?>
 			<?endif?>
 			</span>
       <!-- end .price-->
