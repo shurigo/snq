@@ -5,7 +5,6 @@
 	return "";
 
   $strReturn = '<a href="/">Главная</a> / ';
-
   for($index = 0, $itemSize = count($arResult); $index < $itemSize; $index++)
   {
   	  if($index > 0)

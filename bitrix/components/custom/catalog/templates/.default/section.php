@@ -16,7 +16,7 @@
     "bitrix:breadcrumb",
     "breadcrumb",
     Array(
-        "START_FROM" => $start_from,
+        "START_FROM" => "1",
         "PATH" => "",
         "SITE_ID" => "-"
     ),
