@@ -26,6 +26,7 @@
 <?$APPLICATION->ShowHeadScripts()?>
 </head>
 <body>
+<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
 

@@ -26,6 +26,7 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 </head>
 <body>
+<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
 
