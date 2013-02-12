@@ -12,7 +12,7 @@
 		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"]
 	),
 	$component
-);
+);echo 'sections';
 ?>
 
 <?if($arParams["USE_COMPARE"]=="Y"):?>
