@@ -13,7 +13,7 @@ body {
 	font:normal 12px/14px Arial, Helvetica, sans-serif;
 	color:#000;
 }
-
+img {border:0;}
 form,
 fieldset {
 	margin:0;
@@ -74,7 +74,7 @@ footer {
 	display: block;
 }
 
-img {
+images {
 	border:0;
 	vertical-align:top;
 }
@@ -133,7 +133,7 @@ table .sep {
 
 .selectIn {
 	cursor:pointer;
-	background-image:url(../img/select.png);
+	background-image:url(../images/select.png);
 	background-position:100% 50%;
 	padding-right:19px;
 	background-repeat:no-repeat;
@@ -178,7 +178,7 @@ table .sep {
 	width:11px;
 	height:11px;
 	overflow:hidden;
-	background:#fff url(../img/check.png) no-repeat 0 -9999px;
+	background:#fff url(../images/check.png) no-repeat 0 -9999px;
 	cursor:pointer;
 }
 
@@ -348,7 +348,7 @@ table .sep {
 	text-decoration:none;
 	color:#2e2c2c;
 	padding:8px 16px;
-	background:url(../img/grey-op.png) no-repeat 0 -9999px;
+	background:url(../images/grey-op.png) no-repeat 0 -9999px;
 	margin:-16px 0 0 0;
 	top:8px;
 	position:relative;
@@ -364,7 +364,7 @@ table .sep {
 }
 
 .menu .sub {
-	background:url(../img/grey-op.png);
+	background:url(../images/grey-op.png);
 	position:absolute;
 	top:-9999px;
 	left:0;
@@ -652,6 +652,7 @@ table .sep {
 	position:relative;
 	zoom:1;
 	display:block;
+	min-height:65px;
 }
 
 .side-menu {
@@ -751,7 +752,7 @@ table .sep {
 .ui-slider {
 	height:7px;
 	position:relative;
-	background:#3d464f url(../img/slider.png) 50% 0;
+	background:#3d464f url(../images/slider.png) 50% 0;
 	line-height:0;
 }
 
@@ -759,7 +760,7 @@ table .sep {
 	cursor:pointer;
 	position:absolute;
 	top:-1px;
-	background:url(../img/slider-handle.png) no-repeat;
+	background:url(../images/slider-handle.png) no-repeat;
 	width:8px;
 	height:15px;
 	margin:0 0 0 -4px;
@@ -902,7 +903,7 @@ table .sep {
 	padding:13px 0;
 }
 
-.gallery .big img {
+.gallery .big images {
 	width:300px;
 	height:auto;
 }
@@ -943,14 +944,14 @@ table .sep {
 }
 }
 
-.zoomWindow img {
+.zoomWindow images {
 	width:auto!important;
 	height:auto!important;
 }
 
 .zoom {
 	display:block;
-	background:url(../img/zoom.png) no-repeat;
+	background:url(../images/zoom.png) no-repeat;
 	width:24px;
 	height:23px;
 	position:absolute;
@@ -972,7 +973,7 @@ table .sep {
 	left:0;
 	right:0;
 	height:8px;
-	background:url(../img/slider-arrs.png) no-repeat 50% 0;
+	background:url(../images/slider-arrs.png) no-repeat 50% 0;
 	cursor:pointer;
 }
 
@@ -1019,7 +1020,7 @@ table .sep {
 	cursor:pointer;
 	position:absolute;
 	top:317px;
-	background:url(../img/slider-arrs2.png) no-repeat;
+	background:url(../images/slider-arrs2.png) no-repeat;
 	width:35px;
 	height:50px;
 	overflow:hidden;
@@ -1171,7 +1172,7 @@ table .sep {
 	display:block;
 	text-align:left;
 	text-indent:-9999px;
-	background:url(../img/socials.png) no-repeat;
+	background:url(../images/socials.png) no-repeat;
 	width:21px;
 	height:20px;
 	overflow:hidden;
@@ -1298,7 +1299,7 @@ table .sep {
 	cursor:pointer;
 	position:absolute;
 	top:77px;
-	background:url(../img/slider-arrs3.png) no-repeat;
+	background:url(../images/slider-arrs3.png) no-repeat;
 	width:25px;
 	height:26px;
 	overflow:hidden;
@@ -1335,7 +1336,7 @@ table .sep {
 	margin:0 38px 0 0;
 }
 
-.slider2 img {
+.slider2 images {
 	height:108px;
 	width:auto;
 	border:1px solid #dadada;
