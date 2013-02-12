@@ -24,7 +24,6 @@
  <!-- end .mainContent-->
 
 <aside class="aside">
-<h2>Последние новости</h2>
 <?
     	$APPLICATION->IncludeComponent(
             "bitrix:menu",
