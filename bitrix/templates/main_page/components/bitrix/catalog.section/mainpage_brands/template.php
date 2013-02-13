@@ -16,7 +16,7 @@ if (count($arResult["ITEMS"]) > 0)
         {
             ?>
 
-            <li><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img src="<?=$arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["FILE_VALUE"]["SRC"]?>" width="130" height="130" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" /></a></li>
+            <li><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img src="<?=$arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["FILE_VALUE"]["SRC"]?>" width="130px" height="130px" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" /></a></li>
 
             <?
         }

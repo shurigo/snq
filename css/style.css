@@ -282,6 +282,13 @@ table .sep {
 	left:4px;
 }
 
+.header .city {
+	position:absolute;
+	top:20px;
+	left:550px;
+	color:#696969;
+}
+
 .phone {
 	white-space:nowrap;
 	position:absolute;
@@ -560,7 +567,7 @@ table .sep {
 
 .sort .customSelect {
 	float:left;
-	width:163px;
+	width:130px;
 }
 
 .path {
