@@ -108,15 +108,9 @@
 			);
 			if ($arSec = $dbSec->GetNext())
 			{
-				$dbSec = CIBlockSection::GetList(
-							array(), 
-							array(
-								"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-								"CODE" => $url_array[2],
-							)
-						);
-						if ($arSec = $dbSec->GetNext())
-						{
+?>
+	<aside class="aside">
+<?
 							$APPLICATION->IncludeComponent(
 								"custom:catalog.section.list",
 								"collection_mainpage",
@@ -132,10 +126,9 @@
 									"TOP_DEPTH" => 4,
 									"LEFT_MENU_FLAG" => 1,
 									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-																	"ADD_SECTIONS_CHAIN" => "N"
+									"ADD_SECTIONS_CHAIN" => "N"
 								)
 							);
-						}		
 			}
 		}
 	}

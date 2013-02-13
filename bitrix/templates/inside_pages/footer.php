@@ -1,7 +1,8 @@
-    </div>
-    <!-- end .content-->
-    <div class="footer-place"></div>
-  </div>
+			</aside>	
+			<!-- end .aside -->
+		<!-- end .content-->
+		<div class="footer-place"></div>
+		</div>
   <!-- end .container-->
 </div>
 <!-- end .wrapper-->
