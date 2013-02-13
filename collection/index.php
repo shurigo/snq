@@ -97,43 +97,46 @@
 				"ADD_SECTIONS_CHAIN" => "N"
 			)
 		);
-		$dbSec = CIBlockSection::GetList(
-			array(), 
-			array(
-				"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-				"CODE" => $url_array[2],
-			)
-		);
-		if ($arSec = $dbSec->GetNext())
+		if(empty($url_array[3]))
 		{
 			$dbSec = CIBlockSection::GetList(
-						array(), 
-						array(
-							"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-							"CODE" => $url_array[2],
-						)
-					);
-					if ($arSec = $dbSec->GetNext())
-					{
-						$APPLICATION->IncludeComponent(
-							"custom:catalog.section.list",
-							"collection_mainpage",
-							Array(
-								"IBLOCK_TYPE" => "collection",
-								"IBLOCK_ID" => 1,
-								"SECTION_ID" => $arSec["ID"],
-								"DISPLAY_PANEL" => "N",
-								"CACHE_TYPE" => "A",
-								"CACHE_TIME" => "3600",
-								"CACHE_GROUPS" => "Y",
-								"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-								"TOP_DEPTH" => 4,
-								"LEFT_MENU_FLAG" => 1,
-								"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                "ADD_SECTIONS_CHAIN" => "N"
+				array(), 
+				array(
+					"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+					"CODE" => $url_array[2],
+				)
+			);
+			if ($arSec = $dbSec->GetNext())
+			{
+				$dbSec = CIBlockSection::GetList(
+							array(), 
+							array(
+								"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+								"CODE" => $url_array[2],
 							)
 						);
-					}		
+						if ($arSec = $dbSec->GetNext())
+						{
+							$APPLICATION->IncludeComponent(
+								"custom:catalog.section.list",
+								"collection_mainpage",
+								Array(
+									"IBLOCK_TYPE" => "collection",
+									"IBLOCK_ID" => 1,
+									"SECTION_ID" => $arSec["ID"],
+									"DISPLAY_PANEL" => "N",
+									"CACHE_TYPE" => "A",
+									"CACHE_TIME" => "3600",
+									"CACHE_GROUPS" => "Y",
+									"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+									"TOP_DEPTH" => 4,
+									"LEFT_MENU_FLAG" => 1,
+									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+																	"ADD_SECTIONS_CHAIN" => "N"
+								)
+							);
+						}		
+			}
 		}
 	}
 
