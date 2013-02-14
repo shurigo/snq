@@ -25,7 +25,7 @@ false
             <? if (isset($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"])) {?>
             <div class="price bg-red"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ')?> руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></del> </div>
             <?}  else { ?>
-            <? echo '<div class="price"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'руб</span></div>'; } ?>
+            <? echo '<div class="price"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'руб</span><new>New</new></div>'; } ?>
             <!-- end .price-->
            <!--
             <div class="likes">

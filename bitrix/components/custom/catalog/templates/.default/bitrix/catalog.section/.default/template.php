@@ -22,6 +22,7 @@
 			<?else:?>
 			<span class="price">
 				<?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' руб.';?>
+				<new>New</new>
 			<?endif?>
 			</span>
       <!-- end .price-->
