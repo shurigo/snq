@@ -59,7 +59,7 @@
     $element = $elements->GetNextElement();
 	if(!$element) return $res_default;
 	$fields = $element->GetFields();
-	$cities = get_available_cities();
+	$cities = $this->get_available_cities();
 	if(!in_multiarray($fields['NAME'], $cities)) {
 			$_SESSION['city'] = $res_default;
 			return $res_default;
