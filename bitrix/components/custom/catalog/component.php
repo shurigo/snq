@@ -9,6 +9,7 @@ if($arParams["USE_FILTER"]=="Y")
 else
 	$arParams["FILTER_NAME"] = "";
 
+
 $arDefaultUrlTemplates404 = array(
 	"sections" => "",
 	"section" => "#SECTION_ID#/",

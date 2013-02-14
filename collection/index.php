@@ -23,6 +23,17 @@
     $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
   }
 
+		$arFilter = Array(
+		    'PROPERTY' => Array(
+		      //'!col_availability' => false,
+		      //'!col_availability' => 0,
+		      //Array('LOGIC' => 'OR',
+		      //  'col_availability' => 1,
+				//Array('col_availability' => 2, 'col_city_id' => $_SESSION['city_id'])
+		      //)
+		    )
+		  );
+
 		$APPLICATION->IncludeComponent(
 			"custom:catalog",
 			"",
@@ -32,6 +43,7 @@
 				"IBLOCK_TYPE" => "collection",
 				"IBLOCK_ID" => "1",
 				"USE_FILTER" => "N",
+				"FILTER_NAME" => "arFilter",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",

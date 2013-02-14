@@ -234,14 +234,14 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	if(preg_match("/^UF_/", $arParams["BROWSER_TITLE"])) $arSelect[] = $arParams["BROWSER_TITLE"];
 
 	$arSelect[] = "UF_*";
-
+/*
 	$arFilter = array(
 		"ACTIVE"=>"Y",
 		"GLOBAL_ACTIVE"=>"Y",
 		"IBLOCK_ID"=>$arParams["IBLOCK_ID"],
 		"IBLOCK_ACTIVE"=>"Y",
 	);
-
+*/
 	$bSectionFound = false;
 	//Hidden triky parameter USED to display linked
 	//by default it is not set
@@ -327,6 +327,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		"PREVIEW_PICTURE",
 		"PROPERTY_*",
 	);
+	//print_r($arFilter);
 	$arFilter = array(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"IBLOCK_LID" => SITE_ID,
@@ -335,7 +336,11 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		"ACTIVE" => "Y",
 		"CHECK_PERMISSIONS" => "Y",
 		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-	);
+        array(
+        "LOGIC" => "OR",
+        'PROPERTY' => Array('col_availability' => 1), 'PROPERTY' => Array('col_city_id' => $_SESSION['city_id'])
+              )
+   	);
 
 	if($arParams["BY_LINK"]!=="Y")
 	{

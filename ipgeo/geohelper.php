@@ -7,7 +7,7 @@
 	class geohelper
 	{
   public function get_my_city () {
-	$def_id = 16; $def_name = 'Москва';
+	$def_id = 2097; $def_name = 'Москва';
 	if(!CModule::IncludeModule('iblock')) return $res_default;
 	$geo = new Geo();
 	$ip = $geo->get_ip();
@@ -20,7 +20,7 @@
 	// convert negative values to positive
 	if($ip_long < 0) $ip_long = 4294967296 + $ip_long;
 	$filter = Array(
-	  'IBLOCK_ID' => 14,
+	  'IBLOCK_ID' => 13,
 	  'IBLOCK_ACTIVE' => 'Y',
 	  'ACTIVE_DATE' => 'Y',
 	  'ACTIVE' => 'Y',
@@ -43,7 +43,7 @@
 	$city_id = $props['col_city_id']['VALUE'];
 	if(empty($city_id) || !is_numeric($city_id)) return $def_id;
 	$filter = Array(
-	  'IBLOCK_ID' => 13,
+	  'IBLOCK_ID' => 12,
 	  'ACTIVE' => 'Y',
 	  'XML_ID' => IntVal($city_id));
 	$select = Array('ID', 'NAME', 'IBLOCK_ID');
@@ -65,6 +65,9 @@
 	}
 	$_SESSION['city_id'] = $fields['XML_ID'];
 	$_SESSION['city_name'] = $fields['NAME'];
+
+	//echo "city".$_SESSION['city_id'];
+
 	return $_SESSION['city_id'];
   }
 
@@ -83,13 +86,41 @@
     return $ret;
   }
 
-  public function print_city_option_html() {
- 		$cities = $this->get_available_cities();
-		if(!in_multiarray($_SESSION['city_id'], $cities)) {
-		  $this->override_city(16, 'Москва');
-		}
+  public function print_city_option_html() { 		$cities = $this->get_available_cities();
+//		if(!in_multiarray($_SESSION['city_name'], $cities)) {
+//		  $this->override_city(2097, 'Москва');
+//		}
+		$all_cities['XML_ID'] = array();
+		$all_cities['NAME'] = array();
+
+		$filter = Array(
+	  		'IBLOCK_ID' => 12,
+		  'ACTIVE' => 'Y');
+		$select = Array('ID', 'NAME', 'IBLOCK_ID', 'XML_ID');
+	$elements = CIBlockElement::GetList(
+	  Array(),
+	  $filter,
+	  false,
+	  false,
+	  array()
+	);
+
+	    while($element = $elements->GetNextElement()) {
+		$fields = $element->GetFields();
+        array_push($all_cities['XML_ID'],$fields['XML_ID']);
+	    array_push($all_cities['NAME'],$fields['NAME']);
+	}
+	//print_r($all_cities['NAME']);
+	//print_r($all_cities['XML_ID']);
+	//echo "test=".$all_cities['XML_ID'][5];
    	foreach($cities as $c) {
-	  echo '<option value="'.$c[1].'"'.($c[1] == $_SESSION['city_id'] ? 'selected="selected"':'').'>'.$c[0].'</option>';
+   		//echo 'c[0]='.$c[0];		$k = array_search($c[0], $all_cities['NAME']);
+		//echo 'k='.$k."<br>";
+		$xml_id = $all_cities['XML_ID'][IntVal($k)];
+
+		//print_r($all_cities['XML_ID']);
+
+		//echo $xml_id;	    echo '<option value="'.$xml_id.'"'.($xml_id == $_SESSION['city_id'] ? ' selected':'').'>'.$c[0].'</option>';
 	}
   }
 
