@@ -1,22 +1,21 @@
 <?
+  session_start();
   require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); 
   require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php'); 
   require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php'); 
 	
-	session_start();
-
 	class geohelper
 	{
   public function get_my_city () {
-	  if(isset($_SESSION['city'])) return $_SESSION['city'];
+	  //if(!empty($_SESSION['city'])) return $_SESSION['city'];
     $res_default = implode(' ', Array(105, 'Москва'));
 	if(!CModule::IncludeModule('iblock')) return $res_default;
 	$geo = new Geo(); 
 	$ip = $geo->get_ip();
 	$ip = '95.24.22.7';// ??????
-	$ip = '195.224.222.227'; // ?? ??????
-	$ip = '217.199.218.0'; // ?????
-	$ip = '217.149.188.152'; // ?????????
+	//$ip = '195.224.222.227'; // ?? ??????
+	//$ip = '217.199.218.0'; // ?????
+	//$ip = '217.149.188.152'; // ?????????
 	if(empty($ip)) return $res_default;
 	$ip_long = ip2long($ip);
 	// convert negative values to positive
