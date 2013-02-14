@@ -1,22 +1,21 @@
 <?
   session_start();
-  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); 
-  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php'); 
-  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php'); 
-	
+  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php');
+
 	class geohelper
 	{
   public function get_my_city () {
-	  //if(!empty($_SESSION['city'])) return $_SESSION['city'];
-    $res_default = implode(' ', Array(105, 'Москва'));
+	$def_id = 16; $def_name = 'Москва';
 	if(!CModule::IncludeModule('iblock')) return $res_default;
-	$geo = new Geo(); 
+	$geo = new Geo();
 	$ip = $geo->get_ip();
 	$ip = '95.24.22.7';// ??????
 	//$ip = '195.224.222.227'; // ?? ??????
 	//$ip = '217.199.218.0'; // ?????
 	//$ip = '217.149.188.152'; // ?????????
-	if(empty($ip)) return $res_default;
+	if(empty($ip)) return $def_id;
 	$ip_long = ip2long($ip);
 	// convert negative values to positive
 	if($ip_long < 0) $ip_long = 4294967296 + $ip_long;
@@ -33,16 +32,16 @@
 	// find a city by IP range
 	$elements = CIBlockElement::GetList(
 	  Array(),
-	  $filter, 
+	  $filter,
 	  false,
 	  false,
 	  $select
 	);
 	$element = $elements->GetNextElement();
-	if(!$element) return $res_default;
+	if(!$element) return $def_id;
 	$props = $element->GetProperties();
 	$city_id = $props['col_city_id']['VALUE'];
-	if(empty($city_id) || !is_numeric($city_id)) return $res_default;		
+	if(empty($city_id) || !is_numeric($city_id)) return $def_id;
 	$filter = Array(
 	  'IBLOCK_ID' => 13,
 	  'ACTIVE' => 'Y',
@@ -56,18 +55,19 @@
 	  array()
 	);
     $element = $elements->GetNextElement();
-	if(!$element) return $res_default;
+	if(!$element) return $def_id;
 	$fields = $element->GetFields();
 	$cities = $this->get_available_cities();
 	if(!in_multiarray($fields['NAME'], $cities)) {
-			$_SESSION['city'] = $res_default;
+			$_SESSION['city_id'] = $def_id;
+			$_SESSION['city_name'] = $def_name;
 			return $res_default;
 	}
-	$ret = implode(' ', Array($fields['XML_ID'], $fields['NAME']));
-	$_SESSION['city'] = $ret;
-	return $ret;
+	$_SESSION['city_id'] = $fields['XML_ID'];
+	$_SESSION['city_name'] = $fields['NAME'];
+	return $_SESSION['city_id'];
   }
-	
+
   public function get_available_cities() {
     if(!CModule::IncludeModule('iblock')) return Array();
     $filter = Array(
@@ -83,21 +83,19 @@
     return $ret;
   }
 
-  public function print_city_option_html() {
-		$cities = $this->get_available_cities();
-		$c = explode(' ', $_SESSION['city']);
-		$my_city = $c[1];
-		if(!in_multiarray($my_city, $cities)) {
-		  $this->override_city(105, 'Москва');
+  public function print_city_option_html() {
+ 		$cities = $this->get_available_cities();
+		if(!in_multiarray($_SESSION['city_id'], $cities)) {
+		  $this->override_city(16, 'Москва');
 		}
    	foreach($cities as $c) {
-	  echo '<option value="'.$c[1].'"'.($c[0] == $my_city[1] ? 'selected="selected"':'').'>'.$c[0].'</option>';
-	} 
+	  echo '<option value="'.$c[1].'"'.($c[1] == $_SESSION['city_id'] ? 'selected="selected"':'').'>'.$c[0].'</option>';
+	}
   }
 
 	public function override_city($id, $newcity) {
-		$ret = implode(' ', $id, $newcity);
-		$_SESSION['city'] = $ret;
+		$_SESSION['city_id'] = $id;
+		$_SESSION['city_name'] = $newcity;
 	}
 	}
 ?>

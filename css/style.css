@@ -612,7 +612,7 @@ table .sep {
 	margin:13px 0 0 -10px;
 	top:1px;
 	left:5px;
-	background:#3d464f;
+	background:#11b1e3;
 	color:#fff;
 	border-top:1px solid #fff;
 	position:relative;
@@ -644,9 +644,10 @@ table .sep {
 	font-weight:bold;
 	font-size:12px;
 	font-style:normal;
-	margin:0 0 0 0px;
-	background:#9a0101;
+	margin:0 0 0 50px;
+	background:#11b1e3;
 	padding: 0 5px 0 5px;
+	color: red;
 }
 
 .catalog .name {
