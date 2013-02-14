@@ -86,7 +86,8 @@
 
   public function print_city_option_html() {
 		$cities = $this->get_available_cities();
-		$my_city = explode(' ', $_SESSION['city'])[1];
+		$c = explode(' ', $_SESSION['city']);
+		$my_city = $c[1];
 		if(!in_multiarray($my_city, $cities)) {
 		  $this->override_city(105, 'Москва');
 		}
