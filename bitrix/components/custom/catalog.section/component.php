@@ -136,11 +136,11 @@ $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"] = intval($arParams["PAGER_DESC_NUMB
 $arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"]!=="N";
 
 $arNavParams = array(
-	"iNumPage" => $arParams["PAGE_NUMBER"],
+	//"iNumPage" => $arParams["PAGE_NUMBER"],
 	"nPageSize" => $arParams["PAGE_ELEMENT_COUNT"],
 	"bDescPageNumbering" => $arParams["PAGER_DESC_NUMBERING"],
 	"bShowAll" => $arParams["PAGER_SHOW_ALL"],
-);print_r($arNavParams);
+); //print_r($arNavParams);
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 if($arNavigation["PAGEN"]==0 && $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]>0)
 	$arParams["CACHE_TIME"] = $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"];
@@ -232,7 +232,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	if(preg_match("/^UF_/", $arParams["META_KEYWORDS"])) $arSelect[] = $arParams["META_KEYWORDS"];
 	if(preg_match("/^UF_/", $arParams["META_DESCRIPTION"])) $arSelect[] = $arParams["META_DESCRIPTION"];
 	if(preg_match("/^UF_/", $arParams["BROWSER_TITLE"])) $arSelect[] = $arParams["BROWSER_TITLE"];
-	
+
 	$arSelect[] = "UF_*";
 
 	$arFilter = array(
@@ -358,20 +358,20 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	{
 		$arSort["PROPERTY_col_price"] = $arParams["PRICE_SORT"];
 	}
-	
+
 	$arSort[$arParams["ELEMENT_SORT_FIELD"]] = $arParams["ELEMENT_SORT_ORDER"];
 	$arSort["ID"] = "DESC";
-	
+
 	//Вещь недели
 	if ($arParams["SHOW_HOT_MODEL"] == "Y")
 	{
 		$arFilter["PROPERTY_col_hot_model_VALUE"] = "да";
 	}
 	//Вещь недели
-	
+
 	$arFilter["SECTION_GLOBAL_ACTIVE"] = "Y";
 	$arFilter["SECTION_ACTIVE"] = "Y";
-	
+
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
@@ -451,13 +451,13 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 
 		$arResult["ITEMS"][]=$arItem;
 	}
-	
+
 	$arResult["PRICE_SORT"] = $arParams["PRICE_SORT"];
 	$arResult["COMPONENT_URL"] = $arParams["COMPONENT_URL"];
 	$rsElements->COMPONENT_URL = $arParams["COMPONENT_URL"];
-	
+
 	//echo "<pre>"; print_r($rsElements); echo "</pre>";
-	
+
 	$arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, $arParams["PAGER_TITLE"], $arParams["PAGER_TEMPLATE"], $arParams["PAGER_SHOW_ALWAYS"]);
 	$arResult["NAV_CACHED_DATA"] = $navComponentObject->GetTemplateCachedData();
 	$arResult["NAV_RESULT"] = $rsElements;

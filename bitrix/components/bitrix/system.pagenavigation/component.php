@@ -27,10 +27,10 @@ if (is_object($arParams["NAV_RESULT"]) &&  is_subclass_of($arParams["NAV_RESULT"
 	$arResult["bSavePage"] = (CPageOption::GetOptionString("main", "nav_page_in_session", "Y")=="Y");
 	$arResult["sUrlPath"] = GetPagePath($dbresult->COMPONENT_URL, true);
 	$arResult["NavQueryString"]= htmlspecialchars(DeleteParam(array(
-		"PAGEN_".$dbresult->NavNum, 
-		"SIZEN_".$dbresult->NavNum, 
-		"SHOWALL_".$dbresult->NavNum, 
-		"PHPSESSID", 
+		"PAGEN_".$dbresult->NavNum,
+		"SIZEN_".$dbresult->NavNum,
+		"SHOWALL_".$dbresult->NavNum,
+		"PHPSESSID",
 		"clear_cache",
 	)));
 

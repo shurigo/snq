@@ -1,31 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-      <section class="mainContent">
-        <div class="sort">
-          <form class="ajax-load" action="inc/file.json">
-            <fieldset>
-              <span>Сортировать по</span>
-              <select class="customSelect">
-                <option>Цене</option>
-                <option>Популярности</option>
-              </select>
-            </fieldset>
-          </form>
-        </div>
-        <!-- end .sort-->
+
+
 <?
-	$APPLICATION->IncludeComponent(
-		"bitrix:breadcrumb",
-		"breadcrumb",
-		Array(
-			"START_FROM" => "1",
-			"PATH" => "",
-			"SITE_ID" => "-"
-		),
-		false
-	);
-?>
-	<section data-page="/bitrix/components/custom/catalog.section/templates/.default/template.php" class="catalog">
-<? 
 	$APPLICATION->IncludeComponent(
 		"custom:catalog.section",
 		"",
@@ -69,20 +45,13 @@
 			"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
 			"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
 			"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-			"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"], 
+			"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
 			"PAGE_NUMBER" => $arParams["PAGE_NUMBER"],
 			"JSON" => $arParams["JSON"]
 		),
 		$component
 );
 ?>
-	</section>
-	<!-- end .catalog-->
-	<p>Дубленки издревле пользовались в России большой популярностью. Удобные и практичные, они обладают уникальными теплосберегающими свойствами. Неудивительно, что ещё со времён Петра I путешественники и военные тех времён выбирали в качестве основы своей униформы. Победное шествие русской дубленки в Европе началось в 50-е годы 20-го века, благодаря парижскому триумфу российского модельера Вячеслава Зайцева.</p>
-        <p>За свою долгую историю дубленки претерпели целый ряд серьёзных преобразований. Появилось невероятное количество способов выделки овечьей шкуры для того, чтобы удовлетворить безудержный полёт творческой фантазии дизайнеров. Поэтому многие из современных женских дубленок, особенно те их представители, которые сошли в российские магазины с европейских подиумов, можно, скорее, назвать модной, имиджевой вещью, нежели чем серьёзным защитником от зимней стужи.Тем не менее, хорошие качественные дубленки остаются самой практичной вещью для холодной российской зимы и может прослужить Вам несколько сезонов! Кроме этого дубленки женские - красивые, и удобные и сочетать их с другими предметами костюма в повседневном городском гардеробе очень легко.</p>
-        <p>Не знаете где купить дубленку, тогда приходите к нам, в магазин дубленок, мехов и модной одежды «Снежная Королева». У нас собрана лучшая коллекция Осень-Зима 2012-2013, отражающая все самые актуальные модные тенденции наступившего сезона. Мы предлагаем дубленки женские, дубленки мужские, ультрамодные и классические модели. Все это Вы сможете купить в наших магазинах в Москве и других крупных городах России, по очень привлекательной цене. Приходите, мы ждем Вас!</p>
-      	</section>
-      	<!-- end .mainContent-->
 
 <?if($arParams["USE_FILTER"]=="Y"):?>
 <?$APPLICATION->IncludeComponent(

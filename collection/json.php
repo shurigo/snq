@@ -1,7 +1,6 @@
 <?require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_before.php");?>
 <?
 CModule::IncludeModule('iblock');
-echo '111';
   $arFilter = Array(
 	  'IBLOCK_ID' => '13',
 	  'ACTIVE' => 'Y',
@@ -15,11 +14,11 @@ $arNavStartParams = array("nPageSize" => "1", "iNumPage" => "1");
 print_r($arFilter);
 	$select = Array('ID', 'NAME', 'IBLOCK_ID');
   $res = CIBlockElement::GetList();
- echo '222'; 
+ echo '222';
 	$select = Array('ID', 'NAME', 'IBLOCK_ID');
 	$elements = CIBlockElement::GetList(
 	  Array(),
-	  $filter, 
+	  $filter,
 	  false,
 	  $arNavStartParams,
 	  $select
