@@ -148,7 +148,9 @@ function initLoadPage(){
 				if($(window).scrollTop() > hold.offset().top + hold.outerHeight(true)-1000 && flag){
 					flag = false;
 					$.ajax({
-						data: obj.next,
+						data: {section: 'wfurs', 
+									json: '1',
+									page: '2'},//obj.next,
 						dataType: 'json',
 						url: hold.attr('data-page'),
 						success: function(obj){

@@ -1,10 +1,15 @@
 <?
   require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); 
   require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php'); 
+  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php'); 
+	
+	session_start();
 
-  function get_my_city () {
-//	if(isset($_COOKIE['city'])) return $_COOKIE['city'];
-    $res_default = implode(' ', Array(2097, '??????'));
+	class geohelper
+	{
+  public function get_my_city () {
+	  if(isset($_SESSION['city'])) return $_SESSION['city'];
+    $res_default = implode(' ', Array(105, 'Москва'));
 	if(!CModule::IncludeModule('iblock')) return $res_default;
 	$geo = new Geo(); 
 	$ip = $geo->get_ip();
@@ -54,13 +59,17 @@
     $element = $elements->GetNextElement();
 	if(!$element) return $res_default;
 	$fields = $element->GetFields();
+	$cities = get_available_cities();
+	if(!in_multiarray($fields['NAME'], $cities)) {
+			$_SESSION['city'] = $res_default;
+			return $res_default;
+	}
 	$ret = implode(' ', Array($fields['XML_ID'], $fields['NAME']));
-	setcookie('city', $ret, time() + 60 * 60 * 24 * 30);
-
+	$_SESSION['city'] = $ret;
 	return $ret;
   }
 	
-  function get_available_cities() {
+  public function get_available_cities() {
     if(!CModule::IncludeModule('iblock')) return Array();
     $filter = Array(
       'IBLOCK_ID' => 7, //our shops
@@ -70,16 +79,25 @@
     $sections = CIBlockSection::GetList($sort, $filter, false, array(), false);
     $ret = Array();
     while($section = $sections->GetNext()) {
-      //$ret[$section['NAME']] = $section['ID'];
       $ret[] = Array($section['NAME'], $section['ID']);
     }
     return $ret;
   }
 
-  function print_city_option_html() {
-	$cities = get_available_cities();
+  public function print_city_option_html() {
+		$cities = $this->get_available_cities();
+		$my_city = explode(' ', $_SESSION['city'])[1];
+		if(!in_multiarray($my_city, $cities)) {
+		  $this->override_city(105, 'Москва');
+		}
    	foreach($cities as $c) {
-	  echo '<option value="'.$c[1].'"'.($c[0] == $city[1] ? 'selected="selected"':'').'>'.$c[0].'</option>';
+	  echo '<option value="'.$c[1].'"'.($c[0] == $my_city[1] ? 'selected="selected"':'').'>'.$c[0].'</option>';
 	} 
   }
+
+	public function override_city($id, $newcity) {
+		$ret = implode(' ', $id, $newcity);
+		$_SESSION['city'] = $ret;
+	}
+	}
 ?>

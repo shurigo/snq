@@ -136,10 +136,11 @@ $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"] = intval($arParams["PAGER_DESC_NUMB
 $arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"]!=="N";
 
 $arNavParams = array(
+	"iNumPage" => $arParams["PAGE_NUMBER"],
 	"nPageSize" => $arParams["PAGE_ELEMENT_COUNT"],
 	"bDescPageNumbering" => $arParams["PAGER_DESC_NUMBERING"],
 	"bShowAll" => $arParams["PAGER_SHOW_ALL"],
-);
+);print_r($arNavParams);
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 if($arNavigation["PAGEN"]==0 && $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]>0)
 	$arParams["CACHE_TIME"] = $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"];

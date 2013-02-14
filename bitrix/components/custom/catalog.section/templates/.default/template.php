@@ -1,6 +1,11 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-
-
+<?if($arParams['JSON'] == "1"):?>
+<?echo '{
+  "data": {
+    "next": true,
+    "html":"';
+?>
+<?endif;?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 	<article>
 		<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
@@ -31,3 +36,6 @@
 	<!-- end .article -->
 
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
+<?if($arParams['JSON'] == "1"):?>
+<?echo "\"}}" ;?>
+<?endif;?>

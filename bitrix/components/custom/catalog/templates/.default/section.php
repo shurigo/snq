@@ -24,7 +24,7 @@
 		false
 	);
 ?>
-	<section data-page="inc/file.json" class="catalog">
+	<section data-page="/bitrix/components/custom/catalog.section/templates/.default/template.php" class="catalog">
 <? 
 	$APPLICATION->IncludeComponent(
 		"custom:catalog.section",
@@ -69,7 +69,9 @@
 			"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
 			"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
 			"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-			"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
+			"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"], 
+			"PAGE_NUMBER" => $arParams["PAGE_NUMBER"],
+			"JSON" => $arParams["JSON"]
 		),
 		$component
 );

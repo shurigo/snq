@@ -28,5 +28,4 @@
 		</a>
 	</article>
 	<!-- end .article -->
-
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
