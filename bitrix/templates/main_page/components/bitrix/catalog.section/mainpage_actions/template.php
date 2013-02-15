@@ -11,8 +11,9 @@ if (count($arResult["ITEMS"]) > 0)
           <ul>
           <?foreach($arResult["ITEMS"] as $arItem):?>
 
-            <li><a href="/actions/<?=$arItem["ID"]?>/"><img src="<?=$arItem["DETAIL_PICTURE"]["SRC"]?>" width="998" height="391" alt=" "></a></li>
-
+			<?  if (in_array($_SESSION['city_id'],$arItem['PROPERTIES']['col_city_id']['VALUE']) || $arItem['PROPERTIES']['col_availability']['VALUE'] == 1):  ?>
+                    <li><a href="/actions/<?=$arItem["ID"]?>/"><img src="<?=$arItem["DETAIL_PICTURE"]["SRC"]?>" width="998" height="391" alt=" "></a></li>
+		    <? endif; ?>
          <?endforeach;?>
          </ul>
         </div>
@@ -24,9 +25,9 @@ if (count($arResult["ITEMS"]) > 0)
 
         <ul class="nav">
   	    <?foreach($arResult["ITEMS"] as $arItem):?>
-
-		    <li><?=$arItem["NAME"]?></li>
-
+			<?  if (in_array($_SESSION['city_id'],$arItem['PROPERTIES']['col_city_id']['VALUE']) || $arItem['PROPERTIES']['col_availability']['VALUE'] == 1):  ?>
+            <li><?=$arItem["NAME"]?></li>
+            <? endif; ?>
         <?endforeach;?>
           <!--
           <li class="active">Скидка 20% по<br>

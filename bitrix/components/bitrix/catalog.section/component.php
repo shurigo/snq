@@ -306,6 +306,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		"ACTIVE" => "Y",
 		"CHECK_PERMISSIONS" => "Y",
 		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
+
 	);
 
 	if($arParams["BY_LINK"]!=="Y")
@@ -330,7 +331,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arParams["ELEMENT_SORT_FIELD"] => $arParams["ELEMENT_SORT_ORDER"],
 		"ID" => "DESC",
 	);
-	
+
 	//Вещь недели
 	if ($arParams["SHOW_HOT_MODEL"] == "Y")
 	{
@@ -338,7 +339,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	}
 	//Вещь недели
 
-	
+
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
