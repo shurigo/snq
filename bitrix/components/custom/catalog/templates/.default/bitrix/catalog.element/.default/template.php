@@ -55,12 +55,27 @@ false
             </ul>
             -->
             <!-- end .links-->
-            <p class="grey">¬нимание (!) ÷ены на сайте могут  отличатьс€от действующих.“очную цену  товара узнавайтев магазинах или уточн€йте по телефону (495) 777-8-999.</p>
+            <p class="grey">¬нимание (!) ÷ены на сайте могут  отличатьс€от действующих. “очную цену  товара узнавайтев магазинах или уточн€йте по телефону (495) 777-8-999.</p>
           </section>
           <!-- end .text-->
           <section class="gallery">
+<?
+  if ($arResult["DETAIL_PICTURE"]["HEIGHT"]>$arResult["DETAIL_PICTURE"]["WIDTH"])
+  {
+    $height=418;
+    $x=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$height);
+    $width=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$x);
+  }
+  else
+  {
+    $width=310;
+    $x=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$width);
+    $height=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$x);
+  }
 
-            <div class="big"><a class="zoom-pic" title="" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt=" " width="310px" height="418"><span class="zoom"></span></a></div>
+?>
+
+            <div class="big"><a class="zoom-pic" title="" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt=" " width="<?=$width?>" height="<?=$height?>"><span class="zoom"></span></a></div>
 
             <!-- end .big-->
             <div class="slider">

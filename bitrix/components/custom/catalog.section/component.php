@@ -339,7 +339,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
         array(
         "LOGIC" => "OR",
         'PROPERTY' => Array('col_availability' => 1), 'PROPERTY' => Array('col_city_id' => $_SESSION['city_id'])
-              )
+              ),
    	);
 
 	if($arParams["BY_LINK"]!=="Y")
