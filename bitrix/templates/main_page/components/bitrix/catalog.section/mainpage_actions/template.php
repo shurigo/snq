@@ -7,9 +7,7 @@
         <div class="hold">
           <ul>
           <?foreach($arResult["ITEMS"] as $arItem):?>
-						<?if (in_array(strval($_SESSION['city_id']), $arItem['PROPERTIES']['col_city_id']['VALUE']) || $arItem['PROPERTIES']['col_availability']['VALUE'] == 1):  ?>
-            	<li><a href="/actions/<?=$arItem["ID"]?>/"><img src="<?=$arItem["DETAIL_PICTURE"]["SRC"]?>" width="998" height="391" alt=" "></a></li>
-		    		<? endif; ?>
+            <li><a href="/actions/<?=$arItem["ID"]?>/"><img src="<?=$arItem["DETAIL_PICTURE"]["SRC"]?>" width="998" height="391" alt=" "></a></li>
          <?endforeach;?>
          </ul>
         </div>
