@@ -1,5 +1,6 @@
+<? require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');?>
 <?
-	function in_multiarray($elem, $array)
+    function in_multiarray($elem, $array)
     {
         $top = sizeof($array) - 1;
         $bottom = 0;

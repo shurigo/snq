@@ -1,5 +1,5 @@
 <?
-  session_start();
+//  session_start();
   require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
   require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
   require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php');
@@ -11,7 +11,7 @@
 	if(!CModule::IncludeModule('iblock')) return $res_default;
 	$geo = new Geo();
 	$ip = $geo->get_ip();
-	$ip = '95.24.22.7';// ??????
+	//$ip = '95.24.22.7';// ??????
 	//$ip = '195.224.222.227'; // ?? ??????
 	//$ip = '217.199.218.0'; // ?????
 	//$ip = '217.149.188.152'; // ?????????
@@ -20,7 +20,7 @@
 	// convert negative values to positive
 	if($ip_long < 0) $ip_long = 4294967296 + $ip_long;
 	$filter = Array(
-	  'IBLOCK_ID' => 13,
+	  'IBLOCK_ID' => 14,
 	  'IBLOCK_ACTIVE' => 'Y',
 	  'ACTIVE_DATE' => 'Y',
 	  'ACTIVE' => 'Y',
@@ -43,7 +43,7 @@
 	$city_id = $props['col_city_id']['VALUE'];
 	if(empty($city_id) || !is_numeric($city_id)) return $def_id;
 	$filter = Array(
-	  'IBLOCK_ID' => 12,
+	  'IBLOCK_ID' => 13,
 	  'ACTIVE' => 'Y',
 	  'XML_ID' => IntVal($city_id));
 	$select = Array('ID', 'NAME', 'IBLOCK_ID');
@@ -94,7 +94,7 @@
 		$all_cities['NAME'] = array();
 
 		$filter = Array(
-	  		'IBLOCK_ID' => 12,
+	  		'IBLOCK_ID' => 13,
 		  'ACTIVE' => 'Y');
 		$select = Array('ID', 'NAME', 'IBLOCK_ID', 'XML_ID');
 	$elements = CIBlockElement::GetList(

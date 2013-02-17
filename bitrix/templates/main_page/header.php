@@ -41,24 +41,21 @@
      <!-- actions -->
      <?
 
-    /*
     $myFilter = array(
-		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-		"IBLOCK_LID" => SITE_ID,
-		"IBLOCK_ACTIVE" => "Y",
-		"ACTIVE_DATE" => "Y",
-		"ACTIVE" => "Y",
-		"CHECK_PERMISSIONS" => "Y",
-		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-		//'PROPERTY' => Array('col_city_id' => $_SESSION['city_id'])
-        array(
-        "LOGIC" => "OR",
-        'PROPERTY' => Array('col_availability' => 1), 'PROPERTY' => Array('col_city_id' => $_SESSION['city_id'])
-             )
+			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+			"IBLOCK_LID" => SITE_ID,
+			"IBLOCK_ACTIVE" => "Y",
+			"ACTIVE_DATE" => "Y",
+			"ACTIVE" => "Y",
+			"CHECK_PERMISSIONS" => "Y",
+			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
+			Array('LOGIC' => 'OR', 
+				'PROPERTY_col_availability' => '1', 
+				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+			)		
    	);
-    */
 
-    $APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_actions", Array(
+	$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_actions", Array (
     "DISPLAY_DATE" => "Y",	// Выводить дату элемента
     "DISPLAY_NAME" => "Y",	// Выводить название элемента
     "DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
@@ -71,7 +68,7 @@
     "SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
     "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
     "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
-    "FILTER_NAME" => "",	// Фильтр
+    "FILTER_NAME" => "myFilter",	// Фильтр
     "FIELD_CODE" => "",	// Поля
     "PROPERTY_CODE" => array(0=>"col_availability"),	// Свойства "actions_carousel"
     "CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
@@ -79,7 +76,7 @@
     "PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
     "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
     "DETAIL_PROPERTY_CODE" => array(0=>"col_availability"),
-	"DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
+	  "DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
     "SET_TITLE" => "N",	// Устанавливать заголовок страницы
     "SET_STATUS_404" => "Y",	// Устанавливать статус 404, если не найдены элемент или раздел
     "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",	// Включать инфоблок в цепочку навигации

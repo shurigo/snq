@@ -1,6 +1,4 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-
-<?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?><?foreach($arResult["ITEMS"] as $cell=>$arElement):?>
 
 <a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
 <img src="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" width="179" height="275" alt=" ">

@@ -1,9 +1,7 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $url_array = explode("/", $APPLICATION->GetCurPage());
-?>
-
-<section class="mainContent">
+?><section class="mainContent">
         <!--
         <div class="sort">
           <form class="ajax-load" action="inc/file.json">
@@ -44,10 +42,28 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
 <section data-page="/bitrix/components/custom/catalog.section/templates/.default/template.php" class="catalog">
 
 <?foreach($arResult["ITEMS"] as $arElement):?>
+
+<?
+
+  if ($arElement["DETAIL_PICTURE"]["HEIGHT"]>$arElement["DETAIL_PICTURE"]["WIDTH"])
+  {
+    $height=180;
+    $x=round($arElement["DETAIL_PICTURE"]["HEIGHT"]/$height);
+    $width=round($arElement["DETAIL_PICTURE"]["WIDTH"]/$x);
+  }
+  else
+  {
+    $width=120;
+    $x=round($arElement["DETAIL_PICTURE"]["WIDTH"]/$width);
+    $height=round($arElement["DETAIL_PICTURE"]["HEIGHT"]/$x);
+  }
+
+?>
+
 	<article>
 		<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
           <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-          <img src="<?=$arElement["DETAIL_PICTURE"]["SRC"]?>" width="127" height="211" alt=""> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
+          <img src="<?=$arElement["DETAIL_PICTURE"]["SRC"]?>" width="<?=$width?>" height="<?=$height?>" alt=""> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
 			<span class="text">
 				<span class="name">
@@ -91,6 +107,3 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
 
 </section>
 <!-- end .mainContent-->
-
-
-

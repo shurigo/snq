@@ -1,6 +1,6 @@
 <?
-	$r = session_start();
-	include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
+	session_start();
+	require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php');
 ?>
   <script type="text/javascript">
     $(document).ready(function() {

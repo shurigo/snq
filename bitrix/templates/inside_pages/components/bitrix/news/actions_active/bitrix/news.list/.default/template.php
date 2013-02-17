@@ -9,14 +9,12 @@ $this_date = date("d.m.Y");
 
 if (count($arResult["ITEMS"]) > 0)
 {
- //echo "<pre>"; print_r($arResult); echo "</pre>";
 ?>
 <?foreach($arResult["ITEMS"] as $arItem):?>
 <?
 	if (strlen($arItem["ACTIVE_TO"]) > 0)
 	{
 		$active_to_arr = explode(".", $arItem["ACTIVE_TO"]);
-		//echo "<pre>"; print_r($active_to_arr); echo "</pre>";
 		$active_to_time = mktime(0, 0, 0, $active_to_arr[1], $active_to_arr[0], $active_to_arr[2]);
 	}
 
@@ -30,51 +28,13 @@ if (count($arResult["ITEMS"]) > 0)
          <article class="news" itemscope itemtype="http://schema.org/Product">
 
          <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"] && $arItem["DISPLAY_ACTIVE_TO"]):?>
-                    <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span> - <span><?echo $arItem["DISPLAY_ACTIVE_TO"]?></span>
+           <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span> - <span><?echo $arItem["DISPLAY_ACTIVE_TO"]?></span>
          <?endif?>
          <h2 itemprop="name"><a href="<?echo $arItem["DETAIL_PAGE_URL"]?>"><?echo $arItem["NAME"]?></a></h2>
 
          </article>
 <?
 	}
-	/*
-	else
-	{
-		if ($actions_deactive_showed == 0)
-		{
-			?><div style="padding:30px 0 10px 0;"><h2>Завершённые акции</h2></div><?
-			$actions_deactive_showed = 1;
-		}
-		?>
-        <div style="margin:0 0 2px 0;">
-        <table class="grey_table">
-            <tr>
-                <td class="left_top"></td>
-                <td class="top"></td>
-                <td class="right_top"></td>
-            </tr>
-            <tr>
-                <td class="left"></td>
-                <td class="center"><?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"] && $arItem["DISPLAY_ACTIVE_TO"]):?>
-                    <div><span style="color:#121212; font-size:11px;"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?> - <?echo $arItem["DISPLAY_ACTIVE_TO"]?></span></div>
-                <?endif?>
-                <div class="header"><a href="<?echo $arItem["DETAIL_PAGE_URL"]?>"><?echo $arItem["NAME"]?></a></div>
-                <?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arItem["PREVIEW_TEXT"]):?>
-                    <div style="padding:5px 0 0 0px;"><?echo $arItem["PREVIEW_TEXT"];?></div>
-                <?endif;?></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left_bot"></td>
-                <td class="bot"></td>
-                <td class="right_bot"></td>
-            </tr>
-        </table>
-        </div>
-		<?
-	}
-	//*/
-
 ?>
 <?
 endforeach;

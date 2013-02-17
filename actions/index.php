@@ -1,9 +1,19 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Акции");
-
-?>
-<?$APPLICATION->IncludeComponent(
+	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+	$APPLICATION->SetTitle("Акции");
+	$arrFilter = array(
+		"IBLOCK_ID" => "4",
+		"IBLOCK_ACTIVE" => "Y",
+		"ACTIVE_DATE" => "Y",
+		"ACTIVE" => "Y",
+		"CHECK_PERMISSIONS" => "Y",
+		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
+		Array('LOGIC' => 'OR',
+		  'PROPERTY_col_availability' => '1',
+			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		)   
+	);
+	$APPLICATION->IncludeComponent(
 	"bitrix:news",
 	"actions_active",
 	Array(
@@ -21,6 +31,7 @@ $APPLICATION->SetTitle("Акции");
 		"USE_CATEGORIES" => "N",
 		"USE_REVIEW" => "N",
 		"USE_FILTER" => "N",
+		"FILTER_NAME" => "arrFilter",
 		"SORT_BY1" => "ACTIVE_TO",
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "ACTIVE_FROM",
@@ -84,5 +95,7 @@ $APPLICATION->SetTitle("Акции");
 			"section" => Array(),
 		)
 	)
-);?>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);
+	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+?>
+

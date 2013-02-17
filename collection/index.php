@@ -22,18 +22,15 @@
   if (isset($_GET["SHOWALL_1"])) {
     $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
   }
-
+/*
 		$arFilter = Array(
-		    'PROPERTY' => Array(
-		      //'!col_availability' => false,
-		      //'!col_availability' => 0,
-		      //Array('LOGIC' => 'OR',
-		      //  'col_availability' => 1,
-				//Array('col_availability' => 2, 'col_city_id' => $_SESSION['city_id'])
-		      //)
-		    )
+		    'PROPERTY' => 
+		      Array('LOGIC' => 'OR',
+		        'col_availability' => '1',
+						'col_city_id' => strval($_SESSION['city_id'])
+		      )
 		  );
-
+ */
 		$APPLICATION->IncludeComponent(
 			"custom:catalog",
 			"",
