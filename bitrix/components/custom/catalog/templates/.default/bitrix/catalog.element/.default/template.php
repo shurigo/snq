@@ -64,6 +64,14 @@ false
     $height=418;
     $x=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$height);
     $width=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$x);
+
+    if ($width>310)   // still too lage
+    {
+      $width=310;
+      $x=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$width);
+      $height=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$x);
+    }
+
   }
   else
   {
