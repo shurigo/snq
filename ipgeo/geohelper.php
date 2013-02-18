@@ -20,7 +20,7 @@
 	// convert negative values to positive
 	if($ip_long < 0) $ip_long = 4294967296 + $ip_long;
 	$filter = Array(
-	  'IBLOCK_ID' => 14,
+	  'IBLOCK_ID' => 13,
 	  'IBLOCK_ACTIVE' => 'Y',
 	  'ACTIVE_DATE' => 'Y',
 	  'ACTIVE' => 'Y',
@@ -43,7 +43,7 @@
 	$city_id = $props['col_city_id']['VALUE'];
 	if(empty($city_id) || !is_numeric($city_id)) return $def_id;
 	$filter = Array(
-	  'IBLOCK_ID' => 13,
+	  'IBLOCK_ID' => 12,
 	  'ACTIVE' => 'Y',
 	  'XML_ID' => IntVal($city_id));
 	$select = Array('ID', 'NAME', 'IBLOCK_ID');
@@ -94,7 +94,7 @@
 		$all_cities['NAME'] = array();
 
 		$filter = Array(
-	  		'IBLOCK_ID' => 13,
+	  		'IBLOCK_ID' => 12,
 		  'ACTIVE' => 'Y');
 		$select = Array('ID', 'NAME', 'IBLOCK_ID', 'XML_ID');
 	$elements = CIBlockElement::GetList(
