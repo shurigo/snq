@@ -27,13 +27,8 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 "' alt='' title='LiveInternet: показано число посетителей за"+
 " сегодня' "+
 "border='0' width='88' height='15'><\/a>")
-//--></script><!--/LiveInternet--></noindex></td>
-    </tr>
-</table>
-</div>
+//--></script><!--/LiveInternet--></noindex>
 
-</div>
-</div>
 <noindex>
 <script type="text/javascript">
 

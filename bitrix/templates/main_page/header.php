@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -49,10 +49,10 @@
 			"ACTIVE" => "Y",
 			"CHECK_PERMISSIONS" => "Y",
 			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-			Array('LOGIC' => 'OR', 
-				'PROPERTY_col_availability' => '1', 
+			Array('LOGIC' => 'OR',
+				'PROPERTY_col_availability' => '1',
 				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-			)		
+			)
    	);
 
 	$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_actions", Array (
