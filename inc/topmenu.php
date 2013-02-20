@@ -93,6 +93,7 @@
                     <li><strong>Мужские аксессуары</strong></li>
                     <li><a href="/collection/mgloves/">Перчатки</a></li>
                     <li><a href="/collection/mshawls/">Шарфы</a></li>
+                    <li><a href="/collection/mbags/">Сумки</a></li>
                   </ul></td>
               </tr>
             </table>
