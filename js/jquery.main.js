@@ -73,7 +73,7 @@ function initGallery(){
 		var big = hold.find('.big');
 
 		link.click(function(){
-			big.empty().append('<a class="zoom-pic" title="'+$(this).attr('title')+'" href="'+$(this).attr('data-big')+'"><img src="'+$(this).attr('href')+'" width="310" height="418" alt=" "><span class="zoom"></span></a>');
+			big.empty().append('<a class="zoom-pic" title="'+$(this).attr('title')+'" href="'+$(this).attr('data-big')+'"><img src="'+$(this).attr('href')+'" alt=" "><span class="zoom"></span></a>');
 			if(typeof $.fn.jqzoom == 'function') $('.zoom-pic').jqzoom({
 				alwaysOn:false,
 				zoomWidth: 551,
