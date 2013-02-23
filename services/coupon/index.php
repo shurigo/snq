@@ -63,7 +63,7 @@ if ($handle) {
 <input type="text" name="lastname"><label>Фамилия</label><br><br>
 <input type="text" name="firstname"><label>Имя</label><br><br>
 <input type="text" name="midname"><label>Отчество</label><br><br>
-<input type="checkbox" id="agree" name="agree"><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
+<input type="checkbox" id="agree" name="agree" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
 <input type="hidden" name="coupon" value="<?=$coupon?>">
 <input type="hidden" name="place" value="<?=$place?>">
 <input type="submit" name="send_sms" value="отправить"></p>
@@ -86,14 +86,19 @@ else
         //prepare a message
 	    $message = mb_convert_encoding($coupon." код купона на скидку 10% на новую коллекцию в магазине \"Снежная Королева\". Код действует до 13 марта 2013. Подробнее snowqueen.ru/services/coupon/","utf8");
 
+        //recive or not future sms
+        $recive_future_sms="N";
+        if (isset($agree)) $recive_future_sms="Y";
+
+        if ($recive_future_sms=="Y")
+
+        {
+
         //send sms message
         $message_id = $sms->send($origin_id, $phone, $message);
 
         //put data into result file
         $handle = @fopen($activated_coupones_file, "a");
-        //recive or not future sms
-        $recive_future_sms="N";
-        if (isset($agree)) $recive_future_sms="Y";
 
         $str=$coupon.";".date('d.m.Y').";".$place.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";\n";
 
@@ -108,7 +113,11 @@ else
         file_put_contents($active_coupones_file,implode($arr));
 
         //print message
-        echo 'Сообщение с уникальным кодом на скидку отправлено на ваш мобильный телефон! <a href="/collection/woman/"">Перейти в раздел с новой коллекцией.';
+        echo 'Сообщение с уникальным кодом на скидку отправлено на ваш мобильный телефон! <a href="/collection/woman/"">Перейти в раздел с новой коллекцией.</a>';
+        }  else
+        {           //print message
+           echo 'Для того, чтобы получить промо-код на смс, Вы должны согласиться с условиями рассылки установив соответствующий "флажок" на форме отправки сообщения. <br><a href="/services/coupon/?place='.$place.'">Запросить промо-код еще раз.</a>';
+        }
 
    	    }
 	catch (SMSimpleException $e) {
