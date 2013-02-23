@@ -1,5 +1,4 @@
-			</aside>
-			<!-- end .aside -->
+</div>
 		<!-- end .content-->
 		<div class="footer-place"></div>
 		</div>
