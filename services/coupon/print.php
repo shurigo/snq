@@ -4,7 +4,7 @@ $activated_coupones_file="activated_coupones.csv";
 
 //put data into result file
 $handle = @fopen($activated_coupones_file, "a");
-$str=$_GET["coupon"].";".date('d.m.Y').";".$_GET["place"].";none;\n";
+$str=$_GET["coupon"].";".date('d.m.Y').";".$_GET["place"].";none;;\n";
 if ($handle) {
 			                       fwrite($handle, $str);
 			                       fclose($handle);

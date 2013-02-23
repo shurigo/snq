@@ -59,8 +59,11 @@ if ($handle) {
 <form method="post">
 <fieldset>
 <p>
-<input type="text" name="phone"><label>номер мобильного телефона</label><br><br>
-<input type="checkbox" id="agree" id="name" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
+<input type="text" name="phone"><label>Мобильный телефон (Например: 913 284 1190 - <b>без +7</b>)</label><br><br>
+<input type="text" name="lastname"><label>Фамилия</label><br><br>
+<input type="text" name="firstname"><label>Имя</label><br><br>
+<input type="text" name="midname"><label>Отчество</label><br><br>
+<input type="checkbox" id="agree" name="agree"><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
 <input type="hidden" name="coupon" value="<?=$coupon?>">
 <input type="hidden" name="place" value="<?=$place?>">
 <input type="submit" name="send_sms" value="отправить"></p>
@@ -88,7 +91,12 @@ else
 
         //put data into result file
         $handle = @fopen($activated_coupones_file, "a");
-        $str=$coupon.";".date('d.m.Y').";".$place.";+7".$phone."\n";
+        //recive or not future sms
+        $recive_future_sms="N";
+        if (isset($agree)) $recive_future_sms="Y";
+
+        $str=$coupon.";".date('d.m.Y').";".$place.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";\n";
+
         if ($handle) {
                        fwrite($handle, $str);
                        fclose($handle);
