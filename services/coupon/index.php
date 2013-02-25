@@ -24,8 +24,7 @@ if ($handle) {
                fclose($handle);
              }
 //print form
-?>
-<script type="text/javascript">
+?><script type="text/javascript">
 		$(document).ready(function(){
 			PopUp($('#obj'), $('#trigg'));
 		});
@@ -59,16 +58,18 @@ if ($handle) {
 <form method="post">
 <fieldset>
 <p>
-<input type="text" name="phone"><label>Мобильный телефон (Например: 913 284 1190 - <b>без +7</b>)</label><br><br>
-<input type="text" name="lastname"><label>Фамилия</label><br><br>
-<input type="text" name="firstname"><label>Имя</label><br><br>
-<input type="text" name="midname"><label>Отчество</label><br><br>
-<input type="checkbox" id="agree" name="agree" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
+<input type="text" name="phone"><label>Мобильный телефон (Например: 913 284 1190 - <b>без +7</b>)</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="lastname"><label>Фамилия</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="firstname"><label>Имя</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="midname"><label>Отчество</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="email"><label>e-mail</label><font color="red"><sup>*</sup></font><br><br>
+<input type="checkbox" id="agree" name="agree" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством СМС и e-mail - рассылки.</label><br><br>
 <input type="hidden" name="coupon" value="<?=$coupon?>">
 <input type="hidden" name="place" value="<?=$place?>">
 <input type="submit" name="send_sms" value="отправить"></p>
 </fieldset>
 </form>
+<p><font color="red"><sup>*</sup></font> Поля обязятельные для заполнения</p>
 </div>
 </div>
 
@@ -100,7 +101,7 @@ else
         //put data into result file
         $handle = @fopen($activated_coupones_file, "a");
 
-        $str=$coupon.";".date('d.m.Y').";".$place.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";\n";
+        $str=$coupon.";".date('d.m.Y').";".$place.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";".$email.";\n";
 
         if ($handle) {
                        fwrite($handle, $str);
@@ -115,9 +116,11 @@ else
         //print message
         echo 'Сообщение с уникальным кодом на скидку отправлено на ваш мобильный телефон! <a href="/collection/woman/"">Перейти в раздел с новой коллекцией.</a>';
         }  else
-        {           //print message
+        {
+           //print message
            echo 'Для того, чтобы получить промо-код на смс, Вы должны согласиться с условиями рассылки установив соответствующий "флажок" на форме отправки сообщения. <br><a href="/services/coupon/?place='.$place.'">Запросить промо-код еще раз.</a>';
-        }
+
+        }
 
    	    }
 	catch (SMSimpleException $e) {

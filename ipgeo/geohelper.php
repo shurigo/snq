@@ -4,9 +4,9 @@
 
   function get_my_city () {
    //echo 'point1';
-    include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
+   include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
 
-	$def_id = 2097; $def_name = 'РњРѕСЃРєРІР°';
+	$def_id = 2097; $def_name = 'Москва';
 	if(!CModule::IncludeModule('iblock')) return $res_default;
 	$geo = new Geo();
 	$ip = $geo->get_ip();
@@ -115,7 +115,7 @@
   function print_city_option_html() {
  		$cities = get_available_cities();
 //		if(!in_multiarray($_SESSION['city_name'], $cities)) {
-//		  $this->override_city(2097, 'РњРѕСЃРєРІР°');
+//		  $this->override_city(2097, 'Москва');
 //		}
 		$all_cities['XML_ID'] = array();
 		$all_cities['NAME'] = array();

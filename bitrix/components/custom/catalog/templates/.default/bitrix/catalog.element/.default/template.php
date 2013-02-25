@@ -54,7 +54,7 @@ false
             </ul>
             -->
             <!-- end .links-->
-            <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих. Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+            <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
           </section>
           <!-- end .text-->
           <section class="gallery">
@@ -67,11 +67,13 @@ false
     $width=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$x);
 
     if ($width>310)   // still too lage
-    {
+    {
+
       $width=310;
       $x=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$width);
       $height=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$x);
-    }
+
+    }
 
   }
   else
