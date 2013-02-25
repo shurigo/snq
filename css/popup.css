@@ -41,8 +41,6 @@ html, body {
 	background:#fff;
 	position:relative;
 }
-//.wrapper{width:1000px;height:1200px;}
-
 #win{
 	position:absolute; 
 	z-index:2000; 
@@ -57,7 +55,7 @@ html, body {
 	padding:0; 
 	background:#FFFFFF; 
 	position:fixed; 
-	width:550px;
+	width:600px;
 	height:350px;
 	text-align:left;
 	z-index:3000; 
