@@ -29,29 +29,27 @@ if ($handle) {
 			PopUp($('#obj'), $('#trigg'));
 		});
 </script>
-
 <table border=0 cellspacing=0 cellpadding=0>
 <tr>
-<td background="images/landing_page_top_1.bmp" height=330 width=578></td>
-<td background="images/landing_page_top_2.bmp" height=330 width=35></td>
-<td background="images/landing_page_top_3.bmp" height=330 width=7></td>
-<td background="images/landing_page_top_4.bmp" height=330 width=34></td>
-<td background="images/landing_page_top_5.bmp" height=330 width=344></td>
+    <td background="images/slice_0_0.png" width="562" height="324"></td>
+    <td background="images/slice_0_1.png" width="51"  height="324"></td>
+    <td background="images/slice_0_2.png" width="49"  height="324"></td>
+    <td background="images/slice_0_3.png" width="336"  height="324"></td>
 </tr><tr>
-<td background="images/landing_page_mid_1.bmp" height=35 width=578></td>
-<td height=35 width=35 bgcolor="#00acda"><a href="print.php?coupon=<?=$coupon?>&utm_source=<?=$utm_source?>" target="_blank" title="ÐÀÑÏÅ×ÀÒÀÒÜ ÊÓÏÎÍ"><img src="images/landing_page_print.png" height=32 width=32></a></td>
-<td background="images/landing_page_mid_2.bmp" height=35 width=7></td>
-<td height=35 width=34 bgcolor="#00acda"><a id="trigg" href="javascript:void(0);" title="ÏÎËÓ×ÈÒÜ ÊÎÄ ÏÎ ÑÌÑ"><img src="images/landing_page_sms.png" height=32 width=32></a></td>
-<td background="images/landing_page_mid_3.bmp" height=35 width=344></td>
+    <td background="images/slice_1_0.png" width="562"  height="48"></td>
+<!--    <td bgcolor="#00acda" width="51" height="48"><a href="print.php?coupon=<?=$coupon?>&utm_source=<?=$utm_source?>" target="_blank" title="ÐÀÑÏÅ×ÀÒÀÒÜ ÊÓÏÎÍ"><img src="images/slice_1_1.png"  width="51" height="48"></a></td>
+    <td bgcolor="#00acda" width="49" height="48"><a id="trigg" href="javascript:void(0);" title="ÏÎËÓ×ÈÒÜ ÊÎÄ ÏÎ ÑÌÑ"><img src="images/slice_1_2.png" width="49" height="48"></a></td>
+-->
+<td bgcolor="#00acda" width="51" height="48"><a href="print.php?coupon=<?=$coupon?>&utm_source=<?=$utm_source?>" target="_blank" title="ÐÀÑÏÅ×ÀÒÀÒÜ ÊÓÏÎÍ"><img src="images/slice_1_1.png" width="51"  height="45"></a></td>
+<td background="images/slice_1_2.png" width="49"  height="48"><a id="trigg" href="javascript:void(0);" title="ÏÎËÓ×ÈÒÜ ÊÎÄ ÏÎ ÑÌÑ"><img src="images/slice_1_2.png" width="49" height="45"></a></td>
+    <td background="images/slice_1_3.png" width="336"  height="48"></td>
 </tr><tr>
-<td background="images/landing_page_down_1.bmp" height=385 width=578></td>
-<td background="images/landing_page_down_2.bmp" height=385 width=35></td>
-<td background="images/landing_page_down_3.bmp" height=385 width=7></td>
-<td background="images/landing_page_down_4.bmp" height=385 width=34></td>
-<td background="images/landing_page_down_5.png" height=385 width=344></td>
+    <td background="images/slice_2_0.png" width="562" height="378"></td>
+    <td background="images/slice_2_1.png" width="51" height="378"></td>
+    <td background="images/slice_2_2.png" width="49" height="378"></td>
+    <td background="images/slice_2_3.png" width="336" height="378"></td>
 </tr>
 </table>
-
 <!-- pop-up window -->
 <div id="obj">
 <div class="sample">
