@@ -29,7 +29,7 @@ false
 <?
  //image resizing
  $resizer = $arElement['DETAIL_PICTURE'];
- $file = CFile::ResizeImageGet($resizer, array('width'=>190, 'height'=>240), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+ $file = CFile::ResizeImageGet($resizer, array('width'=>170, 'height'=>240), BX_RESIZE_IMAGE_PROPORTIONAL, true);
  $img = $file['src'];
 ?>
 
