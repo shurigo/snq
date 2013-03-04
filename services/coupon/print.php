@@ -9,6 +9,7 @@ if ($handle) {
 			                       fwrite($handle, $str);
 			                       fclose($handle);
              }
+
 //remove coupone (deactivate)
 $arr = file($active_coupones_file);
 unset($arr[0]);
