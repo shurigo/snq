@@ -33,26 +33,15 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
 <?foreach($arResult["ITEMS"] as $arElement):?>
 
 <?
-
-  if ($arElement["DETAIL_PICTURE"]["HEIGHT"]>$arElement["DETAIL_PICTURE"]["WIDTH"])
-  {
-    $height=180;
-    $x=round($arElement["DETAIL_PICTURE"]["HEIGHT"]/$height);
-    $width=round($arElement["DETAIL_PICTURE"]["WIDTH"]/$x);
-  }
-  else
-  {
-    $width=120;
-    $x=round($arElement["DETAIL_PICTURE"]["WIDTH"]/$width);
-    $height=round($arElement["DETAIL_PICTURE"]["HEIGHT"]/$x);
-  }
-
+ $resizer = $arElement['DETAIL_PICTURE'];
+ $file = CFile::ResizeImageGet($resizer, array('width'=>120, 'height'=>180), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+ $img = $file['src'];
 ?>
 
 	<article>
 		<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
           <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-          <img src="<?=$arElement["DETAIL_PICTURE"]["SRC"]?>" width="<?=$width?>" height="<?=$height?>" alt=""> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
+          <img src="<?=$img?>" alt="<?=$arElement['NAME']?>"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
 			<span class="text">
 				<span class="name">
