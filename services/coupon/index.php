@@ -10,7 +10,7 @@ $active_coupones_file="active_coupones.txt";
 $activated_coupones_file="activated_coupones.csv";
 
 // if ref page is not defined et it to none
-if (!isset($place)) $place="none";
+if (!isset($utm_source)) $utm_source="none";
 
 
 
@@ -24,51 +24,50 @@ if ($handle) {
                fclose($handle);
              }
 //print form
-?>
-<script type="text/javascript">
+?><script type="text/javascript">
 		$(document).ready(function(){
 			PopUp($('#obj'), $('#trigg'));
 		});
 </script>
-
 <table border=0 cellspacing=0 cellpadding=0>
 <tr>
-<td background="images/landing_page_top_1.bmp" height=330 width=578></td>
-<td background="images/landing_page_top_2.bmp" height=330 width=35></td>
-<td background="images/landing_page_top_3.bmp" height=330 width=7></td>
-<td background="images/landing_page_top_4.bmp" height=330 width=34></td>
-<td background="images/landing_page_top_5.bmp" height=330 width=344></td>
+    <td background="images/slice_0_0.png" width="562" height="324"></td>
+    <td background="images/slice_0_1.png" width="51"  height="324"></td>
+    <td background="images/slice_0_2.png" width="49"  height="324"></td>
+    <td background="images/slice_0_3.png" width="336"  height="324"></td>
 </tr><tr>
-<td background="images/landing_page_mid_1.bmp" height=35 width=578></td>
-<td height=35 width=35 bgcolor="#00acda"><a href="print.php?coupon=<?=$coupon?>&place=<?=$place?>" target="_blank" title="РАСПЕЧАТАТЬ КУПОН"><img src="images/landing_page_print.bmp" height=32 width=32></a></td>
-<td background="images/landing_page_mid_2.bmp" height=35 width=7></td>
-<td height=35 width=34 bgcolor="#00acda"><a id="trigg" href="javascript:void(0);" title="ПОЛУЧИТЬ КОД ПО СМС"><img src="images/landing_page_sms.bmp" height=32 width=32></a></td>
-<td background="images/landing_page_mid_3.bmp" height=35 width=344></td>
+    <td background="images/slice_1_0.png" width="562"  height="48"></td>
+<!--    <td bgcolor="#00acda" width="51" height="48"><a href="print.php?coupon=<?=$coupon?>&utm_source=<?=$utm_source?>" target="_blank" title="РАСПЕЧАТАТЬ КУПОН"><img src="images/slice_1_1.png"  width="51" height="48"></a></td>
+    <td bgcolor="#00acda" width="49" height="48"><a id="trigg" href="javascript:void(0);" title="ПОЛУЧИТЬ КОД ПО СМС"><img src="images/slice_1_2.png" width="49" height="48"></a></td>
+-->
+<td bgcolor="#00acda" width="51" height="48"><a href="print.php?coupon=<?=$coupon?>&utm_source=<?=$utm_source?>" target="_blank" title="РАСПЕЧАТАТЬ КУПОН"><img src="images/slice_1_1.png" width="51"  height="45"></a></td>
+<td background="images/slice_1_2.png" width="49"  height="48"><a id="trigg" href="javascript:void(0);" title="ПОЛУЧИТЬ КОД ПО СМС"><img src="images/slice_1_2.png" width="49" height="45"></a></td>
+    <td background="images/slice_1_3.png" width="336"  height="48"></td>
 </tr><tr>
-<td background="images/landing_page_down_1.bmp" height=385 width=578></td>
-<td background="images/landing_page_down_2.bmp" height=385 width=35></td>
-<td background="images/landing_page_down_3.bmp" height=385 width=7></td>
-<td background="images/landing_page_down_4.bmp" height=385 width=34></td>
-<td background="images/landing_page_down_5.png" height=385 width=344></td>
+    <td background="images/slice_2_0.png" width="562" height="378"></td>
+    <td background="images/slice_2_1.png" width="51" height="378"></td>
+    <td background="images/slice_2_2.png" width="49" height="378"></td>
+    <td background="images/slice_2_3.png" width="336" height="378"></td>
 </tr>
 </table>
-
 <!-- pop-up window -->
 <div id="obj">
 <div class="sample">
 <form method="post">
 <fieldset>
 <p>
-<input type="text" name="phone"><label>Мобильный телефон (Например: 913 284 1190 - <b>без +7</b>)</label><br><br>
-<input type="text" name="lastname"><label>Фамилия</label><br><br>
-<input type="text" name="firstname"><label>Имя</label><br><br>
-<input type="text" name="midname"><label>Отчество</label><br><br>
-<input type="checkbox" id="agree" name="agree" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством смс - рассылки.</label><br><br>
+<input type="text" name="phone"><label>Мобильный телефон (Например: 913 284 1190 - <b>без +7</b>)</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="lastname"><label>Фамилия</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="firstname"><label>Имя</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="midname"><label>Отчество</label><font color="red"><sup>*</sup></font><br><br>
+<input type="text" name="email"><label>e-mail</label><font color="red"><sup>*</sup></font><br><br>
+<input type="checkbox" id="agree" name="agree" checked><label>Я, согласен на обработку ООО «СК Трейд» без ограничения по сроку моих персональных данных, с целью получения мною информации об акциях в магазинах сети «Снежная Королева»  посредством СМС и e-mail - рассылки.</label><br><br>
 <input type="hidden" name="coupon" value="<?=$coupon?>">
-<input type="hidden" name="place" value="<?=$place?>">
+<input type="hidden" name="utm_source" value="<?=$utm_source?>">
 <input type="submit" name="send_sms" value="отправить"></p>
 </fieldset>
 </form>
+<p><font color="red"><sup>*</sup></font> Поля обязятельные для заполнения</p>
 </div>
 </div>
 
@@ -100,7 +99,7 @@ else
         //put data into result file
         $handle = @fopen($activated_coupones_file, "a");
 
-        $str=$coupon.";".date('d.m.Y').";".$place.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";\n";
+        $str=$coupon.";".date('d.m.Y').";".$utm_source.";".trim($phone).";".$lastname.";".$firstname.";".$midname.";".$recive_future_sms.";".$email.";\n";
 
         if ($handle) {
                        fwrite($handle, $str);
@@ -115,9 +114,11 @@ else
         //print message
         echo 'Сообщение с уникальным кодом на скидку отправлено на ваш мобильный телефон! <a href="/collection/woman/"">Перейти в раздел с новой коллекцией.</a>';
         }  else
-        {           //print message
-           echo 'Для того, чтобы получить промо-код на смс, Вы должны согласиться с условиями рассылки установив соответствующий "флажок" на форме отправки сообщения. <br><a href="/services/coupon/?place='.$place.'">Запросить промо-код еще раз.</a>';
-        }
+        {
+           //print message
+           echo 'Для того, чтобы получить промо-код на смс, Вы должны согласиться с условиями рассылки установив соответствующий "флажок" на форме отправки сообщения. <br><a href="/services/coupon/?utm_source='.$utm_source.'">Запросить промо-код еще раз.</a>';
+
+        }
 
    	    }
 	catch (SMSimpleException $e) {

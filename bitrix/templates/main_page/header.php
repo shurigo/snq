@@ -49,10 +49,10 @@
 			"ACTIVE" => "Y",
 			"CHECK_PERMISSIONS" => "Y",
 			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-			Array('LOGIC' => 'OR',
-				'PROPERTY_col_availability' => '1',
+			Array('LOGIC' => 'OR', 
+				'PROPERTY_col_availability' => '1', 
 				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-			)
+			)		
    	);
 
 	$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_actions", Array (

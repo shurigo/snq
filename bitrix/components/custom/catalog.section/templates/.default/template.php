@@ -1,22 +1,11 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $url_array = explode("/", $APPLICATION->GetCurPage());
+?><?
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+$url_array = explode("/", $APPLICATION->GetCurPage());
 ?><section class="mainContent">
-        <!--
-        <div class="sort">
-          <form class="ajax-load" action="inc/file.json">
-            <fieldset>
-              <span>Сортировать по</span>
-              <select class="customSelect">
-                <option>Цене</option>
-                <option>Популярности</option>
-              </select>
-            </fieldset>
-          </form>
-        </div>
-        -->
-        <!-- end .sort-->
-<?
+        <?
 	$APPLICATION->IncludeComponent(
 		"bitrix:breadcrumb",
 		"breadcrumb",
@@ -39,7 +28,7 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
 ?>
 <?endif;?>
 
-<section data-page="/bitrix/components/custom/catalog.section/templates/.default/template.php" class="catalog">
+<section class="catalog">
 
 <?foreach($arResult["ITEMS"] as $arElement):?>
 
@@ -101,8 +90,9 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
         <p>За свою долгую историю дубленки претерпели целый ряд серьёзных преобразований. Появилось невероятное количество способов выделки овечьей шкуры для того, чтобы удовлетворить безудержный полёт творческой фантазии дизайнеров. Поэтому многие из современных женских дубленок, особенно те их представители, которые сошли в российские магазины с европейских подиумов, можно, скорее, назвать модной, имиджевой вещью, нежели чем серьёзным защитником от зимней стужи.Тем не менее, хорошие качественные дубленки остаются самой практичной вещью для холодной российской зимы и может прослужить Вам несколько сезонов! Кроме этого дубленки женские - красивые, и удобные и сочетать их с другими предметами костюма в повседневном городском гардеробе очень легко.</p>
         <p>Не знаете где купить дубленку, тогда приходите к нам, в магазин дубленок, мехов и модной одежды «Снежная Королева». У нас собрана лучшая коллекция Осень-Зима 2012-2013, отражающая все самые актуальные модные тенденции наступившего сезона. Мы предлагаем дубленки женские, дубленки мужские, ультрамодные и классические модели. Все это Вы сможете купить в наших магазинах в Москве и других крупных городах России, по очень привлекательной цене. Приходите, мы ждем Вас!</p>
       	 -->
+
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-	<?=$arResult["NAV_STRING"]?>
+  <?=$arResult["NAV_STRING"]?>
 <?endif;?>
 
 </section>

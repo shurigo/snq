@@ -1,4 +1,5 @@
-</div>
+			</aside>	
+			<!-- end .aside -->
 		<!-- end .content-->
 		<div class="footer-place"></div>
 		</div>
@@ -15,9 +16,9 @@
   </div>
 </footer>
 <!-- end .footer-->
-
+</div>
 <noindex><!--LiveInternet counter--><script type="text/javascript"><!--
-document.write("<a href='http://www.liveinternet.ru/click' "+
+/*document.write("<a href='http://www.liveinternet.ru/click' "+
 "target=_blank><img src='http://counter.yadro.ru/hit?t25.11;r"+
 escape(document.referrer)+((typeof(screen)=="undefined")?"":
 ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
@@ -25,7 +26,7 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 ";"+Math.random()+
 "' alt='' title='LiveInternet: показано число посетителей за"+
 " сегодня' "+
-"border='0' width='88' height='15'><\/a>")
+"border='0' width='88' height='15'*/><\/a>")
 //--></script><!--/LiveInternet--></noindex>
 
 <noindex>
@@ -70,5 +71,6 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 <noscript><div><img src="//mc.yandex.ru/watch/7080487" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 </noindex>
+
 </body>
 </html>
