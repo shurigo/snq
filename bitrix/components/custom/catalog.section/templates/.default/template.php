@@ -29,31 +29,31 @@ false
 <?
  //image resizing
  $resizer = $arElement['DETAIL_PICTURE'];
- $file = CFile::ResizeImageGet($resizer, array('width'=>120, 'height'=>180), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+ $file = CFile::ResizeImageGet($resizer, array('width'=>190, 'height'=>240), BX_RESIZE_IMAGE_PROPORTIONAL, true);
  $img = $file['src'];
 ?>
 
-<article>
+<article itemscope itemtype="http://schema.org/Product">
 <a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
 <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-<img src="<?=$img?>" alt="<?=$arElement['NAME']?>"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
+<img src="<?=$img?>" alt="<?=$arElement['NAME']?>" itemprop="image"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
 <span class="text">
-<span class="name">
+<span class="name" itemprop="brand">
 <?=strip_tags($arElement['DISPLAY_PROPERTIES']['col_brand']['DISPLAY_VALUE']);?>
 </span>
-<?=$arElement['NAME']?>
+<span itemprop="name"><?=$arElement['NAME']?></span>
 </span>
 <!-- end .text -->
 <?if(!empty($arElement['PROPERTIES']['col_price_new']['VALUE'])):?>
-<span class="price bg-red">
-<?=number_format($arElement['PROPERTIES']['col_price_new']['VALUE'], 0, '.', ' ').' Руб.';?>
+<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price_new']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
 <del>
 <?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' Руб.';?>
 </del>
 <?else:?>
-<span class="price">
-<?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' Руб.';?>
+<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
 <new>New</new>
 <?endif?>
 </span>

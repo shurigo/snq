@@ -4,7 +4,7 @@
 
 <?
 $resizer = $arElement['PREVIEW_PICTURE'];
-$file = CFile::ResizeImageGet($resizer, array('width'=>179, 'height'=>275), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+$file = CFile::ResizeImageGet($resizer, array('width'=>240, 'height'=>300), BX_RESIZE_IMAGE_PROPORTIONAL, true);
 $img = $file['src'];
 ?>
 

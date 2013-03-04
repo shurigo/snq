@@ -16,15 +16,16 @@ false
 );
 ?>
 <article class="item" itemscope itemtype="http://schema.org/Product">
-          <section class="text">
+<section class="text">
             <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
             <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
-            <p>Бренд: <strong><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
+            <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
 
             <? if (isset($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"])) {?>
-            <div class="price bg-red"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ')?> руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></del> </div>
+
+            <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></del> </div>
             <?}  else { ?>
-            <? echo '<div class="price"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'руб</span>&nbsp;<new>New</new></div>'; } ?>
+            <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
             <!-- end .price-->
            <!--
             <div class="likes">
@@ -54,43 +55,17 @@ false
             </ul>
             -->
             <!-- end .links-->
-            <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
-          </section>
-          <!-- end .text-->
-          <section class="gallery">
+<p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+</section>
+<!-- end .text-->
+<section class="gallery">
 <?
-  /*
-  if ($arResult["DETAIL_PICTURE"]["HEIGHT"]>$arResult["DETAIL_PICTURE"]["WIDTH"])
-  {
-    $height=418;
-    $x=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$height);
-    $width=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$x);
-
-    if ($width>310)   // still too lage
-    {
-
-      $width=310;
-      $x=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$width);
-      $height=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$x);
-
-    }
-
-  }
-  else
-  {
-    $width=310;
-    $x=round($arResult["DETAIL_PICTURE"]["WIDTH"]/$width);
-    $height=round($arResult["DETAIL_PICTURE"]["HEIGHT"]/$x);
-  } */
-
  $resizer = $arResult['DETAIL_PICTURE'];
  $file = CFile::ResizeImageGet($resizer, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
  $img = $file['src'];
-
-
 ?>
 
-            <div class="big"><a class="zoom-pic" title="" href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$img;?>" alt=" "><span class="zoom"></span></a></div>
+            <div class="big"><a class="zoom-pic" title='<?=$arResult["NAME"]?>' href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$img;?>" itemprop="image" alt='<?=$arResult["NAME"]?>'><span class="zoom"></span></a></div>
 
             <!-- end .big-->
             <div class="slider">
