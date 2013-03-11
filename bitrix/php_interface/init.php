@@ -6,6 +6,9 @@
   function Prefix_FunctionName() {
     global $APPLICATION;
 		$path = explode('/', $APPLICATION->GetCurPage());
+		if($APPLICATION->GetCurPage() === '/services/coupon/') {
+			LocalRedirect('/404.php', true, '404 Not Found');
+		}
 		while ("" === end($path))
 		{
 			array_pop($path);
