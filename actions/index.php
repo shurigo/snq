@@ -1,7 +1,7 @@
 <?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	$APPLICATION->SetTitle("Акции");
-	$arrFilter = array(
+	$arFilter = array(
 		"IBLOCK_ID" => "4",
 		"IBLOCK_ACTIVE" => "Y",
 		"ACTIVE_DATE" => "Y",
@@ -31,7 +31,7 @@
 		"USE_CATEGORIES" => "N",
 		"USE_REVIEW" => "N",
 		"USE_FILTER" => "N",
-		"FILTER_NAME" => "arrFilter",
+		"FILTER_NAME" => "arFilter",
 		"SORT_BY1" => "ACTIVE_TO",
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "ACTIVE_FROM",

@@ -73,7 +73,7 @@ else
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER2" => "ASC",
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arFilter",
 		"FIELD_CODE" => "",
 		"PROPERTY_CODE" => "",
 		"CHECK_DATES" => "Y",
