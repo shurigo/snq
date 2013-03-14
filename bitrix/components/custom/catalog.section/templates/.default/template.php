@@ -1,3 +1,4 @@
+<?if($arParams["JSON"]=="n"):?>
 <?
   if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
   $url_array = explode("/", $APPLICATION->GetCurPage());
@@ -16,15 +17,16 @@ false
 );
 ?>
 <input type="hidden" id="section" value="<?=$url_array[2]?>">
-<?if($arParams['JSON'] == "1"):?>
-<?echo '{
-"data": {
-"next": true,
-"html":"';
-?>
-<?endif;?>
 
-<section class="catalog">
+<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>?PAGEN_1=2&json=y">
+<?endif;?>
+<?if($arParams['JSON'] == "y"):?>
+<?='{
+	"data": {
+	"next": true,
+	"html":"';
+endif;?>
+	<pre>record_count=<?=$arResult['NAV_RESULT']->NavPageCount;?></pre>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?
  //image resizing
@@ -63,9 +65,9 @@ false
 <!-- end .article -->
 
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
-<?if($arParams['JSON'] == "1"):?>
-<?echo "\"}}" ;?>
-<?endif;?>
+<?if($arParams['JSON'] == "y"):?>
+<?="\"}}" ;?>
+<?else:?>
 
 </section>
 <!-- end .catalog-->
@@ -93,3 +95,4 @@ if (strlen($arSec["DESCRIPTION"]) > 0)  echo $arSec["DESCRIPTION"];
 
 </section>
 <!-- end .mainContent-->
+<?endif;?>

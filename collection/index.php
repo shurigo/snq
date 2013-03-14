@@ -21,20 +21,18 @@
 
   if (isset($_GET["SHOWALL_1"])) {
     $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
-  }
-/*
-		$arFilter = Array(
-		    'PROPERTY' => 
-		      Array('LOGIC' => 'OR',
-		        'col_availability' => '1',
-						'col_city_id' => strval($_SESSION['city_id'])
-		      )
-		  );
- */
-		$APPLICATION->IncludeComponent(
-			"custom:catalog",
-			"",
-			Array(
+	}
+
+	$json = "n";
+	if(isset($_GET['json'])) {
+    if(in_array($_GET['json'], array('y', 'n'))) {
+		  $json = $_GET['json'];
+		}
+	}
+	$APPLICATION->IncludeComponent(
+		"custom:catalog",
+		"",
+		Array(
 				"AJAX_MODE" => "N",
 				"SEF_MODE" => "Y",
 				"IBLOCK_TYPE" => "collection",
@@ -57,7 +55,6 @@
 				"DETAIL_META_KEYWORDS" => "col_keywords",
 				"DETAIL_META_DESCRIPTION" => "col_description",
 				"DETAIL_BROWSER_TITLE" => "col_title",
-				"BASKET_URL" => "/personal/basket.php",
 				"ACTION_VARIABLE" => "action",
 				"PRODUCT_ID_VARIABLE" => "id",
 				"SECTION_ID_VARIABLE" => "SECTION_ID",
@@ -78,7 +75,7 @@
 				"LINK_PROPERTY_SID" => "",
 				"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
 				"DISPLAY_TOP_PAGER" => "N",
-				"DISPLAY_BOTTOM_PAGER" => "Y",
+				"DISPLAY_BOTTOM_PAGER" => "N",
 				"PAGER_TITLE" => "Модели",
 				"PAGER_SHOW_ALWAYS" => "Y",
 				"PAGER_TEMPLATE" => "collection",
@@ -115,7 +112,7 @@
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"PAGE_NUMBER" => "{$page}",
-				"JSON" => "0"
+				"JSON" => $json
 			)
 		);
 		if(empty($url_array[3]))

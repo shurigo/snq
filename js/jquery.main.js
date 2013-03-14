@@ -146,16 +146,16 @@ function initLoadPage(){
 		$(window).scroll(function(){
 			if(obj.next) {
 				if($(window).scrollTop() > hold.offset().top + hold.outerHeight(true)-1000 && flag){
-					/*flag = false;
+					flag = false;
 					$.ajax({
 						dataType: 'json',
-                                                url: hold.attr('data-page'),
-                                                success: function(obj){
-                                                         hold.append(obj.data.html);
-	                                                 flag = true;
-	                                        },
+            url: hold.attr('data-page'),
+            success: function(obj){
+              hold.append(obj.data.html);
+	            flag = true;
+	          },
 						error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
-					});*/
+					});
 				}
 			}
 		}).bind('loadFirst', function(){
