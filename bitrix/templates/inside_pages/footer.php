@@ -1,5 +1,4 @@
-			</aside>	
-			<!-- end .aside -->
+        </div>
 		<!-- end .content-->
 		<div class="footer-place"></div>
 		</div>
@@ -11,12 +10,12 @@
 
     <? include($_SERVER["DOCUMENT_ROOT"]."/inc/downmenu.php"); ?>
 
-    <div class="fr">© 2010-2012 Снежная королева</div>
+    <div class="fr">© 2010-<?=date("Y")?> Снежная Королева</div>
     <!-- end .fr-->
   </div>
 </footer>
 <!-- end .footer-->
-</div>
+
 <noindex><!--LiveInternet counter--><script type="text/javascript"><!--
 /*document.write("<a href='http://www.liveinternet.ru/click' "+
 "target=_blank><img src='http://counter.yadro.ru/hit?t25.11;r"+

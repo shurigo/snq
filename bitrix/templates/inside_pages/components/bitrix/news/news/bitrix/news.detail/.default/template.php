@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <section class="mainContent">
 
-<article class="news" itemscope itemtype="http://schema.org/Product">
+<article class="news" itemscope itemtype="http://schema.org/Article">
 <h1 itemprop="name"><?=$arResult["NAME"]?></h1>
 <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"]):?>
   <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span>

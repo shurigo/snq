@@ -24,7 +24,7 @@
   }
 /*
 		$arFilter = Array(
-		    'PROPERTY' => 
+		    'PROPERTY' =>
 		      Array('LOGIC' => 'OR',
 		        'col_availability' => '1',
 						'col_city_id' => strval($_SESSION['city_id'])
@@ -150,8 +150,12 @@
 									"ADD_SECTIONS_CHAIN" => "N"
 								)
 							);
+?>
+	</aside>
+	<!-- end .aside-->
+<?
 			}
 		}
 	}
 
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>

@@ -2,7 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Наши магазины");
 ?>
-<div style="margin:10px 45px 45px;">
 <h1>Наши магазины</h1>
 <?
 $APPLICATION->IncludeComponent("custom:our_shops", "", Array(
@@ -15,5 +14,6 @@ $APPLICATION->IncludeComponent("custom:our_shops", "", Array(
 	),
 	false
 );?>
-</div>
+<!-- HUBRUS RTB Segments Pixel V2.3 -->
+<script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850,12846&type=js"></script>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -83,8 +83,99 @@ $dbSec = CIBlockSection::GetList(
 					            );
 $arSec = $dbSec->GetNext();
 if (strlen($arSec["DESCRIPTION"]) > 0)  echo $arSec["DESCRIPTION"];
+
+
+// pixels monitor
+$sections = array( "new" =>
+array(
+12856,
+12857,
+12858,
+12859,
+12860,
+12861,
+12862,
+12863,
+12864,
+12865,
+12866,
+12867,
+12868,
+12869,
+12870,
+12871,
+12872,
+12873,
+12874,
+12875,
+12876,
+12877,
+12878,
+12879,
+12880,
+12881,
+12882,
+12883,
+12884,
+12885,
+12886,
+12887,
+12888,
+12889,
+12890,
+12891,
+12892
+)
+,"origin" =>
+array(
+306,
+284,
+129,
+285,
+136,
+316,
+296,
+297,
+326,
+142,
+317,
+300,
+301,
+305,
+302,
+304,
+156,
+318,
+310,
+311,
+160,
+314,
+315,
+130,
+131,
+133,
+135,
+134,
+286,
+288,
+289,
+290,
+291,
+293,
+319,
+322,
+321));
+
+//find a key in sections array
+$key = array_search($arSec['ID'], $sections["origin"]);
+//get transfered section_id
+$MY_SEC_ID=$sections["new"][$key];
+//build a string
+$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 }
 ?>
+<!-- HUBRUS RTB Segments Pixel V2.3 -->
+<script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
 
 
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>

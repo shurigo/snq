@@ -1,3 +1,6 @@
+<!-- HUBRUS RTB Segments Pixel V2.3 -->
+<script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850&type=js"></script>
+
 <footer class="footer">
 <!-- brands -->
 <?$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_brands", Array(
@@ -54,7 +57,7 @@
   <!-- down menu -->
   <? include("/inc/downmenu.php"); ?>
 
-      <div class="fr">© 2010-2012 Снежная королева</div>
+      <div class="fr">© 2010-<?=date("Y")?> Снежная Королева</div>
     <!-- end .fr-->
   </div>
 </footer>
