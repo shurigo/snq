@@ -57,6 +57,20 @@ else
 
 <aside class="aside">
  <h2>Последние новости</h2>
+ <? 
+		$newsFilter = Array(
+    	"IBLOCK_ID" => "3",
+    	"IBLOCK_ACTIVE" => "Y",
+    	"ACTIVE_DATE" => "Y",
+    	"ACTIVE" => "Y",
+    	"CHECK_PERMISSIONS" => "Y",
+    	"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
+    	Array('LOGIC' => 'OR',
+      	'PROPERTY_col_availability' => '1',
+      	'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+    	)   
+  	); 
+ ?>
  <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"mainpage_news",
@@ -73,7 +87,7 @@ else
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER2" => "ASC",
-		"FILTER_NAME" => "arFilter",
+		"FILTER_NAME" => "newsFilter",
 		"FIELD_CODE" => "",
 		"PROPERTY_CODE" => "",
 		"CHECK_DATES" => "Y",

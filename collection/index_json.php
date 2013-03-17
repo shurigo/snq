@@ -1,51 +1,5 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  // output JSON?
-	$json = "n";
-	if(isset($_GET['json'])) {
-    if(in_array(strtolower($_GET['json']), array('y', 'n'))) {
-		  $json = strtolower($_GET['json']);
-		}
-	}
-	$json_next = false;
-	// output JSON for the infinite scroll function
-	if($json=="y") {
-		while (ob_get_level()) {
-			ob_end_clean();
-		}
-		ob_start();
-		header("Content-Type: application/json");
-		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
-		$buf = ob_get_clean();
-		if(!empty($buf)) { $flag = true; }
-		echo '{ 
-						"data": { 
-							"next": '.$flag.', 
-							"html":';
-		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
-		echo '}}';
-		exit;
-  } // if($json=="y")
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("Коллекция");
-
-  $data_string = "component_url=".$APPLICATION->GetCurPage(true);
-  $_POST['component_url']=$APPLICATION->GetCurPage(true);
-  $url_array = explode("/", $APPLICATION->GetCurPage());
-
-  // Collection root undefined -> redirect to Woman collection
-  if($url_array[1] == 'collection' && empty($url_array[2])) {
-    LocalRedirect('/collection/woman/', true);
-  }
-  if ($url_array[1] == "collection")
-	{
-    if (isset($_GET["PAGEN_1"])) {
-    	$data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
-  }
-
-  if (isset($_GET["SHOWALL_1"])) {
-    $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
-  }
 
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
@@ -95,11 +49,11 @@
 				"DISPLAY_TOP_PAGER" => "N",
 				"DISPLAY_BOTTOM_PAGER" => "N",
 				"PAGER_TITLE" => "Модели",
-				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_SHOW_ALWAYS" => "Y",
 				"PAGER_TEMPLATE" => "collection",
 				"PAGER_DESC_NUMBERING" => "N",
 				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-				"PAGER_SHOW_ALL" => "N",
+				"PAGER_SHOW_ALL" => "Y",
 				"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
 				"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
 				"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),
@@ -125,52 +79,11 @@
 						"ACTION_CODE" => "action"
 					),
 				),
-				"COMPONENT_URL" => $_POST["component_url"],
-				"PRICE_SORT" => $_POST["price_sort"],
+				"COMPONENT_URL" => $_GET["component_url"],
+				"PRICE_SORT" => $_GET["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
-				"PAGE_NUMBER" => "{$page}",
-				"JSON" => $json
+				"JSON" => 'y'
 			)
 		);
-		if(empty($url_array[3]))
-		{
-			$dbSec = CIBlockSection::GetList(
-				array(),
-				array(
-					"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-					"CODE" => $url_array[2],
-				)
-			);
-			if ($arSec = $dbSec->GetNext())
-			{
 ?>
-	<aside class="aside">
-<?
-							$APPLICATION->IncludeComponent(
-								"custom:catalog.section.list",
-								"collection_mainpage",
-								Array(
-									"IBLOCK_TYPE" => "collection",
-									"IBLOCK_ID" => 1,
-									"SECTION_ID" => $arSec["ID"],
-									"DISPLAY_PANEL" => "N",
-									"CACHE_TYPE" => "A",
-									"CACHE_TIME" => "3600",
-									"CACHE_GROUPS" => "Y",
-									"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-									"TOP_DEPTH" => 4,
-									"LEFT_MENU_FLAG" => 1,
-									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-									"ADD_SECTIONS_CHAIN" => "N"
-								)
-							);
-?>
-	</aside>
-	<!-- end .aside-->
-<?
-			}
-		}
-	}
-
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>

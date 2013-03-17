@@ -1,3 +1,4 @@
+<?if(!isset($arParams["JSON"]) || $arParams["JSON"]=="n"): //normal page ?>
 <?
   if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
   $url_array = explode("/", $APPLICATION->GetCurPage());
@@ -16,15 +17,14 @@ false
 );
 ?>
 <input type="hidden" id="section" value="<?=$url_array[2]?>">
-<?if($arParams['JSON'] == "1"):?>
-<?echo '{
-"data": {
-"next": true,
-"html":"';
-?>
-<?endif;?>
 
-<section class="catalog">
+<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
+<?endif; //end normal page?>
+<?
+  // don't go beyound the last page
+	$page_count = $arResult['NAV_RESULT']->NavPageCount;
+	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
+?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?
  //image resizing
@@ -61,15 +61,10 @@ false
 </a>
 </article>
 <!-- end .article -->
-
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
-<?if($arParams['JSON'] == "1"):?>
-<?echo "\"}}" ;?>
-<?endif;?>
-
+<?if(!isset($arParams['JSON']) || $arParams['JSON'] == "n"): //normal page ?>
 </section>
 <!-- end .catalog-->
-
 <?
 //get section description
 if (strlen($url_array[3]) == 0)
@@ -177,10 +172,8 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
 
-
-<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-  <?=$arResult["NAV_STRING"]?>
-<?endif;?>
+<?/*if($arParams["DISPLAY_BOTTOM_PAGER"]) { echo $arResult["NAV_STRING"]; }*/ ?>
 
 </section>
 <!-- end .mainContent-->
+<?endif; // end normal page?>

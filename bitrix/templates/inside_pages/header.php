@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?if(!isset($json) || $json=="n"):?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -39,4 +40,5 @@
     <!-- top menu -->
     <? include($_SERVER["DOCUMENT_ROOT"]."/inc/topmenu.php"); ?>
 
-    <div class="content">
+		<div class="content">
+<?endif;?>
