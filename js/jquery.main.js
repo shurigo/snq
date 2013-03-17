@@ -142,6 +142,7 @@ function initLoadPage(){
 		var hold = $(this);
 		var obj = {next: 2};
 		var flag = true;
+		var page = 2;
 
 		$(window).scroll(function(){
 			if(obj.next) {
@@ -150,11 +151,15 @@ function initLoadPage(){
 					$.ajax({
 						dataType: 'json',
             url: hold.attr('data-page'),
+						data: "PAGEN_1="+page+"&json=y",
             success: function(obj){
-              hold.append(obj.data.html);
-	            flag = true;
+	            flag = obj.data.next;
+              if(flag) hold.append(obj.data.html);
+							page = page + 1;
 	          },
-						error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
+						error: function(xhr, textStatus, thrownError){
+							alert('Server is unavailable. Refresh the page within 15 seconds.!');
+						}
 					});
 				}
 			}

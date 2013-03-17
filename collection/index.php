@@ -1,5 +1,32 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  // output JSON?
+	$json = "n";
+	if(isset($_GET['json'])) {
+    if(in_array(strtolower($_GET['json']), array('y', 'n'))) {
+		  $json = strtolower($_GET['json']);
+		}
+	}
+	$json_next = false;
+	// output JSON for the infinite scroll function
+	if($json=="y") {
+		while (ob_get_level()) {
+			ob_end_clean();
+		}
+		ob_start();
+		header("Content-Type: application/json");
+		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
+		$buf = ob_get_clean();
+		if(!empty($buf)) { $flag = true; }
+		echo '{ 
+						"data": { 
+							"next": '.$flag.', 
+							"html":';
+		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
+		echo '}}';
+		exit;
+  } // if($json=="y")
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   $APPLICATION->SetTitle("Коллекция");
 
   $data_string = "component_url=".$APPLICATION->GetCurPage(true);
@@ -12,23 +39,15 @@
   }
   if ($url_array[1] == "collection")
 	{
-		//$page = (empty($_GET['page']) || !is_numeric($_GET['page'])) ? 1 : $_GET['page'];
-		//CModule::IncludeModule('iblock');
-
-        if (isset($_GET["PAGEN_1"])) {
-    $data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
+    if (isset($_GET["PAGEN_1"])) {
+    	$data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
   }
 
   if (isset($_GET["SHOWALL_1"])) {
     $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
 	}
 
-	$json = "n";
-	if(isset($_GET['json'])) {
-    if(in_array($_GET['json'], array('y', 'n'))) {
-		  $json = $_GET['json'];
-		}
-	}
+
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -77,11 +96,11 @@
 				"DISPLAY_TOP_PAGER" => "N",
 				"DISPLAY_BOTTOM_PAGER" => "N",
 				"PAGER_TITLE" => "Модели",
-				"PAGER_SHOW_ALWAYS" => "Y",
+				"PAGER_SHOW_ALWAYS" => "N",
 				"PAGER_TEMPLATE" => "collection",
 				"PAGER_DESC_NUMBERING" => "N",
 				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-				"PAGER_SHOW_ALL" => "Y",
+				"PAGER_SHOW_ALL" => "N",
 				"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
 				"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
 				"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),

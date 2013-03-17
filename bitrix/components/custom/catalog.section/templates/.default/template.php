@@ -1,4 +1,4 @@
-<?if($arParams["JSON"]=="n"):?>
+<?if(!isset($arParams["JSON"]) || $arParams["JSON"]=="n"): //normal page ?>
 <?
   if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
   $url_array = explode("/", $APPLICATION->GetCurPage());
@@ -18,15 +18,13 @@ false
 ?>
 <input type="hidden" id="section" value="<?=$url_array[2]?>">
 
-<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>?PAGEN_1=2&json=y">
-<?endif;?>
-<?if($arParams['JSON'] == "y"):?>
-<?='{
-	"data": {
-	"next": true,
-	"html":"';
-endif;?>
-	<pre>record_count=<?=$arResult['NAV_RESULT']->NavPageCount;?></pre>
+<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
+<?endif; //end normal page?>
+<?
+  // don't go beyound the last page
+	$page_count = $arResult['NAV_RESULT']->NavPageCount;
+	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
+?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?
  //image resizing
@@ -63,36 +61,28 @@ endif;?>
 </a>
 </article>
 <!-- end .article -->
-
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
-<?if($arParams['JSON'] == "y"):?>
-<?="\"}}" ;?>
-<?else:?>
-
+<?if(!isset($arParams['JSON']) || $arParams['JSON'] == "n"): //normal page ?>
 </section>
 <!-- end .catalog-->
-
 <?
-//get section description
-if (strlen($url_array[3]) == 0)
-{
-$dbSec = CIBlockSection::GetList(
-                        array(),
-						array(
-							"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-							"CODE" => $url_array[2],
-						)
-					            );
-$arSec = $dbSec->GetNext();
-if (strlen($arSec["DESCRIPTION"]) > 0)  echo $arSec["DESCRIPTION"];
-}
+	//get section description
+	if (strlen($url_array[3]) == 0)
+	{
+		$dbSec = CIBlockSection::GetList(
+							array(),
+							array(
+								"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+								"CODE" => $url_array[2],
+							)
+												);
+		$arSec = $dbSec->GetNext();
+		if (strlen($arSec["DESCRIPTION"]) > 0)  echo $arSec["DESCRIPTION"];
+	}
 ?>
 
-
-<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-  <?=$arResult["NAV_STRING"]?>
-<?endif;?>
+<?/*if($arParams["DISPLAY_BOTTOM_PAGER"]) { echo $arResult["NAV_STRING"]; }*/ ?>
 
 </section>
 <!-- end .mainContent-->
-<?endif;?>
+<?endif; // end normal page?>
