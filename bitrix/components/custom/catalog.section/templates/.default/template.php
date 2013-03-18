@@ -65,6 +65,16 @@ false
 <?if(!isset($arParams['JSON']) || $arParams['JSON'] == "n"): //normal page ?>
 </section>
 <!-- end .catalog-->
+<div id='loading_div' style='display:none' align='center'>
+  <img src='/images/loading_icon.gif'/>
+</div>
+<script type='text/javascript'>
+	$('#loading_div').hide().ajaxStart(function(){
+		$(this).show();
+	}).ajaxStop(function() {
+  	$(this).hide();
+});
+</script>
 <?
 	//get section description
 	if (strlen($url_array[3]) == 0)
