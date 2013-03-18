@@ -153,7 +153,9 @@ function initLoadPage(){
             url: hold.attr('data-page'),
 						data: "PAGEN_1="+page+"&json=y",
             success: function(obj){
-	            flag = obj.data.next;
+	            if(null != obj) {
+								flag = obj.data.next;
+							}
               if(flag) hold.append(obj.data.html);
 							page = page + 1;
 	          },
