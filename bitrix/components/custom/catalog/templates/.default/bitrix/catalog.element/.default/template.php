@@ -27,23 +27,42 @@ false
             <?}  else { ?>
             <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
             <!-- end .price-->
-           <!--
+
             <div class="likes">
               <table>
                 <tr>
-                  <td><img src="/images/temp/fb.png" width="46" height="20" alt=" "></td>
-                  <td class="sep">&nbsp;</td>
-                  <td><img src="/images/temp/tw.png" width="55" height="20" alt=" "></td>
-                  <td class="sep">&nbsp;</td>
-                  <td><img src="/images/temp/pi.png" width="43" height="20" alt=" "></td>
-                  <td class="sep">&nbsp;</td>
+                  <td>
+                      <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+                  </td>
+                  <td class="sep">&nbsp;&nbsp;</td>
+                  <td>
+                    <div id="vk_like"></div>
+				    <script type="text/javascript">
+						VK.Widgets.Like("vk_like", {type: "button", height: 20});
+				    </script>
+                  </td>
+                  <td class="sep">&nbsp;&nbsp;</td>
+                  <td>
+					<div class="g-plusone" data-size="medium"></div>
+					<script type="text/javascript">
+					  window.___gcfg = {lang: 'ru'};
+
+  					 (function() {
+								    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+								    po.src = 'https://apis.google.com/js/plusone.js';
+								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ 								 })();
+				  </script>
+                  </td>
+                  <!--<td class="sep">&nbsp;</td>
                   <td><img src="/images/temp/fb2.png" width="52" height="20" alt=" "></td>
                   <td class="sep">&nbsp;</td>
                   <td><img src="/images/temp/goo.png" width="32" height="20" alt=" "></td>
+                  -->
                 </tr>
               </table>
             </div>
-            -->
+
             <!-- end .likes-->
             <!--
             <div itemprop="description">
