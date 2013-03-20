@@ -1,9 +1,16 @@
 User-Agent: *
 Disallow: /bitrix/*
+Disallow: /tools/*
+Disallow: /anketa/*
+Disallow: /services/send_card/*
+Disallow: /services/coupon/*
+Disallow: /our_shops/?c*
+Disallow: /about/fashion_blog/*
 Disallow: /collection/woman/*
 Disallow: /collection/wleather/*
 Disallow: /collection/wtopclothes/*
 Disallow: /collection/wtopclother/*
+Disallow: /collection/wclothes_*
 Disallow: /collection/wclothes/*
 Disallow: /collection/waccessories/*
 Disallow: /collection/wfurs/*
@@ -13,13 +20,6 @@ Disallow: /collection/mtopclothes/*
 Disallow: /collection/mclothes/*
 Disallow: /collection/maccessories/*
 Disallow: /collection/brands/*
-Disallow: /our_shops/?c*
-Disallow: /good_prices/*
-Disallow: /anketa/*
-Disallow: /elle_project/*
-Disallow: /fitting-room/*
-Disallow: /collection/wclothes_*
-Disallow: /about/fashion_blog*
 
 # settings
 Host: snowqueen.ru

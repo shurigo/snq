@@ -14,8 +14,8 @@
     </select>
 </form>
 </div>
-<div id="ymaps-map-id_133707667107155769727" style="width: 910px; height: 500px;"></div>
-<div style="width: 910px; text-align: right;"><a href="http://api.yandex.ru/maps/tools/constructor/?lang=ru-RU" target="_blank" style="color: #191a1e; font: 13px Arial,Helvetica,sans-serif;">Создано с помощью инструментов Яндекс.Карт</a></div>
+<div id="ymaps-map-id_133707667107155769727" style="width: 998px; height: 400px;"></div>
+<div style="width: 998px; text-align: right;"><a href="http://api.yandex.ru/maps/tools/constructor/?lang=ru-RU" target="_blank" style="color: #191a1e; font: 13px Arial,Helvetica,sans-serif;"></a></div>
 <script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_133707667107155769727"></script>
 <div id="cities">
 	<?

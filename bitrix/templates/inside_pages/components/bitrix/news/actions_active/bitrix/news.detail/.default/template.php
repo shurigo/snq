@@ -1,7 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <section class="mainContent">
 
-<article class="news" itemscope itemtype="http://schema.org/Product">
+<article class="news" itemscope itemtype="http://schema.org/Article">
 <h1 itemprop="name"><?=$arResult["NAME"]?></h1>
 
 <?if(strlen($arResult["DETAIL_TEXT"])>0):?>
@@ -76,8 +76,8 @@ if ($APPLICATION->GetCurPage() == "/actions/1059/")
 }
 
 ?>
-<p></br></p>
-<p><a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a></p>
+</article>
+<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 </section>
 
 <aside class="aside">

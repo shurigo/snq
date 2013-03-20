@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?if(!isset($json) || $json=="n"):?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -18,6 +19,12 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
 
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?82"></script>
+<script type="text/javascript">
+  VK.init({apiId: 3501967, onlyWidgets: true});
+</script>
+
+
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -29,6 +36,17 @@
 <?$APPLICATION->ShowHeadScripts()?>
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
@@ -39,4 +57,5 @@
     <!-- top menu -->
     <? include($_SERVER["DOCUMENT_ROOT"]."/inc/topmenu.php"); ?>
 
-    <div class="content">
+		<div class="content">
+<?endif;?>
