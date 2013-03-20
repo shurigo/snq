@@ -106,7 +106,7 @@ function ajaxLoad(){
 			slider.slider({
 				range: true,
 				min: 10,
-				max: 100000,
+				max: 300000,
 				values: [ 15000,60000 ],
 				slide: function( event, ui ) {
 					min.val(ui.values[0].addSpace());
@@ -122,7 +122,7 @@ function ajaxLoad(){
 
 		function reloadPage(){
 			$.ajax({
-				data: hold.serialize(),
+				data: hold.serialize()+"&json=y",
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){

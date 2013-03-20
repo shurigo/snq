@@ -129,7 +129,6 @@
 				"PRICE_SORT" => $_POST["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
-				"PAGE_NUMBER" => "{$page}",
 				"JSON" => $json
 			)
 		);
@@ -166,6 +165,51 @@
 								)
 							);
 ?>
+			<form class="ajax-load" action="/collection/"<?=$APPLICATION->GetCurPage()?>>
+        <fieldset>
+        <section class="filter">
+          <div class="hr"></div>
+          <label class="label">Бренд</label>
+          <div class="checks">
+            <ul>
+              <li>
+                <input name="checkbox01" class="customCheckbox" type="checkbox" value="">
+                <label>ANTA</label>
+							</li>
+						</ul>
+					</div>
+					<!-- end .checks-->
+					<div class="hr"></div>
+          <label class="label">Ценовой диапозон, руб</label>
+          <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+            <div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
+            <a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a></div>
+          <!-- end .ui-slider-->
+          <div class="slider-values">
+            <input type="text" name="min" readonly class="l" value="15 000" />
+            <input type="text" name="max" readonly class="r" value="60 000" />
+          </div>
+          <!-- end .slider-values-->
+          <div class="hr"></div>
+          <label class="label">Цвет</label>
+          <div class="checks type2">
+            <ul>
+              <li>
+                <input class="customCheckbox" type="checkbox" value="">
+                <label>Beige</label>
+              </li>
+						<ul>
+              <li>
+                <input class="customCheckbox" type="checkbox" value="">
+                <label>Black</label>
+              </li>
+						</ul>
+          </div>
+          <!-- end .checks--> 
+        </section>
+        </fieldset>
+        </form>
+        <!-- end .filter--> 
 	</aside>
 	<!-- end .aside-->
 <?
