@@ -100,9 +100,9 @@
           </div>
           <!-- end .sub-->
         </li>
-        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow">Блог</a></li>
+        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru'); return false;">Блог</a></li>
         <li><a class="red" href="/actions/">Акции</a></li>
-        <li><a class="red" href="http://shop.snq.ru/" target="_blank" rel="nofollow">Интернет-магазин</a></li>
+        <li><a class="red" href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru'); return false;">Интернет-магазин</a></li>
       </ul>
       <!-- end .menu-->
     </nav>

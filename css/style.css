@@ -1313,6 +1313,33 @@ table .sep {
 	margin:3px 0 0 0;
 }
 
+.info-links2 {
+	list-style:none;
+	zoom:1;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+
+.info-links2 li {
+	float:left;
+	width:495px;
+	margin:0 0 0 7px;
+}
+.info-links2 li:first-child {
+	margin:0;
+}
+
+.info-links2 a {
+	display:block;
+	position:relative;
+	overflow:hidden;
+	border:1px solid #bebebe;
+	background:white;
+	height:274px;
+	text-align:right;
+	text-decoration:none;
+}
 .slider2 {
 	zoom:1;
 	position:relative;
