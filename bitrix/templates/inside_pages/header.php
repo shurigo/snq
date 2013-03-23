@@ -18,12 +18,46 @@
 <script type='text/javascript' src='/js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
+<script type="text/javascript" src="/js/ga_social_tracking.js"></script>
+
+<!-- Original VK block
 
 <script type="text/javascript" src="//vk.com/js/api/openapi.js?82"></script>
 <script type="text/javascript">
   VK.init({apiId: 3501967, onlyWidgets: true});
 </script>
+-->
 
+<div id="vk_api_transport"></div>
+<script type="text/javascript">
+    window.vkAsyncInit = function() {
+      VK.init({apiId: 3501967 , onlyWidgets: true});
+      VK.Widgets.Like("vk_like", {type: "button", height: 20, width: 150, pageUrl: "http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>"});
+      _ga.trackVkontakte();
+    };
+    setTimeout(function() {
+      var el = document.createElement("script");
+      el.type = "text/javascript";
+      el.src = "http://vkontakte.ru/js/api/openapi.js";
+      el.async = true;
+      document.getElementById("vk_api_transport").appendChild(el);
+    }, 0);
+</script>
+
+<div id="fb-root"></div>
+<script>
+            // Facebook async loading.
+            (function() {
+              var e = document.createElement('script'); e.async = true;
+              e.src = document.location.protocol +
+                '//connect.facebook.net/ru_RU/all.js';
+              document.getElementById('fb-root').appendChild(e);
+            }());
+            window.fbAsyncInit = function() {
+              FB.init({status: true, cookie: true, xfbml: true});
+              _ga.trackFacebook();
+            };
+</script>
 
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -81,7 +115,7 @@ document.location.href = link.href;
 
 </head>
 <body>
-
+<!-- ORIGINAL FB
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -90,7 +124,7 @@ document.location.href = link.href;
   js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
+-->
 
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
