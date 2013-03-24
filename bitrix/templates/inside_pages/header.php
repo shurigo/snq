@@ -20,6 +20,25 @@
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript" src="/js/ga_social_tracking.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+
+    });
+</script>
+
 <!-- Original VK block
 
 <script type="text/javascript" src="//vk.com/js/api/openapi.js?82"></script>

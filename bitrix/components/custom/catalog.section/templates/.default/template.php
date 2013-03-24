@@ -183,7 +183,7 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
 
 <?/*if($arParams["DISPLAY_BOTTOM_PAGER"]) { echo $arResult["NAV_STRING"]; }*/ ?>
-
+<a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->
 <?endif; // end normal page?>
