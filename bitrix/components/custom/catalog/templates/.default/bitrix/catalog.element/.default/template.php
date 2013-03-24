@@ -48,6 +48,8 @@ false
 				     -->
                   </td>
                   <td class="sep">&nbsp;&nbsp;</td>
+                  <td><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></td>
+                  <td class="sep">&nbsp;&nbsp;</td>
                   <td>
 					<div class="g-plusone" data-size="medium"></div>
 					<script type="text/javascript">
@@ -61,8 +63,6 @@ false
 				  </script>
                   </td>
                   <!--<td class="sep">&nbsp;</td>
-                  <td><img src="/images/temp/fb2.png" width="52" height="20" alt=" "></td>
-                  <td class="sep">&nbsp;</td>
                   <td><img src="/images/temp/goo.png" width="32" height="20" alt=" "></td>
                   -->
                 </tr>

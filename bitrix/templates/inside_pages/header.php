@@ -78,6 +78,21 @@
             };
 </script>
 
+<!-- Twitter -->
+<script>
+            (function(){
+              var twitterWidgets = document.createElement('script');
+              twitterWidgets.type = 'text/javascript';
+              twitterWidgets.async = true;
+              twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+
+              // Setup a callback to track once the script loads.
+              twitterWidgets.onload = _ga.trackTwitter;
+
+              document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+            })();
+</script>
+
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
