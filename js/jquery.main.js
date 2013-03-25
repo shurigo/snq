@@ -151,8 +151,12 @@ function initLoadPage(){
 					$.ajax({
 						dataType: 'json',
             url: hold.attr('data-page'),
-						data: "PAGEN_1="+page+"&json=y",
+						data: {
+							PAGEN_1: page, 
+							json: 'y'
+						},
             success: function(obj){
+							alert(document.location.href);
 	            if(null != obj) {
 								flag = obj.data.next;
 							}
@@ -160,7 +164,7 @@ function initLoadPage(){
 							page = page + 1;
 	          },
 						error: function(xhr, textStatus, thrownError){
-							alert('Server is unavailable. Refresh the page within 15 seconds.!');
+							alert('Server is unavailable. Refresh the page within 15 seconds!');
 						}
 					});
 				}

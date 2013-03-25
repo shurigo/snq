@@ -1,13 +1,12 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   // output JSON?
-	$json = "n";
+	$json = "n"; // default
 	if(isset($_GET['json'])) {
     if(in_array(strtolower($_GET['json']), array('y', 'n'))) {
 		  $json = strtolower($_GET['json']);
 		}
 	}
-	$json_next = false;
 	// output JSON for the infinite scroll function
 	if($json=="y") {
 		while (ob_get_level()) {
@@ -17,7 +16,7 @@
 		header("Content-Type: application/json");
 		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
 		$buf = ob_get_clean();
-		if(!empty($buf)) { $flag = true; }
+		if(!empty($buf)) { $flag = true; } // has data?
 		echo '{ 
 						"data": { 
 							"next": '.$flag.', 
@@ -29,7 +28,6 @@
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   $APPLICATION->SetTitle("Коллекция");
 
-  $data_string = "component_url=".$APPLICATION->GetCurPage(true);
   $_POST['component_url']=$APPLICATION->GetCurPage(true);
   $url_array = explode("/", $APPLICATION->GetCurPage());
 
@@ -37,16 +35,23 @@
   if($url_array[1] == 'collection' && empty($url_array[2])) {
     LocalRedirect('/collection/woman/', true);
   }
-  if ($url_array[1] == "collection")
-	{
-    if (isset($_GET["PAGEN_1"])) {
-    	$data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
-  }
 
-  if (isset($_GET["SHOWALL_1"])) {
-    $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
-  }
-
+	$arFilter =	Array(
+			'IBLOCK_ID' => '1',
+			"CHECK_PERMISSIONS" => "Y",
+			Array('LOGIC' => 'OR', 
+				'PROPERTY_col_availability' => '1', 
+				'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
+	);	
+	// process brands
+  foreach($_GET as $key=>$value) {
+		if(preg_match('/brand\d+/', $key)) {
+			$arFilter = array_merge($arFilter, Array('PROPERTY_col_brand' => strval($value)));
+		}
+		//if(preg_match()
+	}	
+?><pre><?var_dump($arFilter);?></pre><?
+	// process price
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -55,7 +60,7 @@
 				"SEF_MODE" => "Y",
 				"IBLOCK_TYPE" => "collection",
 				"IBLOCK_ID" => "1",
-				"USE_FILTER" => "N",
+				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
@@ -151,7 +156,7 @@
 								"collection_mainpage",
 								Array(
 									"IBLOCK_TYPE" => "collection",
-									"IBLOCK_ID" => 1,
+									"IBLOCK_ID" => "1",
 									"SECTION_ID" => $arSec["ID"],
 									"DISPLAY_PANEL" => "N",
 									"CACHE_TYPE" => "A",
@@ -165,25 +170,37 @@
 								)
 							);
 ?>
-			<form class="ajax-load" action="/collection/"<?=$APPLICATION->GetCurPage()?>>
+			<form class="ajax-load" action="<?=$APPLICATION->GetCurPage()?>">
         <fieldset>
-        <section class="filter">
-          <div class="hr"></div>
-          <label class="label">Бренд</label>
-          <div class="checks">
-            <ul>
-              <li>
-                <input name="checkbox01" class="customCheckbox" type="checkbox" value="">
-                <label>ANTA</label>
-							</li>
-						</ul>
-					</div>
-					<!-- end .checks-->
+					<section class="filter">
+<?
+							$APPLICATION->IncludeComponent(
+								"custom:catalog.section",
+								"menu_checkbox",
+								Array(
+									"IBLOCK_TYPE" => "brands",
+									"IBLOCK_ID" => "2",
+									"USE_FILTER" => "N",
+									"ELEMENT_SORT_FIELD" => "NAME",
+									"ELEMENT_SORT_ORDER" => "ASC",
+									"PAGE_ELEMENT_COUNT" => "1000",
+									"SECTION_ID" => "brands",
+									"DISPLAY_PANEL" => "N",
+									"CACHE_TYPE" => "A",
+									"CACHE_TIME" => "3600",
+									"CACHE_GROUPS" => "Y",
+									"LEFT_MENU_FLAG" => 1,
+									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+									"ADD_SECTIONS_CHAIN" => "N"
+								)
+							);
+?>
 					<div class="hr"></div>
           <label class="label">Ценовой диапозон, руб</label>
           <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
             <div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
-            <a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a></div>
+						<a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a>
+					</div>
           <!-- end .ui-slider-->
           <div class="slider-values">
             <input type="text" name="min" readonly class="l" value="15 000" />
@@ -205,15 +222,13 @@
               </li>
 						</ul>
           </div>
-          <!-- end .checks--> 
         </section>
-        </fieldset>
-        </form>
-        <!-- end .filter--> 
+			</fieldset>
+		</form>
+	<!-- end .filter--> 
 	</aside>
 	<!-- end .aside-->
 <?
-			}
 		}
 	}
 
