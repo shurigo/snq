@@ -1,8 +1,8 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Блог редактора");
-?> 
-<div style="margin:10px 45px 45px;"><?$APPLICATION->IncludeComponent(
+$APPLICATION->SetTitle("Интересное о мехе");
+?>
+<?$APPLICATION->IncludeComponent(
 	"bitrix:news",
 	"about_fur",
 	Array(
@@ -29,14 +29,16 @@ $APPLICATION->SetTitle("Блог редактора");
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"LIST_FIELD_CODE" => array(),
 		"LIST_PROPERTY_CODE" => array(),
+		"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
+		"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
+		"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"DISPLAY_NAME" => "Y",
-		"META_KEYWORDS" => "-",
-		"META_DESCRIPTION" => "-",
-		"BROWSER_TITLE" => "-",
+		"PROPERTY_CODE" => array(0=>"col_keywords",1=>"col_description",2=>"col_title"),
+		"META_KEYWORDS" => "col_keywords",
+		"META_DESCRIPTION" => "col_description",
+		"BROWSER_TITLE" => "col_title",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"DETAIL_FIELD_CODE" => array(),
-		"DETAIL_PROPERTY_CODE" => array(),
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_PAGER_TITLE" => "Страница",
@@ -85,5 +87,5 @@ $APPLICATION->SetTitle("Блог редактора");
 		)
 	)
 );?>
- </div>
+
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

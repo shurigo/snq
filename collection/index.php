@@ -18,9 +18,9 @@
 		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
 		$buf = ob_get_clean();
 		if(!empty($buf)) { $flag = true; }
-		echo '{ 
-						"data": { 
-							"next": '.$flag.', 
+		echo '{
+						"data": {
+							"next": '.$flag.',
 							"html":';
 		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
 		echo '}}';

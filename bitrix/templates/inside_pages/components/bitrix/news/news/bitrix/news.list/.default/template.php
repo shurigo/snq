@@ -5,7 +5,7 @@
 
 <?foreach($arResult["ITEMS"] as $arItem):?>
 
-<article class="news" itemscope itemtype="http://schema.org/Product">
+<article class="news" itemscope itemtype="http://schema.org/Article">
 
 <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"]):?>
 <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span>
