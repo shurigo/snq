@@ -26,6 +26,7 @@
                     <li><a href="/collection/wleathertopcoat/">Пальто из кожи</a></li>
                     <li><a href="/collection/wtopjacket/">Куртки</a></li>
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
+                    <li><a href="/collection/wtopcloak/">Плащи</a></li>
                   </ul></td>
                 <td><ul>
                     <li><a href="/collection/wblouse/">Блузки</a></li>
