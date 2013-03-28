@@ -94,9 +94,9 @@ document.location.href = link.href;
 			"ACTIVE" => "Y",
 			"CHECK_PERMISSIONS" => "Y",
 			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-			Array('LOGIC' => 'OR',
-				'PROPERTY_col_availability' => '1',
-				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+			array('LOGIC' => 'OR',
+				array('PROPERTY_col_availability' => '1','!DETAIL_PICTURE'=>false),
+				array('PROPERTY_col_city_id' => strval($_SESSION['city_id']),'!DETAIL_PICTURE'=>false)
 			)
    	);
 
