@@ -7,7 +7,39 @@
 		  $json = strtolower($_GET['json']);
 		}
 	}
-	// output JSON for the infinite scroll function
+	$arFilter =	Array(
+			'IBLOCK_ID' => '1',
+			Array(
+				'LOGIC' => 'OR', 
+				'PROPERTY_col_availability' => '1', 
+				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+			)
+	);
+	// process the brand filter
+	$filter_brand = Array();
+  foreach($_GET as $key=>$value) {
+		if(preg_match('/brand\d+/', $key)) {
+			$filter_brand[] = Array('PROPERTY_col_brand' => strval($value));
+		}
+	}	
+	if(count($filter_brand) > 0) {
+		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
+	}
+	// process price
+	if(isset($_GET['max'])) {
+		$price_max = str_replace(' ', '', $_GET['max']);
+		if(is_numeric(intval($price_max))) {
+			$arFilter[] = Array('<PROPERTY_col_price' => $price_max);
+		}
+	}
+	if(isset($_GET['min'])) {
+		$price_min = str_replace(' ', '', $_GET['min']);
+		if(is_numeric(intval($price_max))) {
+			$arFilter[] = Array('>PROPERTY_col_price' => $price_min);
+		}
+	}
+	?><pre><?var_dump($arFilter);?></pre><?
+	// output JSON
 	if($json=="y") {
 		while (ob_get_level()) {
 			ob_end_clean();
@@ -36,22 +68,6 @@
     LocalRedirect('/collection/woman/', true);
   }
 
-	$arFilter =	Array(
-			'IBLOCK_ID' => '1',
-			"CHECK_PERMISSIONS" => "Y",
-			Array('LOGIC' => 'OR', 
-				'PROPERTY_col_availability' => '1', 
-				'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
-	);	
-	// process brands
-  foreach($_GET as $key=>$value) {
-		if(preg_match('/brand\d+/', $key)) {
-			$arFilter = array_merge($arFilter, Array('PROPERTY_col_brand' => strval($value)));
-		}
-		//if(preg_match()
-	}	
-?><pre><?var_dump($arFilter);?></pre><?
-	// process price
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",

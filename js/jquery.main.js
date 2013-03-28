@@ -122,14 +122,16 @@ function ajaxLoad(){
 
 		function reloadPage(){
 			$.ajax({
-				data: hold.serialize()+"&json=y",
+				data: hold.serialize()+"&PAGEN_1=1&json=y",
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){
 					$('.mainContent .catalog').empty().append(obj.data.html);
 					$(window).trigger('loadFirst');
 				},
-				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
+				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');},
+complete: function(){ 
+       }
 			});
 		}
 	});
@@ -143,7 +145,6 @@ function initLoadPage(){
 		var obj = {next: 2};
 		var flag = true;
 		var page = 2;
-
 		$(window).scroll(function(){
 			if(obj.next) {
 				if($(window).scrollTop() > hold.offset().top + hold.outerHeight(true)-1000 && flag){
@@ -151,18 +152,16 @@ function initLoadPage(){
 					$.ajax({
 						dataType: 'json',
             url: hold.attr('data-page'),
-						data: {
-							PAGEN_1: page, 
-							json: 'y'
-						},
+						data: 'PAGEN_1='+page+'&json=y&'+$('.ajax-load').serialize(),
             success: function(obj){
-							alert(document.location.href);
 	            if(null != obj) {
 								flag = obj.data.next;
 							}
-              if(flag) hold.append(obj.data.html);
-							page = page + 1;
-	          },
+              if(flag) {
+								hold.append(obj.data.html);
+								page++;
+	          	}
+						},
 						error: function(xhr, textStatus, thrownError){
 							alert('Server is unavailable. Refresh the page within 15 seconds!');
 						}
@@ -353,3 +352,4 @@ jQuery.fn.customCheckbox = function(_options){
 		_this.trigger('change');
 	}
 }
+

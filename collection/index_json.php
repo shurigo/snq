@@ -1,6 +1,5 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -9,7 +8,7 @@
 				"SEF_MODE" => "Y",
 				"IBLOCK_TYPE" => "collection",
 				"IBLOCK_ID" => "1",
-				"USE_FILTER" => "N",
+				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
