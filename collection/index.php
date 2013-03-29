@@ -19,23 +19,31 @@
 	$filter_brand = Array();
   foreach($_GET as $key=>$value) {
 		if(preg_match('/brand\d+/', $key)) {
-			$filter_brand[] = Array('PROPERTY_col_brand' => strval($value));
+			$filter_brand[] = Array('PROPERTY_col_brand' => $value);
 		}
 	}	
 	if(count($filter_brand) > 0) {
 		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
 	}
 	// process price
+	if(isset($_GET['min'])) {
+		$price_min = str_replace(' ', '', $_GET['min']);
+		if(is_numeric(intval($price_min))) {
+			$arFilter[] = Array(
+				'LOGIC' => 'OR', 
+				Array('PROPERTY_col_price_new' => false, '>=PROPERTY_col_price' => $price_min),
+				Array('!PROPERTY_col_price_new' => false, '>=PROPERTY_col_price_new' => $price_min)
+			);
+		}
+	}
 	if(isset($_GET['max'])) {
 		$price_max = str_replace(' ', '', $_GET['max']);
 		if(is_numeric(intval($price_max))) {
-			$arFilter[] = Array('<PROPERTY_col_price' => $price_max);
-		}
-	}
-	if(isset($_GET['min'])) {
-		$price_min = str_replace(' ', '', $_GET['min']);
-		if(is_numeric(intval($price_max))) {
-			$arFilter[] = Array('>PROPERTY_col_price' => $price_min);
+			$arFilter[] = Array(
+				'LOGIC' => 'OR', 
+				Array('PROPERTY_col_price_new' => false, '<=PROPERTY_col_price' => $price_max),
+				Array('!PROPERTY_col_price_new' => false, '<=PROPERTY_col_price_new' => $price_max)
+			);
 		}
 	}
 	?><pre><?var_dump($arFilter);?></pre><?
@@ -223,21 +231,6 @@
             <input type="text" name="max" readonly class="r" value="60 000" />
           </div>
           <!-- end .slider-values-->
-          <div class="hr"></div>
-          <label class="label">Цвет</label>
-          <div class="checks type2">
-            <ul>
-              <li>
-                <input class="customCheckbox" type="checkbox" value="">
-                <label>Beige</label>
-              </li>
-						<ul>
-              <li>
-                <input class="customCheckbox" type="checkbox" value="">
-                <label>Black</label>
-              </li>
-						</ul>
-          </div>
         </section>
 			</fieldset>
 		</form>

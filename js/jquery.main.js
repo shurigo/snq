@@ -122,11 +122,15 @@ function ajaxLoad(){
 
 		function reloadPage(){
 			$.ajax({
-				data: hold.serialize()+"&PAGEN_1=1&json=y",
+				data: hold.serialize()+"&json=y",
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){
-					$('.mainContent .catalog').empty().append(obj.data.html);
+					if(obj) {
+						$('.mainContent .catalog').empty().append(obj.data.html);
+					} else {
+						$('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
+					}	
 					$(window).trigger('loadFirst');
 				},
 				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');},
