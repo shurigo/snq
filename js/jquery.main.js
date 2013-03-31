@@ -126,7 +126,7 @@ function ajaxLoad(){
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){
-					if(obj) {
+					if(obj.data.next) {
 						$('.mainContent .catalog').empty().append(obj.data.html);
 					} else {
 						$('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
@@ -134,8 +134,6 @@ function ajaxLoad(){
 					$(window).trigger('loadFirst');
 				},
 				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');},
-complete: function(){ 
-       }
 			});
 		}
 	});
@@ -158,13 +156,14 @@ function initLoadPage(){
             url: hold.attr('data-page'),
 						data: 'PAGEN_1='+page+'&json=y&'+$('.ajax-load').serialize(),
             success: function(obj){
-	            if(null != obj) {
-								flag = obj.data.next;
-							}
-              if(flag) {
+							flag = true;
+              if(obj != null && obj.data.next) {
 								hold.append(obj.data.html);
 								page++;
 	          	}
+							else {
+								flag = false;
+							}
 						},
 						error: function(xhr, textStatus, thrownError){
 							alert('Server is unavailable. Refresh the page within 15 seconds!');
@@ -174,6 +173,8 @@ function initLoadPage(){
 			}
 		}).bind('loadFirst', function(){
 			obj.next = 2;
+			page = 2;
+			flag = true;
 		});
 	});
 }

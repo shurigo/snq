@@ -46,7 +46,6 @@
 			);
 		}
 	}
-	?><pre><?var_dump($arFilter);?></pre><?
 	// output JSON
 	if($json=="y") {
 		while (ob_get_level()) {
@@ -56,7 +55,12 @@
 		header("Content-Type: application/json");
 		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
 		$buf = ob_get_clean();
-		if(!empty($buf)) { $flag = true; } // has data?
+		if(IsNullOrEmptyString($buf)) { // has data?
+			$flag = 'false';
+		} else {
+			$flag = 'true';
+		}
+		ob_start();
 		echo '{ 
 						"data": { 
 							"next": '.$flag.', 
@@ -220,7 +224,7 @@
 							);
 ?>
 					<div class="hr"></div>
-          <label class="label">Ценовой диапозон, руб</label>
+          <label class="label">Ценовой диапазон, руб</label>
           <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
             <div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
 						<a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a>
@@ -240,5 +244,8 @@
 <?
 		}
 	}
-
+	// Function for basic field validation (present and neither empty nor only white space
+	function IsNullOrEmptyString($question){
+		return (!isset($question) || trim($question)==='');
+	}
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
