@@ -1,14 +1,52 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   // output JSON?
-	$json = "n";
+	$json = "n"; // default
 	if(isset($_GET['json'])) {
     if(in_array(strtolower($_GET['json']), array('y', 'n'))) {
 		  $json = strtolower($_GET['json']);
 		}
 	}
-	$json_next = false;
-	// output JSON for the infinite scroll function
+	$arFilter =	Array(
+			'IBLOCK_ID' => '1',
+			Array(
+				'LOGIC' => 'OR', 
+				'PROPERTY_col_availability' => '1', 
+				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+			)
+	);
+	// process the brand filter
+	$filter_brand = Array();
+  foreach($_GET as $key=>$value) {
+		if(preg_match('/brand\d+/', $key)) {
+			$filter_brand[] = Array('PROPERTY_col_brand' => $value);
+		}
+	}	
+	if(count($filter_brand) > 0) {
+		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
+	}
+	// process price
+	if(isset($_GET['min'])) {
+		$price_min = str_replace(' ', '', $_GET['min']);
+		if(is_numeric(intval($price_min))) {
+			$arFilter[] = Array(
+				'LOGIC' => 'OR', 
+				Array('PROPERTY_col_price_new' => false, '>=PROPERTY_col_price' => $price_min),
+				Array('!PROPERTY_col_price_new' => false, '>=PROPERTY_col_price_new' => $price_min)
+			);
+		}
+	}
+	if(isset($_GET['max'])) {
+		$price_max = str_replace(' ', '', $_GET['max']);
+		if(is_numeric(intval($price_max))) {
+			$arFilter[] = Array(
+				'LOGIC' => 'OR', 
+				Array('PROPERTY_col_price_new' => false, '<=PROPERTY_col_price' => $price_max),
+				Array('!PROPERTY_col_price_new' => false, '<=PROPERTY_col_price_new' => $price_max)
+			);
+		}
+	}
+	// output JSON
 	if($json=="y") {
 		while (ob_get_level()) {
 			ob_end_clean();
@@ -17,10 +55,15 @@
 		header("Content-Type: application/json");
 		include $_SERVER['DOCUMENT_ROOT'].'/collection/index_json.php';
 		$buf = ob_get_clean();
-		if(!empty($buf)) { $flag = true; }
-		echo '{
-						"data": {
-							"next": '.$flag.',
+		if(IsNullOrEmptyString($buf)) { // has data?
+			$flag = 'false';
+		} else {
+			$flag = 'true';
+		}
+		ob_start();
+		echo '{ 
+						"data": { 
+							"next": '.$flag.', 
 							"html":';
 		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
 		echo '}}';
@@ -29,22 +72,12 @@
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   $APPLICATION->SetTitle("Коллекция");
 
-  $data_string = "component_url=".$APPLICATION->GetCurPage(true);
   $_POST['component_url']=$APPLICATION->GetCurPage(true);
   $url_array = explode("/", $APPLICATION->GetCurPage());
 
   // Collection root undefined -> redirect to Woman collection
   if($url_array[1] == 'collection' && empty($url_array[2])) {
     LocalRedirect('/collection/woman/', true);
-  }
-  if ($url_array[1] == "collection")
-	{
-    if (isset($_GET["PAGEN_1"])) {
-    	$data_string .= "&PAGEN_1=".$_GET["PAGEN_1"];
-  }
-
-  if (isset($_GET["SHOWALL_1"])) {
-    $data_string .= "&SHOWALL_1=".$_GET["SHOWALL_1"];
   }
 
 	$APPLICATION->IncludeComponent(
@@ -55,7 +88,7 @@
 				"SEF_MODE" => "Y",
 				"IBLOCK_TYPE" => "collection",
 				"IBLOCK_ID" => "1",
-				"USE_FILTER" => "N",
+				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
@@ -129,7 +162,6 @@
 				"PRICE_SORT" => $_POST["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
-				"PAGE_NUMBER" => "{$page}",
 				"JSON" => $json
 			)
 		);
@@ -152,7 +184,7 @@
 								"collection_mainpage",
 								Array(
 									"IBLOCK_TYPE" => "collection",
-									"IBLOCK_ID" => 1,
+									"IBLOCK_ID" => "1",
 									"SECTION_ID" => $arSec["ID"],
 									"DISPLAY_PANEL" => "N",
 									"CACHE_TYPE" => "A",
@@ -166,11 +198,54 @@
 								)
 							);
 ?>
+			<form class="ajax-load" action="<?=$APPLICATION->GetCurPage()?>">
+        <fieldset>
+					<section class="filter">
+<?
+							$APPLICATION->IncludeComponent(
+								"custom:catalog.section",
+								"menu_checkbox",
+								Array(
+									"IBLOCK_TYPE" => "brands",
+									"IBLOCK_ID" => "2",
+									"USE_FILTER" => "N",
+									"ELEMENT_SORT_FIELD" => "NAME",
+									"ELEMENT_SORT_ORDER" => "ASC",
+									"PAGE_ELEMENT_COUNT" => "1000",
+									"SECTION_ID" => "brands",
+									"DISPLAY_PANEL" => "N",
+									"CACHE_TYPE" => "A",
+									"CACHE_TIME" => "3600",
+									"CACHE_GROUPS" => "Y",
+									"LEFT_MENU_FLAG" => 1,
+									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+									"ADD_SECTIONS_CHAIN" => "N"
+								)
+							);
+?>
+					<div class="hr"></div>
+          <label class="label">Ценовой диапазон, руб</label>
+          <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+            <div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
+						<a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a>
+					</div>
+          <!-- end .ui-slider-->
+          <div class="slider-values">
+            <input type="text" name="min" readonly class="l" value="15 000" />
+            <input type="text" name="max" readonly class="r" value="60 000" />
+          </div>
+          <!-- end .slider-values-->
+        </section>
+			</fieldset>
+		</form>
+	<!-- end .filter--> 
 	</aside>
 	<!-- end .aside-->
 <?
-			}
 		}
 	}
-
+	// Function for basic field validation (present and neither empty nor only white space
+	function IsNullOrEmptyString($question){
+		return (!isset($question) || trim($question)==='');
+	}
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>

@@ -1,11 +1,9 @@
 <?  if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) {die();} ?><?  if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) {die();} ?>
-
-<noindex>
 <div class="left_menu">
 <?
 	$CURRENT_DEPTH = $arResult["SECTION"]["DEPTH_LEVEL"] + 1;
 	$show_level = array();
-    foreach($arResult["SECTIONS"] as $arSection)
+  foreach($arResult["SECTIONS"] as $arSection)
 	{
 		if ($arSection["DEPTH_LEVEL"] <= $CURRENT_DEPTH){$show_level[$arSection["DEPTH_LEVEL"] + 1] = 0;}
         if (in_array($arSection["ID"], $arResult["NAV_SECTION_ARRAY"])) {$show_level[$arSection["DEPTH_LEVEL"] + 1] = 1;}
@@ -23,4 +21,3 @@
 	}
 ?>
 </div>
-</noindex>

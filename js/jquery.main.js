@@ -106,7 +106,7 @@ function ajaxLoad(){
 			slider.slider({
 				range: true,
 				min: 10,
-				max: 100000,
+				max: 300000,
 				values: [ 15000,60000 ],
 				slide: function( event, ui ) {
 					min.val(ui.values[0].addSpace());
@@ -122,14 +122,18 @@ function ajaxLoad(){
 
 		function reloadPage(){
 			$.ajax({
-				data: hold.serialize(),
+				data: hold.serialize()+"&json=y",
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){
-					$('.mainContent .catalog').empty().append(obj.data.html);
+					if(obj.data.next) {
+						$('.mainContent .catalog').empty().append(obj.data.html);
+					} else {
+						$('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
+					}	
 					$(window).trigger('loadFirst');
 				},
-				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
+				error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');},
 			});
 		}
 	});
@@ -143,7 +147,6 @@ function initLoadPage(){
 		var obj = {next: 2};
 		var flag = true;
 		var page = 2;
-
 		$(window).scroll(function(){
 			if(obj.next) {
 				if($(window).scrollTop() > hold.offset().top + hold.outerHeight(true)-1000 && flag){
@@ -151,22 +154,27 @@ function initLoadPage(){
 					$.ajax({
 						dataType: 'json',
             url: hold.attr('data-page'),
-						data: "PAGEN_1="+page+"&json=y",
+						data: 'PAGEN_1='+page+'&json=y&'+$('.ajax-load').serialize(),
             success: function(obj){
-	            if(null != obj) {
-								flag = obj.data.next;
+							flag = true;
+              if(obj != null && obj.data.next) {
+								hold.append(obj.data.html);
+								page++;
+	          	}
+							else {
+								flag = false;
 							}
-              if(flag) hold.append(obj.data.html);
-							page = page + 1;
-	          },
+						},
 						error: function(xhr, textStatus, thrownError){
-							alert('Server is unavailable. Refresh the page within 15 seconds.!');
+							alert('Server is unavailable. Refresh the page within 15 seconds!');
 						}
 					});
 				}
 			}
 		}).bind('loadFirst', function(){
 			obj.next = 2;
+			page = 2;
+			flag = true;
 		});
 	});
 }
@@ -349,3 +357,4 @@ jQuery.fn.customCheckbox = function(_options){
 		_this.trigger('change');
 	}
 }
+

@@ -330,15 +330,8 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter = array(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"IBLOCK_LID" => SITE_ID,
-		"IBLOCK_ACTIVE" => "Y",
-		"ACTIVE_DATE" => "Y",
-		"ACTIVE" => "Y",
-		"CHECK_PERMISSIONS" => "Y",
-		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-		Array('LOGIC' => 'OR', 
-			'PROPERTY_col_availability' => '1', 
-			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-		)		
+
+		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]
   );
 
 	if($arParams["BY_LINK"]!=="Y")
