@@ -74,11 +74,12 @@ false
             <div itemprop="description">
               <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
             </div>
-            <ul class="links">
-              <li><a href="#">Купить</a></li>
-              <li><a href="#">Найти в магазине</a></li>
-            </ul>
             -->
+            <ul class="links">
+              <li><a href="/actions/" title="Акции">Скидки %</a></li>
+              <li><a href="/our_shops/" title="Наши магазины">Где купить?</a></li>
+            </ul>
+
             <!-- end .links-->
 <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
 </section>
@@ -258,9 +259,9 @@ if($ar_res = $res->GetNext())  $SEC_CODE=$ar_res['CODE'];
 
 
 if (substr($SEC_CODE,0,1)=="w")
-$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12857,".$MY_SEC_ID.",12893&type=js&varname1=viewed_item_id&value1=".$arResult["ID"];
+$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12857,".$MY_SEC_ID.",12893&type=js&varname1=481_vi&value1=".$arResult["ID"];
 else
-$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&type=js&varname1=viewed_item_id&value1=".$arResult["ID"];
+$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&type=js&varname1=481_vi&value1=".$arResult["ID"];
 //echo $HUBRUS_str;
 ?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>

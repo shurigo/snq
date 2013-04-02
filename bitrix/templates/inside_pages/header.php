@@ -51,7 +51,7 @@
 <script type="text/javascript">
     window.vkAsyncInit = function() {
       VK.init({apiId: 3501967 , onlyWidgets: true});
-      VK.Widgets.Like("vk_like", {type: "button", height: 20, width: 150, pageUrl: "http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>"});
+      VK.Widgets.Like("vk_like", {type: "button", height: 20, width: 200, pageUrl: "http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>"});
       _ga.trackVkontakte();
     };
     setTimeout(function() {
