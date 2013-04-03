@@ -1414,3 +1414,9 @@ table .sep {
     text-indent:-9999px;
     background: url('/images/icon_top.png') no-repeat;
 }
+.twitter-hack {
+float:left; width:95px; margin:0px 0 0px 0px;
+}
+.vk-hack {
+float:left; width:130px; margin:0px 0 0px 0px;
+}

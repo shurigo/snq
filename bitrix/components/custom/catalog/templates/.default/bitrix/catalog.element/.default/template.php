@@ -32,27 +32,29 @@ false
               <table>
                 <tr>
                   <td>
-                      <!-- ORIGINAL FB
+                      <div class="vk-hack"><div id="vk_like"></div></div>
+				      <!-- Original VK block
+                      <div id="vk_like"></div>
+				      <script type="text/javascript">
+						VK.Widgets.Like("vk_like", {type: "button", height: 20});
+				      </script>
+				      -->
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+				      <!-- ORIGINAL FB
                       <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
                       -->
-                    <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
-                  </td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td>
-                    <div id="vk_like"></div>
-				    <!-- Original VK block
-                    <div id="vk_like"></div>
-				    <script type="text/javascript">
-						VK.Widgets.Like("vk_like", {type: "button", height: 20});
-				    </script>
-				     -->
-                  </td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td>
-					<div class="g-plusone" data-size="medium"></div>
-					<script type="text/javascript">
+                      <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+                      <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+                      <div class="g-plusone" data-size="medium"></div>
+					  <script type="text/javascript">
 					  window.___gcfg = {lang: 'ru'};
 
   					 (function() {
@@ -60,11 +62,8 @@ false
 								    po.src = 'https://apis.google.com/js/plusone.js';
 								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
  								 })();
-				  </script>
+				     </script>
                   </td>
-                  <!--<td class="sep">&nbsp;</td>
-                  <td><img src="/images/temp/goo.png" width="32" height="20" alt=" "></td>
-                  -->
                 </tr>
               </table>
             </div>
