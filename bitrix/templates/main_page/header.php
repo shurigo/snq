@@ -93,11 +93,7 @@ document.location.href = link.href;
 			"ACTIVE_DATE" => "Y",
 			"ACTIVE" => "Y",
 			"CHECK_PERMISSIONS" => "Y",
-			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
-			array('LOGIC' => 'OR',
-				array('PROPERTY_col_availability' => '1','!DETAIL_PICTURE'=>false),
-				array('PROPERTY_col_city_id' => strval($_SESSION['city_id']),'!DETAIL_PICTURE'=>false)
-			)
+			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]
    	);
 
 	$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_actions", Array (
@@ -115,12 +111,12 @@ document.location.href = link.href;
     "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
     "FILTER_NAME" => "myFilter",	// Фильтр
     "FIELD_CODE" => "",	// Поля
-    "PROPERTY_CODE" => array(0=>"col_availability"),	// Свойства "actions_carousel"
+    "PROPERTY_CODE" => array(0=>"col_availability",1=>"col_city_id"),	// Свойства "actions_carousel"
     "CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
     "DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
     "PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
     "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
-    "DETAIL_PROPERTY_CODE" => array(0=>"col_availability"),
+    "DETAIL_PROPERTY_CODE" => array(0=>"col_availability",1=>"col_city_id"),
 	  "DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
     "SET_TITLE" => "N",	// Устанавливать заголовок страницы
     "SET_STATUS_404" => "Y",	// Устанавливать статус 404, если не найдены элемент или раздел
@@ -180,7 +176,7 @@ document.location.href = link.href;
 
       <ul class="info-links">
         <li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru - big_image_main_page'); return false;"><img src="/images/img1.jpg" width="321" height="274" alt=" "><span class="text1">Интернет-магазин</span></a></li>
-        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru - big_image_main_page'); return false;"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о стиле</span></a></li>
+        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru - big_image_main_page'); return false;"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о моде</span></a></li>
         <li>
                   	<?$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_hot_model", Array(
                     "AJAX_MODE" => "N",	// Включить режим AJAX
