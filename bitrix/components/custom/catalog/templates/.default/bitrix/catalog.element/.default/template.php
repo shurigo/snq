@@ -75,8 +75,8 @@ false
             </div>
             -->
             <ul class="links">
-              <li><a href="/actions/" title="Акции">Скидки %</a></li>
-              <li><a href="/our_shops/" title="Наши магазины">Где купить?</a></li>
+              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;">Скидки %</a></li>
+              <li><a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, 'Outbound Links', 'our_shops_card'); return false;">Где купить?</a></li>
             </ul>
 
             <!-- end .links-->
