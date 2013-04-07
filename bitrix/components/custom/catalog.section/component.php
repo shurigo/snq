@@ -104,7 +104,7 @@ if($arParams["PAGE_ELEMENT_COUNT"]<=0)
 	$arParams["PAGE_ELEMENT_COUNT"]=20;
 $arParams["LINE_ELEMENT_COUNT"] = intval($arParams["LINE_ELEMENT_COUNT"]);
 if($arParams["LINE_ELEMENT_COUNT"]<=0)
-	$arParams["LINE_ELEMENT_COUNT"]=3;
+	$arParams["LINE_ELEMENT_COUNT"]=4;
 
 if(!is_array($arParams["PROPERTY_CODE"]))
 	$arParams["PROPERTY_CODE"] = array();
@@ -136,11 +136,10 @@ $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"] = intval($arParams["PAGER_DESC_NUMB
 $arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"]!=="N";
 
 $arNavParams = array(
-	//"iNumPage" => $arParams["PAGE_NUMBER"],
 	"nPageSize" => $arParams["PAGE_ELEMENT_COUNT"],
 	"bDescPageNumbering" => $arParams["PAGER_DESC_NUMBERING"],
 	"bShowAll" => $arParams["PAGER_SHOW_ALL"],
-); //print_r($arNavParams);
+); 
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 if($arNavigation["PAGEN"]==0 && $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]>0)
 	$arParams["CACHE_TIME"] = $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"];
@@ -330,7 +329,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter = array(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"IBLOCK_LID" => SITE_ID,
-
 		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]
   );
 
@@ -369,8 +367,65 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter["SECTION_GLOBAL_ACTIVE"] = "Y";
 	$arFilter["SECTION_ACTIVE"] = "Y";
 
+	$filter_final = array_merge($arrFilter, $arFilter);
+	
+	// Brands (for the filter in the left menu)
+	if($arParams['INCLUDE_BRANDS'] == 'Y') {
+		if(!function_exists('sort_brand')) {
+			function sort_brand($a, $b) {
+				return strcmp($a['NAME'], $b['NAME']);
+			}
+		}
+		$arResult['BRANDS'] = array();
+		$rsElements = CIBlockElement::GetList(
+			Array('PROPERTY_COL_BRAND' => 'ASC'), 
+			$filter_final,	
+			Array('PROPERTY_COL_BRAND'), 
+			false, 
+			Array('IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_COL_BRAND')
+		);
+		while($element = $rsElements->GetNextElement())
+		{
+			$arItem = $element->GetFields();
+			if($item_element = CIBlockElement::GetById($arItem['PROPERTY_COL_BRAND_VALUE']))
+			{
+				if($item = $item_element->GetNext()) { 
+					$brand = Array();
+					$brand['ID'] = $item['ID'];
+					$brand['NAME'] = $item['NAME'];
+					$brand['CNT'] = $arItem['CNT'];	
+					$arResult['BRANDS'][] = $brand;
+				}
+			}
+		}
+		usort($arResult['BRANDS'], 'sort_brand');
+	}
+
+	// Price: min, max	
+	if(!function_exists('get_price_min_max')) {
+		function get_price_min_max($asc_desc, $filter) {
+			$elements = CIBlockElement::GetList(
+				Array('PROPERTY_COL_PRICE' => $asc_desc),
+				$filter,	
+				false, 
+				false, 
+				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE', 'PROPERTY_COL_PRICE_NEW'));
+			if($element = $elements->GetNextElement()) {
+				$price = $element->GetProperty('COL_PRICE')['VALUE'];
+				$price_new = $element->GetProperty('COL_PRICE_NEW')['VALUE']; 
+				if(empty($price_new)) return $price;
+				return $price_new;
+			}
+		}
+	}
+
+	if($arParams['INCLUDE_PRICE_MIN_MAX'] == 'Y') {
+		$arResult['PRICE_MIN'] = get_price_min_max('ASC', $filter_final);
+		$arResult['PRICE_MAX'] = get_price_min_max('DESC', $filter_final);
+	}
+
 	//EXECUTE
-	$rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
+	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
 	if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
 		$rsElements->SetSectionContext($arResult);
@@ -451,8 +506,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arResult["PRICE_SORT"] = $arParams["PRICE_SORT"];
 	$arResult["COMPONENT_URL"] = $arParams["COMPONENT_URL"];
 	$rsElements->COMPONENT_URL = $arParams["COMPONENT_URL"];
-
-	//echo "<pre>"; print_r($rsElements); echo "</pre>";
 
 	$arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, $arParams["PAGER_TITLE"], $arParams["PAGER_TEMPLATE"], $arParams["PAGER_SHOW_ALWAYS"]);
 	$arResult["NAV_CACHED_DATA"] = $navComponentObject->GetTemplateCachedData();

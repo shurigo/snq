@@ -105,9 +105,10 @@ function ajaxLoad(){
 		if (slider.length > 0 && typeof $.fn.slider == 'function') {
 			slider.slider({
 				range: true,
-				min: 10,
-				max: 300000,
-				values: [ 15000,60000 ],
+				min: min.val(),
+				max: max.val(),
+				step: 100,
+				//values: [ 0, max ],
 				slide: function( event, ui ) {
 					min.val(ui.values[0].addSpace());
 					max.val(ui.values[1].addSpace());
@@ -121,6 +122,7 @@ function ajaxLoad(){
 		}
 
 		function reloadPage(){
+			alert(hold.serialize());
 			$.ajax({
 				data: hold.serialize()+"&json=y",
 				dataType: 'json',

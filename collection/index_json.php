@@ -14,9 +14,9 @@
 				"USE_COMPARE" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
-				"LINE_ELEMENT_COUNT" => "3",
-				"ELEMENT_SORT_FIELD" => "sort",
-				"ELEMENT_SORT_ORDER" => "asc",
+				"LINE_ELEMENT_COUNT" => "4",
+				"ELEMENT_SORT_FIELD" => $sort_field,
+				"ELEMENT_SORT_ORDER" => $sort_order,
 				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
@@ -78,8 +78,8 @@
 						"ACTION_CODE" => "action"
 					),
 				),
-				"COMPONENT_URL" => $_GET["component_url"],
-				"PRICE_SORT" => $_GET["price_sort"],
+				//"COMPONENT_URL" => $_GET["component_url"],
+				//"PRICE_SORT" => $_GET["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"JSON" => 'y'

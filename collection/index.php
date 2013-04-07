@@ -80,6 +80,14 @@
     LocalRedirect('/collection/woman/', true);
   }
 
+  // sort field selector
+  $sort_field = 'property_col_brand';
+  $sort_order = 'asc';
+	if(isset($_GET['sort'])){
+		if($_GET['sort'] == 'price') { $sort_field = 'property_col_price'; }
+		if($_GET['sort'] == 'brand') { $sort_field = 'property_col_brand'; }
+	}
+
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -90,13 +98,14 @@
 				"IBLOCK_ID" => "1",
 				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
+				"INCLUDE_BRANDS" => "Y",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
-				"LINE_ELEMENT_COUNT" => "3",
-				"ELEMENT_SORT_FIELD" => "sort",
-				"ELEMENT_SORT_ORDER" => "asc",
+				"LINE_ELEMENT_COUNT" => "4",
+				"ELEMENT_SORT_FIELD" => $sort_field,
+				"ELEMENT_SORT_ORDER" => $sort_order,
 				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
@@ -158,8 +167,6 @@
 						"ACTION_CODE" => "action"
 					),
 				),
-				"COMPONENT_URL" => $_POST["component_url"],
-				"PRICE_SORT" => $_POST["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"JSON" => $json
@@ -197,48 +204,36 @@
 									"ADD_SECTIONS_CHAIN" => "N"
 								)
 							);
+	$filter_brand =	Array(
+		Array(
+			'LOGIC' => 'OR', 
+			'PROPERTY_col_availability' => '1', 
+			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		)
+	);
+	$APPLICATION->IncludeComponent(
+		"custom:catalog.section",
+		"menu_checkbox",
+		Array(
+			"IBLOCK_ID" => "1",
+			"SECTION_ID" => $arSec["ID"],
+			"USE_FILTER" => "Y",
+			"INCLUDE_BRANDS" => "Y", // retrieve a brand list specific to the selected elements (see $arResults['BRANDS'] array)
+			"INCLUDE_PRICE_MIN_MAX" => "Y",
+			"FILTER_NAME" => "filter_brand",
+			"PAGE_ELEMENT_COUNT" => "1000",
+			"IBLOCK_TYPE" => "collection",
+			"SECTION_ID_VARIABLE" => "SECTION_ID",
+			"DISPLAY_PANEL" => "N",
+			"CACHE_TYPE" => "A",
+			"CACHE_TIME" => "3600",
+			"CACHE_GROUPS" => "Y",
+			"LEFT_MENU_FLAG" => 1,
+			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+			"ADD_SECTIONS_CHAIN" => "N"
+		)
+	);
 ?>
-			<form class="ajax-load" action="<?=$APPLICATION->GetCurPage()?>">
-        <fieldset>
-					<section class="filter">
-<?
-							$APPLICATION->IncludeComponent(
-								"custom:catalog.section",
-								"menu_checkbox",
-								Array(
-									"IBLOCK_TYPE" => "brands",
-									"IBLOCK_ID" => "2",
-									"USE_FILTER" => "N",
-									"ELEMENT_SORT_FIELD" => "NAME",
-									"ELEMENT_SORT_ORDER" => "ASC",
-									"PAGE_ELEMENT_COUNT" => "1000",
-									"SECTION_ID" => "brands",
-									"DISPLAY_PANEL" => "N",
-									"CACHE_TYPE" => "A",
-									"CACHE_TIME" => "3600",
-									"CACHE_GROUPS" => "Y",
-									"LEFT_MENU_FLAG" => 1,
-									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-									"ADD_SECTIONS_CHAIN" => "N"
-								)
-							);
-?>
-					<div class="hr"></div>
-          <label class="label">Ценовой диапазон, руб</label>
-          <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
-            <div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
-						<a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 15%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 60%;"></a>
-					</div>
-          <!-- end .ui-slider-->
-          <div class="slider-values">
-            <input type="text" name="min" readonly class="l" value="15 000" />
-            <input type="text" name="max" readonly class="r" value="60 000" />
-          </div>
-          <!-- end .slider-values-->
-        </section>
-			</fieldset>
-		</form>
-	<!-- end .filter--> 
 	</aside>
 	<!-- end .aside-->
 <?
