@@ -24,15 +24,17 @@ if (count($arResult["ITEMS"]) > 0)
 		{
 			$actions_active_showed = 1;
 		}
+
 		?>
-         <article class="news" itemscope itemtype="http://schema.org/Product">
 
-         <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"] && $arItem["DISPLAY_ACTIVE_TO"]):?>
-           <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span> - <span><?echo $arItem["DISPLAY_ACTIVE_TO"]?></span>
-         <?endif?>
-         <h2 itemprop="name"><a href="<?echo $arItem["DETAIL_PAGE_URL"]?>"><?echo $arItem["NAME"]?></a></h2>
-
-         </article>
+         <?if (($arItem["DISPLAY_PROPERTIES"]["col_availability"]["VALUE"] ==0 && in_array(strval($_SESSION['city_id']), $arItem["DISPLAY_PROPERTIES"]["col_city_id"]["VALUE"])) ||($arItem["DISPLAY_PROPERTIES"]["col_availability"]["VALUE"] ==1 && !in_array(strval($_SESSION['city_id']), $arItem["DISPLAY_PROPERTIES"]["col_city_id"]["VALUE"])) ):?>
+          <article class="news" itemscope itemtype="http://schema.org/Article">
+          <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"] && $arItem["DISPLAY_ACTIVE_TO"]):?>
+            <span itemprop="datePublished"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span> - <span><?echo $arItem["DISPLAY_ACTIVE_TO"]?></span>
+          <?endif?>
+          <h2 itemprop="name"><a href="<?echo $arItem["DETAIL_PAGE_URL"]?>"><?echo $arItem["NAME"]?></a></h2>
+          </article>
+         <?endif;?>
 <?
 	}
 ?>
@@ -40,7 +42,7 @@ if (count($arResult["ITEMS"]) > 0)
 endforeach;
 if ($actions_active_showed == 0)
 {
-	?><div style="padding:10px 0 10px 0;">На данный момент акций нет. Следите за нашими <a href="/about/news/">новостями</a>.</div><?
+	?><div>На данный момент акций нет. Следите за нашими <a href="/about/news/">новостями</a>.</div><?
 }
 else
 {
@@ -57,7 +59,7 @@ else
 
 <aside class="aside">
  <h2>Последние новости</h2>
- <? 
+ <?
 		$newsFilter = Array(
     	"IBLOCK_ID" => "3",
     	"IBLOCK_ACTIVE" => "Y",
@@ -68,8 +70,8 @@ else
     	Array('LOGIC' => 'OR',
       	'PROPERTY_col_availability' => '1',
       	'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-    	)   
-  	); 
+    	)
+  	);
  ?>
  <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
