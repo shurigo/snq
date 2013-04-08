@@ -406,9 +406,12 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 				false, 
 				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE', 'PROPERTY_COL_PRICE_NEW'));
 			if($element = $elements->GetNextElement()) {
-				$price = $element->GetProperty('COL_PRICE')['VALUE'];
-				$price_new = $element->GetProperty('COL_PRICE_NEW')['VALUE'];
-				return Array('ID' => $element->GetFields()['ID'], 'PRICE' => $price, 'PRICE_NEW' => $price_new);
+				$price_p = $element->GetProperty('COL_PRICE');
+				$price = $price_p['VALUE'];
+				$price_new_p = $element->GetProperty('COL_PRICE_NEW');
+				$price_new = $price_new_p['VALUE'];
+				$id_p = $element->GetFields();
+				return Array('ID' => $id_p['ID'], 'PRICE' => $price, 'PRICE_NEW' => $price_new);
 			}
 		}
 	}
