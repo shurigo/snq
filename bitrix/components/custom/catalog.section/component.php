@@ -104,7 +104,7 @@ if($arParams["PAGE_ELEMENT_COUNT"]<=0)
 	$arParams["PAGE_ELEMENT_COUNT"]=20;
 $arParams["LINE_ELEMENT_COUNT"] = intval($arParams["LINE_ELEMENT_COUNT"]);
 if($arParams["LINE_ELEMENT_COUNT"]<=0)
-	$arParams["LINE_ELEMENT_COUNT"]=3;
+	$arParams["LINE_ELEMENT_COUNT"]=4;
 
 if(!is_array($arParams["PROPERTY_CODE"]))
 	$arParams["PROPERTY_CODE"] = array();
@@ -136,11 +136,10 @@ $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"] = intval($arParams["PAGER_DESC_NUMB
 $arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"]!=="N";
 
 $arNavParams = array(
-	//"iNumPage" => $arParams["PAGE_NUMBER"],
 	"nPageSize" => $arParams["PAGE_ELEMENT_COUNT"],
 	"bDescPageNumbering" => $arParams["PAGER_DESC_NUMBERING"],
 	"bShowAll" => $arParams["PAGER_SHOW_ALL"],
-); //print_r($arNavParams);
+); 
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 if($arNavigation["PAGEN"]==0 && $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]>0)
 	$arParams["CACHE_TIME"] = $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"];
@@ -330,7 +329,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter = array(
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"IBLOCK_LID" => SITE_ID,
-
 		"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]
   );
 
@@ -357,7 +355,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	}
 
 	$arSort[$arParams["ELEMENT_SORT_FIELD"]] = $arParams["ELEMENT_SORT_ORDER"];
-	$arSort["ID"] = "DESC";
+	//$arSort["ID"] = "DESC";
 
 	//Вещь недели
 	if ($arParams["SHOW_HOT_MODEL"] == "Y")
@@ -369,8 +367,73 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter["SECTION_GLOBAL_ACTIVE"] = "Y";
 	$arFilter["SECTION_ACTIVE"] = "Y";
 
+	$filter_final = array_merge($arrFilter, $arFilter);
+	
+	// Brands (for the filter in the left menu)
+	if($arParams['INCLUDE_BRANDS'] == 'Y') {
+		$arResult['BRANDS'] = array();
+		$rsElements = CIBlockElement::GetList(
+			Array('PROPERTY_COL_BRAND.NAME' => 'ASC'), 
+			$filter_final,	
+			Array('PROPERTY_COL_BRAND'), 
+			false, 
+			Array('IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_COL_BRAND')
+		);
+		while($element = $rsElements->GetNextElement())
+		{
+			$arItem = $element->GetFields();
+			if($item_element = CIBlockElement::GetById($arItem['PROPERTY_COL_BRAND_VALUE']))
+			{
+				if($item = $item_element->GetNext()) { 
+					$brand = Array();
+					$brand['ID'] = $item['ID'];
+					$brand['NAME'] = $item['NAME'];
+					$brand['CNT'] = $arItem['CNT'];	
+					$arResult['BRANDS'][] = $brand;
+				}
+			}
+		}
+	}
+
+	// Price: min, max	
+	// consider a direct database query to improve the performance
+	if(!function_exists('get_price_min_max')) {
+		function get_price_min_max($asc_desc, $filter, $price_new = '') {
+			$elements = CIBlockElement::GetList(
+				Array('PROPERTY_COL_PRICE'.$price_new => $asc_desc),
+				array_merge(Array('!PROPERTY_COL_PRICE'.$price_new => false), $filter),	
+				false, 
+				false, 
+				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE', 'PROPERTY_COL_PRICE_NEW'));
+			if($element = $elements->GetNextElement()) {
+				$price = $element->GetProperty('COL_PRICE')['VALUE'];
+				$price_new = $element->GetProperty('COL_PRICE_NEW')['VALUE'];
+				return Array('ID' => $element->GetFields()['ID'], 'PRICE' => $price, 'PRICE_NEW' => $price_new);
+			}
+		}
+	}
+	if($arParams['INCLUDE_PRICE_MIN_MAX'] == 'Y') {
+		$price_min = get_price_min_max('ASC', $filter_final); 
+		$price_min_new = get_price_min_max('ASC', $filter_final, '_NEW'); 
+		$price_max = get_price_min_max('DESC', $filter_final); 
+		$price_max_new = get_price_min_max('DESC', $filter_final, '_NEW'); 
+		if(!empty($price_min_new) && 
+			!empty($price_min['PRICE_NEW']) && 
+			intval($price_min_new['PRICE_NEW']) <= intval($price_min['PRICE_NEW'])) {
+			$arResult['PRICE_MIN'] = $price_min_new['PRICE_NEW'];
+		} else {
+			$arResult['PRICE_MIN'] = $price_min['PRICE'];
+		}
+		if(!empty($price_max_new) && 
+			!empty($price_max['PRICE_NEW']) && 
+			intval($price_max_new['PRICE_NEW']) >= intval($price_max['PRICE_NEW'])) {
+			$arResult['PRICE_MAX'] = $price_max_new['PRICE_NEW'];
+		} else {
+			$arResult['PRICE_MAX'] = $price_max['PRICE'];
+		}
+	} // end Price: min, max
 	//EXECUTE
-	$rsElements = CIBlockElement::GetList($arSort, array_merge($arrFilter, $arFilter), false, $arNavParams, $arSelect);
+	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
 	if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
 		$rsElements->SetSectionContext($arResult);
@@ -451,8 +514,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arResult["PRICE_SORT"] = $arParams["PRICE_SORT"];
 	$arResult["COMPONENT_URL"] = $arParams["COMPONENT_URL"];
 	$rsElements->COMPONENT_URL = $arParams["COMPONENT_URL"];
-
-	//echo "<pre>"; print_r($rsElements); echo "</pre>";
 
 	$arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, $arParams["PAGER_TITLE"], $arParams["PAGER_TEMPLATE"], $arParams["PAGER_SHOW_ALWAYS"]);
 	$arResult["NAV_CACHED_DATA"] = $navComponentObject->GetTemplateCachedData();

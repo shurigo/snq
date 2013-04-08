@@ -30,9 +30,7 @@ $APPLICATION->IncludeComponent(
 		"PRICE_CODE" => $arParams["PRICE_CODE"],
 		"USE_PRICE_COUNT" => $arParams["USE_PRICE_COUNT"],
 		"SHOW_PRICE_COUNT" => $arParams["SHOW_PRICE_COUNT"],
-
 		"PRICE_VAT_INCLUDE" => $arParams["PRICE_VAT_INCLUDE"],
-
 		"DISPLAY_TOP_PAGER" => $arParams["DISPLAY_TOP_PAGER"],
 		"DISPLAY_BOTTOM_PAGER" => $arParams["DISPLAY_BOTTOM_PAGER"],
 		"PAGER_TITLE" => $arParams["PAGER_TITLE"],
@@ -41,14 +39,10 @@ $APPLICATION->IncludeComponent(
 		"PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
 		"PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
-
 		"SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
 		"SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
 		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
 		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
-		
-		"COMPONENT_URL" => $_POST["component_url"],
-		"PRICE_SORT" => $_POST["price_sort"]
 	),
 	$component
 );
