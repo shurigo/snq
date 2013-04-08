@@ -1,3 +1,4 @@
+<br>
 <form class="ajax-load" id="filter_form" action="<?=$APPLICATION->GetCurPage()?>">
 	<fieldset>
 		<section class="filter">
@@ -7,14 +8,14 @@
 				<ul>
 					<?foreach($arResult['BRANDS'] as $item):?>
 						<li>
-							<input name="<?='brand'.++$index;?>" class="customCheckbox" type="checkbox" value="<?=$item['ID'];?>">
-							<label><?=$item['NAME'];?> (<?=$item['CNT']?>)</label>
+							<input style="float:left;" name="<?='brand'.++$index;?>" class="customCheckbox" type="checkbox" value="<?=$item['ID'];?>">
+							<label style="display:block;overflow:hidden;" title="<?=$item['NAME'];?> (<?=$item['CNT']?>)"><?=$item['NAME'];?> <strong>(<?=$item['CNT']?>)</strong></label>
 						</li>
 					<?endforeach;?>
 				</ul>
 			</div>
 			<!-- end .checks-->
-			<div class="hr"></div>
+			<br>
 			<label class="label">Ценовой диапазон, руб</label>
 			<div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
 				<div class="ui-slider-range ui-widget-header" style="left: 15%; width: 45%;"></div>
