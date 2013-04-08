@@ -7,6 +7,13 @@
 		  $json = strtolower($_GET['json']);
 		}
 	}
+  // sort field selector
+  $sort_field = 'PROPERTY_COL_PRICE';
+  $sort_order = 'asc';
+	if(isset($_GET['sort'])){
+		if($_GET['sort'] == 'price_asc') { $sort_order = 'asc'; }
+		if($_GET['sort'] == 'price_desc') { $sort_order = 'desc'; }
+	}
 	$arFilter =	Array(
 			'IBLOCK_ID' => '1',
 			Array(
@@ -79,14 +86,6 @@
   if($url_array[1] == 'collection' && empty($url_array[2])) {
     LocalRedirect('/collection/woman/', true);
   }
-
-  // sort field selector
-  $sort_field = 'property_col_brand';
-  $sort_order = 'asc';
-	if(isset($_GET['sort'])){
-		if($_GET['sort'] == 'price') { $sort_field = 'property_col_price'; }
-		if($_GET['sort'] == 'brand') { $sort_field = 'property_col_brand'; }
-	}
 
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",

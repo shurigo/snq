@@ -4,6 +4,17 @@
   $url_array = explode("/", $APPLICATION->GetCurPage());
 ?>
 <section class="mainContent">
+<div class="sort">
+	<form class="ajax-load" id="sort_form" action="<?=$APPLICATION->GetCurPage();?>">
+		<fieldset>
+			<span>Сортировать по</span>
+			<select class="customSelect" name="sort">
+				<option value="price_asc">Цене (возр.)</option>
+				<option value="price_desc">Цене (убыв.)</option>
+			</select>
+		</fieldset>
+	</form>
+</div>
 <?
 	$APPLICATION->IncludeComponent(
 		"bitrix:breadcrumb",
@@ -18,17 +29,6 @@
 ?>
 <input type="hidden" id="section" value="<?=$url_array[2]?>">
 
-<div class="sort">
-	<form class="ajax-load" action="<?=$APPLICATION->GetCurPage();?>">
-		<fieldset>
-			<span>Сортировать по</span>
-			<select class="customSelect" name="sort">
-				<option value="price_asc">Цене (возр.)</option>
-				<option value="price_desc">Цене (убыв.)</option>
-			</select>
-		</fieldset>
-	</form>
-</div>
 <section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
 <?endif; //end normal page?>
 <?

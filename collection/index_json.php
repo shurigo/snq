@@ -78,8 +78,6 @@
 						"ACTION_CODE" => "action"
 					),
 				),
-				//"COMPONENT_URL" => $_GET["component_url"],
-				//"PRICE_SORT" => $_GET["price_sort"],
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"JSON" => 'y'

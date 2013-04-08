@@ -105,10 +105,10 @@ function ajaxLoad(){
 		if (slider.length > 0 && typeof $.fn.slider == 'function') {
 			slider.slider({
 				range: true,
-				min: min.val(),
-				max: max.val(),
-				step: 100,
-				//values: [ 0, max ],
+				min: 1000,
+				max: 350000,
+				//step: 50,
+				values: [ min.val(), max.val() ],
 				slide: function( event, ui ) {
 					min.val(ui.values[0].addSpace());
 					max.val(ui.values[1].addSpace());
@@ -122,9 +122,10 @@ function ajaxLoad(){
 		}
 
 		function reloadPage(){
-			alert(hold.serialize());
+			var filter_form = $('#filter_form');
+			var sort_form = $('#sort_form');
 			$.ajax({
-				data: hold.serialize()+"&json=y",
+				data: filter_form.serialize() + '&' + sort_form.serialize()+"&json=y",
 				dataType: 'json',
 				url: hold.attr('action'),
 				success: function(obj){

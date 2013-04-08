@@ -1,4 +1,4 @@
-<form class="ajax-load" action="<?=$APPLICATION->GetCurPage()?>">
+<form class="ajax-load" id="filter_form" action="<?=$APPLICATION->GetCurPage()?>">
 	<fieldset>
 		<section class="filter">
 			<div class="hr"></div>
