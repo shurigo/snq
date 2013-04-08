@@ -105,9 +105,8 @@ function ajaxLoad(){
 		if (slider.length > 0 && typeof $.fn.slider == 'function') {
 			slider.slider({
 				range: true,
-				min: 1000,
-				max: 350000,
-				//step: 50,
+				min: parseInt(min.val(),10),
+				max: parseInt(max.val(),10),
 				values: [ min.val(), max.val() ],
 				slide: function( event, ui ) {
 					min.val(ui.values[0].addSpace());
