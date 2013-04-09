@@ -1367,3 +1367,10 @@ table .sep {
 	border:1px solid #dadada;
 	background:#ebebeb;
 }
+.truncated { 
+	display:inline-block; 
+	max-width:100px; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
+}

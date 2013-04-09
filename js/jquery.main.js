@@ -21,18 +21,7 @@ $(window).load(function(){
 	ajaxLoad();
 	initGallery();
 	initNav();
-	resizeLabel();
 });
-
-function resizeLabel() {
-	var targetWidth = $('div.checks ul').width();
-	alert(targetWidth);
-	$('div.checks label').each(function() {
-		var width = $(this.width());
-	if(width > targetWidth) { alert(width); }
-	});
-}
-
 
 function initNav(){
 	$('.menu-hold').each(function(){

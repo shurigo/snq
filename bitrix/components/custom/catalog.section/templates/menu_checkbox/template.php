@@ -8,8 +8,8 @@
 				<ul>
 					<?foreach($arResult['BRANDS'] as $item):?>
 						<li>
-							<input style="float:left;" name="<?='brand'.++$index;?>" class="customCheckbox" type="checkbox" value="<?=$item['ID'];?>">
-							<label style="display:block;overflow:hidden;" title="<?=$item['NAME'];?> (<?=$item['CNT']?>)"><?=$item['NAME'];?> <strong>(<?=$item['CNT']?>)</strong></label>
+							<input name="<?='brand'.++$index;?>" class="customCheckbox" type="checkbox" value="<?=$item['ID'];?>">
+							<label class="truncated" title="<?=$item['NAME'];?> (<?=$item['CNT']?>)"><?=$item['NAME'];?> <strong>(<?=$item['CNT']?>)</strong></label>
 						</li>
 					<?endforeach;?>
 				</ul>
