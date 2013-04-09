@@ -1402,7 +1402,6 @@ table .sep {
 	border:1px solid #dadada;
 	background:#ebebeb;
 }
-
 .scrollup{
     width:40px;
     height:40px;
@@ -1419,4 +1418,11 @@ float:left; width:95px; margin:0px 0 0px 0px;
 }
 .vk-hack {
 float:left; width:140px; margin:0px 0 0px 0px;
+}
+.truncated { 
+	display:inline-block; 
+	max-width:140px; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
 }
