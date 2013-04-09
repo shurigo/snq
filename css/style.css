@@ -1402,7 +1402,6 @@ table .sep {
 	border:1px solid #dadada;
 	background:#ebebeb;
 }
-
 .scrollup{
     width:40px;
     height:40px;
@@ -1413,4 +1412,11 @@ table .sep {
     display:none;
     text-indent:-9999px;
     background: url('/images/icon_top.png') no-repeat;
+}
+.truncated { 
+	display:inline-block; 
+	max-width:140px; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap; 
 }

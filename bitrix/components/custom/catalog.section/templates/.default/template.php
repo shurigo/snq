@@ -4,17 +4,28 @@
   $url_array = explode("/", $APPLICATION->GetCurPage());
 ?>
 <section class="mainContent">
+<div class="sort">
+	<form class="ajax-load" id="sort_form" action="<?=$APPLICATION->GetCurPage();?>">
+		<fieldset>
+			<span>Сортировать по</span>
+			<select class="customSelect" name="sort">
+				<option value="price_asc">Цене (возр.)</option>
+				<option value="price_desc">Цене (убыв.)</option>
+			</select>
+		</fieldset>
+	</form>
+</div>
 <?
-$APPLICATION->IncludeComponent(
-"bitrix:breadcrumb",
-"breadcrumb",
-Array(
-"START_FROM" => "1",
-"PATH" => "",
-"SITE_ID" => "-"
-),
-false
-);
+	$APPLICATION->IncludeComponent(
+		"bitrix:breadcrumb",
+		"breadcrumb",
+		Array(
+			"START_FROM" => "1",
+			"PATH" => "",
+			"SITE_ID" => "-"
+		),
+		false
+	);
 ?>
 <input type="hidden" id="section" value="<?=$url_array[2]?>">
 
@@ -181,8 +192,6 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 ?>
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
-
-<?/*if($arParams["DISPLAY_BOTTOM_PAGER"]) { echo $arResult["NAV_STRING"]; }*/ ?>
 <a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->
