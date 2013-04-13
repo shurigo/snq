@@ -1,14 +1,11 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?
-//echo "<pre>"; print_r($arResult); echo "</pre>";
-?>
 <div style="margin:20px 0;">
 <form action="/our_shops/" method="get" enctype="multipart/form-data">
     <select name="city_select" onchange="javascript:this.form.submit();">
         <?
         foreach($arResult as $arSection)
         {
-            ?><!--<?=$arParams["SECTION_ID"]?>--><option value="<?=$arSection["ID"]?>" <?=($arParams["SECTION_ID"] == $arSection["ID"])?' selected="selected"':'';?> style="width:250px;"><?=$arSection["NAME"]?></option><?
+            ?><option value="<?=$arSection["ID"]?>" <?=($arParams["SECTION_ID"] == $arSection["ID"])?' selected="selected"':'';?> style="width:250px;"><?=$arSection["NAME"]?></option><?
         }
         ?>
     </select>
