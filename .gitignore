@@ -1,2 +1,11 @@
-dbconn.php
 license_key.php
+bitrix/backup/
+bitrix/cache/
+bitrix/html_pages/
+bitrix/managed_cache/
+bitrix/modules/updater.log
+bitrix/php_interface/dbconn.php
+bitrix/stack_cache/
+restore.php
+upload/
+

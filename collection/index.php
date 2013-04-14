@@ -8,11 +8,12 @@
 		}
 	}
   // sort field selector
-  $sort_field = 'PROPERTY_COL_PRICE';
+  $sort_field = 'sort';
   $sort_order = 'asc';
 	if(isset($_GET['sort'])){
-		if($_GET['sort'] == 'price_asc') { $sort_order = 'asc'; }
-		if($_GET['sort'] == 'price_desc') { $sort_order = 'desc'; }
+		if($_GET['sort'] == 'sort') { $sort_field = 'sort'; $sort_order = 'asc'; }
+		if($_GET['sort'] == 'price_asc') { $sort_field = 'property_col_price'; $sort_order = 'asc'; }
+		if($_GET['sort'] == 'price_desc') { $sort_field = 'property_col_price'; $sort_order = 'desc'; }
 	}
 	$arFilter =	Array(
 			'IBLOCK_ID' => '1',
