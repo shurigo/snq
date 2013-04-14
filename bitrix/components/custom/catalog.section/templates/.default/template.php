@@ -57,11 +57,11 @@
 <span itemprop="name"><?=$arElement['NAME']?></span>
 </span>
 <!-- end .text -->
-<?if(!empty($arElement['PROPERTIES']['col_price_new']['VALUE'])):?>
+<?if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE']):?>
 <span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price_new']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
 <del>
-<?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').' Руб.';?>
+<?=number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.';?>
 </del>
 <?else:?>
 <span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
