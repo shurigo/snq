@@ -37,21 +37,13 @@
 	if(isset($_GET['min'])) {
 		$price_min = str_replace(' ', '', $_GET['min']);
 		if(is_numeric(intval($price_min))) {
-			$arFilter[] = Array(
-				'LOGIC' => 'OR',
-				Array('PROPERTY_col_price_new' => false, '>=PROPERTY_col_price' => $price_min),
-				Array('!PROPERTY_col_price_new' => false, '>=PROPERTY_col_price_new' => $price_min)
-			);
+			$arFilter[] = Array('>=PROPERTY_col_price' => $price_min);
 		}
 	}
 	if(isset($_GET['max'])) {
 		$price_max = str_replace(' ', '', $_GET['max']);
 		if(is_numeric(intval($price_max))) {
-			$arFilter[] = Array(
-				'LOGIC' => 'OR',
-				Array('PROPERTY_col_price_new' => false, '<=PROPERTY_col_price' => $price_max),
-				Array('!PROPERTY_col_price_new' => false, '<=PROPERTY_col_price_new' => $price_max)
-			);
+			$arFilter[] = Array('<=PROPERTY_col_price' => $price_max);
 		}
 	}
 	// output JSON
