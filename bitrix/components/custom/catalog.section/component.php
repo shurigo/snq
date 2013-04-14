@@ -398,42 +398,26 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	// Price: min, max	
 	// consider a direct database query to improve the performance
 	if(!function_exists('get_price_min_max')) {
-		function get_price_min_max($asc_desc, $filter, $price_new = '') {
+		function get_price_min_max($asc_desc, $filter) {
 			$elements = CIBlockElement::GetList(
-				Array('PROPERTY_COL_PRICE'.$price_new => $asc_desc),
-				array_merge(Array('!PROPERTY_COL_PRICE'.$price_new => false), $filter),	
+				Array('PROPERTY_COL_PRICE'.$price => $asc_desc),
+				$filter,	
 				false, 
 				false, 
-				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE', 'PROPERTY_COL_PRICE_NEW'));
+				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE'));
 			if($element = $elements->GetNextElement()) {
 				$price_p = $element->GetProperty('COL_PRICE');
 				$price = $price_p['VALUE'];
-				$price_new_p = $element->GetProperty('COL_PRICE_NEW');
-				$price_new = $price_new_p['VALUE'];
 				$id_p = $element->GetFields();
-				return Array('ID' => $id_p['ID'], 'PRICE' => $price, 'PRICE_NEW' => $price_new);
+				return Array('ID' => $id_p['ID'], 'PRICE' => $price);
 			}
 		}
 	}
 	if($arParams['INCLUDE_PRICE_MIN_MAX'] == 'Y') {
 		$price_min = get_price_min_max('ASC', $filter_final); 
-		$price_min_new = get_price_min_max('ASC', $filter_final, '_NEW'); 
 		$price_max = get_price_min_max('DESC', $filter_final); 
-		$price_max_new = get_price_min_max('DESC', $filter_final, '_NEW'); 
-		if(!empty($price_min_new) && 
-			!empty($price_min['PRICE_NEW']) && 
-			intval($price_min_new['PRICE_NEW']) <= intval($price_min['PRICE_NEW'])) {
-			$arResult['PRICE_MIN'] = $price_min_new['PRICE_NEW'];
-		} else {
-			$arResult['PRICE_MIN'] = $price_min['PRICE'];
-		}
-		if(!empty($price_max_new) && 
-			!empty($price_max['PRICE_NEW']) && 
-			intval($price_max_new['PRICE_NEW']) >= intval($price_max['PRICE_NEW'])) {
-			$arResult['PRICE_MAX'] = $price_max_new['PRICE_NEW'];
-		} else {
-			$arResult['PRICE_MAX'] = $price_max['PRICE'];
-		}
+		$arResult['PRICE_MIN'] = $price_min['PRICE'];
+		$arResult['PRICE_MAX'] = $price_max['PRICE'];
 	} // end Price: min, max
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);

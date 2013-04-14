@@ -74,7 +74,6 @@
 						'PREVIEW_TEXT_TYPE',
 						'PREVIEW_PICTURE',
 						'PROPERTY_COL_MODEL_CODE',
-						'PROPERTY_COL_PRICE_NEW',
 						'PROPERTY_COL_PRICE',
 						'PROPERTY_COL_TITLE',
 						'PROPERTY_COL_BRAND',
@@ -87,8 +86,7 @@
 						$xml->writeAttribute('available', 'true');
 						$xml->writeElement('url', $root_url.$element['DETAIL_PAGE_URL']);
 						$price = $element['PROPERTY_COL_PRICE_VALUE'];
-						$price_new = $element['PROPERTY_COL_PRICE_NEW_VALUE'];
-						$xml->writeElement('price', $price_new != 0 ? $price_new : $price);
+						$xml->writeElement('price', $price);
 						$xml->writeElement('currencyId', 'RUR');
 						$xml->writeElement('categoryId', $element['IBLOCK_SECTION_ID']);
 						$xml->writeElement('picture', $root_url.CFile::GetPath($element['PREVIEW_PICTURE']));
