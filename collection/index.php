@@ -8,9 +8,10 @@
 		}
 	}
   // sort field selector
-  $sort_field = 'PROPERTY_COL_PRICE';
+  $sort_field = 'sort';
   $sort_order = 'asc';
 	if(isset($_GET['sort'])){
+		if($_GET['sort'] == 'sort') { $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_asc') { $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_desc') { $sort_order = 'desc'; }
 	}

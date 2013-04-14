@@ -9,6 +9,7 @@
 		<fieldset>
 			<span>Сортировать по</span>
 			<select class="customSelect" name="sort">
+				<option value="sort">По умолчанию</option>
 				<option value="price_asc">Цене (возр.)</option>
 				<option value="price_desc">Цене (убыв.)</option>
 			</select>
