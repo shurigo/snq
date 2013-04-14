@@ -212,7 +212,7 @@ document.location.href = link.href;
                         1 => "col_model_code",
                         2 => "col_price",
                         3 => "col_brand",
-                        4 => "col_price_new",
+                        4 => "col_price_origin",
                     ),
                     "PRICE_CODE" => "",	// Тип цены
                     "USE_PRICE_COUNT" => "N",	// Использовать вывод цен с диапазонами

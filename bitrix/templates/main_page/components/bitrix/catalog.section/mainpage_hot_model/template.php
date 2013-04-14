@@ -21,10 +21,10 @@ $price_title="Цена";
 $old_price="<br /> ";
 
 //check if there is discount
-if (isset($arElement["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"]))
-{$price=number_format($arElement["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ');
+if ($arElement["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arElement["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"])
+{$price=number_format($arElement["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ');
 $price_title="Новая цена";
-$old_price=number_format($arElement["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'  Руб.';
+$old_price=number_format($arElement["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ').'  Руб.';
 }
 
 
