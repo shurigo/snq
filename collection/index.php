@@ -17,8 +17,8 @@
 	$arFilter =	Array(
 			'IBLOCK_ID' => '1',
 			Array(
-				'LOGIC' => 'OR', 
-				'PROPERTY_col_availability' => '1', 
+				'LOGIC' => 'OR',
+				'PROPERTY_col_availability' => '1',
 				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 			)
 	);
@@ -28,7 +28,7 @@
 		if(preg_match('/brand\d+/', $key)) {
 			$filter_brand[] = Array('PROPERTY_col_brand' => $value);
 		}
-	}	
+	}
 	if(count($filter_brand) > 0) {
 		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
 	}
@@ -37,7 +37,7 @@
 		$price_min = str_replace(' ', '', $_GET['min']);
 		if(is_numeric(intval($price_min))) {
 			$arFilter[] = Array(
-				'LOGIC' => 'OR', 
+				'LOGIC' => 'OR',
 				Array('PROPERTY_col_price_new' => false, '>=PROPERTY_col_price' => $price_min),
 				Array('!PROPERTY_col_price_new' => false, '>=PROPERTY_col_price_new' => $price_min)
 			);
@@ -47,7 +47,7 @@
 		$price_max = str_replace(' ', '', $_GET['max']);
 		if(is_numeric(intval($price_max))) {
 			$arFilter[] = Array(
-				'LOGIC' => 'OR', 
+				'LOGIC' => 'OR',
 				Array('PROPERTY_col_price_new' => false, '<=PROPERTY_col_price' => $price_max),
 				Array('!PROPERTY_col_price_new' => false, '<=PROPERTY_col_price_new' => $price_max)
 			);
@@ -68,9 +68,9 @@
 			$flag = 'true';
 		}
 		ob_start();
-		echo '{ 
-						"data": { 
-							"next": '.$flag.', 
+		echo '{
+						"data": {
+							"next": '.$flag.',
 							"html":';
 		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
 		echo '}}';
@@ -105,12 +105,12 @@
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => $sort_field,
 				"ELEMENT_SORT_ORDER" => $sort_order,
-				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
+				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
 				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
 				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
-				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
+				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"DETAIL_META_KEYWORDS" => "col_keywords",
 				"DETAIL_META_DESCRIPTION" => "col_description",
 				"DETAIL_BROWSER_TITLE" => "col_title",
@@ -205,8 +205,8 @@
 							);
 	$filter_brand =	Array(
 		Array(
-			'LOGIC' => 'OR', 
-			'PROPERTY_col_availability' => '1', 
+			'LOGIC' => 'OR',
+			'PROPERTY_col_availability' => '1',
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 		)
 	);
