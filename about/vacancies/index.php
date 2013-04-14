@@ -40,6 +40,10 @@ $APPLICATION->SetTitle("Вакансии");
 
           <p>Дополнительную информацию о нас Вы можете получить по телефону <strong>(495) 777-8-999</strong>. </p>
 
+          <table>
+          <tr><td><a href="office.php">Вакансии в офисе</a></td><td><a href="shops.php">Вакансии в магазинах</a></td><td>Вакансии Логистического центра</td></tr>
+          </table>
+<!--
           <div style="margin: 20px 0pt 0pt;"><?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section.list",
 	"vacancies",
@@ -58,7 +62,7 @@ $APPLICATION->SetTitle("Вакансии");
 		"CACHE_GROUPS" => "Y"
 	)
 );?> </div>
-
+-->
 
 </section>
 
