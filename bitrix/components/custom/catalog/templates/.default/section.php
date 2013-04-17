@@ -6,6 +6,7 @@
 		Array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+			"USE_SORT"	=> $arParams["USE_SORT"],
 			"ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
 			"ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],
 			"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],

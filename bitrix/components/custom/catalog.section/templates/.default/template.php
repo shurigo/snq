@@ -4,6 +4,7 @@
   $url_array = explode("/", $APPLICATION->GetCurPage());
 ?>
 <section class="mainContent">
+<?if($arParams['USE_SORT'] == 'Y'):?>
 <div class="sort">
 	<form class="ajax-load" id="sort_form" action="<?=$APPLICATION->GetCurPage();?>">
 		<fieldset>
@@ -16,6 +17,7 @@
 		</fieldset>
 	</form>
 </div>
+<?endif;?>
 <?
 	$APPLICATION->IncludeComponent(
 		"bitrix:breadcrumb",

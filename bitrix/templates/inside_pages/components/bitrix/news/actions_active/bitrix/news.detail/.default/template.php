@@ -1,6 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <section class="mainContent">
-
 <article class="news" itemscope itemtype="http://schema.org/Article">
 <h1 itemprop="name"><?=$arResult["NAME"]?></h1>
 
@@ -13,68 +12,101 @@
 <?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
 <?endif?>
-
 <?
-if ($APPLICATION->GetCurPage() == "/actions/1059/")
-{
-	$APPLICATION->IncludeComponent("bitrix:catalog.section", "good_price", Array(
-                "AJAX_MODE" => "N",	// Включить режим AJAX
-                "IBLOCK_TYPE" => "collection",	// Тип инфо-блока
-                "IBLOCK_ID" => "1",	// Инфо-блок
-                "SECTION_ID" => "88",	// ID раздела
-                "SECTION_CODE" => "goodprice_ss11",	// Код раздела
-                "ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
-                "ELEMENT_SORT_ORDER" => "asc",	// Порядок сортировки элементов
-                "FILTER_NAME" => "arrFilter",	// Имя массива со значениями фильтра для фильтрации элементов
-                "INCLUDE_SUBSECTIONS" => "Y",	// Показывать элементы подразделов раздела
-                "SHOW_ALL_WO_SECTION" => "N",	// Показывать все элементы, если не указан раздел
-                "SECTION_URL" => "",	// URL, ведущий на страницу с содержимым раздела
-                "DETAIL_URL" => "/good_prices/detail.php?ELEMENT_ID=#ELEMENT_ID#",	// URL, ведущий на страницу с содержимым элемента раздела
-                "BASKET_URL" => "/personal/basket.php",	// URL, ведущий на страницу с корзиной покупателя
-                "ACTION_VARIABLE" => "action",	// Название переменной, в которой передается действие
-                "PRODUCT_ID_VARIABLE" => "id",	// Название переменной, в которой передается код товара для покупки
-                "PRODUCT_QUANTITY_VARIABLE" => "quantity",	// Название переменной, в которой передается количество товара
-                "PRODUCT_PROPS_VARIABLE" => "prop",	// Название переменной, в которой передаются характеристики товара
-                "SECTION_ID_VARIABLE" => "SECTION_ID",	// Название переменной, в которой передается код группы
-                "META_KEYWORDS" => "-",	// Установить ключевые слова страницы из свойства
-                "META_DESCRIPTION" => "-",	// Установить описание страницы из свойства
-                "BROWSER_TITLE" => "-",	// Установить заголовок окна браузера из свойства
-                "DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
-                "ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-                "DISPLAY_COMPARE" => "N",	// Выводить кнопку сравнения
-                "SET_TITLE" => "Y",	// Устанавливать заголовок страницы
-                "SET_STATUS_404" => "N",	// Устанавливать статус 404, если не найдены элемент или раздел
-                "PAGE_ELEMENT_COUNT" => "100",	// Количество элементов на странице
-                "LINE_ELEMENT_COUNT" => "3",	// Количество элементов выводимых в одной строке таблицы
-                "PROPERTY_CODE" => array("col_brand", "col_price", "col_model_code"),	// Свойства
-                "PRICE_CODE" => "",	// Тип цены
-                "USE_PRICE_COUNT" => "N",	// Использовать вывод цен с диапазонами
-                "SHOW_PRICE_COUNT" => "1",	// Выводить цены для количества
-                "PRICE_VAT_INCLUDE" => "Y",	// Включать НДС в цену
-                "PRODUCT_PROPERTIES" => "",	// Характеристики товара
-                "USE_PRODUCT_QUANTITY" => "N",	// Разрешить указание количества товара
-                "CACHE_TYPE" => "A",	// Тип кеширования
-                "CACHE_TIME" => "3600",	// Время кеширования (сек.)
-                "CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре
-                "CACHE_GROUPS" => "Y",	// Учитывать права доступа
-                "DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-                "DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
-                "PAGER_TITLE" => "Товары",	// Название категорий
-                "PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
-                "PAGER_TEMPLATE" => "",	// Название шаблона
-                "PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-                "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-                "PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
-                "AJAX_OPTION_SHADOW" => "Y",	// Включить затенение
-                "AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-                "AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-                "AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-                "AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
-                ),
-                false
-            );
-}
-
+	$arFilter = Array(
+		'IBLOCK_ID' => '1',
+		Array(
+			'LOGIC' => 'OR',
+			'PROPERTY_col_availability' => '1',
+			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		)
+	);
+	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
+	$APPLICATION->IncludeComponent(
+		"custom:catalog.section",
+		"",
+		Array(
+				"AJAX_MODE" => "N",
+				"SEF_MODE" => "Y",
+				"IBLOCK_TYPE" => "collection",
+				"IBLOCK_ID" => "1",
+				"USE_FILTER" => "Y",
+				"FILTER_NAME" => "arFilter",
+				"INCLUDE_BRANDS" => "Y",
+				"USE_REVIEW" => "N",
+				"USE_COMPARE" => "N",
+				"USE_SORT" => "Y",
+				"SHOW_TOP_ELEMENTS" => "N",
+				"PAGE_ELEMENT_COUNT" => "32",
+				"LINE_ELEMENT_COUNT" => "4",
+				"ELEMENT_SORT_FIELD" => 'sort',
+				"ELEMENT_SORT_ORDER" => 'asc',
+				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
+				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
+				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
+				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"DETAIL_META_KEYWORDS" => "col_keywords",
+				"DETAIL_META_DESCRIPTION" => "col_description",
+				"DETAIL_BROWSER_TITLE" => "col_title",
+				"ACTION_VARIABLE" => "action",
+				"PRODUCT_ID_VARIABLE" => "id",
+				"SECTION_ID_VARIABLE" => "SECTION_ID",
+				"DISPLAY_PANEL" => "N",
+				"CACHE_TYPE" => "N",
+				"CACHE_TIME" => "3600",
+				"CACHE_FILTER" => "N",
+				"CACHE_GROUPS" => "Y",
+				"SET_TITLE" => "Y",
+				"SET_STATUS_404" => "Y",
+				"PRICE_CODE" => array(0=>"col_price",),
+				"USE_PRICE_COUNT" => "N",
+				"SHOW_PRICE_COUNT" => "1",
+				"PRICE_VAT_INCLUDE" => "Y",
+				"PRICE_VAT_SHOW_VALUE" => "N",
+				"LINK_IBLOCK_TYPE" => "",
+				"LINK_IBLOCK_ID" => "",
+				"LINK_PROPERTY_SID" => "",
+				"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
+				"DISPLAY_TOP_PAGER" => "N",
+				"DISPLAY_BOTTOM_PAGER" => "N",
+				"PAGER_TITLE" => "Модели",
+				"PAGER_SHOW_ALWAYS" => "N",
+				"PAGER_TEMPLATE" => "collection",
+				"PAGER_DESC_NUMBERING" => "N",
+				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+				"PAGER_SHOW_ALL" => "N",
+				"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
+				"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
+				"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),
+				"DISPLAY_ELEMENT_SELECT_BOX" => "N",
+				"ELEMENT_SORT_FIELD_BOX" => "id",
+				"ELEMENT_SORT_ORDER_BOX" => "asc",
+				"COMPARE_ELEMENT_SORT_FIELD" => "sort",
+				"COMPARE_ELEMENT_SORT_ORDER" => "asc",
+				"AJAX_OPTION_SHADOW" => "Y",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"AJAX_OPTION_HISTORY" => "N",
+				"SEF_FOLDER" => "/collection/",
+				"SEF_URL_TEMPLATES" => Array(
+					"section" => "#SECTION_CODE#/",
+					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+					"compare" => "compare.php?action=#ACTION_CODE#"
+				),
+				"VARIABLE_ALIASES" => Array(
+					"section" => Array(),
+					"element" => Array(),
+					"compare" => Array(
+						"ACTION_CODE" => "action"
+					),
+				),
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"JSON" => $json
+			)
+	);
 ?>
 </article>
 <a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
