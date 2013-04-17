@@ -12,6 +12,8 @@
 <?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
 <?endif?>
+</article>
+<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 <?
 	$arFilter = Array(
 		'IBLOCK_ID' => '1',
@@ -108,8 +110,6 @@
 			)
 	);
 ?>
-</article>
-<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 </section>
 
 <aside class="aside">
