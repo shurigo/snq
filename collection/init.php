@@ -1,4 +1,10 @@
 <?
+	// Function for basic field validation (present and neither empty nor only white space
+	if(!function_exists('IsNullOrEmptyString')) {
+		function IsNullOrEmptyString($question){
+			return (!isset($question) || trim($question)==='');
+		}
+	}
   // output JSON?
 	$json = "n"; // default
 	if(isset($_GET['json'])) {
@@ -37,14 +43,4 @@
 		echo '}}';
 		exit;
   } // if($json=="y")
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("Коллекция");
-
-  $_POST['component_url']=$APPLICATION->GetCurPage(true);
-  $url_array = explode("/", $APPLICATION->GetCurPage());
-
-  // Collection root undefined -> redirect to Woman collection
-  if($url_array[1] == 'collection' && empty($url_array[2])) {
-    LocalRedirect('/collection/woman/', true);
-	}
 ?>

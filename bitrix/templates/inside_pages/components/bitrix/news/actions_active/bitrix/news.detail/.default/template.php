@@ -14,6 +14,8 @@
 <?endif?>
 </article>
 <a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
+<!--old </section>-->
+<!-- end .mainContent -->
 <?
 	$arFilter = Array(
 		'IBLOCK_ID' => '1',
@@ -85,24 +87,19 @@
 				"SEF_FOLDER" => "/collection/",
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
-					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-					"compare" => "compare.php?action=#ACTION_CODE#"
+					//"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+				//	"element" => empty($url_array[2]) ? "/#ELEMENT_ID#/" : "#SECTION_CODE#/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
 					"element" => Array(),
-					"compare" => Array(
-						"ACTION_CODE" => "action"
-					),
 				),
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
 				"JSON" => $json
 			)
-	);
+		);
 ?>
-</section>
-
 <aside class="aside">
 <h2>Последние новости</h2>
  <?$APPLICATION->IncludeComponent(

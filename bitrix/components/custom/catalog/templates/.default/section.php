@@ -7,6 +7,7 @@
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 			"USE_SORT"	=> $arParams["USE_SORT"],
+			"NOT_SHOW_NAV_CHAIN" => $arParams["NOT_SHOW_NAV_CHAIN"],
 			"ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
 			"ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],
 			"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
@@ -51,17 +52,3 @@
 		$component
 );
 ?>
-<?if($arParams["USE_COMPARE"]=="Y"):?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.compare.list",
-	"",
-	Array(
-		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-		"NAME" => $arParams["COMPARE_NAME"],
-		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
-		"COMPARE_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["compare"],
-	),
-	$component
-);?>
-<?endif?>

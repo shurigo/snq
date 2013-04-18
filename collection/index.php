@@ -33,6 +33,15 @@
 		}
 	}
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $APPLICATION->SetTitle("ÃŠÃ®Ã«Ã«Ã¥ÃªÃ¶Ã¨Ã¿");
+
+  $_POST['component_url']=$APPLICATION->GetCurPage(true);
+  $url_array = explode("/", $APPLICATION->GetCurPage());
+  // Collection root undefined -> redirect to Woman collection
+  if($url_array[1] == 'collection' && empty($url_array[2])) {
+    LocalRedirect('/collection/woman/', true);
+	}
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -47,6 +56,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "Y",
+				"NOT_SHOW_NAV_CHAIN" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
@@ -82,20 +92,9 @@
 				"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
 				"DISPLAY_TOP_PAGER" => "N",
 				"DISPLAY_BOTTOM_PAGER" => "N",
-				"PAGER_TITLE" => "Ìîäåëè",
-				"PAGER_SHOW_ALWAYS" => "N",
-				"PAGER_TEMPLATE" => "collection",
-				"PAGER_DESC_NUMBERING" => "N",
-				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-				"PAGER_SHOW_ALL" => "N",
-				"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
-				"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
-				"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),
 				"DISPLAY_ELEMENT_SELECT_BOX" => "N",
 				"ELEMENT_SORT_FIELD_BOX" => "id",
 				"ELEMENT_SORT_ORDER_BOX" => "asc",
-				"COMPARE_ELEMENT_SORT_FIELD" => "sort",
-				"COMPARE_ELEMENT_SORT_ORDER" => "asc",
 				"AJAX_OPTION_SHADOW" => "Y",
 				"AJAX_OPTION_JUMP" => "N",
 				"AJAX_OPTION_STYLE" => "Y",
@@ -104,14 +103,10 @@
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
 					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-					"compare" => "compare.php?action=#ACTION_CODE#"
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
 					"element" => Array(),
-					"compare" => Array(
-						"ACTION_CODE" => "action"
-					),
 				),
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
@@ -127,29 +122,28 @@
 					"CODE" => $url_array[2],
 				)
 			);
-			if ($arSec = $dbSec->GetNext())
-			{
+			if ($arSec = $dbSec->GetNext()) {
 ?>
 	<aside class="aside">
 <?
-							$APPLICATION->IncludeComponent(
-								"custom:catalog.section.list",
-								"collection_mainpage",
-								Array(
-									"IBLOCK_TYPE" => "collection",
-									"IBLOCK_ID" => "1",
-									"SECTION_ID" => $arSec["ID"],
-									"DISPLAY_PANEL" => "N",
-									"CACHE_TYPE" => "A",
-									"CACHE_TIME" => "3600",
-									"CACHE_GROUPS" => "Y",
-									"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-									"TOP_DEPTH" => 4,
-									"LEFT_MENU_FLAG" => 1,
-									"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-									"ADD_SECTIONS_CHAIN" => "N"
-								)
-							);
+				$APPLICATION->IncludeComponent(
+					"custom:catalog.section.list",
+					"collection_mainpage",
+					Array(
+						"IBLOCK_TYPE" => "collection",
+						"IBLOCK_ID" => "1",
+						"SECTION_ID" => $arSec["ID"],
+						"DISPLAY_PANEL" => "N",
+						"CACHE_TYPE" => "A",
+						"CACHE_TIME" => "3600",
+						"CACHE_GROUPS" => "Y",
+						"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+						"TOP_DEPTH" => 4,
+						"LEFT_MENU_FLAG" => 1,
+						"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+						"ADD_SECTIONS_CHAIN" => "N"
+					)
+				);
 	$filter_brand =	Array(
 		Array(
 			'LOGIC' => 'OR',
@@ -164,7 +158,7 @@
 			"IBLOCK_ID" => "1",
 			"SECTION_ID" => $arSec["ID"],
 			"USE_FILTER" => "Y",
-			"INCLUDE_BRANDS" => "Y", // retrieve a brand list specific to the selected elements (see $arResults['BRANDS'] array)
+			"INCLUDE_BRANDS" => "Y", // retrieve a brand list specific to the selected elements (see $arResult['BRANDS'] array)
 			"INCLUDE_PRICE_MIN_MAX" => "Y",
 			"FILTER_NAME" => "filter_brand",
 			"PAGE_ELEMENT_COUNT" => "1000",
@@ -184,9 +178,5 @@
 	<!-- end .aside-->
 <?
 		}
-	}
-	// Function for basic field validation (present and neither empty nor only white space
-	function IsNullOrEmptyString($question){
-		return (!isset($question) || trim($question)==='');
 	}
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
