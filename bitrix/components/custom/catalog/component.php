@@ -55,7 +55,7 @@ if($arParams["SEF_MODE"] == "Y")
 
 	if(!$componentPage)
 	{
-		$componentPage = "sections";
+		$componentPage = "section";
 
 		if($arParams["SET_STATUS_404"]==="Y")
 		{
@@ -121,5 +121,6 @@ else
 		"ALIASES" => $arVariableAliases
 	);
 }
+//error_log('componentPage='.$componentPage);
 $this->IncludeComponentTemplate($componentPage);
 ?>

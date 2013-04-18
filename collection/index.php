@@ -38,7 +38,7 @@
 
   $_POST['component_url']=$APPLICATION->GetCurPage(true);
   $url_array = explode("/", $APPLICATION->GetCurPage());
-  // Collection root undefined -> redirect to Woman collection
+	// Collection root undefined -> redirect to Woman collection
   if($url_array[1] == 'collection' && empty($url_array[2])) {
     LocalRedirect('/collection/woman/', true);
 	}
