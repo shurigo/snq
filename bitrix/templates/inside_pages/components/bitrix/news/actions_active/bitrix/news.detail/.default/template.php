@@ -14,18 +14,33 @@
 <?endif?>
 </article>
 <a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
+<pre>
+<?
+//print_r($arResult);
+?>
+</pre>
 <!--old </section>-->
 <!-- end .mainContent -->
 <?
 	$arFilter = Array(
 		'IBLOCK_ID' => '1',
-		Array(
-			'LOGIC' => 'OR',
-			'PROPERTY_col_availability' => '1',
-			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-		)
+//		Array(
+//			'LOGIC' => 'OR',
+//			'PROPERTY_col_availability' => '1',
+//			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
 	);
+	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
+		$arFilter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
+	}
+	if($arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да') {
+		$arFilter['!property_col_price_origin'] = false;
+	}
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
+?><pre>
+<?
+print_r($arFilter);
+?>
+	</pre><?
 	$APPLICATION->IncludeComponent(
 		"custom:catalog.section",
 		"",
@@ -36,10 +51,11 @@
 				"IBLOCK_ID" => "1",
 				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
-				"INCLUDE_BRANDS" => "Y",
+				"INCLUDE_BRANDS" => "N",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
+				"ACTIONS_MODE" => "Y",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
@@ -87,7 +103,7 @@
 				"SEF_FOLDER" => "/collection/",
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
-					//"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
 				//	"element" => empty($url_array[2]) ? "/#ELEMENT_ID#/" : "#SECTION_CODE#/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
@@ -96,7 +112,7 @@
 				),
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
-				"JSON" => $json
+				"JSON" => "n" 
 			)
 		);
 ?>

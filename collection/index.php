@@ -38,8 +38,12 @@
 
   $_POST['component_url']=$APPLICATION->GetCurPage(true);
   $url_array = explode("/", $APPLICATION->GetCurPage());
-	// Collection root undefined -> redirect to Woman collection
-  if($url_array[1] == 'collection' && empty($url_array[2])) {
+	// Collection root / idem id undefined -> redirect to Woman collection
+	if($url_array[1] == 'collection' 
+		&& count($url_array) == 2
+		&& (
+				empty($url_array[2]) 
+				|| !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
 	}
 	$APPLICATION->IncludeComponent(
@@ -102,7 +106,8 @@
 				"SEF_FOLDER" => "/collection/",
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
-					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+					//"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+					"element" => "/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),

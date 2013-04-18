@@ -32,10 +32,12 @@
 		);
 	}
 ?>
-<input type="hidden" id="section" value="<?=$url_array[2]?>">
-
-<!--<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">-->
-<section class="catalog" data-page="/collection/">
+	<input type="hidden" id="section" value="<?=$url_array[2]?>">
+	<?if($arParams['ACTIONS_MODE'] == 'Y'):?>
+		<section class="catalog" data-page="/collection/">
+	<?else:?>
+		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
+	<?endif;?>
 <?endif; //end normal page?>
 <?
   // don't go beyound the last page
