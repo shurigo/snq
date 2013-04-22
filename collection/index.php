@@ -1,18 +1,19 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-	$arFilter =	Array(
-			'IBLOCK_ID' => '1',
-			Array(
-				'LOGIC' => 'OR',
-				'PROPERTY_col_availability' => '1',
-				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-			)
-	);
-	error_log('json='.print_r($_SESSION['action_catalog_filter'], true));
 	if(isset($_GET['m']) && $_GET['m']=='a') {
 		error_log('mode=a', 0);
 		$arFilter = $_SESSION['action_catalog_filter'];
+		error_log('p1='.print_r($_SESSION['action_catalog_filter'], true), 0);
+	} else {
+		$arFilter =	Array(
+				'IBLOCK_ID' => '1',
+				Array(
+					'LOGIC' => 'OR',
+					'PROPERTY_col_availability' => '1',
+					'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+				)
+		);
 	}
 	// process the brand filter
 	$filter_brand = Array();
@@ -40,7 +41,7 @@
   $url_array = explode("/", $APPLICATION->GetCurPage());
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("Êîëëåêöèÿ");
+  $APPLICATION->SetTitle("Коллекция");
 
 	// Collection root / idem id undefined -> redirect to Woman collection
 	if($url_array[1] == 'collection' 
@@ -110,8 +111,8 @@
 				"SEF_FOLDER" => "/collection/",
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
-					//"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-					"element" => "/#ELEMENT_ID#/",
+					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+					//"element" => "/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
