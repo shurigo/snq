@@ -9,6 +9,11 @@
 				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 			)
 	);
+	error_log('json='.print_r($_SESSION['action_catalog_filter'], true));
+	if(isset($_GET['m']) && $_GET['m']=='a') {
+		error_log('mode=a', 0);
+		$arFilter = $_SESSION['action_catalog_filter'];
+	}
 	// process the brand filter
 	$filter_brand = Array();
   foreach($_GET as $key=>$value) {
@@ -32,12 +37,11 @@
 			$arFilter[] = Array('<=PROPERTY_col_price' => $price_max);
 		}
 	}
+  $url_array = explode("/", $APPLICATION->GetCurPage());
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   $APPLICATION->SetTitle("Êîëëåêöèÿ");
 
-  $_POST['component_url']=$APPLICATION->GetCurPage(true);
-  $url_array = explode("/", $APPLICATION->GetCurPage());
 	// Collection root / idem id undefined -> redirect to Woman collection
 	if($url_array[1] == 'collection' 
 		&& count($url_array) == 2

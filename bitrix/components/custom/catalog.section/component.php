@@ -1,6 +1,5 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
-
 CPageOption::SetOptionString("main", "nav_page_in_session", "N");
 
 /*************************************************************************
@@ -55,7 +54,6 @@ if(strlen($arParams["ELEMENT_SORT_FIELD"])<=0)
 	$arParams["ELEMENT_SORT_FIELD"]="sort";
 if($arParams["ELEMENT_SORT_ORDER"]!="desc")
 	 $arParams["ELEMENT_SORT_ORDER"]="asc";
-
 if(strlen($arParams["FILTER_NAME"])<=0 || !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$/", $arParams["FILTER_NAME"]))
 {
 	$arrFilter = array();
@@ -64,10 +62,9 @@ else
 {
 	global $$arParams["FILTER_NAME"];
 	$arrFilter = ${$arParams["FILTER_NAME"]};
-	if(!is_array($arrFilter))
+	if(!is_array($arrFilter)) 
 		$arrFilter = array();
 }
-
 $arParams["SECTION_URL"]=trim($arParams["SECTION_URL"]);
 $arParams["DETAIL_URL"]=trim($arParams["DETAIL_URL"]);
 $arParams["BASKET_URL"]=trim($arParams["BASKET_URL"]);
@@ -316,6 +313,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		"ACTIVE_FROM",
 		"CREATED_BY",
 		"IBLOCK_ID",
+		"SECTION_ID",
 		"IBLOCK_SECTION_ID",
 		"DETAIL_PAGE_URL",
 		"DETAIL_TEXT",
@@ -393,7 +391,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 				}
 			}
 		}
-	}
+	} // if($arParams['INCLUDE_BRANDS'] == 'Y')
 
 	// Price: min, max	
 	// consider a direct database query to improve the performance
@@ -419,15 +417,15 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arResult['PRICE_MIN'] = $price_min['PRICE'];
 		$arResult['PRICE_MAX'] = $price_max['PRICE'];
 	} // end Price: min, max
+	global $actions_mode;
+	error_log('filter_final='.print_r($filter_final, true));
 	//EXECUTE
-	print_r($filter_final);
 	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
 	if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
 		$rsElements->SetSectionContext($arResult);
 	$arResult["ITEMS"] = array();
-	while($obElement = $rsElements->GetNextElement())
-	{
+	while($obElement = $rsElements->GetNextElement()) {
 		$arItem = $obElement->GetFields();
 		if($arResult["ID"])
 			$arItem["IBLOCK_SECTION_ID"] = $arResult["ID"];

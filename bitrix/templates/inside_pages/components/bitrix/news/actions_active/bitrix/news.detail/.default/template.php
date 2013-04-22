@@ -14,33 +14,26 @@
 <?endif?>
 </article>
 <a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
-<pre>
-<?
-//print_r($arResult);
-?>
-</pre>
 <!--old </section>-->
 <!-- end .mainContent -->
 <?
-	$arFilter = Array(
+	$action_catalog_filter = Array(
 		'IBLOCK_ID' => '1',
-//		Array(
-//			'LOGIC' => 'OR',
-//			'PROPERTY_col_availability' => '1',
-//			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
+		Array(
+			'LOGIC' => 'OR',
+			'PROPERTY_col_availability' => '1',
+			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
 	);
 	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
-		$arFilter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
+		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
 	if($arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да') {
-		$arFilter['!property_col_price_origin'] = false;
+		$action_catalog_filter['!property_col_price_origin'] = 'false';
 	}
+	$GLOBALS['action_catalog_filter'] = $action_catalog_filter;
+	$_SESSION['action_catalog_filter'] = $action_catalog_filter;
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
-?><pre>
-<?
-print_r($arFilter);
-?>
-	</pre><?
+
 	$APPLICATION->IncludeComponent(
 		"custom:catalog.section",
 		"",
@@ -50,12 +43,13 @@ print_r($arFilter);
 				"IBLOCK_TYPE" => "collection",
 				"IBLOCK_ID" => "1",
 				"USE_FILTER" => "Y",
-				"FILTER_NAME" => "arFilter",
+				"FILTER_NAME" => "action_catalog_filter",
 				"INCLUDE_BRANDS" => "N",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"ACTIONS_MODE" => "Y",
+				"BY_LINK" => "Y",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
@@ -116,6 +110,7 @@ print_r($arFilter);
 			)
 		);
 ?>
+</section>
 <aside class="aside">
 <h2>Последние новости</h2>
  <?$APPLICATION->IncludeComponent(

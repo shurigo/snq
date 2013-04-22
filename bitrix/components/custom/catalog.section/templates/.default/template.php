@@ -34,7 +34,7 @@
 ?>
 	<input type="hidden" id="section" value="<?=$url_array[2]?>">
 	<?if($arParams['ACTIONS_MODE'] == 'Y'):?>
-		<section class="catalog" data-page="/collection/">
+		<section class="catalog" data-page="/collection/?m=a">
 	<?else:?>
 		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
 	<?endif;?>
