@@ -13,6 +13,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
+				"BY_LINK" => (isset($_GET['m']) && $_GET['m']=='a') ? "Y" : "N",
 				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
