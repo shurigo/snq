@@ -63,7 +63,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "Y",
-				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
+				"DISCOUNT_ONLY" => (isset($_GET['m']) && $_GET['m']=='a') ? $_SESSION['discount_only'] : "N",
 				"NOT_SHOW_NAV_CHAIN" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",

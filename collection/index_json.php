@@ -14,7 +14,7 @@
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"BY_LINK" => (isset($_GET['m']) && $_GET['m']=='a') ? "Y" : "N",
-				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
+				"DISCOUNT_ONLY" => (isset($_GET['m']) && $_GET['m']=='a') ? $_SESSION['discount_only'] : "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
