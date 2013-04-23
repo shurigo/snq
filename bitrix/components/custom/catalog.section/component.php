@@ -437,7 +437,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 			$arItem["PROPERTIES"] = $obElement->GetProperties();
 		elseif(count($arParams["PRODUCT_PROPERTIES"]))
 			$arItem["PROPERTIES"] = $obElement->GetProperties();
-
 		$arItem["DISPLAY_PROPERTIES"] = array();
 		foreach($arParams["PROPERTY_CODE"] as $pid)
 		{

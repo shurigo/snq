@@ -28,9 +28,8 @@
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
 	if($arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да') {
-		$action_catalog_filter['!property_col_price_origin'] = false;
+		$action_catalog_filter['>property_col_price_origin'] = '0';
 	}
-	error_log(print_r($action_catalog_filter, true), 0);
 	$GLOBALS['action_catalog_filter'] = $action_catalog_filter;
 	$_SESSION['action_catalog_filter'] = $action_catalog_filter;
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
@@ -56,12 +55,12 @@
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => 'sort',
 				"ELEMENT_SORT_ORDER" => 'asc',
-				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
 				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
 				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
-				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"DETAIL_META_KEYWORDS" => "col_keywords",
 				"DETAIL_META_DESCRIPTION" => "col_description",
 				"DETAIL_BROWSER_TITLE" => "col_title",
