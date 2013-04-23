@@ -8,14 +8,7 @@
 <?else:?>
 		<p itemprop="text"><?echo $arResult["PREVIEW_TEXT"];?></p>
 <?endif?>
-
-<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
-		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
-<?endif?>
-</article>
-<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
-<!--old </section>-->
-<!-- end .mainContent -->
+<h1>Вещи, участвующие в акции</h1>
 <?
 	$action_catalog_filter = Array(
 		'IBLOCK_ID' => '1',
@@ -99,7 +92,6 @@
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
 					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-				//	"element" => empty($url_array[2]) ? "/#ELEMENT_ID#/" : "#SECTION_CODE#/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
@@ -111,6 +103,11 @@
 			)
 		);
 ?>
+<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
+		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
+<?endif?>
+</article>
+<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 </section>
 <aside class="aside">
 <h2>Последние новости</h2>
