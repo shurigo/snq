@@ -10,7 +10,7 @@ if(!isset($arParams["CACHE_TIME"]))
 
 $arParams["IBLOCK_TYPE"] = trim($arParams["IBLOCK_TYPE"]);
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
-
+$arParams['DISCOUNT_ONLY'] = isset($arParams['DISCOUNT_ONLY']) ? $arParams['DISCOUNT_ONLY'] : "N";
 if (isset($arParams["PRICE_SORT"]) && ($arParams["PRICE_SORT"] == "asc" || $arParams["PRICE_SORT"] == "desc"))
 {
 	if ($arParams["PRICE_SORT"] == "asc")
@@ -367,7 +367,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 
 	$filter_final = array_merge($arFilter, $arrFilter);
 	
-	//error_log('filter_final='.print_r($filter_final, true));
 	// Brands (for the filter in the left menu)
 	if($arParams['INCLUDE_BRANDS'] == 'Y') {
 		$arResult['BRANDS'] = array();
@@ -492,8 +491,13 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 				$arItem["SECTION"]["PATH"][]=$arPath;
 			}
 		}
-
-		$arResult["ITEMS"][]=$arItem;
+		if($arParams['DISCOUNT_ONLY'] == 'Y') { 
+			if($arItem['PROPERTIES']['col_price']['VALUE'] < $arItem['PROPERTIES']['col_price_origin']['VALUE']) {
+				$arResult["ITEMS"][]=$arItem;
+			}
+		} else {
+			$arResult["ITEMS"][]=$arItem;
+		}
 	}
 
 	$arResult["PRICE_SORT"] = $arParams["PRICE_SORT"];

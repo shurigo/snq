@@ -23,15 +23,15 @@
 			'LOGIC' => 'OR',
 			'PROPERTY_col_availability' => '1',
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
-	);
+		);
 	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
-	if($arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да') {
-		$action_catalog_filter['>property_col_price_origin'] = '0';
-	}
+	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да' ? 'Y' : 'N';
 	$GLOBALS['action_catalog_filter'] = $action_catalog_filter;
 	$_SESSION['action_catalog_filter'] = $action_catalog_filter;
+	$GLOBALS['discount_only'] = $discount_only;
+	$_SESSION['discount_only'] = $discount_only;
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
 
 	$APPLICATION->IncludeComponent(
@@ -49,6 +49,7 @@
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"ACTIONS_MODE" => "Y",
+				"DISCOUNT_ONLY" => $discount_only,
 				"BY_LINK" => "Y",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
