@@ -2,9 +2,7 @@
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 	if(isset($_GET['m']) && $_GET['m']=='a') {
-		error_log('mode=a', 0);
 		$arFilter = $_SESSION['action_catalog_filter'];
-		error_log('p1='.print_r($_SESSION['action_catalog_filter'], true), 0);
 	} else {
 		$arFilter =	Array(
 				'IBLOCK_ID' => '1',

@@ -365,8 +365,9 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter["SECTION_GLOBAL_ACTIVE"] = "Y";
 	$arFilter["SECTION_ACTIVE"] = "Y";
 
-	$filter_final = array_merge($arrFilter, $arFilter);
+	$filter_final = array_merge($arFilter, $arrFilter);
 	
+	//error_log('filter_final='.print_r($filter_final, true));
 	// Brands (for the filter in the left menu)
 	if($arParams['INCLUDE_BRANDS'] == 'Y') {
 		$arResult['BRANDS'] = array();
@@ -418,7 +419,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arResult['PRICE_MAX'] = $price_max['PRICE'];
 	} // end Price: min, max
 	global $actions_mode;
-	error_log('filter_final='.print_r($filter_final, true));
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);

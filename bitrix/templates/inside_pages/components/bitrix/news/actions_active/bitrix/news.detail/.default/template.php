@@ -49,7 +49,7 @@
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"ACTIONS_MODE" => "Y",
-				"BY_LINK" => "Y",
+				"BY_LINK" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",

@@ -121,6 +121,5 @@ else
 		"ALIASES" => $arVariableAliases
 	);
 }
-//error_log('componentPage='.$componentPage);
 $this->IncludeComponentTemplate($componentPage);
 ?>
