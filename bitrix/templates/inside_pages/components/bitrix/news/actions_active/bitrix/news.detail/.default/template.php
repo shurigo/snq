@@ -28,8 +28,9 @@
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
 	if($arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да') {
-		$action_catalog_filter['!property_col_price_origin'] = 'false';
+		$action_catalog_filter['!property_col_price_origin'] = false;
 	}
+	error_log(print_r($action_catalog_filter, true), 0);
 	$GLOBALS['action_catalog_filter'] = $action_catalog_filter;
 	$_SESSION['action_catalog_filter'] = $action_catalog_filter;
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
@@ -49,7 +50,7 @@
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"ACTIONS_MODE" => "Y",
-				"BY_LINK" => "N",
+				"BY_LINK" => "Y",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",

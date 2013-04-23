@@ -110,7 +110,6 @@
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
 					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-					//"element" => "/#ELEMENT_ID#/",
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
