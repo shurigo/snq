@@ -14,7 +14,6 @@
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "N",
 				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
-				"BY_LINK" => "Y",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
