@@ -25,7 +25,7 @@ $APPLICATION->SetTitle("Сотрудничество");
 
           <p><strong>Оптовый отдел: </strong></p>
 
-          <p><strong>Тел:</strong>  +7 925-830-29-79</p>
+          <p><strong>Тел:</strong>  +7 495 411-69-05 доб. 2-1525</p>
 
           <p><strong>E-mail:</strong> <a href="mailto:opt@snq.ru">opt@snq.ru</a></p>
 
