@@ -21,9 +21,9 @@ false
             <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
             <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
 
-            <? if (isset($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"])) {?>
+            <? if ($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]) {?>
 
-            <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_new"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></del> </div>
+            <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del> </div>
             <?}  else { ?>
             <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
             <!-- end .price-->
@@ -32,27 +32,29 @@ false
               <table>
                 <tr>
                   <td>
-                      <!-- ORIGINAL FB
+                      <div class="vk-hack"><div id="vk_like"></div></div>
+				      <!-- Original VK block
+                      <div id="vk_like"></div>
+				      <script type="text/javascript">
+						VK.Widgets.Like("vk_like", {type: "button", height: 20});
+				      </script>
+				      -->
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+				      <!-- ORIGINAL FB
                       <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
                       -->
-                    <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
-                  </td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td>
-                    <div id="vk_like"></div>
-				    <!-- Original VK block
-                    <div id="vk_like"></div>
-				    <script type="text/javascript">
-						VK.Widgets.Like("vk_like", {type: "button", height: 20});
-				    </script>
-				     -->
-                  </td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></td>
-                  <td class="sep">&nbsp;&nbsp;</td>
-                  <td>
-					<div class="g-plusone" data-size="medium"></div>
-					<script type="text/javascript">
+                      <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+                      <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
+				 </td>
+				 <td class="sep">&nbsp;&nbsp;</td>
+				 <td>
+                      <div class="g-plusone" data-size="medium"></div>
+					  <script type="text/javascript">
 					  window.___gcfg = {lang: 'ru'};
 
   					 (function() {
@@ -60,11 +62,8 @@ false
 								    po.src = 'https://apis.google.com/js/plusone.js';
 								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
  								 })();
-				  </script>
+				     </script>
                   </td>
-                  <!--<td class="sep">&nbsp;</td>
-                  <td><img src="/images/temp/goo.png" width="32" height="20" alt=" "></td>
-                  -->
                 </tr>
               </table>
             </div>
@@ -74,11 +73,12 @@ false
             <div itemprop="description">
               <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
             </div>
-            <ul class="links">
-              <li><a href="#">Купить</a></li>
-              <li><a href="#">Найти в магазине</a></li>
-            </ul>
             -->
+            <ul class="links">
+              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;">Скидки %</a></li>
+              <li><a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, 'Outbound Links', 'our_shops_card'); return false;">Где купить?</a></li>
+            </ul>
+
             <!-- end .links-->
 <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
 </section>
@@ -258,9 +258,9 @@ if($ar_res = $res->GetNext())  $SEC_CODE=$ar_res['CODE'];
 
 
 if (substr($SEC_CODE,0,1)=="w")
-$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12857,".$MY_SEC_ID.",12893&type=js&varname1=viewed_item_id&value1=".$arResult["ID"];
+$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12857,".$MY_SEC_ID.",12893&type=js&varname1=481_vi&value1=".$arResult["ID"];
 else
-$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&type=js&varname1=viewed_item_id&value1=".$arResult["ID"];
+$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&type=js&varname1=481_vi&value1=".$arResult["ID"];
 //echo $HUBRUS_str;
 ?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>

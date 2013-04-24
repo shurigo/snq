@@ -25,7 +25,7 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 ";"+Math.random()+
 "' alt='' title='LiveInternet: показано число посетителей за"+
 " сегодня' "+
-"border='0' width='88' height='15'*/><\/a>")
+"border='0' width='88' height='15'><\/a>")*/
 //--></script><!--/LiveInternet-->
 
 <!-- Yandex.Metrika counter -->

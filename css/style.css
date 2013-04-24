@@ -1257,7 +1257,7 @@ table .sep {
 	bottom:25px;
 	left:0;
 	white-space:nowrap;
-	background:#424b56;
+	background:#3a4147; /*#424b56 #990100*/
 	font-size:19px;
 	line-height:24px;
 	padding:2px 18px;
@@ -1412,6 +1412,12 @@ table .sep {
     display:none;
     text-indent:-9999px;
     background: url('/images/icon_top.png') no-repeat;
+}
+.twitter-hack {
+float:left; width:95px; margin:0px 0 0px 0px;
+}
+.vk-hack {
+float:left; width:140px; margin:0px 0 0px 0px;
 }
 .truncated { 
 	display:inline-block; 

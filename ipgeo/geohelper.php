@@ -24,11 +24,6 @@
 
 	$filter = Array(
 	  'IBLOCK_ID' => 14,
-	 /* 'IBLOCK_ACTIVE' => 'Y',
-	  'ACTIVE_DATE' => 'Y',
-	  'ACTIVE' => 'Y',
-	  'CHECK_PERMISSIONS' => 'Y',
-	  'ACTIVE' => 'Y', */
 	  'PROPERTY' => Array('<=col_range_start' => $ip_long, '>=col_range_end' => $ip_long)
 	);
 	$select = Array('ID', 'NAME', 'IBLOCK_ID','col_city_id', 'col_range_end', 'col_range_end');

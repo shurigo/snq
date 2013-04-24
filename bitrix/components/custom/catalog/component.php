@@ -55,7 +55,7 @@ if($arParams["SEF_MODE"] == "Y")
 
 	if(!$componentPage)
 	{
-		$componentPage = "sections";
+		$componentPage = "section";
 
 		if($arParams["SET_STATUS_404"]==="Y")
 		{

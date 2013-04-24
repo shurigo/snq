@@ -1,5 +1,5 @@
 <?
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -12,17 +12,20 @@
 				"FILTER_NAME" => "arFilter",
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
+				"USE_SORT" => "N",
+				"BY_LINK" => (isset($_GET['m']) && $_GET['m']=='a') ? "Y" : "N",
+				"DISCOUNT_ONLY" => (isset($_GET['m']) && $_GET['m']=='a') ? $_SESSION['discount_only'] : "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => $sort_field,
 				"ELEMENT_SORT_ORDER" => $sort_order,
-				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
+				"LIST_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
 				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
 				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
-				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_new",5=>"add_pic_1",6=>"add_pic_2"),
+				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 				"DETAIL_META_KEYWORDS" => "col_keywords",
 				"DETAIL_META_DESCRIPTION" => "col_description",
 				"DETAIL_BROWSER_TITLE" => "col_title",
@@ -47,20 +50,9 @@
 				"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
 				"DISPLAY_TOP_PAGER" => "N",
 				"DISPLAY_BOTTOM_PAGER" => "N",
-				"PAGER_TITLE" => "Модели",
-				"PAGER_SHOW_ALWAYS" => "Y",
-				"PAGER_TEMPLATE" => "collection",
-				"PAGER_DESC_NUMBERING" => "N",
-				"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-				"PAGER_SHOW_ALL" => "Y",
-				"COMPARE_NAME" => "CATALOG_COMPARE_LIST",
-				"COMPARE_FIELD_CODE" => array(0=>"ID",1=>"NAME",2=>"PREVIEW_TEXT",3=>"PREVIEW_PICTURE",4=>"DETAIL_TEXT",5=>"DETAIL_PICTURE",),
-				"COMPARE_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",),
 				"DISPLAY_ELEMENT_SELECT_BOX" => "N",
 				"ELEMENT_SORT_FIELD_BOX" => "id",
 				"ELEMENT_SORT_ORDER_BOX" => "asc",
-				"COMPARE_ELEMENT_SORT_FIELD" => "sort",
-				"COMPARE_ELEMENT_SORT_ORDER" => "asc",
 				"AJAX_OPTION_SHADOW" => "Y",
 				"AJAX_OPTION_JUMP" => "N",
 				"AJAX_OPTION_STYLE" => "Y",
@@ -69,14 +61,10 @@
 				"SEF_URL_TEMPLATES" => Array(
 					"section" => "#SECTION_CODE#/",
 					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
-					"compare" => "compare.php?action=#ACTION_CODE#"
 				),
 				"VARIABLE_ALIASES" => Array(
 					"section" => Array(),
-					"element" => Array(),
-					"compare" => Array(
-						"ACTION_CODE" => "action"
-					),
+					"element" => Array()
 				),
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"ADD_SECTIONS_CHAIN" => "N",
