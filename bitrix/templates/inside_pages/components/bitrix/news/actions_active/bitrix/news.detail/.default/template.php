@@ -8,7 +8,14 @@
 <?else:?>
 		<p itemprop="text"><?echo $arResult["PREVIEW_TEXT"];?></p>
 <?endif?>
+
+<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
+		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
+<?endif?>
+</article>
+<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 <?
+	global $action_catalog_filter;
 	$action_catalog_filter = Array(
 		'IBLOCK_ID' => '1',
 		Array(
@@ -20,11 +27,7 @@
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
 	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да' ? 'Y' : 'N';
-	$GLOBALS['action_catalog_filter'] = $action_catalog_filter;
-	$_SESSION['action_catalog_filter'] = $action_catalog_filter;
-	$GLOBALS['discount_only'] = $discount_only;
-	$_SESSION['discount_only'] = $discount_only;
-	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');?>
+?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>  
 		<br>
 		<h1>Вещи, участвующие в акции</h1>

@@ -32,9 +32,9 @@
 		);
 	}
 ?>
-	<input type="hidden" id="section" value="<?=$url_array[2]?>">
+	<? global $action_catalog_filter; ?>
 	<?if($arParams['ACTIONS_MODE'] == 'Y'):?>
-		<section class="catalog" data-page="/collection/?m=a">
+		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
 	<?endif;?>

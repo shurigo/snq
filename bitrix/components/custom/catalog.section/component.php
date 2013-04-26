@@ -10,7 +10,7 @@ if(!isset($arParams["CACHE_TIME"]))
 
 $arParams["IBLOCK_TYPE"] = trim($arParams["IBLOCK_TYPE"]);
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
-$arParams['DISCOUNT_ONLY'] = isset($arParams['DISCOUNT_ONLY']) ? $arParams['DISCOUNT_ONLY'] : "N";
+$arParams['DISCOUNT_ONLY'] = empty($arParams['DISCOUNT_ONLY']) ? "N" : $arParams['DISCOUNT_ONLY'];
 if (isset($arParams["PRICE_SORT"]) && ($arParams["PRICE_SORT"] == "asc" || $arParams["PRICE_SORT"] == "desc"))
 {
 	if ($arParams["PRICE_SORT"] == "asc")
@@ -417,7 +417,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arResult['PRICE_MIN'] = $price_min['PRICE'];
 		$arResult['PRICE_MAX'] = $price_max['PRICE'];
 	} // end Price: min, max
-	global $actions_mode;
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
