@@ -105,7 +105,9 @@
 	<?endif;// if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) ?>
 	<hr>
 	<br>
-	<p itemprop="text"><?=$arResult['PROPERTIES']['col_conditions']['VALUE'];?></p>
+	<?if(is_array($arResult['PROPERTIES']['col_conditions']['VALUE'])):?>
+		<p><?=$arResult['PROPERTIES']['col_conditions']['~VALUE']['TEXT'];?></p>
+	<?endif;?>
 	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
 	<?endif?>
