@@ -4,16 +4,11 @@
 <h1 itemprop="name"><?=$arResult["NAME"]?></h1>
 
 <?if(strlen($arResult["DETAIL_TEXT"])>0):?>
-		<p itemprop="text"><?echo $arResult["DETAIL_TEXT"];?></p>
+		<p itemprop="text"><?=$arResult["DETAIL_TEXT"];?></p>
 <?else:?>
-		<p itemprop="text"><?echo $arResult["PREVIEW_TEXT"];?></p>
-<?endif?>
-
-<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
-		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
+		<p itemprop="text"><?=$arResult["PREVIEW_TEXT"];?></p>
 <?endif?>
 </article>
-<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 <?
 	global $action_catalog_filter;
 	$action_catalog_filter = Array(
@@ -108,11 +103,15 @@
 				)
 		);?>
 	<?endif;// if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) ?>
-<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
+	<hr>
+	<br>
+	<p itemprop="text"><?=$arResult['PROPERTIES']['col_conditions']['VALUE'];?></p>
+	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
 		<img  itemprop="image" border="0" src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" width="777px"  alt="<?=$arResult["NAME"]?>"  title="<?=$arResult["NAME"]?>" />
-<?endif?>
-</article>
-<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
+	<?endif?>
+	<br>
+	<br>
+	<a href="/actions/"><?=GetMessage("T_NEWS_DETAIL_BACK")?></a>
 </section>
 <aside class="aside">
 <h2>Последние новости</h2>
