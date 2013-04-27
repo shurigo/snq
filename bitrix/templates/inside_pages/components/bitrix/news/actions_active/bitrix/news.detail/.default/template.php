@@ -102,9 +102,9 @@
 					"JSON" => "n" 
 				)
 		);?>
-	<?endif;// if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) ?>
 	<hr>
 	<br>
+	<?endif;// if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) ?>
 	<?if(is_array($arResult['PROPERTIES']['col_conditions']['VALUE'])):?>
 		<p><?=$arResult['PROPERTIES']['col_conditions']['~VALUE']['TEXT'];?></p>
 	<?endif;?>
