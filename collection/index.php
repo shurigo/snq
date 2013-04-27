@@ -1,17 +1,17 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-
-	if(isset($_GET['m']) && $_GET['m']=='a') {
-		$arFilter = $_SESSION['action_catalog_filter'];
-	} else {
-		$arFilter =	Array(
-				'IBLOCK_ID' => '1',
-				Array(
-					'LOGIC' => 'OR',
-					'PROPERTY_col_availability' => '1',
-					'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-				)
-		);
+	$arFilter =	Array(
+		'IBLOCK_ID' => '1',
+		Array(
+			'LOGIC' => 'OR',
+			'PROPERTY_col_availability' => '1',
+			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		)
+	);
+	$discount_only = 'N';
+	if(!empty($_GET['m']) && $_GET['m']=='a') {
+		$arFilter['SECTION_ID'] = $_GET['sid'];
+		$discount_only = $_GET['d'];
 	}
 	// process the brand filter
 	$filter_brand = Array();
@@ -63,7 +63,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "Y",
-				"DISCOUNT_ONLY" => (isset($_GET['m']) && $_GET['m']=='a') ? $_SESSION['discount_only'] : "N",
+				"DISCOUNT_ONLY" => $discount_only,
 				"NOT_SHOW_NAV_CHAIN" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
