@@ -20,6 +20,9 @@ Disallow: /collection/mtopclothes/*
 Disallow: /collection/mclothes/*
 Disallow: /collection/maccessories/*
 Disallow: /collection/brands/*
+Disallow: /collection/mleathertopjacket/index.php?PAGEN_1=*
+Disallow: /collection/wleathertopjacket/index.php?PAGEN_1=*
+Disallow: /ipgeo/*
 
 # settings
 Host: snowqueen.ru
