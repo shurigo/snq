@@ -29,7 +29,9 @@ button {
 	color:#000;
 	outline:none;
 }
-
+ul {
+list-style-type: circle;
+}
 input[type="text"],
 input[type="password"],
 textarea,
