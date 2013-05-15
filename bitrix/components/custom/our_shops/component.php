@@ -1,5 +1,6 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
 
 if(!CModule::IncludeModule("iblock"))
 {
@@ -14,12 +15,11 @@ if(!isset($arParams["CACHE_TIME"]))
 
 unset($arParams["IBLOCK_TYPE"]); //was used only for IBLOCK_ID setup with Editor
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
-if (is_numeric($_REQUEST["city_select"]) && ($arIBlockSection = GetIBlockSection($_REQUEST["city_select"], "our_shops")))
-{
+$city_select = get_city_by_name(iconv('utf-8', 'cp1251', $_SESSION['city_name']));
+//if (is_numeric($_REQUEST["city_select"]) && ($arIBlockSection = GetIBlockSection($_REQUEST["city_select"], "our_shops")))
+if (is_numeric($city_select) && ($arIBlockSection = GetIBlockSection($city_select, "our_shops"))) {
 	$arParams["SECTION_ID"] = $arIBlockSection["ID"];
-}
-else
-{
+} else {
 	$arParams["SECTION_ID"] = 16;
 }
 
@@ -27,7 +27,6 @@ else
 /*************************************************************************
 			Work with cache
 *************************************************************************/
-//echo "<pre>"; print_r($arParams); echo "</pre>";
 if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()))))
 {
 	$arFilter = array(
@@ -70,9 +69,7 @@ if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($a
 		}
 	}
 	$arResult = $arSections;
-	//echo "<pre>"; print_r($arSection); echo "</pre>";
-	$this->SetResultCacheKeys(array(
-	));
+	$this->SetResultCacheKeys(array());
 	$this->IncludeComponentTemplate();
 }
 
