@@ -55,7 +55,7 @@
 
   <div class="bg">
   <!-- down menu -->
-  <? include("/inc/downmenu.php"); ?>
+  <? include($_SERVER['DOCUMENT_ROOT'].'/inc/downmenu.php'); ?>
 
       <div class="fr">© 2010-<?=date("Y")?> Снежная Королева</div>
     <!-- end .fr-->
