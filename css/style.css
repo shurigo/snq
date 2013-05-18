@@ -29,9 +29,6 @@ button {
 	color:#000;
 	outline:none;
 }
-ul {
-list-style-type: circle;
-}
 input[type="text"],
 input[type="password"],
 textarea,
@@ -1427,4 +1424,7 @@ float:left; width:140px; margin:0px 0 0px 0px;
 	overflow:hidden; 
 	text-overflow:ellipsis; 
 	white-space:nowrap; 
+}
+.text22 ul {
+	list-style:square;
 }
