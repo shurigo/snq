@@ -6,6 +6,11 @@
 		Array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+			"USE_SORT"	=> $arParams["USE_SORT"], // show the filter combo box
+			"NOT_SHOW_NAV_CHAIN" => $arParams["NOT_SHOW_NAV_CHAIN"],
+			"VIEW_MODDE" => $arParams["VIEW_MODDE"], // show catalog on the actions/brands page
+			"DISCOUNT_ONLY" => $arParams["DISCOUNT_ONLY"], // show only discounted items
+			"BY_LINK" => $arParams["BY_LINK"],
 			"ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
 			"ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],
 			"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
@@ -48,19 +53,5 @@
 			"JSON" => $arParams["JSON"]
 		),
 		$component
-);
+	);
 ?>
-<?if($arParams["USE_COMPARE"]=="Y"):?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.compare.list",
-	"",
-	Array(
-		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-		"NAME" => $arParams["COMPARE_NAME"],
-		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["element"],
-		"COMPARE_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["compare"],
-	),
-	$component
-);?>
-<?endif?>

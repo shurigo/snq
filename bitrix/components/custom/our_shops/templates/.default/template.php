@@ -1,33 +1,16 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div style="margin:20px 0;">
-<form action="/our_shops/" method="get" enctype="multipart/form-data">
-    <select name="city_select" onchange="javascript:this.form.submit();">
-        <?
-        foreach($arResult as $arSection)
-        {
-            ?><option value="<?=$arSection["ID"]?>" <?=($arParams["SECTION_ID"] == $arSection["ID"])?' selected="selected"':'';?> style="width:250px;"><?=$arSection["NAME"]?></option><?
-        }
-        ?>
-    </select>
-</form>
-</div>
 <div id="ymaps-map-id_133707667107155769727" style="width: 998px; height: 400px;"></div>
 <div style="width: 998px; text-align: right;"><a href="http://api.yandex.ru/maps/tools/constructor/?lang=ru-RU" target="_blank" style="color: #191a1e; font: 13px Arial,Helvetica,sans-serif;"></a></div>
 <script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_133707667107155769727"></script>
 <div id="cities">
 	<?
-    foreach($arResult as $arCity)
-	{
-		if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0)
-		{
-            $shop_counter = 1;
-            foreach($arCity["ITEMS"] as $arElement)
-            {
-                if (strlen($arElement["PROPERTY_8"]) > 0)
-                {
-                    if ($shop_counter == 1)
-                    {
-                        ?><script type="text/javascript">
+    foreach($arResult as $arCity) {
+		if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0) {
+    	$shop_counter = 1;
+     	foreach($arCity["ITEMS"] as $arElement) {
+      	if (strlen($arElement["PROPERTY_8"]) > 0) {
+					if ($shop_counter == 1) { ?>
+                        <script type="text/javascript">
                             function fid_133707667107155769727(ymaps) {
     							var map = new ymaps.Map("ymaps-map-id_133707667107155769727", {
                                     center: [<?=$arCity["UF_MAP_COORDINATE"]?>],

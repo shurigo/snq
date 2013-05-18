@@ -11,6 +11,8 @@ $APPLICATION->SetTitle("«агрузить дополнительные картинки");
 $csv_file="add_img.csv";
 $file = fopen($csv_file, 'r');
 
+$i=0;
+
 while (($line = fgetcsv($file, 1000, ";")) !== FALSE) {
 //read data from the file
 $XML_ID =$line[0];
@@ -26,20 +28,21 @@ $arFields = $ob->GetFields();
 $ELEMENT_ID=($arFields['ID']);
 
 //upload image 1
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/img/".$PIC1);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2013/".$PIC1);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 
 //upload image 2
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/img/".$PIC2);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2013/".$PIC2);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_2", $arFile);
 
+$i++;
 
 }
 fclose($file);
 
-echo "done";
+echo "processed rows:".$i;
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
