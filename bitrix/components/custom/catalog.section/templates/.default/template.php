@@ -38,7 +38,7 @@
 	<?elseif($arParams['VIEW_MODE'] == 'brands'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
 	<?else:?>
-		<section class="catalog" data-page="/collection/">
+		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
 	<?endif;?>
 <?endif; //end normal page?>
 <?
