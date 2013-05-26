@@ -14,9 +14,15 @@ if (count($arResult["ITEMS"]) > 0)
 		<?
         if (strlen($arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["VALUE"]) > 0)
         {
+
+         $resizer = $arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["FILE_VALUE"];
+         $file = CFile::ResizeImageGet($resizer, array('width'=>110, 'height'=>110), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+         $img = $file['src'];
+
             ?>
 
-            <li><!--<a href="<?=$arItem["DETAIL_PAGE_URL"]?>">--><img src="<?=$arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["FILE_VALUE"]["SRC"]?>" width="130px" height="130px" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" /><!--</a>--></li>
+            <li><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img src="<?=$img?>" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" /></a></li>
+
 
             <?
         }
