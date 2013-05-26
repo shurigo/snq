@@ -14,7 +14,7 @@ $(window).load(function(){
 	jQuery('div.slider2').gallery({
 		infinite: true,
 		duration: 1200,
-		slideElement: 7,
+		slideElement: 1,
 		listOfSlides: '> div.hold > ul > li'
 	});
 	initLoadPage();
