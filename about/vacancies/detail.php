@@ -1,8 +1,9 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php"); ?>
 
-<table>
-<tr><td><a href="office.php">Вакансии в офисе</a></td><td><a href="shops.php">Вакансии в магазинах</a></td><td>Вакансии Логистического центра</td></tr>
-</table><br>
+<table width="100%">
+<tr><td width="33%"><a href="office.php">Вакансии в офисе</a></td><td width="33%"><a href="shops.php">Вакансии в магазинах</a></td><td width="34%">Вакансии Логистического центра</td></tr>
+</table>
+<br>
 
 <?
 //get element
