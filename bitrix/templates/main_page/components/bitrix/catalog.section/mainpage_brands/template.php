@@ -20,10 +20,7 @@ if (count($arResult["ITEMS"]) > 0)
          $img = $file['src'];
 
             ?>
-
             <li><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img src="<?=$img?>" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" /></a></li>
-
-
             <?
         }
         ?>
