@@ -1,0 +1,25 @@
+#wrapper {
+	width: 992px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px 0px 0px 0px;
+	}
+ 
+.accordionButton {	
+	width: 992px;
+	float: left;
+	background: #003366;
+	border-bottom: 1px solid #FFFFFF;
+	cursor: pointer;
+	font-size:18px;
+	color:white;
+	padding: 15px 5px 15px 10px;
+	}
+ 
+.accordionContent {	
+	width: 992px;
+	float: left;
+	background: #95B1CE;
+	display: none;
+	padding: 5px 5px 5px 10px;
+	}

@@ -1,16 +1,11 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?
-if (count($arResult["ITEMS"]) > 0)
-{
-?>
-
+<?if (count($arResult["ITEMS"]) > 0):?>
   <div class="slider2">
     <div class="prev"></div>
     <div class="next"></div>
     <div class="hold">
       <ul>
       	<?foreach($arResult["ITEMS"] as $arItem):?>
-
 		<?
         if (strlen($arItem["DISPLAY_PROPERTIES"]["brands_carousel"]["VALUE"]) > 0)
         {
@@ -24,14 +19,10 @@ if (count($arResult["ITEMS"]) > 0)
             <?
         }
         ?>
-
         <?endforeach;?>
       </ul>
     </div>
     <!-- end .hold-->
   </div>
   <!-- end .slider2-->
-
-<?
-}
-?>
+<?endif;?>

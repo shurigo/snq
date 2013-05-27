@@ -17,7 +17,7 @@
 			'LOGIC' => 'OR',
 			'PROPERTY_col_availability' => '1',
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
-		);
+	);
 	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
@@ -41,7 +41,7 @@
 					"USE_REVIEW" => "N",
 					"USE_COMPARE" => "N",
 					"USE_SORT" => "N",
-					"ACTIONS_MODE" => "Y",
+					"VIEW_MODE" => "actions",
 					"DISCOUNT_ONLY" => $discount_only,
 					"BY_LINK" => "Y",
 					"SHOW_TOP_ELEMENTS" => "N",

@@ -23,6 +23,10 @@ Disallow: /collection/brands/*
 Disallow: /collection/mleathertopjacket/index.php?PAGEN_1=*
 Disallow: /collection/wleathertopjacket/index.php?PAGEN_1=*
 Disallow: /ipgeo/*
+<<<<<<< HEAD
+Disallow: /collection/check_furcoat/
+=======
+>>>>>>> 7eddc1491fafb8237c21ab068c87988732df4b8a
 
 # settings
 Host: snowqueen.ru

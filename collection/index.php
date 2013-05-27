@@ -13,7 +13,7 @@
 		$arFilter['SECTION_ID'] = $_GET['sid'];
 		$discount_only = $_GET['d'];
 	}
-	// process the brand filter
+	// process the brand filter (left menu)
 	$filter_brand = Array();
   foreach($_GET as $key=>$value) {
 		if(preg_match('/brand\d+/', $key)) {
@@ -22,6 +22,10 @@
 	}
 	if(count($filter_brand) > 0) {
 		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
+	}
+	// brand ID filter
+	if(!empty($_GET['BRAND_ID'])) {
+		$arFilter[] = Array('PROPERTY_col_brand' => $_GET['BRAND_ID']);
 	}
 	// process price
 	if(isset($_GET['min'])) {
@@ -39,14 +43,11 @@
   $url_array = explode("/", $APPLICATION->GetCurPage());
 	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("Коллекция");
 
 	// Collection root / idem id undefined -> redirect to Woman collection
 	if($url_array[1] == 'collection' 
 		&& count($url_array) == 2
-		&& (
-				empty($url_array[2]) 
-				|| !is_numeric($url_array[2]))) {
+		&& (empty($url_array[2]) || !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
 	}
 	$APPLICATION->IncludeComponent(

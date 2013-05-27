@@ -33,8 +33,10 @@
 	}
 ?>
 	<? global $action_catalog_filter; ?>
-	<?if($arParams['ACTIONS_MODE'] == 'Y'):?>
+	<?if($arParams['VIEW_MODE'] == 'actions'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
+	<?elseif($arParams['VIEW_MODE'] == 'brands'):?>
+		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage();?>">
 	<?endif;?>

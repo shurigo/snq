@@ -1,6 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <h1><?=$arResult["NAME"]?></h1>
-<div class="news-list">
+
 <?foreach($arResult["ITEMS"] as $arItem):?>
 		<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 			<div style="float:left; margin:5px;">
@@ -12,4 +12,4 @@
             </div>
 		<?endif?>
 <?endforeach;?>
-</div>
+

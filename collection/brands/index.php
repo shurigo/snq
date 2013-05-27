@@ -1,9 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Бренды");
-?> 
-<div style="margin:10px 45px 45px;">
- <?$APPLICATION->IncludeComponent(
+?>
+
+<?$APPLICATION->IncludeComponent(
 	"bitrix:news",
 	"brands",
 	Array(
@@ -39,7 +39,7 @@ $APPLICATION->SetTitle("Бренды");
 		"DETAIL_FIELD_CODE" => "",
 		"DETAIL_PROPERTY_CODE" => "",
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
-		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
+		"DETAIL_DISPLAY_BOTTOM_PAGER" => "N",
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PAGER_TEMPLATE" => "",
 		"DETAIL_PAGER_SHOW_ALL" => "Y",
@@ -73,57 +73,98 @@ $APPLICATION->SetTitle("Бренды");
 		)
 	)
 );?>
-</div>
-<div style="clear:both;"></div>
-<div>
-<?$APPLICATION->IncludeComponent("bitrix:catalog.link.list", "brands", Array(
-	"AJAX_MODE" => "N",	// Включить режим AJAX
-	"IBLOCK_TYPE" => "collection",	// Тип инфо-блока
-	"IBLOCK_ID" => "1",	// Инфо-блок
-	"LINK_PROPERTY_SID" => "col_brand",	// Свойство в котором хранится связь
-	"ELEMENT_ID" => $_REQUEST["BRAND_ID"],	// ID элемента
-	"ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
-	"ELEMENT_SORT_ORDER" => "asc",	// Порядок сортировки элементов
-	"FILTER_NAME" => "arrFilter",	// Имя массива со значениями фильтра для фильтрации элементов
-	"SECTION_URL" => "/collection/#SECTION_CODE#/",	// URL, ведущий на страницу с содержимым раздела
-	"DETAIL_URL" => "/collection/#SECTION_CODE#/#ELEMENT_ID#/",	// URL, ведущий на страницу с содержимым элемента раздела
-	"BASKET_URL" => "/personal/basket.php",	// URL, ведущий на страницу с корзиной покупателя
-	"ACTION_VARIABLE" => "action",	// Название переменной, в которой передается действие
-	"PRODUCT_ID_VARIABLE" => "id",	// Название переменной, в которой передается код товара для покупки
-	"SECTION_ID_VARIABLE" => "SECTION_ID",	// Название переменной, в которой передается код группы
-	"DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
-	"SET_TITLE" => "Y",	// Устанавливать заголовок страницы
-	"PAGE_ELEMENT_COUNT" => "32",	// Количество элементов на странице
-    "LINE_ELEMENT_COUNT" => 4,
-	"PROPERTY_CODE" => array(	// Свойства
-		0 => "col_model_code",
-		1 => "col_price",
-		2 => "col_sizes",
-        3 => "col_brand",
-        4 => "col_price_new",
-	),
-	"PRICE_CODE" => "",	// Тип цены
-	"USE_PRICE_COUNT" => "N",	// Использовать вывод цен с диапазонами
-	"SHOW_PRICE_COUNT" => "1",	// Выводить цены для количества
-	"PRICE_VAT_INCLUDE" => "Y",	// Включать НДС в цену
-	"CACHE_TYPE" => "A",	// Тип кеширования
-	"CACHE_TIME" => "300",	// Время кеширования (сек.)
-	"CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре
-	"CACHE_GROUPS" => "Y",	// Учитывать права доступа
-	"DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-	"DISPLAY_BOTTOM_PAGER" => "Y",	// Выводить под списком
-	"PAGER_TITLE" => "Товары",	// Название категорий
-	"PAGER_SHOW_ALWAYS" => "Y",	// Выводить всегда
-	"PAGER_TEMPLATE" => "",	// Название шаблона
-	"PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-	"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-	"PAGER_SHOW_ALL" => "Y",	// Показывать ссылку "Все"
-	"AJAX_OPTION_SHADOW" => "Y",	// Включить затенение
-	"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-	"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-	"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-	),
-	false
-);?>
-</div>
+
+
+<?
+	if(!empty($_REQUEST['BRAND_ID'])) {
+
+	   echo "<h1>Все вещи бренда</h1><hr>";
+
+		$arFilter = Array(
+			'IBLOCK_ID' => '1',
+			Array(
+				'LOGIC' => 'OR',
+				'PROPERTY_col_availability' => '1',
+				'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		),
+			'PROPERTY_col_brand' => $_REQUEST['BRAND_ID']
+		);
+		$APPLICATION->IncludeComponent(
+			"custom:catalog.section",
+			"",
+			Array(
+				"AJAX_MODE" => "N",
+				"SEF_MODE" => "Y",
+				"IBLOCK_TYPE" => "collection",
+				"IBLOCK_ID" => "1",
+				"USE_FILTER" => "Y",
+				"FILTER_NAME" => "arFilter",
+				"INCLUDE_BRANDS" => "N",
+				"USE_REVIEW" => "N",
+				"USE_COMPARE" => "N",
+				"USE_SORT" => "N",
+				"VIEW_MODE" => "brands",
+				"DISCOUNT_ONLY" => "N",
+				"BY_LINK" => "Y",
+				"SHOW_TOP_ELEMENTS" => "N",
+				"PAGE_ELEMENT_COUNT" => "32",
+				"LINE_ELEMENT_COUNT" => "4",
+				"ELEMENT_SORT_FIELD" => 'sort',
+				"ELEMENT_SORT_ORDER" => 'asc',
+				"PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"INCLUDE_SUBSECTIONS" => "Y",
+				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
+				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
+				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
+				"PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"DETAIL_META_KEYWORDS" => "col_keywords",
+				"DETAIL_META_DESCRIPTION" => "col_description",
+				"DETAIL_BROWSER_TITLE" => "col_title",
+				"ACTION_VARIABLE" => "action",
+				"PRODUCT_ID_VARIABLE" => "id",
+				"SECTION_ID_VARIABLE" => "SECTION_ID",
+				"DISPLAY_PANEL" => "N",
+				"CACHE_TYPE" => "N",
+				"CACHE_TIME" => "3600",
+				"CACHE_FILTER" => "N",
+				"CACHE_GROUPS" => "Y",
+				"SET_TITLE" => "Y",
+				"SET_STATUS_404" => "Y",
+				"PRICE_CODE" => array(0=>"col_price",),
+				"USE_PRICE_COUNT" => "N",
+				"SHOW_PRICE_COUNT" => "1",
+				"PRICE_VAT_INCLUDE" => "Y",
+				"PRICE_VAT_SHOW_VALUE" => "N",
+				"LINK_IBLOCK_TYPE" => "",
+				"LINK_IBLOCK_ID" => "",
+				"LINK_PROPERTY_SID" => "",
+				"LINK_ELEMENTS_URL" => "link.php?PARENT_ELEMENT_ID=#ELEMENT_ID#",
+				"DISPLAY_TOP_PAGER" => "N",
+				"DISPLAY_BOTTOM_PAGER" => "N",
+				"DISPLAY_ELEMENT_SELECT_BOX" => "N",
+				"ELEMENT_SORT_FIELD_BOX" => "id",
+				"ELEMENT_SORT_ORDER_BOX" => "asc",
+				"COMPARE_ELEMENT_SORT_FIELD" => "sort",
+				"COMPARE_ELEMENT_SORT_ORDER" => "asc",
+				"AJAX_OPTION_SHADOW" => "Y",
+				"AJAX_OPTION_JUMP" => "N",
+				"AJAX_OPTION_STYLE" => "Y",
+				"AJAX_OPTION_HISTORY" => "N",
+				"SEF_FOLDER" => "/collection/",
+				"SEF_URL_TEMPLATES" => Array(
+					"section" => "#SECTION_CODE#/",
+					"element" => "#SECTION_CODE#/#ELEMENT_ID#/",
+				),
+				"VARIABLE_ALIASES" => Array(
+					"section" => Array(),
+					"element" => Array(),
+				),
+				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+				"ADD_SECTIONS_CHAIN" => "N",
+				"JSON" => "n"
+			)
+		);
+	}
+?>
+
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
