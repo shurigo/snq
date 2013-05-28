@@ -20,6 +20,10 @@
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript" src="/js/ga_social_tracking.js"></script>
 
+<link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">
+<script type="text/javascript" src="/js/jquery.simple.accordion.js"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function(){
 
