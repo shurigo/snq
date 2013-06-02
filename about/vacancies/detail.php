@@ -21,7 +21,11 @@ echo $arFields['PREVIEW_TEXT'];
 if (strlen($arFields['PROPERTY_COL_PHONE_VALUE'])>0) echo '<br><div><b>Контактный телефон:</b> '.$arFields['PROPERTY_COL_PHONE_VALUE'].'</div>';
 if (strlen($arFields['PROPERTY_COL_EMAIL_VALUE'])>0) echo '<br><div><b>E-mail:</b> <a href="mailto:'.$arFields['PROPERTY_COL_EMAIL_VALUE'].'">'.$arFields['PROPERTY_COL_EMAIL_VALUE'].'</a></div>';
 
+$vacancy_name=$arFields['NAME'];
+include("anketa.php");
+
 ?>
+
 
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
