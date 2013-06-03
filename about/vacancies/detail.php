@@ -22,6 +22,7 @@ if (strlen($arFields['PROPERTY_COL_PHONE_VALUE'])>0) echo '<br><div><b>Контактны
 if (strlen($arFields['PROPERTY_COL_EMAIL_VALUE'])>0) echo '<br><div><b>E-mail:</b> <a href="mailto:'.$arFields['PROPERTY_COL_EMAIL_VALUE'].'">'.$arFields['PROPERTY_COL_EMAIL_VALUE'].'</a></div>';
 
 $vacancy_name=$arFields['NAME'];
+$hr_email=$arFields['PROPERTY_COL_EMAIL_VALUE'];
 include("anketa.php");
 
 ?>

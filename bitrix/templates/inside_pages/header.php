@@ -8,6 +8,7 @@
 <link href="/css/style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="/css/jquery.jqzoom.css">
 <link rel="stylesheet" type="text/css" href="/css/popup.css">
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <!--[if lte IE 7]><link href="/css/ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
 <!--[if lte IE 8]>
 <script type="text/javascript" src="/js/PIE.js"></script>
@@ -19,6 +20,7 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript" src="/js/ga_social_tracking.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">
 <script type="text/javascript" src="/js/jquery.simple.accordion.js"></script>
