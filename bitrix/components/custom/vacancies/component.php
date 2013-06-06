@@ -15,12 +15,12 @@ if(!isset($arParams["CACHE_TIME"]))
 
 unset($arParams["IBLOCK_TYPE"]); //was used only for IBLOCK_ID setup with Editor
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
+$arParams["IBLOCK_SHOPS_ID"] = intval($arParams["IBLOCK_SHOPS_ID"]);
 $city_select = get_city_by_name(iconv('utf-8', 'cp1251', $_SESSION['city_name']));
-//if (is_numeric($_REQUEST["city_select"]) && ($arIBlockSection = GetIBlockSection($_REQUEST["city_select"], "our_shops")))
 if (is_numeric($city_select) && ($arIBlockSection = GetIBlockSection($city_select, "our_shops"))) {
 	$arParams["SECTION_ID"] = $arIBlockSection["ID"];
 } else {
-	$arParams["SECTION_ID"] = 16;
+	$arParams["SECTION_ID"] = 183;
 }
 
 
@@ -32,7 +32,7 @@ if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($a
 	$arFilter = array(
 		"ACTIVE"=>"Y",
 		"GLOBAL_ACTIVE"=>"Y",
-		"IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+		"IBLOCK_ID"=>$arParams["IBLOCK_SHOPS_ID"],
 		"IBLOCK_ACTIVE"=>"Y",
 	);
 	$arSections = array();
@@ -48,7 +48,7 @@ if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($a
 			$arrFilter = array(
 				"ACTIVE"=>"Y",
 				"GLOBAL_ACTIVE"=>"Y",
-				"IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+				"IBLOCK_ID"=>$arParams["IBLOCK_SHOPS_ID"],
 				"IBLOCK_ACTIVE"=>"Y",
 				"SECTION_ID" => $arSection["ID"],
 			);

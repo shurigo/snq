@@ -88,6 +88,20 @@
     }
   }
 
+	if(!function_exists('get_city_by_name')) {
+		function get_city_by_name($name, $iblock_id = 7) {
+			$default_ret = 16;
+			if(!CModule::IncludeModule('iblock')) return $default_ret;
+			$filter = Array(
+				'IBLOCK_ID' => $iblock_id,
+				'NAME' => $name
+			);
+      $sections = CIBlockSection::GetList($sort, $filter, false, array('ID', 'IBLOCK_ID'), false);
+			$section = $sections->GetNext();
+			return $section ? $section['ID'] : $default_ret;
+		}
+	}
+	
 	if(!function_exists('print_city_option_html')) {
     function print_city_option_html() {
  		  $cities = get_available_cities();
@@ -108,8 +122,8 @@
 
 	    while($element = $elements->GetNextElement()) {
 				$fields = $element->GetFields();
-        array_push($all_cities['XML_ID'],$fields['XML_ID']);
-	    	array_push($all_cities['NAME'],$fields['NAME']);
+        $all_cities['XML_ID'][] = $fields['XML_ID'];
+	    	$all_cities['NAME'][] = $fields['NAME'];
 			}
    		
 			foreach($cities as $c) {

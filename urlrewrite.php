@@ -13,6 +13,12 @@ $arUrlRewrite = array(
 		"PATH"	=>	"/about/about_fur/index.php",
 	),
 	array(
+		"CONDITION"	=>	"#^/about/vacancies/#",
+		"RULE"	=>	"",
+		"ID"	=>	"bitrix:iblock.element.add.list",
+		"PATH"	=>	"/about/vacancies/shops.php",
+	),
+	array(
 		"CONDITION"	=>	"#^/collection/#",
 		"RULE"	=>	"",
 		"ID"	=>	"custom:catalog",
