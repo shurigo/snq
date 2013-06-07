@@ -12,6 +12,7 @@
 			"CACHE_TIME" => "3600",	// Время кеширования (сек.)
 			"CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре
 			"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+      "SECTION_NAME" => $_SESSION['city_name']
 		),
 		false
 	);
