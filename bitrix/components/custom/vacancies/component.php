@@ -19,28 +19,40 @@
   } else {
     $arParams["SECTION_ID"] = 183;
   }
-
   // Work with cache
   if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups())))) {
+    $arResult = array();
+    // Get cities from the shops block
     $arFilter = array(
       "ACTIVE"=>"Y",
       "GLOBAL_ACTIVE"=>"Y",
       "IBLOCK_ID"=>$arParams["IBLOCK_SHOPS_ID"],
       "IBLOCK_ACTIVE"=>"Y",
+    );    
+    $shop_city_sections = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array("UF_*"));
+    // Get the shops section from vacancies block
+    $arFilter = array(
+      "NAME"=>"Вакансии в магазинах",
+      "ACTIVE"=>"Y",
+      "GLOBAL_ACTIVE"=>"Y",
+      "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+      "IBLOCK_ACTIVE"=>"Y",
     );
-    $arSections = array();
-    $rsSections = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array("UF_*"));
-    while($arSection = $rsSections->GetNext()) {
-      $arSections[$arSection["ID"]] = $arSection;
+    $shops_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array('ID', 'NAME'));
+    $shops_section = $shops_section_list->GetNext();
+    // city loop
+    while($city = $shop_city_sections->GetNext()) {
+      $arResult[$city["ID"]] = $city;
       $arSort = array(
         "NAME" => "ASC"
       );
-      $arrFilter = array(
+      $arFilter = array(
         "ACTIVE"=>"Y",
         "GLOBAL_ACTIVE"=>"Y",
         "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
         "IBLOCK_ACTIVE"=>"Y",
-        "NAME" => $arSection["NAME"],
+        "SECTION_ID"=>$shops_section["ID"],
+        "NAME" => $city["NAME"],
       );
       $arSelect = array(
         "ID",
@@ -48,7 +60,7 @@
         "PREVIEW_TEXT",
         "PROPERTY_*",
       );
-      $sections = CIBlockSection::GetList($arSort, $arrFilter, false, false, $arSelect);
+      $sections = CIBlockSection::GetList($arSort, $arFilter, false, false, $arSelect);
       $section = $sections->GetNext();
       $rsElements = CIBlockElement::GetList(
         $arSort,
@@ -68,13 +80,12 @@
         )
       );
       $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
-      $rsElements->SetSectionContext($arSection);
-      $arSection["ITEMS"] = array();
+      $rsElements->SetSectionContext($city);
+      $city["ITEMS"] = array();
       while($obElement = $rsElements->GetNext()) {
-        $arSections[$arSection["ID"]]["ITEMS"][] = $obElement;
+        $arResult[$city["ID"]]["ITEMS"][] = $obElement;
       }
     }
-    $arResult = $arSections;
     $this->SetResultCacheKeys(array());
     $this->IncludeComponentTemplate();
   }

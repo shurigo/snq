@@ -1,14 +1,24 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Вакансии  в офисе");
+$APPLICATION->SetTitle("Вакансии в офисе");
 ?>
 
 <h1>Вакансии в офисе</h1>
 <div id="wrapper">
 <?
+  $filter = array(
+    "NAME"=>"Вакансии в офисе",
+    "ACTIVE"=>"Y",
+    "GLOBAL_ACTIVE"=>"Y",
+    "IBLOCK_ID"=>6,
+    "IBLOCK_ACTIVE"=>"Y",
+  );
+  $ofice_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array('ID', 'NAME'));
+  $ofice_section = $ofice_section_list->GetNext();
+
   $res = CIBlockSection::GetList(
      Array(),
-     Array("IBLOCK_ID"=>6, "ACTIVE"=>"Y","SECTION_ID"=>417),
+     Array("IBLOCK_ID"=>6, "ACTIVE"=>"Y","SECTION_ID"=>$ofice_section['ID']),
      true,
      Array("ID", "NAME", "DESCRIPTION")
   );

@@ -12,7 +12,6 @@
       "CACHE_TIME" => "3600",
       "CACHE_FILTER" => "N",
       "CACHE_GROUPS" => "Y",
-      "SECTION_NAME" => $_SESSION['city_name']
     ),
     false
   );
