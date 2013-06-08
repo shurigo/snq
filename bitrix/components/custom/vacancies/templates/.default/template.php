@@ -1,4 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?if(empty($_GET['ajax'])):?>
 <div id="ymaps-map-id_133707667107155769727" style="width: 998px; height: 400px;"></div>
 <div style="width: 998px; text-align: right;"><a href="http://api.yandex.ru/maps/tools/constructor/?lang=ru-RU" target="_blank" style="color: #191a1e; font: 13px Arial,Helvetica,sans-serif;"></a></div>
 <script type="text/javascript" src="http://api-maps.yandex.ru/2.0/?coordorder=longlat&load=package.full&wizard=constructor&lang=ru-RU&onload=fid_133707667107155769727"></script>
@@ -31,30 +32,24 @@
   }
 </script>
 </div>
-<div>
-<table style="width:100%;">
-  <tr>
-    <td valign="top" style="width:50%; padding:0 20px 0 0;">
-    <?
-        foreach($arResult as $arCity) {
-            if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0) {
-                $counter = 1;
-    ?><ol><?
-              foreach($arCity["ITEMS"] as $arElement) {
-          ?>
-                <li style="margin:20px 0 0 20px;">
-                    <div style="color:#191a1e; font-weight:bold; font-size:14px;"><?=$arElement["NAME"]?></div>
-                    <div style="margin:10px 0 0 0; font-weight:bold;">Адрес:</div>
-                    <div><?=$arElement["PREVIEW_TEXT"]?></div>
-                </li>
-          <?
-                $counter++;
-              }
-				?></ol><?
-            }
-				}
-        ?>
-        </td>
-    </tr>
-</table>
+<?endif;  /* if(empty($_GET['ajax'])) */ ?> 
+<script>
+  $(function() {
+    $('#accordion').accordion({
+      heightStyle: "content",
+      collapsible: true
+    });
+  });
+</script>
+<div id="accordion">
+<?foreach($arResult as $arCity):?>
+  <?if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0):?>
+    <?foreach($arCity["ITEMS"] as $arElement):?>
+      <h3><?=$arElement["NAME"]?></h3>
+      <div>
+        <p><?=$arElement["PREVIEW_TEXT"]?></p>
+      </div>
+    <?endforeach;?>
+  <?endif;?>
+<?endforeach;?>
 </div>

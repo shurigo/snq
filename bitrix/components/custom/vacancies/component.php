@@ -23,38 +23,37 @@ if (is_numeric($city_select) && ($arIBlockSection = GetIBlockSection($city_selec
 }
 
 // Work with cache
-if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()))))
-{
-	$arFilter = array(
-		"ACTIVE"=>"Y",
-		"GLOBAL_ACTIVE"=>"Y",
-		"IBLOCK_ID"=>$arParams["IBLOCK_SHOPS_ID"],
-		"IBLOCK_ACTIVE"=>"Y",
-	);
-	$arSections = array();
-	$rsSections = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array("UF_*"));
-	while($arSection = $rsSections->GetNext()) {
-		$arSections[$arSection["ID"]] = $arSection;
-		if ($arSection["NAME"] == $arParams["SECTION_NAME"]) {
-			$arSort = array(
-				"NAME" => "ASC"
-			);
-			$arrFilter = array(
-				"ACTIVE"=>"Y",
-				"GLOBAL_ACTIVE"=>"Y",
-				"IBLOCK_ID"=>$arParams["IBLOCK_ID"],
-				"IBLOCK_ACTIVE"=>"Y",
-				"NAME" => $arParams["SECTION_NAME"],
-			);
-			$arSelect = array(
-				"ID",
-				"NAME",
-				"PREVIEW_TEXT",
-				"PROPERTY_*",
-			);
-			$sections = CIBlockSection::GetList($arSort, $arrFilter, false, false, $arSelect);
+if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups())))) {
+  $arFilter = array(
+    "ACTIVE"=>"Y",
+    "GLOBAL_ACTIVE"=>"Y",
+    "IBLOCK_ID"=>$arParams["IBLOCK_SHOPS_ID"],
+    "IBLOCK_ACTIVE"=>"Y",
+  );
+  $arSections = array();
+  $rsSections = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array("UF_*"));
+  while($arSection = $rsSections->GetNext()) {
+    $arSections[$arSection["ID"]] = $arSection;
+    if ($arSection["NAME"] == $arParams["SECTION_NAME"]) {
+      $arSort = array(
+        "NAME" => "ASC"
+      );
+      $arrFilter = array(
+        "ACTIVE"=>"Y",
+        "GLOBAL_ACTIVE"=>"Y",
+        "IBLOCK_ID"=>$arParams["IBLOCK_ID"],
+        "IBLOCK_ACTIVE"=>"Y",
+        "NAME" => $arParams["SECTION_NAME"],
+      );
+      $arSelect = array(
+        "ID",
+        "NAME",
+        "PREVIEW_TEXT",
+        "PROPERTY_*",
+      );
+      $sections = CIBlockSection::GetList($arSort, $arrFilter, false, false, $arSelect);
       $section = $sections->GetNext();
-			$rsElements = CIBlockElement::GetList(
+      $rsElements = CIBlockElement::GetList(
         $arSort, 
         Array(
           'ACTIVE'=>'Y', 
@@ -62,26 +61,25 @@ if($this->StartResultCache(false, array($arrFilter, $arParams["SECTION_ID"], ($a
           'SECTION_ID' => $section['ID']
         ),
         false, 
+        false,
         Array(
           "ID",
           "NAME",
+          "IBLOCK_ID",
           "PREVIEW_TEXT",
           "PROPERTY_*"
-        ),
-        Array()
+        )
       );
       $rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
-			$rsElements->SetSectionContext($arSection);
-			$arSection["ITEMS"] = array();
-			while($obElement = $rsElements->GetNext())
-			{
-				$arSections[$arSection["ID"]]["ITEMS"][] = $obElement;
-			}
-		}
-	}
-	$arResult = $arSections;
-	$this->SetResultCacheKeys(array());
-	$this->IncludeComponentTemplate();
+      $rsElements->SetSectionContext($arSection);
+      $arSection["ITEMS"] = array();      
+      while($obElement = $rsElements->GetNext()) {
+        $arSections[$arSection["ID"]]["ITEMS"][] = $obElement;
+      }
+    }
+  }
+  $arResult = $arSections;
+  $this->SetResultCacheKeys(array());
+  $this->IncludeComponentTemplate();
 }
-
 ?>

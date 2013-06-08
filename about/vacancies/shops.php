@@ -1,20 +1,20 @@
 <?
-	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-	$APPLICATION->SetTitle("Вакансии в магазинах");
-	$APPLICATION->IncludeComponent(
-		"custom:vacancies", 
-		"", 
-		Array(
-			"IBLOCK_TYPE" => "vacancies",	// Тип инфо-блока
-			"IBLOCK_ID" => "6",	// Инфо-блок
-			"IBLOCK_SHOPS_ID" => "7",	// Инфо-блок
-			"CACHE_TYPE" => "N",	// Тип кеширования
-			"CACHE_TIME" => "3600",	// Время кеширования (сек.)
-			"CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре
-			"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $APPLICATION->SetTitle("Вакансии в магазинах");
+  $APPLICATION->IncludeComponent(
+    "custom:vacancies", 
+    "", 
+    Array(
+      "IBLOCK_TYPE" => "vacancies",
+      "IBLOCK_ID" => "6",
+      "IBLOCK_SHOPS_ID" => "7",
+      "CACHE_TYPE" => "N",
+      "CACHE_TIME" => "3600",
+      "CACHE_FILTER" => "N",
+      "CACHE_GROUPS" => "Y",
       "SECTION_NAME" => $_SESSION['city_name']
-		),
-		false
-	);
-	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+    ),
+    false
+  );
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
