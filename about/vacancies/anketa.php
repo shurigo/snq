@@ -14,17 +14,18 @@ if (isset($_POST["captcha_word"]) && strlen($_POST["captcha_word"]) == 0)
 	}
 elseif(!$APPLICATION->CaptchaCheckCode($_POST["captcha_word"], $_POST["captcha_sid"]))
 	{
-		$error_array['captcha_word_error'] = "не верный код с картинки!";
+		$error_array['captcha_word_error'] = "неверный код с картинки!";
 	}
 
 //check last name is correct
-if (!isset($last_name) || $last_name == "")        $error_array['last_name_error'] = "заполнено неверно";
-if (!isset($first_name) || $first_name == "")      $error_array['first_name_error'] = "заполнено неверно";
-if (!isset($middle_name) || $middle_name == "")    $error_array['middle_name_error'] = "заполнено неверно";
-if (!isset($birthday) || $birthday == "")          $error_array['birthday_error'] = "заполнено неверно";
-if (!isset($citizenship) || $citizenship == "")    $error_array['citizenship_error'] = "заполнено неверно";
-if ((!isset($mobile_phone) || $mobile_phone == "") && (!isset($home_phone) || $home_phone == ""))    $error_array['phone_error'] = "заполнено неверно";
-if (!isset($email) || $email == "")    $error_array['email_error'] = "заполнено неверно";
+$msg_invalid_string = "заполнено неверно";
+if(!empty($last_name))                           $error_array['last_name_error']   = $msg_invalid_string;
+if(!empty($first_name))                          $error_array['first_name_error']  = $msg_invalid_string;
+if(!empty($middle_name))                         $error_array['middle_name_error'] = $msg_invalid_string;
+if(!empty($birthday))                            $error_array['birthday_error']    = $msg_invalid_string;
+if(!empty($citizenship))                         $error_array['citizenship_error'] = $msg_invalid_string;
+if(!empty($mobile_phone) && !isset($home_phone)) $error_array['phone_error']       = $msg_invalid_string;
+if(!empty($email))                               $error_array['email_error']       = $msg_invalid_string;
 
 if (count($error_array) == 0)
 {
@@ -159,7 +160,25 @@ if (count($error_array) != 0)
 <tr><td width="25%">Дополнительная информация:</td><td width="70%"><textarea  name="additional_info" cols="72" rows="5"><?=(isset($additional_info))?($additional_info):("")?></textarea></td></tr>
 <tr bgcolor="#EDE8EA"><td width="25%">Здесь вы можите прикрепить свое резюме:</td><td width="70%"><input type="file"  name="cv" size="70" maxlength="40"></td></tr>
 <input type="hidden" name="captcha_sid" value="<?=$code;?>" />
-<tr><td width="25%">Введите код с картинки в поле ниже:</td><td width="70%">
+<? // Append a shop list for the current city ?>
+<?if(isset($_GET['c']) && is_numeric($_GET['c'])):?>
+<tr>
+  <td>Магазины:</td>
+  <td>
+<?  $shops = CIBlockElement::GetList(
+      Array('NAME'=>'ASC'),
+      Array('ACTIVE'=>'Y', 7, 'SECTION_ID' => $_GET['c']),
+      false, 
+      false, 
+      Array('ID', 'NAME', 'IBLOCK_ID'));
+    while($shop = $shops->GetNext()):?>
+      <input type="checkbox" name="shop_<?$shop['ID']?>"><?=$shop['NAME']?></input>
+      <br/>
+    <?endwhile;?>
+  </td>
+</tr>
+<?endif;?>
+<tr <?=isset($_GET['c']) ? 'bgcolor="#EDE8EA"' : ''?>><td width="25%">Введите код с картинки в поле ниже:</td><td width="70%">
 <img src="../../bitrix/tools/captcha.php?captcha_sid=<?=$code;?>" width="180" height="40" alt="Введите код с этой картинки в поле ниже" title="Введите код с этой картинки в поле ниже" />
 <br /><input type="input" name="captcha_word" value="" />&nbsp;<?if(strlen($error_array['captcha_word_error']) > 0) echo "<font color=\"red\">".$error_array['captcha_word_error']."</font>";?>
 </td></tr>
