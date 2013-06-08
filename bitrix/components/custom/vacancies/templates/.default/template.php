@@ -8,48 +8,23 @@
   function fid_133707667107155769727(ymaps) {
     var map = new ymaps.Map(
       "ymaps-map-id_133707667107155769727", {
-    <?foreach($arResult as $arElement):?>
-      <?if($arElement['NAME'] == $_SESSION['city_name']):?>
-        center: [<?=$arElement["UF_MAP_COORDINATE"]?>],
-      <?endif;?>
-    <?endforeach;?>
-        zoom: <?=(is_numeric($arCity["UF_MAP_ZOOM"]) && $arCity["UF_MAP_ZOOM"] > 0)?$arCity["UF_MAP_ZOOM"]:8;?>,
+        center: [106.905535,60.815115],
+        zoom: 3,
         type: "yandex#map"});
     map.controls
       .add("zoomControl")
       .add("mapTools")
       .add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
-    <?foreach($arResult as $arElement):?>
-      <?$pm_name='pm_'.$arElement['ID'];?>
-    var <?=$pm_name?>=new ymaps.Placemark([<?=$arElement["UF_MAP_COORDINATE"]?>], {
-        balloonContent: "<?=$arElement['NAME']?>"
-      });
-    <?=$pm_name?>.events.add('click', function() {
-      alert('<?=htmlspecialchars($arElement['NAME'])?>');
+<?foreach($arResult as $city):?>
+<?if (is_array($city["ITEMS"]) && count($city["ITEMS"]) > 0):?>
+<?$pm_name='pm_'.$city['ID'];?>
+    var <?=$pm_name?>=new ymaps.Placemark([<?=$city["UF_MAP_COORDINATE"]?>], {
+      balloonContent:'<strong>Вакансии в г.<?=$city['NAME']?>:</strong><br/><?foreach($city['ITEMS'] as $vacancy):?><a href="/about/vacancies/detail.php?id=<?=$vacancy['ID']?>"><?=$vacancy['NAME']?></a><br/><?endforeach;?>'
     });
     map.geoObjects.add(<?=$pm_name?>);
-    <?endforeach;?>
+<?endif;?>
+<?endforeach;?>
   }
 </script>
 </div>
-<?endif;  /* if(empty($_GET['ajax'])) */ ?> 
-<script>
-  $(function() {
-    $('#accordion').accordion({
-      heightStyle: "content",
-      collapsible: true
-    });
-  });
-</script>
-<div id="accordion">
-<?foreach($arResult as $arCity):?>
-  <?if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0):?>
-    <?foreach($arCity["ITEMS"] as $arElement):?>
-      <h3><?=$arElement["NAME"]?></h3>
-      <div>
-        <p><?=$arElement["PREVIEW_TEXT"]?></p>
-      </div>
-    <?endforeach;?>
-  <?endif;?>
-<?endforeach;?>
-</div>
+<?endif;?> 
