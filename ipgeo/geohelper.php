@@ -1,7 +1,7 @@
 <?
   include($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
   include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/common.php');
-  include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
+  require_once($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geo.php');
 
   if(!function_exists('set_def_city')) {
     function set_def_city() {
