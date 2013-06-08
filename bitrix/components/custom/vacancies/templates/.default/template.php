@@ -19,7 +19,8 @@
 <?if (is_array($city["ITEMS"]) && count($city["ITEMS"]) > 0):?>
 <?$pm_name='pm_'.$city['ID'];?>
     var <?=$pm_name?>=new ymaps.Placemark([<?=$city["UF_MAP_COORDINATE"]?>], {
-      balloonContent:'<strong>Вакансии в г.<?=$city['NAME']?>:</strong><br/><?foreach($city['ITEMS'] as $vacancy):?><a href="/about/vacancies/detail.php?id=<?=$vacancy['ID']?>"><?=$vacancy['NAME']?></a><br/><?endforeach;?>'
+      balloonContent:'<strong>Вакансии в г.<?=$city['NAME']?>:</strong><br/><?foreach($city['ITEMS'] as $vacancy):?><a href="/about/vacancies/detail.php?id=<?=$vacancy['ID']?>"><?=$vacancy['NAME']?></a><br/><?endforeach;?>',
+      iconContent:<?=count($city['ITEMS'])?>
     });
     map.geoObjects.add(<?=$pm_name?>);
 <?endif;?>
