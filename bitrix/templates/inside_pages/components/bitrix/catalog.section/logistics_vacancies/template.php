@@ -3,4 +3,3 @@
   <p><a href="detail.php?id=<?=$arElement["ID"]?>"><?=$arElement["NAME"]?></a></p>
 <?endforeach;?>
 <hr>
-<p><a href="/about/vacancies/">Все вакансии</a></p>

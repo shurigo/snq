@@ -1,13 +1,13 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Вакансии в офисе");
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $title = "Вакансии в офисе";
+  $APPLICATION->SetTitle($title);
+  include_once($_SERVER['DOCUMENT_ROOT'].'/about/vacancies/header.php');
 ?>
-
-<h1>Вакансии в офисе</h1>
 <div id="wrapper">
 <?
   $filter = array(
-    "NAME"=>"Вакансии в офисе",
+    "NAME"=>$title,
     "ACTIVE"=>"Y",
     "GLOBAL_ACTIVE"=>"Y",
     "IBLOCK_ID"=>"6",
@@ -52,7 +52,7 @@ $APPLICATION->SetTitle("Вакансии в офисе");
 	"DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
 	"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
 	"DISPLAY_COMPARE" => "N",	// Выводить кнопку сравнения
-	"SET_TITLE" => "Y",	// Устанавливать заголовок страницы
+	"SET_TITLE" => "N",	// Устанавливать заголовок страницы
 	"SET_STATUS_404" => "N",	// Устанавливать статус 404, если не найдены элемент или раздел
 	"PAGE_ELEMENT_COUNT" => "30",	// Количество элементов на странице
 	"LINE_ELEMENT_COUNT" => "1",	// Количество элементов выводимых в одной строке таблицы

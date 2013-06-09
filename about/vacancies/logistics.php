@@ -1,10 +1,9 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$title = "Вакансии логистического центра";
-$APPLICATION->SetTitle($title);
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $title = "Вакансии логистического центра";
+  $APPLICATION->SetTitle($title);
+  include_once($_SERVER['DOCUMENT_ROOT'].'/about/vacancies/header.php');
 ?>
-
-<h1><?=$title?></h1>
 <div id="wrapper">
 <?
   $filter = array(
