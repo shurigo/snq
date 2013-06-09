@@ -4,18 +4,14 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/modules/phpmailer/class.phpmailer.php")
 $code = $APPLICATION->CaptchaGetCode();
 
 // if send button was push
-if (isset($send))
-{
+if (isset($send)) {
 //validate conditions
 //Проверочный код
-if (isset($_POST["captcha_word"]) && strlen($_POST["captcha_word"]) == 0)
-	{
-		$error_array['captcha_word_error'] = "код с картинки не введён!";
-	}
-elseif(!$APPLICATION->CaptchaCheckCode($_POST["captcha_word"], $_POST["captcha_sid"]))
-	{
-		$error_array['captcha_word_error'] = "неверный код с картинки!";
-	}
+if(isset($_POST["captcha_word"]) && strlen($_POST["captcha_word"]) == 0) {
+  $error_array['captcha_word_error'] = "код с картинки не введён!";
+} elseif(!$APPLICATION->CaptchaCheckCode($_POST["captcha_word"], $_POST["captcha_sid"])) {
+  $error_array['captcha_word_error'] = "неверный код с картинки!";
+}
 
 //check last name is correct
 $msg_invalid_string = "заполнено неверно";
@@ -114,7 +110,7 @@ if (count($error_array) != 0)
 {	echo "Не все обязательные поля заполнены или заполнены не верно!";
 }
 ?>
-<form method="post" action="detail.php?id=<?=$id?>#anketa_form">
+<form method="post" action="detail.php?id=<?=$id?><?=(isset($c) ? '&c='.$c : '')?>#anketa_form">
 <input type="hidden" name="hr_email" value="<?=$hr_email?>">
 
 <fieldset>
@@ -155,6 +151,7 @@ if (count($error_array) != 0)
   $city_res = CIBlockSection::GetList(Array(), Array('IBLOCK_ID'=>7, 'ID'=>$_GET['c']), false, Array('ID', 'NAME'), Array());
   $city = $city_res->GetNext();
 ?>
+
 <input type="hidden" name="city_name" value="<?=$city['NAME']?>"/>
 <tr>
   <td>Магазины в г. <?=$city['NAME']?>:</td>
