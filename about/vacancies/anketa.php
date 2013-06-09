@@ -27,27 +27,15 @@ if(empty($citizenship))                         $error_array['citizenship_error'
 if(empty($mobile_phone) && empty($home_phone))  $error_array['phone_error']       = $msg_invalid_string;
 if(empty($email))                               $error_array['email_error']       = $msg_invalid_string;
 
-if (count($error_array) == 0)
-{
+if (count($error_array) == 0) {
 //prepare message body
-
 switch ($education) {
-    case 1:
-        $education_name = "Высшее";
-        break;
-    case 2:
-        $education_name = "Незаконченное высшее";
-        break;
-    case 3:
-        $education_name = "Студент";
-        break;
-    case 4:
-        $education_name = "Среднне-специальное";
-        break;
-    case 5:
-        $education_name =  "Средннее";
-        break;
-        }
+  case 1: $education_name = "Высшее";               break;
+  case 2: $education_name = "Незаконченное высшее"; break;
+  case 3: $education_name = "Студент";              break;
+  case 4: $education_name = "Среднне-специальное";  break;
+  case 5: $education_name =  "Средннее";            break;
+}
 $body='
 <html>
 <head></head>
@@ -68,7 +56,8 @@ switch ($education) {
 <tr><td width="25%">Наличие документов</td><td width="70%">действующий паспорт РФ:'.$passport.'<br />военный билет (приписное свидетельство):'.$cvidet.'</td></tr>
 <tr><td width="25%">Заинтересовавшая вакансия</td><td width="70%">'.$vacancy_name.'</td></tr>
 '.((isset($info)&&($info != ""))?('<tr><td width="25%">Как вы узнали о вакансии:</td><td width="70%">'.$info.'</td></tr>'):("")).'
-'.((isset($additional_info)&&($additional_info != ""))?('<tr><td width="25%">Дополнительная информация::</td><td width="70%">'.$additional_info.'</td></tr>'):("")).'
+'.((isset($additional_info)&&($additional_info != ""))?('<tr><td width="25%">Дополнительная информация:</td><td width="70%">'.$additional_info.'</td></tr>'):("")).'
+'.(isset($shops)?('<tr><td width="25%">Магазины в г. '.$city_name.':</td><td width="70%">'.implode(', ', $shops).'</td></tr>'):("")).'
 </body>
 </html>';
 echo $body;
@@ -162,9 +151,14 @@ if (count($error_array) != 0)
 <input type="hidden" name="captcha_sid" value="<?=$code;?>" />
 <? // Append a shop list for the current city ?>
 <?if(isset($_GET['c']) && is_numeric($_GET['c'])):?>
+<?
+  $city_res = CIBlockSection::GetList(Array(), Array('IBLOCK_ID'=>7, 'ID'=>$_GET['c']), false, Array('ID', 'NAME'), Array());
+  $city = $city_res->GetNext();
+?>
+<input type="hidden" name="city_name" value="<?=$city['NAME']?>"/>
 <tr>
-  <td>Магазины:</td>
-  <td>
+  <td>Магазины в г. <?=$city['NAME']?>:</td>
+  <td>    
 <?  $shops = CIBlockElement::GetList(
       Array('NAME'=>'ASC'),
       Array('ACTIVE'=>'Y', 7, 'SECTION_ID' => $_GET['c']),
@@ -172,8 +166,7 @@ if (count($error_array) != 0)
       false, 
       Array('ID', 'NAME', 'IBLOCK_ID'));
     while($shop = $shops->GetNext()):?>
-      <input type="checkbox" name="shop_<?$shop['ID']?>"><?=$shop['NAME']?></input>
-      <br/>
+      <label><input type="checkbox" name="shops[]" id="shop_<?$shop['ID']?>" value="<?=trim($shop['NAME'])?>"/><?=trim($shop['NAME'])?></label><br/>
     <?endwhile;?>
   </td>
 </tr>
