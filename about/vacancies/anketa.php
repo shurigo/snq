@@ -24,7 +24,7 @@ if(empty($first_name))                          $error_array['first_name_error']
 if(empty($middle_name))                         $error_array['middle_name_error'] = $msg_invalid_string;
 if(empty($birthday))                            $error_array['birthday_error']    = $msg_invalid_string;
 if(empty($citizenship))                         $error_array['citizenship_error'] = $msg_invalid_string;
-if(empty($mobile_phone) && !isset($home_phone)) $error_array['phone_error']       = $msg_invalid_string;
+if(empty($mobile_phone) && empty($home_phone))  $error_array['phone_error']       = $msg_invalid_string;
 if(empty($email))                               $error_array['email_error']       = $msg_invalid_string;
 
 if (count($error_array) == 0)
