@@ -13,9 +13,18 @@ $APPLICATION->SetTitle("Вакансии в офисе");
     "IBLOCK_ID"=>"6",
     "IBLOCK_ACTIVE"=>"Y",
   );
-  $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  $section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  $parent_section = $section_list->GetNext();
+  $filter = array(
+    "SECTION_ID"=>$parent_section['ID'],
+    "ACTIVE"=>"Y",
+    "GLOBAL_ACTIVE"=>"Y",
+    "IBLOCK_ID"=>"6",
+    "IBLOCK_ACTIVE"=>"Y"
+  );
+  $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME', 'DESCRIPTION'));
   while($arSection = $office_section_list->GetNext()) {
-    echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'-'.$arSection['ELEMENT_CNT'].'</div><div class="accordionContent">';
+    echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].' ('.$arSection['ELEMENT_CNT'].')</div><div class="accordionContent">';
 
    $APPLICATION->IncludeComponent("bitrix:catalog.section", "office_vacancies", Array(
 	"AJAX_MODE" => "N",	// Включить режим AJAX

@@ -28,14 +28,14 @@ if(empty($mobile_phone) && empty($home_phone))  $error_array['phone_error']     
 if(empty($email))                               $error_array['email_error']       = $msg_invalid_string;
 
 if (count($error_array) == 0) {
-//prepare message body
-switch ($education) {
-  case 1: $education_name = "Высшее";               break;
-  case 2: $education_name = "Незаконченное высшее"; break;
-  case 3: $education_name = "Студент";              break;
-  case 4: $education_name = "Среднне-специальное";  break;
-  case 5: $education_name =  "Средннее";            break;
-}
+  //prepare message body
+  switch ($education) {
+    case 1: $education_name = "Высшее";               break;
+    case 2: $education_name = "Незаконченное высшее"; break;
+    case 3: $education_name = "Студент";              break;
+    case 4: $education_name = "Среднне-специальное";  break;
+    case 5: $education_name = "Средннее";             break;
+  }
 $body='
 <html>
 <head></head>
