@@ -10,41 +10,12 @@ $APPLICATION->SetTitle("Вакансии в офисе");
     "NAME"=>"Вакансии в офисе",
     "ACTIVE"=>"Y",
     "GLOBAL_ACTIVE"=>"Y",
-    "IBLOCK_ID"=>6,
+    "IBLOCK_ID"=>"6",
     "IBLOCK_ACTIVE"=>"Y",
   );
-  $ofice_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $arFilter, false, array('ID', 'NAME'));
-  $ofice_section = $ofice_section_list->GetNext();
-
-  $res = CIBlockSection::GetList(
-     Array(),
-     Array("IBLOCK_ID"=>6, "ACTIVE"=>"Y","SECTION_ID"=>$ofice_section['ID']),
-     true,
-     Array("ID", "NAME", "DESCRIPTION")
-  );
-  while($arSection = $res->GetNext())
-  {
+  $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  while($arSection = $office_section_list->GetNext()) {
     echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'-'.$arSection['ELEMENT_CNT'].'</div><div class="accordionContent">';
-
-    /*
-    $APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list",
-	"office_vacancies",
-	Array(
-		"IBLOCK_TYPE" => "vacancies",
-		"IBLOCK_ID" => "6",
-		"SECTION_ID" => $arSection['ID'],
-		"SECTION_CODE" => "",
-		"SECTION_URL" => "",
-		"COUNT_ELEMENTS" => "N",
-		"TOP_DEPTH" => "2",
-		"DISPLAY_PANEL" => "N",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"CACHE_GROUPS" => "Y"
-	)
-);*/
 
    $APPLICATION->IncludeComponent("bitrix:catalog.section", "office_vacancies", Array(
 	"AJAX_MODE" => "N",	// Включить режим AJAX
