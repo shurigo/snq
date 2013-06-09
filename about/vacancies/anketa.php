@@ -19,13 +19,13 @@ elseif(!$APPLICATION->CaptchaCheckCode($_POST["captcha_word"], $_POST["captcha_s
 
 //check last name is correct
 $msg_invalid_string = "заполнено неверно";
-if(!empty($last_name))                           $error_array['last_name_error']   = $msg_invalid_string;
-if(!empty($first_name))                          $error_array['first_name_error']  = $msg_invalid_string;
-if(!empty($middle_name))                         $error_array['middle_name_error'] = $msg_invalid_string;
-if(!empty($birthday))                            $error_array['birthday_error']    = $msg_invalid_string;
-if(!empty($citizenship))                         $error_array['citizenship_error'] = $msg_invalid_string;
-if(!empty($mobile_phone) && !isset($home_phone)) $error_array['phone_error']       = $msg_invalid_string;
-if(!empty($email))                               $error_array['email_error']       = $msg_invalid_string;
+if(empty($last_name))                           $error_array['last_name_error']   = $msg_invalid_string;
+if(empty($first_name))                          $error_array['first_name_error']  = $msg_invalid_string;
+if(empty($middle_name))                         $error_array['middle_name_error'] = $msg_invalid_string;
+if(empty($birthday))                            $error_array['birthday_error']    = $msg_invalid_string;
+if(empty($citizenship))                         $error_array['citizenship_error'] = $msg_invalid_string;
+if(empty($mobile_phone) && !isset($home_phone)) $error_array['phone_error']       = $msg_invalid_string;
+if(empty($email))                               $error_array['email_error']       = $msg_invalid_string;
 
 if (count($error_array) == 0)
 {
