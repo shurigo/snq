@@ -1,6 +1,6 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $title = "Вакансии в офисе";
+  $title = "Вакансии логистического центра";
   $APPLICATION->SetTitle($title);
   include_once($_SERVER['DOCUMENT_ROOT'].'/about/vacancies/header.php');
 ?>
@@ -13,25 +13,13 @@
     "IBLOCK_ID"=>"6",
     "IBLOCK_ACTIVE"=>"Y",
   );
-  $section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
-  $parent_section = $section_list->GetNext();
-  $filter = array(
-    "SECTION_ID"=>$parent_section['ID'],
-    "ACTIVE"=>"Y",
-    "GLOBAL_ACTIVE"=>"Y",
-    "IBLOCK_ID"=>"6",
-    "IBLOCK_ACTIVE"=>"Y"
-  );
-  $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME', 'DESCRIPTION'));
-  while($arSection = $office_section_list->GetNext()) {
-    if($arSection['ELEMENT_CNT'] == 0) continue; // skip empty sections
-    echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'<div class="accordionButtonNumber">'.$arSection['ELEMENT_CNT'].'</div></div><div class="accordionContent">';
-
-   $APPLICATION->IncludeComponent("bitrix:catalog.section", "office_vacancies", Array(
+  $logistics_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  $logistics_section = $logistics_section_list->GetNext();
+   $APPLICATION->IncludeComponent("bitrix:catalog.section", "logistics_vacancies", Array(
 	"AJAX_MODE" => "N",	// Включить режим AJAX
 	"IBLOCK_TYPE" => "vacancies",	// Тип инфо-блока
 	"IBLOCK_ID" => "6",	// Инфо-блок
-	"SECTION_ID" => $arSection['ID'],	// ID раздела
+	"SECTION_ID" => $logistics_section['ID'],	// ID раздела
 	"SECTION_CODE" => "",	// Код раздела
 	"ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
 	"ELEMENT_SORT_ORDER" => "asc",	// Порядок сортировки элементов
@@ -52,7 +40,7 @@
 	"DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
 	"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
 	"DISPLAY_COMPARE" => "N",	// Выводить кнопку сравнения
-	"SET_TITLE" => "N",	// Устанавливать заголовок страницы
+	"SET_TITLE" => "Y",	// Устанавливать заголовок страницы
 	"SET_STATUS_404" => "N",	// Устанавливать статус 404, если не найдены элемент или раздел
 	"PAGE_ELEMENT_COUNT" => "30",	// Количество элементов на странице
 	"LINE_ELEMENT_COUNT" => "1",	// Количество элементов выводимых в одной строке таблицы
@@ -84,7 +72,7 @@
 );
 
       echo '</div>';
-  };
+  //};
 ?>
 </div>
 

@@ -1,6 +1,8 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-  $APPLICATION->SetTitle("Вакансии в магазинах");
+  $title = 'Вакансии в магазинах';
+  include_once($_SERVER['DOCUMENT_ROOT'].'/about/vacancies/header.php');
+  $APPLICATION->SetTitle($title);
   $APPLICATION->IncludeComponent(
     "custom:vacancies", 
     "", 

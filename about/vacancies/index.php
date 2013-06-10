@@ -41,7 +41,7 @@ $APPLICATION->SetTitle("Вакансии");
           <p>Дополнительную информацию о нас Вы можете получить по телефону <strong>(495) 777-8-999</strong>. </p>
 
           <table width="100%">
-          <tr><td width="33%"><a href="office.php">Вакансии в офисе</a></td><td width="33%"><a href="shops.php">Вакансии в магазинах</a></td><td width="34%">Вакансии Логистического центра</td></tr>
+          <tr><td width="33%"><a href="office.php">Вакансии в офисе</a></td><td width="33%"><a href="shops.php">Вакансии в магазинах</a></td><td width="34%"><a href="logistics.php">Вакансии Логистического центра</a></td></tr>
           </table>
 <!--
           <div style="margin: 20px 0pt 0pt;"><?$APPLICATION->IncludeComponent(
