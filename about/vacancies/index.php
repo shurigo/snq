@@ -10,7 +10,7 @@ $APPLICATION->SetTitle("Вакансии");
             <br />
            &laquo;Снежная Королева&raquo; - это команда профессионалов с прогрессивной системой управления.
             <br />
-           &laquo;Снежная Королева&raquo; &ndash; лидер среди мультибрендовых магазинов модной одежды, мехов (<a href="/collection/wfurs/">шубы и меха</a>, <a href="/collection/wmink/">шубы из норки</a>, полушубки, <a href="/collection/wfurvest/">меховые жилеты</a>) и аксессуаров.
+           &laquo;Снежная Королева&raquo; &ndash; лидер среди мультибрендовых магазинов модной одежды, мехов (шубы и меха, <a href="/collection/wmink/">шубы из норки</a>, полушубки, <a href="/collection/wfurvest/">меховые жилеты</a>) и аксессуаров.
             <br />
 
             <br />
@@ -39,9 +39,9 @@ $APPLICATION->SetTitle("Вакансии");
           <p>Стань лидером вместе с нами!</p>
 
           <p>Дополнительную информацию о нас Вы можете получить по телефону <strong>(495) 777-8-999</strong>. </p>
-
+          <br />
           <table width="100%">
-          <tr><td width="33%"><a href="office.php">Вакансии в офисе</a></td><td width="33%"><a href="shops.php">Вакансии в магазинах</a></td><td width="34%"><a href="logistics.php">Вакансии Логистического центра</a></td></tr>
+          <tr><td width="33%" align="center"><a href="office.php"><img src="./img/office.jpg"  alt="Вакансии в офисе" border="0"><br />Вакансии в офисе</a></td><td width="33%" align="center"><a href="shops.php"><img src="./img/shops.jpg" alt="Вакансии в магазинах" border="0"><br />Вакансии в магазинах</a></td><td width="34%" align="center"><a href="logistics.php"><img src="./img/logistics.jpg" alt="Вакансии Логистического центра" border="0"><br />Вакансии Логистического центра</a></td></tr>
           </table>
 <!--
           <div style="margin: 20px 0pt 0pt;"><?$APPLICATION->IncludeComponent(
