@@ -55,6 +55,5 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/7080487" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
 </body>
 </html>
