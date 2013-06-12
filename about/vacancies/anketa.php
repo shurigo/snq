@@ -1,3 +1,5 @@
+<br>
+<br id="anketa_form">
 <?
 //include mailing lib
 require_once($_SERVER["DOCUMENT_ROOT"]."/modules/phpmailer/class.phpmailer.php");
@@ -36,6 +38,7 @@ if (count($error_array) == 0) {
 <html>
 <head></head>
 <body>
+<h1>Анкета</h1>
 <table cellpadding="10" border=1 width="100%">
 <tr><td width="25%">Фамилия:</td><td width="70%">'.$last_name.'</td></tr>
 <tr><td width="25%">Имя:</td><td width="70%">'.$first_name.'</td></tr>
@@ -49,36 +52,70 @@ if (count($error_array) == 0) {
 <tr><td width="25%">Образование:</td><td width="70%">'.$education_name.'</td></tr>
 '.((isset($company_name)&&($company_name != ""))?('<tr><td width="25%">Последнее место работы:</td><td width="70%"></td></tr><tr><td width="30%" align="right">название компании:</td><td width="70%">'.$company_name.'</td></tr><tr><td width="30%" align="right">должность:</td><td width="70%">'.$job.'</td></tr><tr><td width="30%" align="right">должносные обязанности:</td><td width="70%">'.$duties.'</td></tr><tr><td width="30%" align="right">период работы:</td><td width="70%">c&nbsp;'.$sdate.'&nbsp;по&nbsp;'.$edate.'</td></tr><tr><td width="30%" align="right">были ли у вас подчененные?</td><td width="70%">'.$management.'</td></tr>'):("")).'
 <tr><td width="25%">Социальный пакет на предыдущем месте работы:</td><td width="70%">ДМС (добровольное медецинское страхование):&nbsp;'.((isset($soc_package_d))?("Да"):("Нет")).'<br />страхование жизни:&nbsp;'.((isset($soc_package_li))?("Да"):("Нет")).'<br />оплата услуг сотовой связи:&nbsp;'.((isset($soc_package_m))?("Да"):("Нет")).'<br />оплата обедов:&nbsp;'.((isset($soc_package_l))?("Да"):("Нет")).'<br />обучение:&nbsp;'.((isset($soc_package_e))?("Да"):("Нет")).'<br />другое:&nbsp;'.((isset($soc_package_other)&&($soc_package_other != ""))?($soc_package_other):("Нет")).'</td></tr>
-<tr><td width="25%">Наличие документов</td><td width="70%">действующий паспорт РФ:'.$passport.'<br />военный билет (приписное свидетельство):'.$cvidet.'</td></tr>
+<tr><td width="25%">Наличие документов</td><td width="70%">действующий паспорт РФ:'.$passport.'<br />военный билет (приписное свидетельство):'.$svidet.'</td></tr>
 <tr><td width="25%">Заинтересовавшая вакансия</td><td width="70%">'.$vacancy_name.'</td></tr>
 '.((isset($info)&&($info != ""))?('<tr><td width="25%">Как вы узнали о вакансии:</td><td width="70%">'.$info.'</td></tr>'):("")).'
 '.((isset($additional_info)&&($additional_info != ""))?('<tr><td width="25%">Дополнительная информация:</td><td width="70%">'.$additional_info.'</td></tr>'):("")).'
 '.(isset($shops)?('<tr><td width="25%">Магазины в г. '.$city_name.':</td><td width="70%">'.implode(', ', $shops).'</td></tr>'):("")).'
 </body>
 </html>';
-echo $body;
+
+//echo $body;
 
 //send message
-/*
+
 $mail           = new PHPMailer();
 $mail->CharSet = 'windows-1251';
 $mail->From     = $email;
+
 $mail->FromName = $last_name." ".$first_name;
-$mail->Subject  = "Отклик на вакансию";
+$mail->Subject  = "Отклик на вакансию ".$vacancy_name;
 
 $mail->MsgHTML($body);
 $mail->AltBody = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 $mail->AddAddress($hr_email, "HR Snowqueen.ru");
-//$mail->AddEmbeddedImage('images/card_left.bmp', 'card_left');
-//$mail->AddEmbeddedImage('images/card_right.bmp', 'card_right');
-$mail->AddAttachment($cv);
+//$mail->AddAddress("vyacheslav.levin@gmail.com", "HR Snowqueen.ru");
+
+if (isset($_FILES['resume']) &&
+    $_FILES['resume']['error'] == UPLOAD_ERR_OK) {
+    $mail->AddAttachment($_FILES['resume']['tmp_name'],
+                         $_FILES['resume']['name']);
+}
 
 if(!$mail->Send()) {
     echo "Mailer Error! ".$mail->ErrorInfo."<br />";
   } else {
-    echo "Ваша анкета отправлена.";
+    echo "<div style=\"background-color:#ede9ea;color:red;heigh:20px;font-size:14px;\">Спасибо, за оставленную информацию. Наши специалисты изучат Ваш опыт, и свяжутся с Вами в ближайшее время.</div><br />";
+
+    unset($last_name);
+    unset($first_name);
+    unset($middle_name);
+    unset($birthday);
+    unset($citizenship);
+    unset($address);
+    unset($mobile_phone);
+    unset($home_phone);
+    unset($email);
+    unset($education);
+    unset($company_name);
+    unset($job);
+    unset($duties);
+    unset($sdate);
+    unset($edate);
+    unset($management);
+    unset($soc_package_d);
+    unset($soc_package_li);
+    unset($soc_package_m);
+    unset($soc_package_l);
+    unset($soc_package_e);
+    unset($soc_package_o);
+    unset($passport);
+    unset($svidet);
+    unset($info);
+    unset($additional_info);
+    unset($resume);
   }
-*/
+
 }
 
 }
@@ -101,18 +138,16 @@ $(function() {
     });
         });
 </script>
-<br id="anketa_form">
-<br>
 <hr>
 <h1>Анкета</h1>
 <?
 if (count($error_array) != 0)
-{	echo "Не все обязательные поля заполнены или заполнены не верно!";
+{	echo "<div style=\"background-color:#ede9ea;color:red;heigh:20px;font-size:14px;\">Не все обязательные поля заполнены или заполнены не верно!</div><br />";
 }
 ?>
-<form method="post" action="detail.php?id=<?=$id?><?=(isset($c) ? '&c='.$c : '')?>#anketa_form">
+<form method="post" enctype="multipart/form-data" action="detail.php?id=<?=$id?><?=(isset($c) ? '&c='.$c : '')?>#anketa_form">
 <input type="hidden" name="hr_email" value="<?=$hr_email?>">
-
+<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 <fieldset>
 <table cellpadding="10" border=0>
 <tr bgcolor="#EDE8EA"><td width="25%">Фамилия:*</td><td width="70%"><input type="text" name="last_name" size="70" value="<?=(isset($last_name))?($last_name):("")?>">&nbsp;<?if(strlen($error_array['last_name_error']) > 0) echo "<font color=\"red\">".$error_array['last_name_error']."</font>";?></td></tr>
@@ -139,11 +174,11 @@ if (count($error_array) != 0)
 <input type="checkbox"  name="soc_package_e" <?=(isset($soc_package_e))?("checked"):("") ?>>обучение<br />
 <input type="checkbox"  name="soc_package_o" <?=(isset($soc_package_0))?("checked"):("") ?>>впишите <input type="text" name="soc_package_other" size="55" value="<?=(isset($soc_package_other))?($soc_package_other):("")?>"><br />
 </td></tr>
-<tr bgcolor="#EDE8EA"><td width="25%">Наличие документов</td><td width="70%">действующий паспорт РФ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="passport" value="нет" <?=((isset($passport)) || ($passport == "нет"))?("checked"):("")?>> нет<input type="radio" name="passport" value="да" <?=((!isset($passport)) || ($passport == "да"))?("checked"):("")?>> да<br />военный билет (приписное свидетельство) <input type="radio" name="svidet" value="нет" <?=((isset($svidet)) || ($svidet == "нет"))?("checked"):("")?>> нет<input type="radio" name="cvidet" value="да" <?=((!isset($svidet)) || ($svidet == "да"))?("checked"):("")?>> да</td></tr>
+<tr bgcolor="#EDE8EA"><td width="25%">Наличие документов</td><td width="70%">действующий паспорт РФ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="passport" value="нет" <?=((isset($passport)) || ($passport == "нет"))?("checked"):("")?>> нет<input type="radio" name="passport" value="да" <?=((!isset($passport)) || ($passport == "да"))?("checked"):("")?>> да<br />военный билет (приписное свидетельство) <input type="radio" name="svidet" value="нет" <?=(($svidet == "нет"))?("checked"):("")?>> нет<input type="radio" name="svidet" value="да" <?=((!isset($svidet)) || ($svidet == "да"))?("checked"):("")?>> да</td></tr>
 <tr><td width="25%">Заинтересовавшая вакансия</td><td width="70%"><input type="text" name="vacancy" size="70" value="<?=$vacancy_name?>" disabled></td></tr>
 <tr bgcolor="#EDE8EA"><td width="25%">Как вы узнали о вакансии:</td><td width="70%"><input type="text" name="info" size="70" value="<?=(isset($info))?($info):("")?>"></td></tr>
 <tr><td width="25%">Дополнительная информация:</td><td width="70%"><textarea  name="additional_info" cols="72" rows="5"><?=(isset($additional_info))?($additional_info):("")?></textarea></td></tr>
-<tr bgcolor="#EDE8EA"><td width="25%">Здесь вы можите прикрепить свое резюме:</td><td width="70%"><input type="file"  name="cv" size="70" maxlength="40"></td></tr>
+<tr bgcolor="#EDE8EA"><td width="25%">Здесь вы можите прикрепить свое резюме:</td><td width="70%"><input type="file" name="resume" id="resume" size="70" value="<?=(isset($resume))?($resume):("")?>"></td></tr>
 <input type="hidden" name="captcha_sid" value="<?=$code;?>" />
 <? // Append a shop list for the current city ?>
 <?if(isset($_GET['c']) && is_numeric($_GET['c'])):?>
@@ -155,12 +190,12 @@ if (count($error_array) != 0)
 <input type="hidden" name="city_name" value="<?=$city['NAME']?>"/>
 <tr>
   <td>Магазины в г. <?=$city['NAME']?>:</td>
-  <td>    
+  <td>
 <?  $shops = CIBlockElement::GetList(
       Array('NAME'=>'ASC'),
       Array('ACTIVE'=>'Y', 7, 'SECTION_ID' => $_GET['c']),
-      false, 
-      false, 
+      false,
+      false,
       Array('ID', 'NAME', 'IBLOCK_ID'));
     while($shop = $shops->GetNext()):?>
       <label><input type="checkbox" name="shops[]" id="shop_<?$shop['ID']?>" value="<?=trim($shop['NAME'])?>"/><?=trim($shop['NAME'])?></label><br/>
