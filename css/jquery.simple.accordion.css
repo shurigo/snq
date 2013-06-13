@@ -1,25 +1,35 @@
 #wrapper {
-	width: 992px;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0px 0px 0px 0px;
+	width: 996px;
+        padding: 0px 0px 0px 0px;
 	}
  
 .accordionButton {	
-	width: 992px;
+	width: 986px;
 	float: left;
-	background: #003366;
+	background: #cbcbcb;
 	border-bottom: 1px solid #FFFFFF;
 	cursor: pointer;
-	font-size:18px;
-	color:white;
-	padding: 15px 5px 15px 10px;
+        font-size:14px;
+	color:black;
+        height:30px;
+        padding-left:10px;
+        padding-top:10px;   
 	}
- 
+.accordionButton .accordionButtonNumber {	
+	width: 30px;
+	float: right;
+	cursor: pointer;
+	font-size:14px;
+        font-weight: bold;
+	color:black;
+        height:50px;
+        text-align: center;
+		}  
 .accordionContent {	
-	width: 992px;
+	width: 986px;
 	float: left;
-	background: #95B1CE;
+	background: #F5F2F3;
 	display: none;
-	padding: 5px 5px 5px 10px;
+        padding-left:10px;
+        padding-top:10px;  
 	}

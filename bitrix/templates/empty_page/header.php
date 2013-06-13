@@ -3,5 +3,6 @@
 <script type="text/javascript" src="/js/jquery.ui.widget.min.js"></script>
 <script type="text/javascript" src="/js/jquery.ui.rcarousel.min.js"></script>
 <script type="text/javascript" src="/js/jquery.jqzoom-core.js"></script>
+<script type="text/javascript" src="/js/set-city.js"></script>
 <link rel="stylesheet" href="/js/jquery.jqzoom.css" type="text/css" />
 <link rel="stylesheet" href="/js/rcarousel.css" type="text/css" />

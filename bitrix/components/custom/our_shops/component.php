@@ -15,8 +15,7 @@ if(!isset($arParams["CACHE_TIME"]))
 
 unset($arParams["IBLOCK_TYPE"]); //was used only for IBLOCK_ID setup with Editor
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
-$city_select = get_city_by_name(iconv('utf-8', 'cp1251', $_SESSION['city_name']));
-//if (is_numeric($_REQUEST["city_select"]) && ($arIBlockSection = GetIBlockSection($_REQUEST["city_select"], "our_shops")))
+$city_select = get_city_by_name($_SESSION['city_name']);
 if (is_numeric($city_select) && ($arIBlockSection = GetIBlockSection($city_select, "our_shops"))) {
 	$arParams["SECTION_ID"] = $arIBlockSection["ID"];
 } else {

@@ -1,40 +1,31 @@
 <?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Вакансии  в офисе");
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  $title = "Вакансии в офисе";
+  $APPLICATION->SetTitle($title);
+  include_once($_SERVER['DOCUMENT_ROOT'].'/about/vacancies/header.php');
 ?>
-
-<h1>Вакансии в офисе</h1>
 <div id="wrapper">
 <?
-  $res = CIBlockSection::GetList(
-     Array(),
-     Array("IBLOCK_ID"=>6, "ACTIVE"=>"Y","SECTION_ID"=>417),
-     true,
-     Array("ID", "NAME", "DESCRIPTION")
+  $filter = array(
+    "NAME"=>$title,
+    "ACTIVE"=>"Y",
+    "GLOBAL_ACTIVE"=>"Y",
+    "IBLOCK_ID"=>"6",
+    "IBLOCK_ACTIVE"=>"Y",
   );
-  while($arSection = $res->GetNext())
-  {
-    echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'-'.$arSection['ELEMENT_CNT'].'</div><div class="accordionContent">';
-
-    /*
-    $APPLICATION->IncludeComponent(
-	"bitrix:catalog.section.list",
-	"office_vacancies",
-	Array(
-		"IBLOCK_TYPE" => "vacancies",
-		"IBLOCK_ID" => "6",
-		"SECTION_ID" => $arSection['ID'],
-		"SECTION_CODE" => "",
-		"SECTION_URL" => "",
-		"COUNT_ELEMENTS" => "N",
-		"TOP_DEPTH" => "2",
-		"DISPLAY_PANEL" => "N",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"CACHE_GROUPS" => "Y"
-	)
-);*/
+  $section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  $parent_section = $section_list->GetNext();
+  $filter = array(
+    "SECTION_ID"=>$parent_section['ID'],
+    "ACTIVE"=>"Y",
+    "GLOBAL_ACTIVE"=>"Y",
+    "IBLOCK_ID"=>"6",
+    "IBLOCK_ACTIVE"=>"Y"
+  );
+  $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME', 'DESCRIPTION'));
+  while($arSection = $office_section_list->GetNext()) {
+    if($arSection['ELEMENT_CNT'] == 0) continue; // skip empty sections
+    echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'<div class="accordionButtonNumber">'.$arSection['ELEMENT_CNT'].'</div></div><div class="accordionContent">';
 
    $APPLICATION->IncludeComponent("bitrix:catalog.section", "office_vacancies", Array(
 	"AJAX_MODE" => "N",	// Включить режим AJAX
@@ -61,7 +52,7 @@ $APPLICATION->SetTitle("Вакансии  в офисе");
 	"DISPLAY_PANEL" => "N",	// Добавлять в админ. панель кнопки для данного компонента
 	"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
 	"DISPLAY_COMPARE" => "N",	// Выводить кнопку сравнения
-	"SET_TITLE" => "Y",	// Устанавливать заголовок страницы
+	"SET_TITLE" => "N",	// Устанавливать заголовок страницы
 	"SET_STATUS_404" => "N",	// Устанавливать статус 404, если не найдены элемент или раздел
 	"PAGE_ELEMENT_COUNT" => "30",	// Количество элементов на странице
 	"LINE_ELEMENT_COUNT" => "1",	// Количество элементов выводимых в одной строке таблицы
