@@ -141,7 +141,7 @@ function ajaxLoad(){
 	});
 }
 
-Number.prototype.addSpace=function(){var temp='';for(var i=this.toString().length-1;i>=0;i--){temp=this.toString().charAt(i)+temp;if(!((this.toString().length-i)%3))temp=' '+temp;};return temp;}
+Number.prototype.addSpace=function(){var temp='';for(var i=this.toString().length-1;i>=0;i--){temp=this.toString().charAt(i)+temp;if(((this.toString().length-i)%3)==0)temp=' '+temp;};return temp;}
 
 function initLoadPage(){
 	$('.mainContent .catalog').each(function(){
