@@ -85,7 +85,7 @@ function initGallery(){
     yOffset:0,
     title: false
   });
-  $('.zoomWindow').live('mouseover', function(){$(this).css({display: 'none'});});
+  $('body').on('mouseover', '.zoomWindow', function(){$(this).css({display: 'none'});});
   $('.gallery').each(function(){
     var hold = $(this);
     var link = hold.find('div.hold > ul > li > a');
