@@ -23,6 +23,7 @@
 <script type="text/javascript" src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script type='text/javascript' src='/js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript" src="/js/jquery.main.js"></script>
+<script type="text/javascript" src="/js/set-city.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
