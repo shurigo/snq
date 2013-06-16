@@ -24,7 +24,6 @@
   );
   $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME', 'DESCRIPTION'));
   while($arSection = $office_section_list->GetNext()) {
-    if($arSection['ELEMENT_CNT'] == 0) continue; // skip empty sections
     echo '<div class="accordionButton" title="'.$arSection['DESCRIPTION'].'">'.$arSection['NAME'].'<div class="accordionButtonNumber">'.$arSection['ELEMENT_CNT'].'</div></div><div class="accordionContent">';
 
    $APPLICATION->IncludeComponent("bitrix:catalog.section", "office_vacancies", Array(
