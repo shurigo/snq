@@ -208,8 +208,8 @@ if(intval($find_section_section) > 0)
 	$nav = CIBlockSection::GetNavChain($IBLOCK_ID, $find_section_section);
 	while($ar_nav = $nav->GetNext())
 	{
-		$strPath .= htmlspecialchars($ar_nav["~NAME"], ENT_QUOTES)."&nbsp;/&nbsp;";
-		$jsPath .= htmlspecialchars(CUtil::JSEscape($ar_nav["~NAME"]), ENT_QUOTES)."&nbsp;/&nbsp;";
+		$strPath .= htmlspecialcharsex($ar_nav["~NAME"], ENT_QUOTES)."&nbsp;/&nbsp;";
+		$jsPath .= htmlspecialcharsex(CUtil::JSEscape($ar_nav["~NAME"]), ENT_QUOTES)."&nbsp;/&nbsp;";
 	}
 }
 
@@ -263,7 +263,7 @@ while($arRes = $rsData->NavNext(true, "f_"))
 		array(
 			"DEFAULT" => "Y",
 			"TEXT" => GetMessage("IBLOCK_SECSEARCH_SELECT"),
-			"ACTION"=>"javascript:SelEl('".($get_xml_id? $f_XML_ID: $f_ID)."', '".htmlspecialchars($jsPath.htmlspecialchars(CUtil::JSEscape($arRes["NAME"]), ENT_QUOTES))."&nbsp;/&nbsp;"."')",
+			"ACTION"=>"javascript:SelEl('".($get_xml_id? $f_XML_ID: $f_ID)."', '".htmlspecialcharsex($jsPath.htmlspecialcharsex(CUtil::JSEscape($arRes["NAME"]), ENT_QUOTES))."&nbsp;/&nbsp;"."')",
 		),
 	));
 }
@@ -418,11 +418,11 @@ function SelAll()
 
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_ID")?>:</td>
-		<td><input type="text" name="find_section_id" size="47" value="<?echo htmlspecialchars($find_section_id)?>"></td>
+		<td><input type="text" name="find_section_id" size="47" value="<?echo htmlspecialcharsex($find_section_id)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_TIMESTAMP")." (".CLang::GetDateFormat("SHORT")."):"?></td>
-		<td><?echo CalendarPeriod("find_section_timestamp_1", htmlspecialchars($find_section_timestamp_1), "find_section_timestamp_2", htmlspecialchars($find_section_timestamp_2), "find_section_form","Y")?></td>
+		<td><?echo CalendarPeriod("find_section_timestamp_1", htmlspecialcharsex($find_section_timestamp_1), "find_section_timestamp_2", htmlspecialcharsex($find_section_timestamp_2), "find_section_form","Y")?></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_MODIFIED_BY")?>:</td>
@@ -462,11 +462,11 @@ function SelAll()
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_CODE")?>:</td>
-		<td><input type="text" name="find_section_code" size="47" value="<?echo htmlspecialchars($find_section_code)?>"></td>
+		<td><input type="text" name="find_section_code" size="47" value="<?echo htmlspecialcharsex($find_section_code)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_XML_ID")?>:</td>
-		<td><input type="text" name="find_section_external_id" size="47" value="<?echo htmlspecialchars($find_section_external_id)?>"></td>
+		<td><input type="text" name="find_section_external_id" size="47" value="<?echo htmlspecialcharsex($find_section_external_id)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBLOCK_SECSEARCH_ACTIVE")?>:</td>

@@ -363,12 +363,12 @@ function _ShowListPropertyField($name, $property_fields, $values, $bInitDef = fa
 
 			$uniq = md5(uniqid(rand(), true));
 			if($multiple=="Y") //multiple
-				$res .= '<input type="checkbox" name="'.$name.'[]" value="'.htmlspecialchars($ar_enum["ID"]).'"'.($sel?" checked":"").' id="'.$uniq.'"><label for="'.$uniq.'">'.htmlspecialcharsex($ar_enum["VALUE"]).'</label><br>';
+				$res .= '<input type="checkbox" name="'.$name.'[]" value="'.htmlspecialcharsex($ar_enum["ID"]).'"'.($sel?" checked":"").' id="'.$uniq.'"><label for="'.$uniq.'">'.htmlspecialcharsex($ar_enum["VALUE"]).'</label><br>';
 			else //if(MULTIPLE=="Y")
-				$res .= '<input type="radio" name="'.$name.'[]" id="'.$uniq.'" value="'.htmlspecialchars($ar_enum["ID"]).'"'.($sel?" checked":"").'><label for="'.$uniq.'">'.htmlspecialcharsex($ar_enum["VALUE"]).'</label><br>';
+				$res .= '<input type="radio" name="'.$name.'[]" id="'.$uniq.'" value="'.htmlspecialcharsex($ar_enum["ID"]).'"'.($sel?" checked":"").'><label for="'.$uniq.'">'.htmlspecialcharsex($ar_enum["VALUE"]).'</label><br>';
 
 			if($cnt==1)
-				$res_tmp = '<input type="checkbox" name="'.$name.'[]" value="'.htmlspecialchars($ar_enum["ID"]).'"'.($sel?" checked":"").' id="'.$uniq.'"><br>';
+				$res_tmp = '<input type="checkbox" name="'.$name.'[]" value="'.htmlspecialcharsex($ar_enum["ID"]).'"'.($sel?" checked":"").' id="'.$uniq.'"><br>';
 		}
 
 
@@ -394,7 +394,7 @@ function _ShowListPropertyField($name, $property_fields, $values, $bInitDef = fa
 				$sel = in_array($ar_enum["ID"], $values);
 			if($sel)
 				$bNoValue = false;
-			$res .= '<option value="'.htmlspecialchars($ar_enum["ID"]).'"'.($sel?" selected":"").'>'.htmlspecialcharsex($ar_enum["VALUE"]).'</option>';
+			$res .= '<option value="'.htmlspecialcharsex($ar_enum["ID"]).'"'.($sel?" selected":"").'>'.htmlspecialcharsex($ar_enum["VALUE"]).'</option>';
 		}
 
 		if($property_fields["MULTIPLE"]=="Y" && IntVal($property_fields["ROW_COUNT"])<2)
@@ -554,11 +554,11 @@ function _ShowHiddenValue($name, $value)
 	if(is_array($value))
 	{
 		foreach($value as $k => $v)
-			$res .= _ShowHiddenValue($name.'['.htmlspecialchars($k).']', $v);
+			$res .= _ShowHiddenValue($name.'['.htmlspecialcharsex($k).']', $v);
 	}
 	else
 	{
-		$res .= '<input type="hidden" name="'.$name.'" value="'.htmlspecialchars($value).'">'."\n";
+		$res .= '<input type="hidden" name="'.$name.'" value="'.htmlspecialcharsex($value).'">'."\n";
 	}
 
 	return $res;
@@ -1270,7 +1270,7 @@ do{ //one iteration loop
 			}
 			else
 			{
-				LocalRedirect("/bitrix/admin/iblock_element_edit.php?ID=".$ID.($WF=="Y"?"&WF=Y":"")."&lang=".LANG. "&type=".htmlspecialchars($type)."&".$tabControl->ActiveTabParam()."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):""));
+				LocalRedirect("/bitrix/admin/iblock_element_edit.php?ID=".$ID.($WF=="Y"?"&WF=Y":"")."&lang=".LANG. "&type=".htmlspecialcharsex($type)."&".$tabControl->ActiveTabParam()."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):""));
 			}
 		}
 	}
@@ -1340,7 +1340,7 @@ else
 
 	$str_IBLOCK_ELEMENT_SECTION = Array();
 	$str_ACTIVE = $arIBlock["FIELDS"]["ACTIVE"]["DEFAULT_VALUE"] === "N"? "N": "Y";
-	$str_NAME = htmlspecialchars($arIBlock["FIELDS"]["NAME"]["DEFAULT_VALUE"]);
+	$str_NAME = htmlspecialcharsex($arIBlock["FIELDS"]["NAME"]["DEFAULT_VALUE"]);
 	if($arIBlock["FIELDS"]["ACTIVE_FROM"]["DEFAULT_VALUE"] === "=now")
 		$str_ACTIVE_FROM = ConvertTimeStamp(false, "FULL");
 	elseif($arIBlock["FIELDS"]["ACTIVE_FROM"]["DEFAULT_VALUE"] === "=today")
@@ -1350,9 +1350,9 @@ else
 		$str_ACTIVE_TO = ConvertTimeStamp(time() + intval($arIBlock["FIELDS"]["ACTIVE_TO"]["DEFAULT_VALUE"])*24*60*60, "FULL");
 
 	$str_PREVIEW_TEXT_TYPE = $arIBlock["FIELDS"]["PREVIEW_TEXT_TYPE"]["DEFAULT_VALUE"] !== "html"? "text": "html";
-	$str_PREVIEW_TEXT = htmlspecialchars($arIBlock["FIELDS"]["PREVIEW_TEXT"]["DEFAULT_VALUE"]);
+	$str_PREVIEW_TEXT = htmlspecialcharsex($arIBlock["FIELDS"]["PREVIEW_TEXT"]["DEFAULT_VALUE"]);
 	$str_DETAIL_TEXT_TYPE = $arIBlock["FIELDS"]["DETAIL_TEXT_TYPE"]["DEFAULT_VALUE"] !== "html"? "text": "html";
-	$str_DETAIL_TEXT = htmlspecialchars($arIBlock["FIELDS"]["DETAIL_TEXT"]["DEFAULT_VALUE"]);
+	$str_DETAIL_TEXT = htmlspecialcharsex($arIBlock["FIELDS"]["DETAIL_TEXT"]["DEFAULT_VALUE"]);
 
 	if ($historyId > 0)
 	{
@@ -1404,7 +1404,7 @@ else
 
 	$adminChain->AddItem(array(
 		"TEXT" => htmlspecialcharsex($arIBlock["NAME"]),
-		"LINK" => htmlspecialchars($sSectionUrl),
+		"LINK" => htmlspecialcharsex($sSectionUrl),
 	));
 
 	if($find_section_section > 0)
@@ -1420,7 +1420,7 @@ else
 			$sSectionUrl = CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$ar_nav["ID"]));
 			$adminChain->AddItem(array(
 				"TEXT" => $ar_nav["NAME"],
-				"LINK" => htmlspecialchars($sSectionUrl),
+				"LINK" => htmlspecialcharsex($sSectionUrl),
 			));
 
 			if($ar_nav["ID"] != $find_section_section)
@@ -1518,13 +1518,13 @@ else
 		$aMenu[] = array("SEPARATOR"=>"Y");
 		$aMenu[] = array(
 			"TEXT"=>htmlspecialcharsex($arIBlock["ELEMENT_ADD"]),
-			"LINK"=>"iblock_element_edit.php?type=".htmlspecialchars($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&IBLOCK_SECTION_ID=".$MENU_SECTION_ID."&find_section_section=".intval($find_section_section),
+			"LINK"=>"iblock_element_edit.php?type=".htmlspecialcharsex($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&IBLOCK_SECTION_ID=".$MENU_SECTION_ID."&find_section_section=".intval($find_section_section),
 			"ICON"=>"btn_new",
 		);
 		$aMenu[] = array(
 			"TEXT"=>GetMessage("IBEL_E_COPY_ELEMENT"),
 			"TITLE"=>GetMessage("IBEL_E_COPY_ELEMENT_TITLE"),
-			"LINK"=>"iblock_element_edit.php?type=".htmlspecialchars($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&IBLOCK_SECTION_ID=".$MENU_SECTION_ID."&find_section_section=".intval($find_section_section)."&action=copy&ID=".$ID,
+			"LINK"=>"iblock_element_edit.php?type=".htmlspecialcharsex($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&IBLOCK_SECTION_ID=".$MENU_SECTION_ID."&find_section_section=".intval($find_section_section)."&action=copy&ID=".$ID,
 			"ICON"=>"btn_copy",
 		);
 
@@ -1770,9 +1770,9 @@ function addNewRow(tableID)
 <?echo GetFilterHiddens("find_");?>
 <input type="hidden" name="linked_state" id="linked_state" value="<?if($bLinked) echo 'Y'; else echo 'N';?>">
 <input type="hidden" name="Update" value="Y">
-<input type="hidden" name="from" value="<?echo htmlspecialchars($from)?>">
-<input type="hidden" name="WF" value="<?echo htmlspecialchars($WF)?>">
-<input type="hidden" name="return_url" value="<?echo htmlspecialchars($return_url)?>">
+<input type="hidden" name="from" value="<?echo htmlspecialcharsex($from)?>">
+<input type="hidden" name="WF" value="<?echo htmlspecialcharsex($WF)?>">
+<input type="hidden" name="return_url" value="<?echo htmlspecialcharsex($return_url)?>">
 <?if($ID>0 && !$bCopy):?>
 	<input type="hidden" name="ID" value="<?echo $ID?>">
 <?endif;?>
@@ -1917,7 +1917,7 @@ if(count($PROP)>0):
 				$elements_name = GetMessage("IBLOCK_ELEMENT_EDIT_ELEMENTS");
 		?>
 		<tr id="tr_LINKED_PROP<?echo $arLinkedProp["ID"]?>">
-			<td colspan="2"><a href="<?echo htmlspecialchars(CIBlock::GetAdminElementListLink($arLinkedProp["IBLOCK_ID"], array('set_filter'=>'Y', 'find_el_property_'.$arLinkedProp["ID"]=>$ID)))?>"><?echo CIBlock::GetArrayByID($arLinkedProp["IBLOCK_ID"], "NAME").": ".$elements_name?></a></td>
+			<td colspan="2"><a href="<?echo htmlspecialcharsex(CIBlock::GetAdminElementListLink($arLinkedProp["IBLOCK_ID"], array('set_filter'=>'Y', 'find_el_property_'.$arLinkedProp["ID"]=>$ID)))?>"><?echo CIBlock::GetArrayByID($arLinkedProp["IBLOCK_ID"], "NAME").": ".$elements_name?></a></td>
 		</tr>
 		<?
 		} while ($arLinkedProp = $rsLinkedProps->GetNext());
@@ -2594,7 +2594,7 @@ if ($bBizproc && ($historyId <= 0)):
 				<table width="100%" cellpadding="0" cellspacing="0" border="0">
 					<tr>
 						<td width="99%" align="center">
-							<?= htmlspecialchars($arDocumentState["TEMPLATE_NAME"]) ?>
+							<?= htmlspecialcharsex($arDocumentState["TEMPLATE_NAME"]) ?>
 						</td>
 						<td width="1%" align="right">
 							<?if (strlen($arDocumentState["ID"]) > 0 && strlen($arDocumentState["WORKFLOW_STATUS"]) > 0):?>
@@ -2607,12 +2607,12 @@ if ($bBizproc && ($historyId <= 0)):
 		</tr>
 		<tr>
 			<td width="40%"><?echo GetMessage("IBEL_BIZPROC_NAME")?></td>
-			<td width="60%"><?= htmlspecialchars($arDocumentState["TEMPLATE_NAME"]) ?></td>
+			<td width="60%"><?= htmlspecialcharsex($arDocumentState["TEMPLATE_NAME"]) ?></td>
 		</tr>
 		<?if($arDocumentState["TEMPLATE_DESCRIPTION"]!=''):?>
 		<tr>
 			<td width="40%"><?echo GetMessage("IBEL_BIZPROC_DESC")?></td>
-			<td width="60%"><?= htmlspecialchars($arDocumentState["TEMPLATE_DESCRIPTION"]) ?></td>
+			<td width="60%"><?= htmlspecialcharsex($arDocumentState["TEMPLATE_DESCRIPTION"]) ?></td>
 		</tr>
 		<?endif?>
 		<?if (strlen($arDocumentState["STATE_MODIFIED"]) > 0):?>
@@ -2653,7 +2653,7 @@ if ($bBizproc && ($historyId <= 0)):
 						<?
 						foreach ($arEvents as $e)
 						{
-							?><option value="<?= htmlspecialchars($e["NAME"]) ?>"<?= ($_REQUEST["bizproc_event_".$bizProcIndex] == $e["NAME"]) ? " selected" : ""?>><?= htmlspecialchars($e["TITLE"]) ?></option><?
+							?><option value="<?= htmlspecialcharsex($e["NAME"]) ?>"<?= ($_REQUEST["bizproc_event_".$bizProcIndex] == $e["NAME"]) ? " selected" : ""?>><?= htmlspecialcharsex($e["TITLE"]) ?></option><?
 						}
 						?>
 					</select>
@@ -2674,7 +2674,7 @@ if ($bBizproc && ($historyId <= 0)):
 						<?
 						foreach ($arTasks as $arTask)
 						{
-							?><a href="bizproc_task.php?id=<?= $arTask["ID"] ?>&back_url=<?= urlencode($APPLICATION->GetCurPageParam("", array())) ?>" title="<?= htmlspecialchars($arTask["DESCRIPTION"]) ?>"><?= $arTask["NAME"] ?></a><br /><?
+							?><a href="bizproc_task.php?id=<?= $arTask["ID"] ?>&back_url=<?= urlencode($APPLICATION->GetCurPageParam("", array())) ?>" title="<?= htmlspecialcharsex($arTask["DESCRIPTION"]) ?>"><?= $arTask["NAME"] ?></a><br /><?
 						}
 						?>
 					</td>
@@ -2742,7 +2742,7 @@ if((!defined('BX_PUBLIC_MODE') || BX_PUBLIC_MODE != 1) && $BlockPerm >= "X")
 	echo
 		BeginNote(),
 		GetMessage("IBEL_E_IBLOCK_MANAGE_HINT"),
-		' <a href="iblock_edit.php?type='.htmlspecialchars($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_element_edit.php?ID=".$ID.($WF=="Y"?"&WF=Y":"")."&lang=".LANG. "&type=".htmlspecialchars($type)."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):"")).'">',
+		' <a href="iblock_edit.php?type='.htmlspecialcharsex($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_element_edit.php?ID=".$ID.($WF=="Y"?"&WF=Y":"")."&lang=".LANG. "&type=".htmlspecialcharsex($type)."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):"")).'">',
 		GetMessage("IBEL_E_IBLOCK_MANAGE_HINT_HREF"),
 		'</a>',
 		EndNote()

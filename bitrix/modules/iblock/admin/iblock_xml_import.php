@@ -256,7 +256,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["Import"]=="Y")
 			<?echo GetMessage("IBLOCK_CML2_DELETED", array("#COUNT#"=>intval($NS["DONE"]["DEL"])))?><br>
 			<?echo GetMessage("IBLOCK_CML2_DEACTIVATED", array("#COUNT#"=>intval($NS["DONE"]["DEA"])))?><br>
 			<?echo GetMessage("IBLOCK_CML2_WITH_ERRORS", array("#COUNT#"=>intval($NS["DONE"]["ERR"])))?><br>
-			<a href="<?echo htmlspecialchars(CIBlock::GetAdminElementListLink($NS["IBLOCK_ID"] , array('find_el_y'=>'Y')))?>"><?echo GetMessage("IBLOCK_CML2_ELEMENTS_LIST")?></a></p>
+			<a href="<?echo htmlspecialcharsex(CIBlock::GetAdminElementListLink($NS["IBLOCK_ID"] , array('find_el_y'=>'Y')))?>"><?echo GetMessage("IBLOCK_CML2_ELEMENTS_LIST")?></a></p>
 			<script>
 				EndImport();
 			</script>
@@ -348,7 +348,7 @@ function EndImport()
 	running = document.getElementById('start_button').disabled = false;
 }
 </script>
-<form method="POST" action="<?echo $APPLICATION->GetCurPage()?>?lang=<?echo htmlspecialchars(LANG)?>" name="form1" id="form1">
+<form method="POST" action="<?echo $APPLICATION->GetCurPage()?>?lang=<?echo htmlspecialcharsex(LANG)?>" name="form1" id="form1">
 <?
 $rsIBlockType = CIBlockType::GetList(array("sort"=>"asc"), array("ACTIVE"=>"Y"));
 $arIBlockType = array("reference"=>array(), "reference_id"=>array());
@@ -367,7 +367,7 @@ $tabControl->BeginNextTab();
 	<tr valign="top">
 		<td width="40%"><span class="required">*</span><?echo GetMessage("IBLOCK_CML2_URL_DATA_FILE")?>:</td>
 		<td width="60%">
-			<input type="text" id="URL_DATA_FILE" name="URL_DATA_FILE" size="30" value="<?=htmlspecialchars($URL_DATA_FILE)?>">
+			<input type="text" id="URL_DATA_FILE" name="URL_DATA_FILE" size="30" value="<?=htmlspecialcharsex($URL_DATA_FILE)?>">
 			<input type="button" value="<?echo GetMessage("IBLOCK_CML2_OPEN")?>" OnClick="BtnClick()">
 			<?
 			CAdminFileDialog::ShowScript
@@ -394,7 +394,7 @@ $tabControl->BeginNextTab();
 	</tr>
 	<tr valign="top">
 		<td><span class="required">*</span><?echo GetMessage("IBLOCK_CML2_LID")?></td>
-		<td><?echo CLang::SelectBoxMulti("LID", htmlspecialchars($LID));?></td>
+		<td><?echo CLang::SelectBoxMulti("LID", htmlspecialcharsex($LID));?></td>
 	</tr>
 	<tr valign="top">
 		<td><?echo GetMessage("IBLOCK_CML2_ACTION")?>:</td>

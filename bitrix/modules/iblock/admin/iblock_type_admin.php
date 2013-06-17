@@ -41,7 +41,7 @@ if($lAdmin->EditAction()) // Save button was pressed
 		$res = $obBlocktype->Update($ID, $arFields);
 		if(!$res)
 		{
-			$lAdmin->AddUpdateError(GetMessage("IBLOCK_TYPE_ADMIN_ERR_SAVE")." (&quot;".htmlspecialchars($ID)."&quot;): ".$obBlocktype->LAST_ERROR, $ID);
+			$lAdmin->AddUpdateError(GetMessage("IBLOCK_TYPE_ADMIN_ERR_SAVE")." (&quot;".htmlspecialcharsex($ID)."&quot;): ".$obBlocktype->LAST_ERROR, $ID);
 			$DB->Rollback();
 		}
 		$DB->Commit();
@@ -68,7 +68,7 @@ if(($arID = $lAdmin->GroupAction()))
 			if(!CIBlockType::Delete($ID))
 			{
 				$DB->Rollback();
-				$lAdmin->AddGroupError(GetMessage("IBLOCK_TYPE_ADMIN_ERR_DEL")." (&quot;".htmlspecialchars($ID)."&quot;)", $ID);
+				$lAdmin->AddGroupError(GetMessage("IBLOCK_TYPE_ADMIN_ERR_DEL")." (&quot;".htmlspecialcharsex($ID)."&quot;)", $ID);
 			}
 			$DB->Commit();
 			break;
@@ -163,12 +163,12 @@ $oFilter->Begin();
 <tr>
 	<td><b><?echo GetMessage("IBLOCK_TYPE_ADMIN_COL_NAME")?>:</b></td>
 	<td nowrap>
-		<input type="text" size="25" name="find_name" value="<?echo htmlspecialchars($find_name)?>" title="<?=GetMessage("MAIN_ADMIN_LIST_FILTER_1ST")?>">
+		<input type="text" size="25" name="find_name" value="<?echo htmlspecialcharsex($find_name)?>" title="<?=GetMessage("MAIN_ADMIN_LIST_FILTER_1ST")?>">
 	</td>
 </tr>
 <tr>
 	<td><?echo GetMessage("IBLOCK_TYPE_ADMIN_FILTER_ID")?>:</td>
-	<td><input type="text" name="find_id" size="47" value="<?echo htmlspecialchars($find_id)?>"></td>
+	<td><input type="text" name="find_id" size="47" value="<?echo htmlspecialcharsex($find_id)?>"></td>
 </tr>
 <?
 $oFilter->Buttons(array("table_id"=>$sTableID, "url"=>$APPLICATION->GetCurPage(), "form"=>"filter_form"));

@@ -33,7 +33,7 @@ if(!$zr=$z->Fetch())
 {
 	$APPLICATION->SetTitle(GetMessage("IBLOCK_ADM_HISTORY_TITLE", array("#ID#" => $ELEMENT_ID)));
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_after.php");
-	?><a href="/bitrix/admin/iblock_admin.php?type=<?echo htmlspecialchars($type)?>&amp;lang=<?echo LANG?>"><?echo htmlspecialcharsex($arIBTYPE["NAME"])?></a> - <a href="<?echo htmlspecialchars(CIBlock::GetAdminElementListLink($IBLOCK_ID, array()))?>"><?echo htmlspecialchars($arIBlock["NAME"])?></a><?
+	?><a href="/bitrix/admin/iblock_admin.php?type=<?echo htmlspecialcharsex($type)?>&amp;lang=<?echo LANG?>"><?echo htmlspecialcharsex($arIBTYPE["NAME"])?></a> - <a href="<?echo htmlspecialcharsex(CIBlock::GetAdminElementListLink($IBLOCK_ID, array()))?>"><?echo htmlspecialcharsex($arIBlock["NAME"])?></a><?
 	echo ShowError(GetMessage("IBLOCK_ADM_HISTORY_BAD_ELEMENT"));
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_admin.php");
 	die();
@@ -183,13 +183,13 @@ while($arRes = $rsData->NavNext(true, "f_"))
 		"ICON"=>"delete",
 		"TEXT"=>GetMessage('IBLOCK_ADM_HISTORY_DELETE'),
 		"TITLE"=>GetMessage("IBLOCK_ADM_HISTORY_DELETE_ALT"),
-		"ACTION"=>"if(confirm('".GetMessage("IBLOCK_ADM_HISTORY_CONFIRM_DEL")."')) ".$lAdmin->ActionDoGroup($f_ID, "delete", 'type='.htmlspecialchars($type).'&ELEMENT_ID='.$ELEMENT_ID.'&IBLOCK_ID='.$IBLOCK_ID.'&find_section_section='.$find_section_section)
+		"ACTION"=>"if(confirm('".GetMessage("IBLOCK_ADM_HISTORY_CONFIRM_DEL")."')) ".$lAdmin->ActionDoGroup($f_ID, "delete", 'type='.htmlspecialcharsex($type).'&ELEMENT_ID='.$ELEMENT_ID.'&IBLOCK_ID='.$IBLOCK_ID.'&find_section_section='.$find_section_section)
 		);
 	$arActions[] = array(
 		"ICON"=>"restore",
 		"TEXT"=>GetMessage('IBLOCK_ADM_HISTORY_RESTORE'),
 		"TITLE"=>GetMessage("IBLOCK_ADM_HISTORY_RESTORE_ALT"),
-		"ACTION"=>"if(confirm('".GetMessage("IBLOCK_ADM_HISTORY_RESTORE_CONFIRM")."')) ".$lAdmin->ActionDoGroup($f_ID, "restore", 'type='.htmlspecialchars($type).'&ELEMENT_ID='.$ELEMENT_ID.'&IBLOCK_ID='.$IBLOCK_ID.'&find_section_section='.$find_section_section)
+		"ACTION"=>"if(confirm('".GetMessage("IBLOCK_ADM_HISTORY_RESTORE_CONFIRM")."')) ".$lAdmin->ActionDoGroup($f_ID, "restore", 'type='.htmlspecialcharsex($type).'&ELEMENT_ID='.$ELEMENT_ID.'&IBLOCK_ID='.$IBLOCK_ID.'&find_section_section='.$find_section_section)
 		);
 
 	$row->AddActions($arActions);
@@ -220,7 +220,7 @@ $lAdmin->AddGroupActionTable(array(
 $aContext = array(
 	array(
 		"TEXT"=>GetMessage("IBLOCK_ADM_HISTORY_ORIGINAL"),
-		"LINK"=>"iblock_element_edit.php?WF=Y&ID=".$ELEMENT_ID."&type=".htmlspecialchars($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".$find_section_section,
+		"LINK"=>"iblock_element_edit.php?WF=Y&ID=".$ELEMENT_ID."&type=".htmlspecialcharsex($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".$find_section_section,
 		"TITLE"=>GetMessage("IBLOCK_ADM_HISTORY_ORIGINAL_TITLE")
 	),
 );
@@ -233,7 +233,7 @@ $chain = $lAdmin->CreateChain();
 $sSectionUrl = CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0));
 $chain->AddItem(array(
 	"TEXT" => htmlspecialcharsex($arIBlock["NAME"]),
-	"LINK" => htmlspecialchars($sSectionUrl),
+	"LINK" => htmlspecialcharsex($sSectionUrl),
 ));
 
 if($find_section_section > 0)
@@ -244,14 +244,14 @@ if($find_section_section > 0)
 		$sSectionUrl = CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$ar_nav["ID"]));
 		$chain->AddItem(array(
 			"TEXT" => $ar_nav["NAME"],
-			"LINK" => htmlspecialchars($sSectionUrl),
+			"LINK" => htmlspecialcharsex($sSectionUrl),
 		));
 	}
 }
 
 $chain->AddItem(array(
 	"TEXT" => htmlspecialcharsex($zr["NAME"]),
-	"LINK" => "iblock_element_edit.php?WF=Y&ID=".$ELEMENT_ID."&type=".htmlspecialchars($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID,
+	"LINK" => "iblock_element_edit.php?WF=Y&ID=".$ELEMENT_ID."&type=".htmlspecialcharsex($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID,
 ));
 
 $lAdmin->ShowChain($chain);
@@ -308,19 +308,19 @@ $oFilter->Begin();
 ?>
 <tr>
 	<td><font class="tableheadtext"><b><?=GetMessage("IBLOCK_FIELD_NAME")?>:</b></td>
-	<td><input type="text" name="find_name" value="<?echo (strlen($find_name)>0) ? htmlspecialchars($find_name) : ""?>" size="38"></td>
+	<td><input type="text" name="find_name" value="<?echo (strlen($find_name)>0) ? htmlspecialcharsex($find_name) : ""?>" size="38"></td>
 </tr>
 <tr>
 	<td><?=GetMessage("IBLOCK_FIELD_ID")?>:</td>
-	<td><input type="text" name="find_id" size="38" value="<?echo htmlspecialchars($find_id)?>"></td>
+	<td><input type="text" name="find_id" size="38" value="<?echo htmlspecialcharsex($find_id)?>"></td>
 </tr>
 <tr>
 	<td><?echo GetMessage("IBLOCK_FIELD_TIMESTAMP_X")." (".CLang::GetDateFormat("SHORT")."):"?></td>
-	<td><?echo CalendarPeriod("find_timestamp_from", htmlspecialchars($find_timestamp_from), "find_timestamp_to", htmlspecialchars($find_timestamp_to), "find_form")?></font></td>
+	<td><?echo CalendarPeriod("find_timestamp_from", htmlspecialcharsex($find_timestamp_from), "find_timestamp_to", htmlspecialcharsex($find_timestamp_to), "find_form")?></font></td>
 </tr>
 <tr>
 	<td><?=GetMessage("IBLOCK_FIELD_MODIFIED_BY")?>:</td>
-	<td><input type="text" name="find_modified_user_id" value="<?echo htmlspecialchars($find_modified_user_id)?>" size="3">&nbsp;<?
+	<td><input type="text" name="find_modified_user_id" value="<?echo htmlspecialcharsex($find_modified_user_id)?>" size="3">&nbsp;<?
 		$gr_res = CIBlock::GetGroupPermissions($IBLOCK_ID);
 		$res = Array(1);
 		foreach($gr_res as $gr=>$perm)
@@ -330,18 +330,18 @@ $oFilter->Begin();
 		?><select name="find_modified_by">
 		<option value=""><?echo GetMessage("IBLOCK_VALUE_ANY")?></option><?
 		while($arr = $res->Fetch())
-			echo "<option value='".$arr["ID"]."'".($find_modified_by==$arr["ID"]?" selected":"").">(".htmlspecialchars($arr["LOGIN"].") ".$arr["NAME"]." ".$arr["LAST_NAME"])."</option>";
+			echo "<option value='".$arr["ID"]."'".($find_modified_by==$arr["ID"]?" selected":"").">(".htmlspecialcharsex($arr["LOGIN"].") ".$arr["NAME"]." ".$arr["LAST_NAME"])."</option>";
 		?></select>
 	</td>
 </tr>
 <tr>
 	<td><?=GetMessage("IBLOCK_FIELD_STATUS")?>:</td>
-	<td><input type="text" name="find_status_id" value="<?echo htmlspecialchars($find_status_id)?>" size="3">&nbsp;<?
-	echo SelectBox("find_status", CWorkflowStatus::GetDropDownList("Y"), GetMessage("IBLOCK_ALL"), htmlspecialchars($find_status));
+	<td><input type="text" name="find_status_id" value="<?echo htmlspecialcharsex($find_status_id)?>" size="3">&nbsp;<?
+	echo SelectBox("find_status", CWorkflowStatus::GetDropDownList("Y"), GetMessage("IBLOCK_ALL"), htmlspecialcharsex($find_status));
 	?></td>
 </tr>
 <?
-$oFilter->Buttons(array("table_id"=>$sTableID, "url"=>$APPLICATION->GetCurPage()."?type=".htmlspecialchars($type)."&IBLOCK_ID=".intval($IBLOCK_ID)."&ELEMENT_ID=".$ELEMENT_ID, "form"=>"find_form"));
+$oFilter->Buttons(array("table_id"=>$sTableID, "url"=>$APPLICATION->GetCurPage()."?type=".htmlspecialcharsex($type)."&IBLOCK_ID=".intval($IBLOCK_ID)."&ELEMENT_ID=".$ELEMENT_ID, "form"=>"find_form"));
 $oFilter->End();
 ?>
 </form>

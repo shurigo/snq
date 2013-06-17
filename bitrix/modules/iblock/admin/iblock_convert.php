@@ -120,7 +120,7 @@ foreach($arMessages as $strMessage)
 
 if(count($arErrors)==0):?>
 	<?if($STEP==0):?>
-		<p><span class="required"><?=GetMessage("IBCONV_ATTENTION")?></span> <?=GetMessage("IBCONV_WARNING_MESSAGE",array("#IBLOCK_NAME#"=>htmlspecialchars($arIBlock["NAME"])))?>
+		<p><span class="required"><?=GetMessage("IBCONV_ATTENTION")?></span> <?=GetMessage("IBCONV_WARNING_MESSAGE",array("#IBLOCK_NAME#"=>htmlspecialcharsex($arIBlock["NAME"])))?>
 		<input type="button" name="START" value="<?=GetMessage("IBCONV_MOVE")?>" OnClick="DoNext(<?=$arIBlock["VERSION"]==2?21:12?>,1)">
 	<?elseif($STEP>=1 && $STEP<=5):?>
 		<?if($WAY==12):?>

@@ -38,7 +38,7 @@ if($bBadBlock)
 	if($bBadBlock):
 	?>
 	<?echo ShowError(GetMessage("IBLOCK_BAD_IBLOCK"));?>
-	<a href="iblock_admin.php?lang=<?echo LANG?>&amp;type=<?echo htmlspecialchars($type)?>"><?echo GetMessage("IBLOCK_BACK_TO_ADMIN")?></a>
+	<a href="iblock_admin.php?lang=<?echo LANG?>&amp;type=<?echo htmlspecialcharsex($type)?>"><?echo GetMessage("IBLOCK_BACK_TO_ADMIN")?></a>
 	<?
 	endif;
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_admin.php");
@@ -1021,7 +1021,7 @@ else
 }
 
 $rsData->NavStart();
-$lAdmin->NavText($rsData->GetNavPrint(htmlspecialchars($arIBlock["ELEMENTS_NAME"])));
+$lAdmin->NavText($rsData->GetNavPrint(htmlspecialcharsex($arIBlock["ELEMENTS_NAME"])));
 
 function GetElementName($ID)
 {
@@ -1181,9 +1181,9 @@ while($arRes = $rsData->NavNext(true, "f_"))
 
 
 		if($lockStatus=='red' && $arRes_orig['LOCKED_USER_NAME']!='')
-			$row->AddViewField("LOCK_STATUS", '<table cellpadding="0" cellspacing="0" border="0"><tr><td><img hspace="4" src="'.$lamp.'" alt="'.htmlspecialchars($lamp_alt).'" title="'.htmlspecialchars($lamp_alt).'" /></td><td>'.$arRes_orig['LOCKED_USER_NAME'].$unlock.'</td></tr></table>');
+			$row->AddViewField("LOCK_STATUS", '<table cellpadding="0" cellspacing="0" border="0"><tr><td><img hspace="4" src="'.$lamp.'" alt="'.htmlspecialcharsex($lamp_alt).'" title="'.htmlspecialcharsex($lamp_alt).'" /></td><td>'.$arRes_orig['LOCKED_USER_NAME'].$unlock.'</td></tr></table>');
 		else
-			$row->AddViewField("LOCK_STATUS", '<img src="'.$lamp.'" hspace="4" alt="'.htmlspecialchars($lamp_alt).'" title="'.htmlspecialchars($lamp_alt).'" />');
+			$row->AddViewField("LOCK_STATUS", '<img src="'.$lamp.'" hspace="4" alt="'.htmlspecialcharsex($lamp_alt).'" title="'.htmlspecialcharsex($lamp_alt).'" />');
 	}
 
 	if($bBizproc)
@@ -1633,7 +1633,7 @@ while($arRes = $rsData->NavNext(true, "f_"))
 						"ICON"=>"view",
 						"TEXT"=>GetMessage("IBLOCK_EL_ADMIN_VIEW_WF"),
 						"TITLE"=>GetMessage("IBEL_A_ORIG"),
-						"ACTION"=>$lAdmin->ActionRedirect(htmlspecialchars($tmpVar).((strpos($tmpVar, "?") !== false) ? "&" : "?")."show_workflow=Y")
+						"ACTION"=>$lAdmin->ActionRedirect(htmlspecialcharsex($tmpVar).((strpos($tmpVar, "?") !== false) ? "&" : "?")."show_workflow=Y")
 					);
 				}
 
@@ -1679,14 +1679,14 @@ while($arRes = $rsData->NavNext(true, "f_"))
 							"ICON"=>"view",
 							"TEXT"=>GetMessage("IBLOCK_EL_ADMIN_VIEW"),
 							"TITLE"=>GetMessage("IBEL_A_ORIG"),
-							"ACTION"=>$lAdmin->ActionRedirect(htmlspecialchars($tmpVar))
+							"ACTION"=>$lAdmin->ActionRedirect(htmlspecialcharsex($tmpVar))
 						);
 
 						$arActions[] = array(
 							"ICON"=>"view",
 							"TEXT"=>GetMessage("IBLOCK_EL_ADMIN_VIEW_WF"),
 							"TITLE"=>GetMessage("IBEL_A_ORIG"),
-							"ACTION"=>$lAdmin->ActionRedirect(htmlspecialchars($tmpVar).((strpos($tmpVar, "?") !== false) ? "&" : "?")."show_workflow=Y")
+							"ACTION"=>$lAdmin->ActionRedirect(htmlspecialcharsex($tmpVar).((strpos($tmpVar, "?") !== false) ? "&" : "?")."show_workflow=Y")
 						);
 					}
 
@@ -1736,7 +1736,7 @@ while($arRes = $rsData->NavNext(true, "f_"))
 						"ICON"=>"view",
 						"TEXT"=>GetMessage("IBLOCK_EL_ADMIN_VIEW"),
 						"TITLE"=>GetMessage("IBEL_A_ORIG"),
-						"ACTION"=>$lAdmin->ActionRedirect(htmlspecialchars($tmpVar))
+						"ACTION"=>$lAdmin->ActionRedirect(htmlspecialcharsex($tmpVar))
 					);
 				}
 
@@ -1839,7 +1839,7 @@ while($arRes = $rsData->NavNext(true, "f_"))
 				"ICON"=>"view",
 				"TEXT"=>GetMessage("IBLOCK_EL_ADMIN_VIEW"),
 				"TITLE"=>GetMessage("IBEL_A_ORIG"),
-				"ACTION"=>$lAdmin->ActionRedirect(htmlspecialchars($tmpVar))
+				"ACTION"=>$lAdmin->ActionRedirect(htmlspecialcharsex($tmpVar))
 			);
 		}
 
@@ -1901,17 +1901,17 @@ if($arIBTYPE["SECTIONS"]=="Y")
 {
 	$chain->AddItem(array(
 		"TEXT" => htmlspecialcharsex($arIBlock["NAME"]),
-		"LINK" => htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0))),
+		"LINK" => htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0))),
 	));
 
 	$sLastFolder = '';
 	if($find_section_section > 0)
 	{
-		$sLastFolder = htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0)));
+		$sLastFolder = htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0)));
 		$nav = CIBlockSection::GetNavChain($IBLOCK_ID, $find_section_section);
 		while($ar_nav = $nav->GetNext())
 		{
-			$sLastFolder = htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$ar_nav["ID"])));
+			$sLastFolder = htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$ar_nav["ID"])));
 			$chain->AddItem(array(
 				"TEXT" => $ar_nav["NAME"],
 				"LINK" => $sLastFolder,
@@ -1925,7 +1925,7 @@ $lAdmin->ShowChain($chain);
 $aContext = array(
 	array(
 		"ICON"=>"btn_new",
-		"TEXT"=>htmlspecialchars($arIBlock["ELEMENT_ADD"]),
+		"TEXT"=>htmlspecialcharsex($arIBlock["ELEMENT_ADD"]),
 		"LINK"=>'iblock_element_edit.php?IBLOCK_SECTION_ID='.urlencode($find_section_section).$sThisSectionUrl,
 		"TITLE"=>GetMessage("IBEL_A_ADDEL_TITLE")
 	),
@@ -2281,7 +2281,7 @@ if($BlockPerm >= "X")
 	echo
 		BeginNote(),
 		GetMessage("IBEL_A_IBLOCK_MANAGE_HINT"),
-		' <a href="iblock_edit.php?type='.htmlspecialchars($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_element_admin.php?".$sThisSectionUrl).'">',
+		' <a href="iblock_edit.php?type='.htmlspecialcharsex($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_element_admin.php?".$sThisSectionUrl).'">',
 		GetMessage("IBEL_A_IBLOCK_MANAGE_HINT_HREF"),
 		'</a>',
 		EndNote()

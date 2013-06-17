@@ -437,7 +437,7 @@ if ($STEP == 2)
 			<input type="radio" name="delimiter_r" id="delimiter_TAB" value="TAB" <?if ($delimiter_r=="TAB") echo "checked"?>><label for="delimiter_TAB"><?echo GetMessage("IBLOCK_ADM_EXP_DELIM_TAB") ?></label><br>
 			<input type="radio" name="delimiter_r" id="delimiter_SPS" value="SPS" <?if ($delimiter_r=="SPS") echo "checked"?>><label for="delimiter_SPS"><?echo GetMessage("IBLOCK_ADM_EXP_DELIM_SPS") ?></label><br>
 			<input type="radio" name="delimiter_r" id="delimiter_OTR" value="OTR" <?if ($delimiter_r=="OTR") echo "checked"?>><label for="delimiter_OTR"><?echo GetMessage("IBLOCK_ADM_EXP_DELIM_OTR") ?></label>
-			<input type="text" name="delimiter_other_r" size="3" value="<?echo htmlspecialchars($delimiter_other_r) ?>">
+			<input type="text" name="delimiter_other_r" size="3" value="<?echo htmlspecialcharsex($delimiter_other_r) ?>">
 			<input type="hidden" name="first_names_r" value="N">
 		</td>
 	</tr>
@@ -526,7 +526,7 @@ if ($STEP == 2)
 	<tr>
 		<td valign="top"><?echo GetMessage("IBLOCK_ADM_EXP_ENTER_FILE_NAME") ?>:</td>
 		<td valign="top">
-			<input type="text" name="DATA_FILE_NAME" size="40" value="<?echo (strlen($DATA_FILE_NAME)>0)?htmlspecialchars($DATA_FILE_NAME):"/upload/export_file.csv"?>"><br>
+			<input type="text" name="DATA_FILE_NAME" size="40" value="<?echo (strlen($DATA_FILE_NAME)>0)?htmlspecialcharsex($DATA_FILE_NAME):"/upload/export_file.csv"?>"><br>
 			<small><?echo GetMessage("IBLOCK_ADM_EXP_FILE_WARNING") ?></small>
 		</td>
 	</tr>

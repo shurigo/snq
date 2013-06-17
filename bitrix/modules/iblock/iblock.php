@@ -563,21 +563,21 @@ function GetIBlockDropDownList($IBLOCK_ID, $strTypeName, $strIBlockName, $arFilt
 		';
 	}
 
-	$html .= '<select name="'.htmlspecialchars($strTypeName).'" id="'.htmlspecialchars($strTypeName).'" OnChange="OnTypeChanged(this, \''.CUtil::JSEscape($strIBlockName).'\')">'."\n";
+	$html .= '<select name="'.htmlspecialcharsex($strTypeName).'" id="'.htmlspecialcharsex($strTypeName).'" OnChange="OnTypeChanged(this, \''.CUtil::JSEscape($strIBlockName).'\')">'."\n";
 	foreach($arTypes as $key => $value)
 	{
 		if($IBLOCK_TYPE === false)
 			$IBLOCK_TYPE = $key;
-		$html .= '<option value="'.htmlspecialchars($key).'"'.($IBLOCK_TYPE===$key? ' selected': '').'>'.htmlspecialchars($value).'</option>'."\n";
+		$html .= '<option value="'.htmlspecialcharsex($key).'"'.($IBLOCK_TYPE===$key? ' selected': '').'>'.htmlspecialcharsex($value).'</option>'."\n";
 	}
 	$html .= "</select>\n";
 
 	$html .= "&nbsp;\n";
 
-	$html .= '<select name="'.htmlspecialchars($strIBlockName).'" id="'.htmlspecialchars($strIBlockName).'">'."\n";
+	$html .= '<select name="'.htmlspecialcharsex($strIBlockName).'" id="'.htmlspecialcharsex($strIBlockName).'">'."\n";
 	foreach($arIBlocks[$IBLOCK_TYPE] as $key => $value)
 	{
-		$html .= '<option value="'.htmlspecialchars($key).'"'.($IBLOCK_ID==$key? ' selected': '').'>'.htmlspecialchars($value).'</option>'."\n";
+		$html .= '<option value="'.htmlspecialcharsex($key).'"'.($IBLOCK_ID==$key? ' selected': '').'>'.htmlspecialcharsex($value).'</option>'."\n";
 	}
 	$html .= "</select>\n";
 

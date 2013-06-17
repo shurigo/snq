@@ -258,7 +258,7 @@ function EndExport()
 }
 </script>
 
-<form method="POST" action="<?echo $APPLICATION->GetCurPage()?>?lang=<?echo htmlspecialchars(LANG)?>" name="form1" id="form1">
+<form method="POST" action="<?echo $APPLICATION->GetCurPage()?>?lang=<?echo htmlspecialcharsex(LANG)?>" name="form1" id="form1">
 <?
 $tabControl->Begin();
 $tabControl->BeginNextTab();
@@ -266,7 +266,7 @@ $tabControl->BeginNextTab();
 	<tr valign="top">
 		<td width="40%"><?echo GetMessage("IBLOCK_CML2_URL_DATA_FILE")?>:</td>
 		<td width="60%">
-			<input type="text" id="URL_DATA_FILE" name="URL_DATA_FILE" size="30" value="<?=htmlspecialchars($URL_DATA_FILE)?>">
+			<input type="text" id="URL_DATA_FILE" name="URL_DATA_FILE" size="30" value="<?=htmlspecialcharsex($URL_DATA_FILE)?>">
 			<input type="button" value="<?echo GetMessage("IBLOCK_CML2_OPEN")?>" OnClick="BtnClick()">
 			<?
 			CAdminFileDialog::ShowScript

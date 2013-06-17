@@ -73,6 +73,9 @@ $mail->Subject  = "Отклик на вакансию ".$vacancy_name;
 
 $mail->MsgHTML($body);
 $mail->AltBody = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+
+//check if hr e-mail was provided if not put the default value
+if (!isset($hr_email) || $hr_email == "") $hr_email="resume@snq.ru";
 $mail->AddAddress($hr_email, "HR Snowqueen.ru");
 //$mail->AddAddress("vyacheslav.levin@gmail.com", "HR Snowqueen.ru");
 

@@ -383,8 +383,8 @@ class CAllUserTypeEntity extends CDBResult
 			$aMsg[] = array(
 				"id"=>"FIELD_NAME",
 				"text"=>GetMessage("USER_TYPE_ADD_ALREADY_ERROR", array(
-						"#FIELD_NAME#"=>htmlspecialchars($arFields["FIELD_NAME"]),
-						"#ENTITY_ID#"=>htmlspecialchars($arFields["ENTITY_ID"]),
+						"#FIELD_NAME#"=>htmlspecialcharsex($arFields["FIELD_NAME"]),
+						"#ENTITY_ID#"=>htmlspecialcharsex($arFields["ENTITY_ID"]),
 				)),
 			);
 			$e = new CAdminException($aMsg);
@@ -458,8 +458,8 @@ class CAllUserTypeEntity extends CDBResult
 				$aMsg[] = array(
 					"id"=>"FIELD_NAME",
 					"text"=>GetMessage("USER_TYPE_ADD_ERROR", array(
-							"#FIELD_NAME#"=>htmlspecialchars($arFields["FIELD_NAME"]),
-							"#ENTITY_ID#"=>htmlspecialchars($arFields["ENTITY_ID"]),
+							"#FIELD_NAME#"=>htmlspecialcharsex($arFields["FIELD_NAME"]),
+							"#ENTITY_ID#"=>htmlspecialcharsex($arFields["ENTITY_ID"]),
 					)),
 				);
 				$e = new CAdminException($aMsg);
@@ -1082,9 +1082,9 @@ class CAllUserTypeManager
 		if($arUserField["USER_TYPE"])
 		{
 			if($this->GetRights($arUserField["ENTITY_ID"]) >= "W")
-				$strLabelHTML = '<a href="/bitrix/admin/userfield_edit.php?lang='.LANG.'&ID='.urlencode($arUserField["ID"]).'&back_url='.urlencode($APPLICATION->GetCurPageParam().'&tabControl_active_tab=user_fields_tab').'">'.htmlspecialchars($arUserField["EDIT_FORM_LABEL"]? $arUserField["EDIT_FORM_LABEL"]: $arUserField["FIELD_NAME"]).'</a>'.($arUserField["MANDATORY"]=="Y"? '<span class="required">*</span>': '').':';
+				$strLabelHTML = '<a href="/bitrix/admin/userfield_edit.php?lang='.LANG.'&ID='.urlencode($arUserField["ID"]).'&back_url='.urlencode($APPLICATION->GetCurPageParam().'&tabControl_active_tab=user_fields_tab').'">'.htmlspecialcharsex($arUserField["EDIT_FORM_LABEL"]? $arUserField["EDIT_FORM_LABEL"]: $arUserField["FIELD_NAME"]).'</a>'.($arUserField["MANDATORY"]=="Y"? '<span class="required">*</span>': '').':';
 			else
-				$strLabelHTML = htmlspecialchars($arUserField["EDIT_FORM_LABEL"]? $arUserField["EDIT_FORM_LABEL"]: $arUserField["FIELD_NAME"]).($arUserField["MANDATORY"]=="Y"? '<span class="required">*</span>': '').':';
+				$strLabelHTML = htmlspecialcharsex($arUserField["EDIT_FORM_LABEL"]? $arUserField["EDIT_FORM_LABEL"]: $arUserField["FIELD_NAME"]).($arUserField["MANDATORY"]=="Y"? '<span class="required">*</span>': '').':';
 
 			if(is_callable(array($arUserField["USER_TYPE"]["CLASS_NAME"], "geteditformhtml")))
 			{
@@ -1105,7 +1105,7 @@ class CAllUserTypeManager
 							$arUserField,
 							array(
 								"NAME" => $arUserField["FIELD_NAME"],
-								"VALUE" => htmlspecialchars($form_value),
+								"VALUE" => htmlspecialcharsex($form_value),
 							),
 						)
 					);
@@ -1117,7 +1117,7 @@ class CAllUserTypeManager
 						$form_value = array();
 					foreach($form_value as $key=>$value)
 					{
-						$form_value[$key] = htmlspecialchars($value);
+						$form_value[$key] = htmlspecialcharsex($value);
 					}
 					$html = call_user_func_array(
 						array($arUserField["USER_TYPE"]["CLASS_NAME"], "geteditformhtmlmulty"),
@@ -1147,7 +1147,7 @@ class CAllUserTypeManager
 									$arUserField,
 									array(
 										"NAME" => $arUserField["FIELD_NAME"]."[".$i."]",
-										"VALUE" => htmlspecialchars($value),
+										"VALUE" => htmlspecialcharsex($value),
 									),
 								)
 							).'</td></tr>';
@@ -1189,7 +1189,7 @@ class CAllUserTypeManager
 						),
 					)
 				).CAdminCalendar::ShowScript();
-				return '<tr><td>'.htmlspecialchars($arUserField["LIST_FILTER_LABEL"]? $arUserField["LIST_FILTER_LABEL"]: $arUserField["FIELD_NAME"]).':</td><td>'.$html.'</td></tr>';
+				return '<tr><td>'.htmlspecialcharsex($arUserField["LIST_FILTER_LABEL"]? $arUserField["LIST_FILTER_LABEL"]: $arUserField["FIELD_NAME"]).':</td><td>'.$html.'</td></tr>';
 			}
 		}
 	}
@@ -1227,7 +1227,7 @@ class CAllUserTypeManager
 						$form_value = array();
 					foreach($form_value as $key=>$val)
 					{
-						$form_value[$key] = htmlspecialchars($val);
+						$form_value[$key] = htmlspecialcharsex($val);
 					}
 					$html = call_user_func_array(
 						array($arUserField["USER_TYPE"]["CLASS_NAME"], "getadminlistviewhtmlmulty"),
