@@ -535,7 +535,7 @@ $u->Show();
 	}
 </script>
 
-<form method="POST" name="frm" id="frm" action="iblock_edit.php?type=<?echo htmlspecialchars($type)?>&amp;lang=<?echo LANG?>&amp;admin=<?echo ($_REQUEST["admin"]=="Y"? "Y": "N")?>"  ENCTYPE="multipart/form-data">
+<form method="POST" name="frm" id="frm" action="iblock_edit.php?type=<?echo htmlspecialcharsex($type)?>&amp;lang=<?echo LANG?>&amp;admin=<?echo ($_REQUEST["admin"]=="Y"? "Y": "N")?>"  ENCTYPE="multipart/form-data">
 <?=bitrix_sessid_post()?>
 <?echo GetFilterHiddens("find_");?>
 <?if($bBizproc && $bCurrentBPDisabled):?>
@@ -543,7 +543,7 @@ $u->Show();
 <?endif?>
 <input type="hidden" name="Update" value="Y">
 <input type="hidden" name="ID" value="<?echo $ID?>">
-<?if(strlen($_REQUEST["return_url"])>0):?><input type="hidden" name="return_url" value="<?=htmlspecialchars($_REQUEST["return_url"])?>"><?endif?>
+<?if(strlen($_REQUEST["return_url"])>0):?><input type="hidden" name="return_url" value="<?=htmlspecialcharsex($_REQUEST["return_url"])?>"><?endif?>
 <?CAdminMessage::ShowOldStyleError($strWarning);?>
 <?
 function show_post_var($vname, $vvalue, $var_stack=array())
@@ -564,7 +564,7 @@ function show_post_var($vname, $vvalue, $var_stack=array())
 		}
 		else
 			$var_name=$vname;
-		?><input type="hidden" name="<?echo htmlspecialchars($var_name)?>" value="<?echo htmlspecialchars($vvalue)?>"><?
+		?><input type="hidden" name="<?echo htmlspecialcharsex($var_name)?>" value="<?echo htmlspecialcharsex($vvalue)?>"><?
 	}
 }
 
@@ -695,7 +695,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 			is_array($arPropertyFields["SET"])
 			&& array_key_exists("SEARCHABLE", $arPropertyFields["SET"])
 		):?>
-			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_SEARCHABLE" value="<?echo htmlspecialchars($arPropertyFields["SET"]["SEARCHABLE"])?>">
+			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_SEARCHABLE" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["SEARCHABLE"])?>">
 		<?endif?>
 
 		<?
@@ -720,7 +720,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 			is_array($arPropertyFields["SET"])
 			&& array_key_exists("FILTRABLE", $arPropertyFields["SET"])
 		):?>
-			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_FILTRABLE" value="<?echo htmlspecialchars($arPropertyFields["SET"]["FILTRABLE"])?>">
+			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_FILTRABLE" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["FILTRABLE"])?>">
 		<?endif?>
 
 		<?
@@ -749,7 +749,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 			is_array($arPropertyFields["SET"])
 			&& array_key_exists("WITH_DESCRIPTION", $arPropertyFields["SET"])
 		):?>
-			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_WITH_DESCRIPTION" value="<?echo htmlspecialchars($arPropertyFields["SET"]["WITH_DESCRIPTION"])?>">
+			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_WITH_DESCRIPTION" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["WITH_DESCRIPTION"])?>">
 		<?endif?>
 
 		<?
@@ -773,7 +773,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 			is_array($arPropertyFields["SET"])
 			&& array_key_exists("MULTIPLE_CNT", $arPropertyFields["SET"])
 		):?>
-			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_MULTIPLE_CNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["MULTIPLE_CNT"])?>">
+			<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_MULTIPLE_CNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["MULTIPLE_CNT"])?>">
 		<?endif?>
 
 
@@ -806,7 +806,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 				is_array($arPropertyFields["SET"])
 				&& array_key_exists("ROW_COUNT", $arPropertyFields["SET"])
 			):?>
-				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_ROW_COUNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["ROW_COUNT"])?>">
+				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_ROW_COUNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["ROW_COUNT"])?>">
 			<?endif?>
 
 			<tr class="heading">
@@ -876,11 +876,11 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 						continue;
 				?>
 				<tr>
-				<td><?=(intval($arPV_Keys[$i])>0?htmlspecialchars($arPV_Keys[$i]):"&nbsp;")?></td>
-				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_XML[<?echo htmlspecialchars($arPV_Keys[$i])?>]" value="<?echo htmlspecialchars($arPROPERTY_VALUES_XML[$arPV_Keys[$i]])?>" size="15" maxlength="200"></td>
-				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES[<?echo htmlspecialchars($arPV_Keys[$i])?>]" value="<?echo htmlspecialcharsex($arPROPERTY_VALUES[$arPV_Keys[$i]])?>" size="35" maxlength="255"></td>
-				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_SORT[<?echo htmlspecialchars($arPV_Keys[$i])?>]" value="<?echo htmlspecialchars($arPROPERTY_VALUES_SORT[$arPV_Keys[$i]])?>" size="5" maxlength="11"></td>
-				<td><input type="<?=($str_PROPERTY_MULTIPLE!="Y"?"radio":"checkbox")?>" name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_DEF[]" value="<?echo htmlspecialchars($arPV_Keys[$i])?>" <?if(in_array($arPV_Keys[$i], $arPROPERTY_VALUES_DEF))echo " checked"?>></td>
+				<td><?=(intval($arPV_Keys[$i])>0?htmlspecialcharsex($arPV_Keys[$i]):"&nbsp;")?></td>
+				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_XML[<?echo htmlspecialcharsex($arPV_Keys[$i])?>]" value="<?echo htmlspecialcharsex($arPROPERTY_VALUES_XML[$arPV_Keys[$i]])?>" size="15" maxlength="200"></td>
+				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES[<?echo htmlspecialcharsex($arPV_Keys[$i])?>]" value="<?echo htmlspecialcharsex($arPROPERTY_VALUES[$arPV_Keys[$i]])?>" size="35" maxlength="255"></td>
+				<td><input type="text"  name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_SORT[<?echo htmlspecialcharsex($arPV_Keys[$i])?>]" value="<?echo htmlspecialcharsex($arPROPERTY_VALUES_SORT[$arPV_Keys[$i]])?>" size="5" maxlength="11"></td>
+				<td><input type="<?=($str_PROPERTY_MULTIPLE!="Y"?"radio":"checkbox")?>" name="PROPERTY_<?echo $str_PROPERTY_ID?>_VALUES_DEF[]" value="<?echo htmlspecialcharsex($arPV_Keys[$i])?>" <?if(in_array($arPV_Keys[$i], $arPROPERTY_VALUES_DEF))echo " checked"?>></td>
 				</tr>
 				<?endfor?>
 				<?for($i=$MAX_NEW_ID; $i<$MAX_NEW_ID+5; $i++):?>
@@ -893,7 +893,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 				</tr>
 				<?endfor?>
 				</table>
-				<input type="hidden" name="PROPERTY_<?=htmlspecialchars($str_PROPERTY_ID)?>_CNT" value="<?echo ($MAX_NEW_ID+5)?>">
+				<input type="hidden" name="PROPERTY_<?=htmlspecialcharsex($str_PROPERTY_ID)?>_CNT" value="<?echo ($MAX_NEW_ID+5)?>">
 				<input type="submit"  name="propedit[<?echo $str_PROPERTY_ID?>]" value="<?echo GetMessage("IB_E_PROP_LIST_MORE")?>">
 
 				</td>
@@ -916,7 +916,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 				is_array($arPropertyFields["SET"])
 				&& array_key_exists("COL_COUNT", $arPropertyFields["SET"])
 			):?>
-				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["COL_COUNT"])?>">
+				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["COL_COUNT"])?>">
 			<?endif?>
 
 			<tr>
@@ -950,7 +950,7 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 				is_array($arPropertyFields["SET"])
 				&& array_key_exists("COL_COUNT", $arPropertyFields["SET"])
 			):?>
-				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["COL_COUNT"])?>">
+				<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["COL_COUNT"])?>">
 			<?endif?>
 
 			<tr>
@@ -988,13 +988,13 @@ if(IntVal($str_PROPERTY_ID)>0 || (strlen($str_PROPERTY_ID)>0 && $str_PROPERTY_ID
 			</tr>
 			<?else:?>
 				<?if(is_array($arPropertyFields["SET"]) && array_key_exists("ROW_COUNT", $arPropertyFields["SET"])):?>
-					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_ROW_COUNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["ROW_COUNT"])?>">
+					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_ROW_COUNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["ROW_COUNT"])?>">
 				<?else:?>
 					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_ROW_COUNT" value="<?echo $str_PROPERTY_ROW_COUNT?>">
 				<?endif;?>
 
 				<?if(is_array($arPropertyFields["SET"]) && array_key_exists("COL_COUNT", $arPropertyFields["SET"])):?>
-					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialchars($arPropertyFields["SET"]["COL_COUNT"])?>">
+					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo htmlspecialcharsex($arPropertyFields["SET"]["COL_COUNT"])?>">
 				<?else:?>
 					<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_COL_COUNT" value="<?echo $str_PROPERTY_COL_COUNT?>">
 				<?endif;?>
@@ -1357,13 +1357,13 @@ $tabControl->BeginNextTab();
 								?>
 								<table border="0" cellspacing="2" cellpadding="0">
 								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]"><?echo GetMessage("IB_E_FIELD_ACTIVE_TO")?></label></td></tr>
-								<tr><td><input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="5"></td></tr>
+								<tr><td><input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="5"></td></tr>
 								</table>
 								<?
 								break;
 							case "NAME":
 								?>
-								<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="60">
+								<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="60">
 								<?
 								break;
 							case "DETAIL_TEXT_TYPE":
@@ -1378,7 +1378,7 @@ $tabControl->BeginNextTab();
 							case "DETAIL_TEXT":
 							case "PREVIEW_TEXT":
 								?>
-								<textarea name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" rows="5" cols="47"><?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"])?></textarea>
+								<textarea name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" rows="5" cols="47"><?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"])?></textarea>
 								<?
 								break;
 							case "PREVIEW_PICTURE":
@@ -1388,11 +1388,11 @@ $tabControl->BeginNextTab();
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["DELETE_WITH_DETAIL"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]"><?echo GetMessage("IB_E_FIELD_PREVIEW_PICTURE_DELETE_WITH_DETAIL")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["UPDATE_WITH_DETAIL"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]"><?echo GetMessage("IB_E_FIELD_PREVIEW_PICTURE_UPDATE_WITH_DETAIL")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["SCALE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]"><?echo GetMessage("IB_E_FIELD_PICTURE_SCALE")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["IGNORE_ERRORS"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]"><?echo GetMessage("IB_E_FIELD_PICTURE_IGNORE_ERRORS")?></label></td></tr>
 								<tr><td><input type="checkbox" value="resample" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["METHOD"]==="resample") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]"><?echo GetMessage("IB_E_FIELD_PICTURE_METHOD")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
 								</table>
 								<?
 								break;
@@ -1400,11 +1400,11 @@ $tabControl->BeginNextTab();
 								?>
 								<table border="0" cellspacing="2" cellpadding="0">
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["SCALE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]"><?echo GetMessage("IB_E_FIELD_PICTURE_SCALE")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["IGNORE_ERRORS"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]"><?echo GetMessage("IB_E_FIELD_PICTURE_IGNORE_ERRORS")?></label></td></tr>
 								<tr><td><input type="checkbox" value="resample" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["METHOD"]==="resample") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]"><?echo GetMessage("IB_E_FIELD_PICTURE_METHOD")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
 								</table>
 								<?
 								break;
@@ -1413,14 +1413,14 @@ $tabControl->BeginNextTab();
 								<table border="0" cellspacing="2" cellpadding="0">
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["UNIQUE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]"><?echo GetMessage("IB_E_FIELD_CODE_UNIQUE")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANSLITERATION"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]"><?echo GetMessage("IB_E_FIELD_EL_TRANSLITERATION")?></label></td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"><?echo GetMessage("IB_E_FIELD_TRANS_LEN")?></label>&nbsp;<input type="text" size="4" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_LEN"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"><?echo GetMessage("IB_E_FIELD_TRANS_LEN")?></label>&nbsp;<input type="text" size="4" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_LEN"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"></td></tr>
 								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]"><?echo GetMessage("IB_E_FIELD_TRANS_CASE")?></label>&nbsp;<select name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]">
 									<option value=""><?echo GetMessage("IB_E_FIELD_TRANS_CASE_LEAVE")?></option>
 									<option value="L" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_CASE"]==="L") echo "selected"?>><?echo GetMessage("IB_E_FIELD_TRANS_CASE_LOWER")?></option>
 									<option value="U" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_CASE"]==="U") echo "selected"?>><?echo GetMessage("IB_E_FIELD_TRANS_CASE_UPPER")?></option>
 								</select><td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"><?echo GetMessage("IB_E_FIELD_TRANS_SPACE")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_SPACE"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"></td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"><?echo GetMessage("IB_E_FIELD_TRANS_OTHER")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_OTHER"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"><?echo GetMessage("IB_E_FIELD_TRANS_SPACE")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_SPACE"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"><?echo GetMessage("IB_E_FIELD_TRANS_OTHER")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_OTHER"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_EAT"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]"><?echo GetMessage("IB_E_FIELD_TRANS_EAT")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["USE_GOOGLE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]"><?echo GetMessage("IB_E_FIELD_EL_TRANS_USE_GOOGLE")?></label></td></tr>
 								</table>
@@ -1536,14 +1536,14 @@ $tabControl->BeginNextTab();
 							<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_LINK_IBLOCK_ID" value="<?echo $str_PROPERTY_LINK_IBLOCK_ID?>">
 <?if(is_array($str_PROPERTY_DEFAULT_VALUE)):?>
 	<?foreach($str_PROPERTY_DEFAULT_VALUE as $key=>$value):?>
-		<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_DEFAULT_VALUE[<?=htmlspecialchars($key)?>]" value="<?=htmlspecialchars($value)?>">
+		<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_DEFAULT_VALUE[<?=htmlspecialcharsex($key)?>]" value="<?=htmlspecialcharsex($value)?>">
 	<?endforeach?>
 <?else:?>
 	<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_DEFAULT_VALUE" value="<?echo $str_PROPERTY_DEFAULT_VALUE?>">
 <?endif?>
 <?if(is_array($str_PROPERTY_USER_TYPE_SETTINGS)):?>
 	<?foreach($str_PROPERTY_USER_TYPE_SETTINGS as $key=>$value):?>
-		<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_USER_TYPE_SETTINGS[<?=htmlspecialchars($key)?>]" value="<?=htmlspecialchars($value)?>">
+		<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_USER_TYPE_SETTINGS[<?=htmlspecialcharsex($key)?>]" value="<?=htmlspecialcharsex($value)?>">
 	<?endforeach?>
 <?else:?>
 	<input type="hidden" name="PROPERTY_<?echo $str_PROPERTY_ID?>_USER_TYPE_SETTINGS" value="<?echo $str_PROPERTY_USER_TYPE_SETTINGS?>">
@@ -1564,7 +1564,7 @@ $tabControl->BeginNextTab();
 									{
 										if(strlen($value)<=0)
 											continue;
-										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES[<?echo htmlspecialchars($key)?>]" value="<?=htmlspecialchars($value)?>"><?
+										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES[<?echo htmlspecialcharsex($key)?>]" value="<?=htmlspecialcharsex($value)?>"><?
 									}
 								}
 
@@ -1575,7 +1575,7 @@ $tabControl->BeginNextTab();
 									{
 										if(strlen($value)<=0)
 											continue;
-										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_DEF[<?echo htmlspecialchars($key)?>]" value="<?=htmlspecialchars($value)?>"><?
+										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_DEF[<?echo htmlspecialcharsex($key)?>]" value="<?=htmlspecialcharsex($value)?>"><?
 									}
 								}
 
@@ -1586,7 +1586,7 @@ $tabControl->BeginNextTab();
 									{
 										if(strlen($value)<=0)
 											continue;
-										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_XML[<?=$key?>]" value="<?=htmlspecialchars($value)?>"><?
+										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_XML[<?=$key?>]" value="<?=htmlspecialcharsex($value)?>"><?
 									}
 								}
 
@@ -1597,7 +1597,7 @@ $tabControl->BeginNextTab();
 									{
 										if(strlen($value)<=0)
 											continue;
-										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_SORT[<?=$key?>]" value="<?=htmlspecialchars($value)?>"><?
+										?><input type="hidden" name="PROPERTY_<?=$str_PROPERTY_ID?>_VALUES_SORT[<?=$key?>]" value="<?=htmlspecialcharsex($value)?>"><?
 									}
 								}
 
@@ -1617,7 +1617,7 @@ $tabControl->BeginNextTab();
 							<option value="G" <?if($str_PROPERTY_PROPERTY_TYPE=="G" && !$str_PROPERTY_USER_TYPE)echo " selected"?>><?echo GetMessage("IB_E_PROP_TYPE_G")?></option>
 							<option value="E" <?if($str_PROPERTY_PROPERTY_TYPE=="E" && !$str_PROPERTY_USER_TYPE)echo " selected"?>><?echo GetMessage("IB_E_PROP_TYPE_E")?></option>
 							<?foreach(CIBlockProperty::GetUserType() as  $ar):?>
-								<option value="<?=htmlspecialchars($ar["PROPERTY_TYPE"].":".$ar["USER_TYPE"])?>" <?if($str_PROPERTY_PROPERTY_TYPE==$ar["PROPERTY_TYPE"] && $str_PROPERTY_USER_TYPE==$ar["USER_TYPE"])echo " selected"?>><?=htmlspecialchars($ar["DESCRIPTION"])?></option>
+								<option value="<?=htmlspecialcharsex($ar["PROPERTY_TYPE"].":".$ar["USER_TYPE"])?>" <?if($str_PROPERTY_PROPERTY_TYPE==$ar["PROPERTY_TYPE"] && $str_PROPERTY_USER_TYPE==$ar["USER_TYPE"])echo " selected"?>><?=htmlspecialcharsex($ar["DESCRIPTION"])?></option>
 							<?endforeach;?>
 						</select>
 						</td>
@@ -1672,7 +1672,7 @@ $tabControl->BeginNextTab();
 						{
 							case "SECTION_NAME":
 								?>
-								<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="60">
+								<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"])?>" size="60">
 								<?
 								break;
 							case "SECTION_DESCRIPTION_TYPE":
@@ -1685,7 +1685,7 @@ $tabControl->BeginNextTab();
 								break;
 							case "SECTION_DESCRIPTION":
 								?>
-								<textarea name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" rows="5" cols="47"><?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"])?></textarea>
+								<textarea name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE]" rows="5" cols="47"><?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"])?></textarea>
 								<?
 								break;
 							case "SECTION_PICTURE":
@@ -1695,11 +1695,11 @@ $tabControl->BeginNextTab();
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["DELETE_WITH_DETAIL"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][DELETE_WITH_DETAIL]"><?echo GetMessage("IB_E_FIELD_PREVIEW_PICTURE_DELETE_WITH_DETAIL")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["UPDATE_WITH_DETAIL"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UPDATE_WITH_DETAIL]"><?echo GetMessage("IB_E_FIELD_PREVIEW_PICTURE_UPDATE_WITH_DETAIL")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["SCALE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]"><?echo GetMessage("IB_E_FIELD_PICTURE_SCALE")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["IGNORE_ERRORS"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]"><?echo GetMessage("IB_E_FIELD_PICTURE_IGNORE_ERRORS")?></label></td></tr>
 								<tr><td><input type="checkbox" value="resample" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["METHOD"]==="resample") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]"><?echo GetMessage("IB_E_FIELD_PICTURE_METHOD")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
 								</table>
 								<?
 								break;
@@ -1707,11 +1707,11 @@ $tabControl->BeginNextTab();
 								?>
 								<table border="0" cellspacing="2" cellpadding="0">
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["SCALE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][SCALE]"><?echo GetMessage("IB_E_FIELD_PICTURE_SCALE")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_WIDTH")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][WIDTH]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["WIDTH"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_HEIGHT")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][HEIGHT]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["HEIGHT"])?>" size="7"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["IGNORE_ERRORS"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][IGNORE_ERRORS]"><?echo GetMessage("IB_E_FIELD_PICTURE_IGNORE_ERRORS")?></label></td></tr>
 								<tr><td><input type="checkbox" value="resample" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["METHOD"]==="resample") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][METHOD]"><?echo GetMessage("IB_E_FIELD_PICTURE_METHOD")?></label></td></tr>
-								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
+								<tr><td><?echo GetMessage("IB_E_FIELD_PICTURE_COMPRESSION")?>:&nbsp;<input name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][COMPRESSION]" type="text" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["COMPRESSION"])?>" size="7"></td></tr>
 								</table>
 								<?
 								break;
@@ -1720,14 +1720,14 @@ $tabControl->BeginNextTab();
 								<table border="0" cellspacing="2" cellpadding="0">
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["UNIQUE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][UNIQUE]"><?echo GetMessage("IB_E_FIELD_CODE_UNIQUE")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANSLITERATION"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANSLITERATION]"><?echo GetMessage("IB_E_FIELD_SEC_TRANSLITERATION")?></label></td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"><?echo GetMessage("IB_E_FIELD_TRANS_LEN")?></label>&nbsp;<input type="text" size="4" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_LEN"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"><?echo GetMessage("IB_E_FIELD_TRANS_LEN")?></label>&nbsp;<input type="text" size="4" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_LEN"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_LEN]"></td></tr>
 								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]"><?echo GetMessage("IB_E_FIELD_TRANS_CASE")?></label>&nbsp;<select name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_CASE]">
 									<option value=""><?echo GetMessage("IB_E_FIELD_TRANS_CASE_LEAVE")?></option>
 									<option value="L" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_CASE"]==="L") echo "selected"?>><?echo GetMessage("IB_E_FIELD_TRANS_CASE_LOWER")?></option>
 									<option value="U" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_CASE"]==="U") echo "selected"?>><?echo GetMessage("IB_E_FIELD_TRANS_CASE_UPPER")?></option>
 								</select><td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"><?echo GetMessage("IB_E_FIELD_TRANS_SPACE")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_SPACE"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"></td></tr>
-								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"><?echo GetMessage("IB_E_FIELD_TRANS_OTHER")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialchars($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_OTHER"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"><?echo GetMessage("IB_E_FIELD_TRANS_SPACE")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_SPACE"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_SPACE]"></td></tr>
+								<tr><td><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"><?echo GetMessage("IB_E_FIELD_TRANS_OTHER")?></label>&nbsp;<input type="text" size="2" value="<?echo htmlspecialcharsex($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_OTHER"])?>" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_OTHER]"></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["TRANS_EAT"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][TRANS_EAT]"><?echo GetMessage("IB_E_FIELD_TRANS_EAT")?></label></td></tr>
 								<tr><td><input type="checkbox" value="Y" id="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]" name="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]" <?if($arFields[$FIELD_ID]["DEFAULT_VALUE"]["USE_GOOGLE"]==="Y") echo "checked"?>><label for="FIELDS[<?echo $FIELD_ID?>][DEFAULT_VALUE][USE_GOOGLE]"><?echo GetMessage("IB_E_FIELD_EL_TRANS_USE_GOOGLE")?></label></td></tr>
 								</table>
@@ -1935,62 +1935,62 @@ $tabControl->BeginNextTab();
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_SECTIONS_NAME")?></td>
 		<td valign="top">
-			<input type="text" name="SECTIONS_NAME" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["SECTIONS_NAME"])?>">
+			<input type="text" name="SECTIONS_NAME" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["SECTIONS_NAME"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_SECTION_NAME")?></td>
 		<td valign="top">
-			<input type="text" name="SECTION_NAME" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["SECTION_NAME"])?>">
+			<input type="text" name="SECTION_NAME" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["SECTION_NAME"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_SECTION_ADD")?></td>
 		<td valign="top">
-			<input type="text" name="SECTION_ADD" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["SECTION_ADD"])?>">
+			<input type="text" name="SECTION_ADD" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["SECTION_ADD"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_SECTION_EDIT")?></td>
 		<td valign="top">
-			<input type="text" name="SECTION_EDIT" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["SECTION_EDIT"])?>">
+			<input type="text" name="SECTION_EDIT" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["SECTION_EDIT"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_SECTION_DELETE")?></td>
 		<td valign="top">
-			<input type="text" name="SECTION_DELETE" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["SECTION_DELETE"])?>">
+			<input type="text" name="SECTION_DELETE" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["SECTION_DELETE"])?>">
 		</td>
 	</tr>
 	<?endif?>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_ELEMENTS_NAME")?></td>
 		<td valign="top">
-			<input type="text" name="ELEMENTS_NAME" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["ELEMENTS_NAME"])?>">
+			<input type="text" name="ELEMENTS_NAME" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["ELEMENTS_NAME"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_ELEMENT_NAME")?></td>
 		<td valign="top">
-			<input type="text" name="ELEMENT_NAME" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["ELEMENT_NAME"])?>">
+			<input type="text" name="ELEMENT_NAME" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["ELEMENT_NAME"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_ELEMENT_ADD")?></td>
 		<td valign="top">
-			<input type="text" name="ELEMENT_ADD" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["ELEMENT_ADD"])?>">
+			<input type="text" name="ELEMENT_ADD" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["ELEMENT_ADD"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_ELEMENT_EDIT")?></td>
 		<td valign="top">
-			<input type="text" name="ELEMENT_EDIT" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["ELEMENT_EDIT"])?>">
+			<input type="text" name="ELEMENT_EDIT" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["ELEMENT_EDIT"])?>">
 		</td>
 	</tr>
 	<tr>
 		<td valign="top"><?echo GetMessage("IB_E_ELEMENT_DELETE")?></td>
 		<td valign="top">
-			<input type="text" name="ELEMENT_DELETE" size="20" maxlength="100" value="<?echo htmlspecialchars($arMessages["ELEMENT_DELETE"])?>">
+			<input type="text" name="ELEMENT_DELETE" size="20" maxlength="100" value="<?echo htmlspecialcharsex($arMessages["ELEMENT_DELETE"])?>">
 		</td>
 	</tr>
 	<?

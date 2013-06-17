@@ -48,7 +48,7 @@ if(!$arIBlock["SECTION_NAME"])
 	$arIBlock["SECTION_NAME"] = $arIBTYPE["SECTION_NAME"]? $arIBTYPE["SECTION_NAME"]: GetMessage("IBLOCK_SECTION");
 
 $aTabs = array();
-$aTabs[] = array("DIV" => "edit1", "TAB" => $arIBlock["SECTION_NAME"], "ICON"=>"iblock_section", "TITLE"=> htmlspecialchars($ID > 0 ? $arIBlock["SECTION_EDIT"] : $arIBlock["SECTION_ADD"]));
+$aTabs[] = array("DIV" => "edit1", "TAB" => $arIBlock["SECTION_NAME"], "ICON"=>"iblock_section", "TITLE"=> htmlspecialcharsex($ID > 0 ? $arIBlock["SECTION_EDIT"] : $arIBlock["SECTION_ADD"]));
 $aTabs[] = array("DIV" => "edit2", "TAB" => GetMessage("IBSEC_E_TAB2"), "ICON"=>"iblock_section", "TITLE"=>GetMessage("IBSEC_E_TAB2_TITLE"));
 
 //Add user fields tab only when there is fields defined or user has rights for adding new field
@@ -156,9 +156,9 @@ if($REQUEST_METHOD=="POST" && strlen($Update)>0 && check_bitrix_sessid())
 
 ClearVars("str_");
 $str_ACTIVE="Y";
-$str_NAME = htmlspecialchars($arIBlock["FIELDS"]["SECTION_NAME"]["DEFAULT_VALUE"]);
+$str_NAME = htmlspecialcharsex($arIBlock["FIELDS"]["SECTION_NAME"]["DEFAULT_VALUE"]);
 $str_DESCRIPTION_TYPE = $arIBlock["FIELDS"]["SECTION_DESCRIPTION_TYPE"]["DEFAULT_VALUE"] !== "html"? "text": "html";
-$str_DESCRIPTION = htmlspecialchars($arIBlock["FIELDS"]["SECTION_DESCRIPTION"]["DEFAULT_VALUE"]);
+$str_DESCRIPTION = htmlspecialcharsex($arIBlock["FIELDS"]["SECTION_DESCRIPTION"]["DEFAULT_VALUE"]);
 $str_SORT="500";
 $str_IBLOCK_SECTION_ID = $IBLOCK_SECTION_ID;
 
@@ -178,7 +178,7 @@ else
 
 $adminChain->AddItem(array(
 	"TEXT" => htmlspecialcharsex($arIBlock["NAME"]),
-	"LINK" => htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0))),
+	"LINK" => htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>0))),
 ));
 if($find_section_section > 0)
 {
@@ -188,7 +188,7 @@ if($find_section_section > 0)
 		$last_nav = CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$ar_nav["ID"]));
 		$adminChain->AddItem(array(
 			"TEXT" => $ar_nav["NAME"],
-			"LINK" => htmlspecialchars($last_nav),
+			"LINK" => htmlspecialcharsex($last_nav),
 		));
 	}
 }
@@ -197,7 +197,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_aft
 
 $aMenu = array(
 	array(
-		"TEXT"=>htmlspecialchars($arIBlock["SECTIONS_NAME"]),
+		"TEXT"=>htmlspecialcharsex($arIBlock["SECTIONS_NAME"]),
 		"LINK"=>CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>intval($find_section_section))),
 		"ICON"=>"btn_list",
 	)
@@ -207,8 +207,8 @@ if($ID>0)
 {
 	$aMenu[] = array("SEPARATOR"=>"Y");
 	$aMenu[] = array(
-		"TEXT"=>htmlspecialchars($arIBlock["SECTION_ADD"]),
-		"LINK"=>"iblock_section_edit.php?type=".htmlspecialchars($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section)."&IBLOCK_SECTION_ID=".htmlspecialchars($IBLOCK_SECTION_ID>0?$IBLOCK_SECTION_ID:$find_section_section),
+		"TEXT"=>htmlspecialcharsex($arIBlock["SECTION_ADD"]),
+		"LINK"=>"iblock_section_edit.php?type=".htmlspecialcharsex($type)."&lang=".LANG."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section)."&IBLOCK_SECTION_ID=".htmlspecialcharsex($IBLOCK_SECTION_ID>0?$IBLOCK_SECTION_ID:$find_section_section),
 		"ICON"=>"btn_new",
 	);
 
@@ -217,7 +217,7 @@ if($ID>0)
 	$urlDelete .= '&ID[]='.(preg_match('/^iblock_list_admin\.php/', $urlDelete)? "S": "").$ID;
 
 	$aMenu[] = array(
-		"TEXT"=>htmlspecialchars($arIBlock["SECTION_DELETE"]),
+		"TEXT"=>htmlspecialcharsex($arIBlock["SECTION_DELETE"]),
 		"LINK"=>"javascript:if(confirm('".GetMessage("IBSEC_E_CONFIRM_DEL_MESSAGE")."'))window.location='".CUtil::JSEscape($urlDelete)."'",
 		"ICON"=>"btn_delete",
 	);
@@ -228,7 +228,7 @@ $link = $GLOBALS["APPLICATION"]->GetCurPage()."?mode=settings".($link <> ""? "&"
 $aMenu[] = array(
 	"TEXT"=>GetMessage("admin_lib_context_sett"),
 	"TITLE"=>GetMessage("admin_lib_context_sett_title"),
-	"LINK"=>"javascript:".$tabControl->GetName().".ShowSettings('".htmlspecialchars(CUtil::addslashes($link))."')",
+	"LINK"=>"javascript:".$tabControl->GetName().".ShowSettings('".htmlspecialcharsex(CUtil::addslashes($link))."')",
 	"ICON"=>"btn_settings",
 );
 
@@ -359,7 +359,7 @@ $tabControl->BeginEpilogContent();
 <input type="hidden" name="Update" value="Y">
 <input type="hidden" name="ID" value="<?echo $ID?>">
 <?if(strlen($return_url)>0):?>
-	<input type="hidden" name="return_url" value="<?=htmlspecialchars($return_url)?>">
+	<input type="hidden" name="return_url" value="<?=htmlspecialcharsex($return_url)?>">
 <?endif?>
 <?
 $tabControl->EndEpilogContent();
@@ -430,7 +430,7 @@ $tabControl->BeginCustomField("IBLOCK_SECTION_ID", GetMessage("IBSEC_E_PARENT_SE
 			<option value="0"><?echo GetMessage("IBLOCK_UPPER_LEVEL")?></option>
 		<?
 			while($a = $l->Fetch()):
-				?><option value="<?echo intval($a["ID"])?>"<?if($str_IBLOCK_SECTION_ID==$a["ID"])echo " selected"?>><?echo str_repeat(".", $a["DEPTH_LEVEL"])?><?echo htmlspecialchars($a["NAME"])?></option><?
+				?><option value="<?echo intval($a["ID"])?>"<?if($str_IBLOCK_SECTION_ID==$a["ID"])echo " selected"?>><?echo str_repeat(".", $a["DEPTH_LEVEL"])?><?echo htmlspecialcharsex($a["NAME"])?></option><?
 			endwhile;
 		?>
 		</select>
@@ -624,11 +624,11 @@ if(
 		if(is_array($form_value))
 		{
 			foreach($form_value as $value)
-				$hidden .= '<input type="hidden" name="'.$FIELD_NAME.'[]" value="'.htmlspecialchars($value).'">';
+				$hidden .= '<input type="hidden" name="'.$FIELD_NAME.'[]" value="'.htmlspecialcharsex($value).'">';
 		}
 		else
 		{
-			$hidden .= '<input type="hidden" name="'.$FIELD_NAME.'" value="'.htmlspecialchars($form_value).'">';
+			$hidden .= '<input type="hidden" name="'.$FIELD_NAME.'" value="'.htmlspecialcharsex($form_value).'">';
 		}
 		$tabControl->EndCustomField($FIELD_NAME, $hidden);
 	}
@@ -651,7 +651,7 @@ if($BlockPerm >= "X" && (!defined('BX_PUBLIC_MODE') || BX_PUBLIC_MODE != 1))
 	echo
 		BeginNote(),
 		GetMessage("IBSEC_E_IBLOCK_MANAGE_HINT"),
-		' <a href="iblock_edit.php?type='.htmlspecialchars($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_section_edit.php?ID=".$ID."&lang=".LANG. "&type=".htmlspecialchars($type)."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):"")).'">',
+		' <a href="iblock_edit.php?type='.htmlspecialcharsex($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_section_edit.php?ID=".$ID."&lang=".LANG. "&type=".htmlspecialcharsex($type)."&IBLOCK_ID=".$IBLOCK_ID."&find_section_section=".intval($find_section_section).(strlen($return_url)>0?"&return_url=".UrlEncode($return_url):"")).'">',
 		GetMessage("IBSEC_E_IBLOCK_MANAGE_HINT_HREF"),
 		'</a>',
 		EndNote()

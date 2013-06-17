@@ -931,7 +931,7 @@ if ($STEP == 1)
  	<tr>
 		<td><?echo GetMessage("IBLOCK_ADM_IMP_DATA_FILE") ?></td>
 		<td>
-			<input type="text" name="URL_DATA_FILE" value="<?echo htmlspecialchars($URL_DATA_FILE)?>" size="30">
+			<input type="text" name="URL_DATA_FILE" value="<?echo htmlspecialcharsex($URL_DATA_FILE)?>" size="30">
 			<input type="button" value="<?echo GetMessage("IBLOCK_ADM_IMP_OPEN") ?>" OnClick="BtnClick()">
 			<?
 			CAdminFileDialog::ShowScript
@@ -1064,7 +1064,7 @@ if ($STEP == 2)
 			<input type="radio" name="delimiter_r" id="delimiter_r_TAB" value="TAB" <?if ($delimiter_r=="TAB") echo "checked"?>><label for="delimiter_r_TAB"><?echo GetMessage("IBLOCK_ADM_IMP_TAB") ?></label><br>
 			<input type="radio" name="delimiter_r" id="delimiter_r_SPS" value="SPS" <?if ($delimiter_r=="SPS") echo "checked"?>><label for="delimiter_r_SPS"><?echo GetMessage("IBLOCK_ADM_IMP_SPS") ?></label><br>
 			<input type="radio" name="delimiter_r" id="delimiter_r_OTR" value="OTR" <?if ($delimiter_r=="OTR") echo "checked"?>><label for="delimiter_r_OTR"><?echo GetMessage("IBLOCK_ADM_IMP_OTR") ?></label>
-			<input type="text" name="delimiter_other_r" size="3" value="<?echo htmlspecialchars($delimiter_other_r) ?>">
+			<input type="text" name="delimiter_other_r" size="3" value="<?echo htmlspecialcharsex($delimiter_other_r) ?>">
 		</td>
 	</tr>
 	<tr id="table_r2">
@@ -1084,7 +1084,7 @@ if ($STEP == 2)
 			<small><?echo GetMessage("IBLOCK_ADM_IMP_FIX_MET_DESCR") ?></small>
 		</td>
 		<td valign="top" width="60%">
-			<textarea name="metki_f" rows="7" cols="3"><?echo htmlspecialchars($metki_f) ?></textarea>
+			<textarea name="metki_f" rows="7" cols="3"><?echo htmlspecialcharsex($metki_f) ?></textarea>
 		</td>
 	</tr>
 	<tr id="table_f2">
@@ -1113,7 +1113,7 @@ if ($STEP == 2)
 				}
 			}
 			?>
-			<textarea name="data" wrap="OFF" rows="7" cols="80"><?echo htmlspecialchars($sContent) ?></textarea>
+			<textarea name="data" wrap="OFF" rows="7" cols="80"><?echo htmlspecialcharsex($sContent) ?></textarea>
 		</td>
 	</tr>
 	<?
@@ -1179,7 +1179,7 @@ if ($STEP == 3)
 		?>
 		<tr>
 			<td valign="top" width="40%">
-				<b><?echo GetMessage("IBLOCK_ADM_IMP_FIELD") ?> <?echo $i+1 ?></b> (<?echo htmlspecialchars($arDataFileFields[$i]);?>):
+				<b><?echo GetMessage("IBLOCK_ADM_IMP_FIELD") ?> <?echo $i+1 ?></b> (<?echo htmlspecialcharsex($arDataFileFields[$i]);?>):
 			</td>
 			<td valign="top" width="60%">
 				<select name="field_<?echo $i ?>">
@@ -1193,7 +1193,7 @@ if ($STEP == 3)
 						if(!$bSelected && !isset(${"field_".$i}))
 							$bSelected = $arAvailFields[$j]["code"]==$arDataFileFields[$i];
 						?>
-						<option value="<?echo $arAvailFields[$j]["value"] ?>" <?if ($bSelected) echo "selected" ?>><?echo htmlspecialchars($arAvailFields[$j]["name"]) ?></option>
+						<option value="<?echo $arAvailFields[$j]["value"] ?>" <?if ($bSelected) echo "selected" ?>><?echo htmlspecialcharsex($arAvailFields[$j]["name"]) ?></option>
 						<?
 					}
 					?>
@@ -1210,7 +1210,7 @@ if ($STEP == 3)
 	<tr>
 		<td valign="top"><?echo GetMessage("IBLOCK_ADM_IMP_IMG_PATH") ?>:</td>
 		<td valign="top">
-			<input type="text" name="PATH2IMAGE_FILES" size="40" value="<?echo htmlspecialchars($PATH2IMAGE_FILES)?>"><br>
+			<input type="text" name="PATH2IMAGE_FILES" size="40" value="<?echo htmlspecialcharsex($PATH2IMAGE_FILES)?>"><br>
 			<small><?echo GetMessage("IBLOCK_ADM_IMP_IMG_PATH_DESCR") ?><br></small>
 		</td>
 	</tr>
@@ -1223,7 +1223,7 @@ if ($STEP == 3)
 	<tr>
 		<td valign="top"><?echo GetMessage("IBLOCK_ADM_IMP_PROP_PATH") ?>:</td>
 		<td valign="top">
-			<input type="text" name="PATH2PROP_FILES" size="40" value="<?echo htmlspecialchars($PATH2PROP_FILES)?>"><br>
+			<input type="text" name="PATH2PROP_FILES" size="40" value="<?echo htmlspecialcharsex($PATH2PROP_FILES)?>"><br>
 			<small><?echo GetMessage("IBLOCK_ADM_IMP_PROP_PATH_DESCR") ?><br></small>
 		</td>
 	</tr>
@@ -1245,7 +1245,7 @@ if ($STEP == 3)
 	<tr>
 		<td valign="top"><?echo GetMessage("IBLOCK_ADM_IMP_AUTO_STEP_TIME");?>:</td>
 		<td valign="top" align="left">
-			<input type="text" name="max_execution_time" size="6" value="<?echo htmlspecialchars($max_execution_time)?>"><br>
+			<input type="text" name="max_execution_time" size="6" value="<?echo htmlspecialcharsex($max_execution_time)?>"><br>
 			<small><?echo GetMessage("IBLOCK_ADM_IMP_AUTO_STEP_TIME_NOTE");?><br></small>
 		</td>
 	</tr>
@@ -1270,7 +1270,7 @@ if ($STEP == 3)
 
 			}
 			?>
-			<textarea name="data" wrap="OFF" rows="7" cols="80"><?echo htmlspecialchars($sContent) ?></textarea>
+			<textarea name="data" wrap="OFF" rows="7" cols="80"><?echo htmlspecialcharsex($sContent) ?></textarea>
 		</td>
 	</tr>
 	<?
@@ -1329,31 +1329,31 @@ $tabControl->Buttons();
 	<input type="hidden" name="STEP" value="<?echo $STEP + 1;?>">
 	<?=bitrix_sessid_post()?>
 	<?if ($STEP>1):?>
-		<input type="hidden" name="URL_DATA_FILE" value="<?echo htmlspecialchars($DATA_FILE_NAME) ?>">
+		<input type="hidden" name="URL_DATA_FILE" value="<?echo htmlspecialcharsex($DATA_FILE_NAME) ?>">
 		<input type="hidden" name="IBLOCK_ID" value="<?echo $IBLOCK_ID ?>">
 	<?endif;?>
 
 	<?if ($STEP<>2):?>
-		<input type="hidden" name="fields_type" value="<?echo htmlspecialchars($fields_type) ?>">
-		<input type="hidden" name="delimiter_r" value="<?echo htmlspecialchars($delimiter_r) ?>">
-		<input type="hidden" name="delimiter_other_r" value="<?echo htmlspecialchars($delimiter_other_r) ?>">
-		<input type="hidden" name="first_names_r" value="<?echo htmlspecialchars($first_names_r) ?>">
-		<input type="hidden" name="metki_f" value="<?echo htmlspecialchars($metki_f) ?>">
-		<input type="hidden" name="first_names_f" value="<?echo htmlspecialchars($first_names_f) ?>">
+		<input type="hidden" name="fields_type" value="<?echo htmlspecialcharsex($fields_type) ?>">
+		<input type="hidden" name="delimiter_r" value="<?echo htmlspecialcharsex($delimiter_r) ?>">
+		<input type="hidden" name="delimiter_other_r" value="<?echo htmlspecialcharsex($delimiter_other_r) ?>">
+		<input type="hidden" name="first_names_r" value="<?echo htmlspecialcharsex($first_names_r) ?>">
+		<input type="hidden" name="metki_f" value="<?echo htmlspecialcharsex($metki_f) ?>">
+		<input type="hidden" name="first_names_f" value="<?echo htmlspecialcharsex($first_names_f) ?>">
 	<?endif;?>
 
 	<?if ($STEP<>3):?>
 		<?foreach($_POST as $name => $value):?>
 			<?if(preg_match("/^field_(\\d+)$/", $name)):?>
-				<input type="hidden" name="<?echo $name?>" value="<?echo htmlspecialchars($value)?>">
+				<input type="hidden" name="<?echo $name?>" value="<?echo htmlspecialcharsex($value)?>">
 			<?endif?>
 		<?endforeach?>
-		<input type="hidden" name="PATH2IMAGE_FILES" value="<?echo htmlspecialchars($PATH2IMAGE_FILES)?>">
-		<input type="hidden" name="IMAGE_RESIZE" value="<?echo htmlspecialchars($IMAGE_RESIZE)?>">
-		<input type="hidden" name="PATH2PROP_FILES" value="<?echo htmlspecialchars($PATH2PROP_FILES)?>">
-		<input type="hidden" name="outFileAction" value="<?echo htmlspecialchars($outFileAction)?>">
-		<input type="hidden" name="inFileAction" value="<?echo htmlspecialchars($inFileAction)?>">
-		<input type="hidden" name="max_execution_time" value="<?echo htmlspecialchars($max_execution_time)?>">
+		<input type="hidden" name="PATH2IMAGE_FILES" value="<?echo htmlspecialcharsex($PATH2IMAGE_FILES)?>">
+		<input type="hidden" name="IMAGE_RESIZE" value="<?echo htmlspecialcharsex($IMAGE_RESIZE)?>">
+		<input type="hidden" name="PATH2PROP_FILES" value="<?echo htmlspecialcharsex($PATH2PROP_FILES)?>">
+		<input type="hidden" name="outFileAction" value="<?echo htmlspecialcharsex($outFileAction)?>">
+		<input type="hidden" name="inFileAction" value="<?echo htmlspecialcharsex($inFileAction)?>">
+		<input type="hidden" name="max_execution_time" value="<?echo htmlspecialcharsex($max_execution_time)?>">
 	<?endif;?>
 
 	<?if ($STEP>1):?>

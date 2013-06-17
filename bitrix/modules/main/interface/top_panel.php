@@ -51,8 +51,8 @@ if($USER->IsAuthorized())
 					$sTitle = str_replace("\n", " ", $sTitle);
 
 					$aFav[] = array(
-						"TEXT"=>htmlspecialchars($db_fav_arr["NAME"]),
-						"TITLE"=>htmlspecialchars($sTitle),
+						"TEXT"=>htmlspecialcharsex($db_fav_arr["NAME"]),
+						"TITLE"=>htmlspecialcharsex($sTitle),
 						"ICON"=>"favorites",
 						"ACTION"=>"jsUtils.Redirect(arguments, '".CUtil::addslashes($db_fav_arr["URL"])."');",
 					);
@@ -134,7 +134,7 @@ if($USER->IsAuthorized())
 		"SEPARATOR"=>true,
 	);
 	$arPanelButtons[] = array(
-		"TEXT"=>'[<a href="/bitrix/admin/user_edit.php?lang='.LANG.'&amp;ID='.$USER->GetID().'">'.$USER->GetID().'</a>] ('.$USER->GetLogin().') '.htmlspecialchars($USER->GetFullName()),
+		"TEXT"=>'[<a href="/bitrix/admin/user_edit.php?lang='.LANG.'&amp;ID='.$USER->GetID().'">'.$USER->GetID().'</a>] ('.$USER->GetLogin().') '.htmlspecialcharsex($USER->GetFullName()),
 		"TITLE"=>GetMessage("top_panel_user"),
 	);
 	$arPanelButtons[] = array(
@@ -143,13 +143,13 @@ if($USER->IsAuthorized())
 	$arPanelButtons[] = array(
 		"TEXT"=>GetMessage("top_panel_logout"),
 		"TITLE"=>GetMessage("TOP_LOG_OFF"),
-		"LINK"=>$APPLICATION->GetCurPage()."?logout=yes".htmlspecialchars($params == ""? "":"&".$params),
+		"LINK"=>$APPLICATION->GetCurPage()."?logout=yes".htmlspecialcharsex($params == ""? "":"&".$params),
 		"ICON"=>"top_panel_logout",
 	);
 }
 
 $sPubUrl = ($_SESSION["BACK_URL_PUB"] <> ""?
-	htmlspecialchars($_SESSION["BACK_URL_PUB"]).(strpos($_SESSION["BACK_URL_PUB"], "?") !== false? "&amp;":"?") : '/?').
+	htmlspecialcharsex($_SESSION["BACK_URL_PUB"]).(strpos($_SESSION["BACK_URL_PUB"], "?") !== false? "&amp;":"?") : '/?').
 	'back_url_admin='.urlencode($APPLICATION->GetCurPage().($params<>""? "?".$params:""));
 ?>
 
@@ -242,7 +242,7 @@ foreach($arPanelButtons as $item)
 		elseif(is_array($item["MENU"]) && !empty($item["MENU"]))
 		{
 			$bWasPopup = true;
-			$sMenuUrl = "this.blur(); topPanelPopup.ShowMenu(this, ".htmlspecialchars(CAdminPopup::PhpToJavaScript($item["MENU"], $dummy)).", jsPanel.IsFixed());";
+			$sMenuUrl = "this.blur(); topPanelPopup.ShowMenu(this, ".htmlspecialcharsex(CAdminPopup::PhpToJavaScript($item["MENU"], $dummy)).", jsPanel.IsFixed());";
 			echo '<td>'.$tooltip.'<div><a href="javascript:void(0)" hidefocus="true" onclick="'.$sMenuUrl.'" title="'.$item["TITLE"].'" class="context-button'.($item["SELECTED"] == true? ' pressed':'').(!empty($item["ICON"])? ' icon'.($item["TEXT"] == ""? ' icon-only':'').'" id="'.$item["ICON"].'"':'"').'">'.$item["TEXT"].'<img src="/bitrix/themes/'.ADMIN_THEME_ID.'/images/panel/arr_down.gif" class="arrow" alt=""></a></div></td>';
 		}
 		else

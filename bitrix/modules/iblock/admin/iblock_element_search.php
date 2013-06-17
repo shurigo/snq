@@ -271,7 +271,7 @@ while($arRes = $rsData->GetNext())
 
 	$row =& $lAdmin->AddRow($arRes["ID"], $arRes);
 
-	$row->AddViewField("NAME", $arRes["NAME"]."<input type=hidden name='n".$arRes["ID"]."' id='name_".$arRes["ID"]."' value='".CUtil::JSEscape(htmlspecialchars($arRes["NAME"]))."'>");
+	$row->AddViewField("NAME", $arRes["NAME"]."<input type=hidden name='n".$arRes["ID"]."' id='name_".$arRes["ID"]."' value='".CUtil::JSEscape(htmlspecialcharsex($arRes["NAME"]))."'>");
 	$row->AddViewField("USER_NAME", "[<a target=\"_blank\" href=\"user_edit.php?lang=".LANGUAGE_ID."&ID=".$arRes["MODIFIED_BY"]."\">".$arRes["MODIFIED_BY"]."</a>]&nbsp;".$arRes["USER_NAME"]);
 	$row->AddCheckField("ACTIVE");
 	$row->AddViewField("CREATED_USER_NAME", "[<a target=\"_blank\" href=\"user_edit.php?lang=".LANGUAGE_ID."&ID=".$arRes["CREATED_BY"]."\">".$arRes["CREATED_BY"]."</a>]&nbsp;".$arRes["CREATED_USER_NAME"]);

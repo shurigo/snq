@@ -132,7 +132,7 @@ $context->Show();
 <?echo GetFilterHiddens("find_");?>
 <input type="hidden" name="Update" value="Y">
 <input type="hidden" name="ID" value="<?echo $ID?>">
-<?if(strlen($back_url)>0):?><input type="hidden" name="back_url" value="<?=htmlspecialchars($back_url)?>"><?endif?>
+<?if(strlen($back_url)>0):?><input type="hidden" name="back_url" value="<?=htmlspecialcharsex($back_url)?>"><?endif?>
 <?
 	$tabControl->Begin();
 	$tabControl->BeginNextTab();
@@ -145,7 +145,7 @@ $context->Show();
 	<?else:?>
 	<tr>
 		<td><span class="required">*</span><?echo GetMessage("IBTYPE_E_ID")?></td>
-		<td><input type="text" name="NEW_ID" size="50" maxlength="50" value="<?=htmlspecialchars($NEW_ID)?>"></td>
+		<td><input type="text" name="NEW_ID" size="50" maxlength="50" value="<?=htmlspecialcharsex($NEW_ID)?>"></td>
 	</tr>
 	<?endif;?>
 	<script>
@@ -186,9 +186,9 @@ $context->Show();
 				?>
 				<tr>
 					<td><font class="tablefieldtext"><?echo $arIBTLang[$i]["NAME"]?>:</font></td>
-					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][NAME]" size="20" maxlength="255" value="<?echo htmlspecialchars($ibtypelang["NAME"])?>"></td>
-					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][SECTION_NAME]" size="20" maxlength="255" value="<?echo htmlspecialchars($ibtypelang["SECTION_NAME"])?>"></td>
-					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][ELEMENT_NAME]" size="20" maxlength="255" value="<?echo htmlspecialchars($ibtypelang["ELEMENT_NAME"])?>"></td>
+					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][NAME]" size="20" maxlength="255" value="<?echo htmlspecialcharsex($ibtypelang["NAME"])?>"></td>
+					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][SECTION_NAME]" size="20" maxlength="255" value="<?echo htmlspecialcharsex($ibtypelang["SECTION_NAME"])?>"></td>
+					<td><input type="text" name="LANG_FIELDS[<?echo $arIBTLang[$i]["LID"]?>][ELEMENT_NAME]" size="20" maxlength="255" value="<?echo htmlspecialcharsex($ibtypelang["ELEMENT_NAME"])?>"></td>
 				</tr>
 				<?endfor?>
 			</table>

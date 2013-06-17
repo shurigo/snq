@@ -28,7 +28,7 @@ if($bBadBlock)
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_after.php");
 	?>
 	<?echo ShowError(GetMessage("IBSEC_A_BAD_IBLOCK"));?>
-	<a href="iblock_admin.php?lang=<?echo LANG?>&amp;type=<?echo htmlspecialchars($type)?>"><?echo GetMessage("IBSEC_A_BACK_TO_ADMIN")?></a>
+	<a href="iblock_admin.php?lang=<?echo LANG?>&amp;type=<?echo htmlspecialcharsex($type)?>"><?echo GetMessage("IBSEC_A_BACK_TO_ADMIN")?></a>
 	<?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_admin.php");
 	die();
@@ -306,15 +306,15 @@ else
 
 $rsData = new CAdminResult($rsData, $sTableID);
 $rsData->NavStart();
-$lAdmin->NavText($rsData->GetNavPrint(htmlspecialchars($arIBlock["SECTIONS_NAME"])));
+$lAdmin->NavText($rsData->GetNavPrint(htmlspecialcharsex($arIBlock["SECTIONS_NAME"])));
 
 $arUsersCache = array();
 
 while($arRes = $rsData->NavNext(true, "f_"))
 {
-	$el_list_url = htmlspecialchars(CIBlock::GetAdminElementListLink($IBLOCK_ID , array('find_section_section'=>$f_ID)));
+	$el_list_url = htmlspecialcharsex(CIBlock::GetAdminElementListLink($IBLOCK_ID , array('find_section_section'=>$f_ID)));
 	$el_add_url = 'iblock_element_edit.php?IBLOCK_SECTION_ID='.$f_ID.'&amp;from=iblock_section_admin_inc'.$sThisSectionUrl;
-	$sec_list_url = htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$f_ID)).($_GET["tree"]=="Y"? '&tree=Y': ''));
+	$sec_list_url = htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID, array('find_section_section'=>$f_ID)).($_GET["tree"]=="Y"? '&tree=Y': ''));
 	$sec_add_url = 'iblock_section_edit.php?IBLOCK_SECTION_ID='.$f_ID.'&from=iblock_section_admin'.$sThisSectionUrl;
 
 	$row =& $lAdmin->AddRow($f_ID, $arRes, $sec_list_url, GetMessage("IBSEC_A_LIST"));
@@ -407,24 +407,23 @@ if(!$bReadOnly)
 
 $aContext = array();
 $aContext[] = array(
-	"TEXT"=>htmlspecialchars($arIBlock["ELEMENTS_NAME"]),
+	"TEXT"=>htmlspecialcharsex($arIBlock["ELEMENTS_NAME"]),
 	"ICON"=>"btn_list",
-	"LINK"=>htmlspecialchars(CIBlock::GetAdminElementListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section))),
+	"LINK"=>htmlspecialcharsex(CIBlock::GetAdminElementListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section))),
 	"TITLE"=>GetMessage("IBSEC_A_LISTEL_TITLE")
 );
 
 if(!$bReadOnly)
 {
 	$aContext[] = array(
-		"TEXT"=>htmlspecialchars($arIBlock["SECTION_ADD"]),
+		"TEXT"=>htmlspecialcharsex($arIBlock["SECTION_ADD"]),
 		"ICON"=>"btn_new",
 		"LINK"=>'iblock_section_edit.php?IBLOCK_SECTION_ID='.$find_section_section.'&from=iblock_section_admin'.$sThisSectionUrl,
 		"TITLE"=>GetMessage("IBSEC_A_SECTADD_PRESS")
 	);
 }
-
 $aContext[] = array(
-	"TEXT"=>htmlspecialchars($arIBlock["ELEMENT_ADD"]),
+	"TEXT"=>htmlspecialcharsex($arIBlock["ELEMENT_ADD"]),
 	"ICON"=>"btn_new",
 	"LINK"=>'iblock_element_edit.php?IBLOCK_SECTION_ID='.$find_section_section.'&from=iblock_section_admin'.$sThisSectionUrl,
 	"TITLE"=>GetMessage("IBSEC_A_ADDEL_TITLE")
@@ -433,13 +432,13 @@ $aContext[] = array(
 if($_GET["tree"]=="Y")
 	$aContext[] = array(
 		"TEXT"=>GetMessage("IBSEC_A_NOT_TREE"),
-		"LINK"=>htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section, 'tree'=>'N'))),
+		"LINK"=>htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section, 'tree'=>'N'))),
 		"TITLE"=>GetMessage("IBSEC_A_NOT_TREE_TITLE")
 	);
 else
 	$aContext[] = array(
 		"TEXT"=>GetMessage("IBSEC_A_TREE"),
-		"LINK"=>htmlspecialchars(CIBlock::GetAdminSectionListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section, 'tree'=>'Y'))),
+		"LINK"=>htmlspecialcharsex(CIBlock::GetAdminSectionListLink($IBLOCK_ID , array('find_section_section'=>$find_section_section, 'tree'=>'Y'))),
 		"TITLE"=>GetMessage("IBSEC_A_TREE_TITLE")
 	);
 
@@ -452,7 +451,7 @@ if($_GET["tree"]=="Y")
 	$sSectionUrl .= '&tree=Y';
 $chain->AddItem(array(
 	"TEXT" => htmlspecialcharsex($arIBlock["NAME"]),
-	"LINK" => htmlspecialchars($sSectionUrl),
+	"LINK" => htmlspecialcharsex($sSectionUrl),
 	"ONCLICK" => $lAdmin->ActionAjaxReload($sSectionUrl).';return false;',
 ));
 if($find_section_section > 0)
@@ -465,7 +464,7 @@ if($find_section_section > 0)
 			$sSectionUrl .= '&tree=Y';
 		$chain->AddItem(array(
 			"TEXT" => $ar_nav["NAME"],
-			"LINK" => htmlspecialchars($sSectionUrl),
+			"LINK" => htmlspecialcharsex($sSectionUrl),
 			"ONCLICK" => $lAdmin->ActionAjaxReload($sSectionUrl).';return false;',
 		));
 	}
@@ -517,11 +516,11 @@ $oFilter->Begin();
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_ID")?>:</td>
-		<td><input type="text" name="find_section_id" size="47" value="<?echo htmlspecialchars($find_section_id)?>"></td>
+		<td><input type="text" name="find_section_id" size="47" value="<?echo htmlspecialcharsex($find_section_id)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_TIMESTAMP")." (".CLang::GetDateFormat("SHORT")."):"?></td>
-		<td><?echo CalendarPeriod("find_section_timestamp_1", htmlspecialchars($find_section_timestamp_1), "find_section_timestamp_2", htmlspecialchars($find_section_timestamp_2), "find_section_form","Y")?></td>
+		<td><?echo CalendarPeriod("find_section_timestamp_1", htmlspecialcharsex($find_section_timestamp_1), "find_section_timestamp_2", htmlspecialcharsex($find_section_timestamp_2), "find_section_form","Y")?></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_MODIFIED_BY")?>:</td>
@@ -561,11 +560,11 @@ $oFilter->Begin();
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_CODE")?>:</td>
-		<td><input type="text" name="find_section_code" size="47" value="<?echo htmlspecialchars($find_section_code)?>"></td>
+		<td><input type="text" name="find_section_code" size="47" value="<?echo htmlspecialcharsex($find_section_code)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_XML_ID")?>:</td>
-		<td><input type="text" name="find_section_external_id" size="47" value="<?echo htmlspecialchars($find_section_external_id)?>"></td>
+		<td><input type="text" name="find_section_external_id" size="47" value="<?echo htmlspecialcharsex($find_section_external_id)?>"></td>
 	</tr>
 	<tr>
 		<td><?echo GetMessage("IBSEC_A_ACTIVE")?>:</td>
@@ -592,7 +591,7 @@ if($BlockPerm >= "X")
 	echo
 		BeginNote(),
 		GetMessage("IBSEC_A_IBLOCK_MANAGE_HINT"),
-		' <a href="iblock_edit.php?type='.htmlspecialchars($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_section_admin.php?".$sThisSectionUrl).'">',
+		' <a href="iblock_edit.php?type='.htmlspecialcharsex($type).'&amp;lang='.LANG.'&amp;ID='.$IBLOCK_ID.'&amp;admin=Y&amp;return_url='.urlencode("iblock_section_admin.php?".$sThisSectionUrl).'">',
 		GetMessage("IBSEC_A_IBLOCK_MANAGE_HINT_HREF"),
 		'</a>',
 		EndNote()
