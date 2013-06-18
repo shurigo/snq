@@ -940,6 +940,7 @@ class CFileMan
 		{
 			if(COption::GetOptionString("fileman", "use_old_version", "N")!="Y")
 			{
+			error_log($strTextValue,0);
 				$strTextValue = htmlspecialcharsback($strTextValue);
 				$curHTMLEd = (($strTextTypeValue == 'html' || !$strTextTypeValue) && $htmled == "Y");
 				$dontShowTA = (!isset($arAdditionalParams['dontshowta'])) ? false : $arAdditionalParams['dontshowta'];
@@ -987,7 +988,7 @@ class CFileMan
 					<input type="checkbox" id="<?=$strTextFieldName?>usehtmledit" name="<?=$strTextFieldName?>usehtmledit" onclick="cl<?=$strTextFieldName?>(this);<?if($usecookie):?>document.cookie='htmled='+(this.checked?'Y':'N')+'; expires=Fri, 31 Dec 2019 23:59:59 GMT;';<?endif;?>"<? echo($htmled == "Y"?" checked":"");?>><label for="<?=$strTextFieldName?>usehtmledit"><?echo GetMessage("FILEMAN_FILEMAN_USE_HTML_EDITOR");?></label>
 					</font>
 					<br>
-					<textarea class="typearea" style="<? echo(($curHTMLEd || $dontShowTA) ? 'display:none;' : '');?>width:100%;height:<?=$iHeight?>px;" name="<?=$strTextFieldName?>" id="<?=$strTextFieldName?>" wrap="virtual" <?=$textarea_field?>><?echo htmlspecialchars($strTextValue)?></textarea>
+					<textarea class="typearea" style="<? echo(($curHTMLEd || $dontShowTA) ? 'display:none;' : '');?>width:100%;height:<?=$iHeight?>px;" name="<?=$strTextFieldName?>" id="<?=$strTextFieldName?>" wrap="virtual" <?=$textarea_field?>><?echo htmlspecialcharsex($strTextValue)?></textarea>
 					<?
 
 				if ($bWithoutPHP)
@@ -1174,7 +1175,7 @@ class CFileMan
 		?>
 		<script>
 		var relPath = "<? echo htmlspecialcharsex(str_replace("</script","</_script", $relPath));?>";
-		var <? echo 'ar_'.htmlspecialchars($name).'_taskbars';?> = {};
+		var <? echo 'ar_'.htmlspecialcharsex($name).'_taskbars';?> = {};
 		<?
 		for ($k = 0; $k < count($arTaskbars); $k++)
 			echo 'ar_'.htmlspecialcharsex($name).'_taskbars["'.$arTaskbars[$k].'"] = true;';
@@ -1241,7 +1242,7 @@ class CFileMan
 				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/bitrix/admin/htmleditor2/'.$arJS[$i]))
 					$arr[] = $arJS[$i];
 			}
-			$str_taskbars = CFileman::GetHTMLEditorSettings(htmlspecialchars($name), $arParams["light_mode"], $arTaskbars);
+			$str_taskbars = CFileman::GetHTMLEditorSettings(htmlspecialcharsex($name), $arParams["light_mode"], $arTaskbars);
 			$str_taskbars .= '_'.CFileman::GetVersion().rand();
 			?>
 <script type="text/javascript" src="/bitrix/admin/fileman_js.php?lang=<?=LANGUAGE_ID?>&v=<?=@filemtime($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/fileman/lang/'.LANGUAGE_ID.'/admin/fileman_js.php')?>"></script>
@@ -1283,35 +1284,35 @@ class CFileMan
 		}
 		?>
 
-		<table id="<? echo htmlspecialchars($name).'_object_ev';?>" cellpadding="0" cellspacing="0" width="100%" height="100%"><tr><td valign="top" height="100%">
-			<div id="<? echo htmlspecialchars($name).'_object';?>"  style="width: 100%; height: 100%;">
-				<table id="<?echo htmlspecialchars($name);?>_pFrame" class="bxedmainframe" cellpadding="0" cellspacing="0" width="100%" height="100%" style="display:none;">
+		<table id="<? echo htmlspecialcharsex($name).'_object_ev';?>" cellpadding="0" cellspacing="0" width="100%" height="100%"><tr><td valign="top" height="100%">
+			<div id="<? echo htmlspecialcharsex($name).'_object';?>"  style="width: 100%; height: 100%;">
+				<table id="<?echo htmlspecialcharsex($name);?>_pFrame" class="bxedmainframe" cellpadding="0" cellspacing="0" width="100%" height="100%" style="display:none;">
 					<tr style="height:0%; display: none;">
-						<td id="<?echo htmlspecialchars($name);?>_toolBarSet0" colspan="3"></td>
+						<td id="<?echo htmlspecialcharsex($name);?>_toolBarSet0" colspan="3"></td>
 					</tr>
 					<tr style="height:100%">
-						<td id="<?echo htmlspecialchars($name);?>_toolBarSet1" style="width:0%; display: none;">
+						<td id="<?echo htmlspecialcharsex($name);?>_toolBarSet1" style="width:0%; display: none;">
 						</td>
 						<td  width="100%" vAlign="top">
 							<table cellpadding="0" cellspacing="0" width="100%" height="100%">
 								<tr style="height:0%; display: none;">
-									<td id="<?echo htmlspecialchars($name);?>_taskBarSet0" colspan="3">
+									<td id="<?echo htmlspecialcharsex($name);?>_taskBarSet0" colspan="3">
 									</td>
 								</tr>
 								<tr>
-									<td id="<?echo htmlspecialchars($name);?>_taskBarSet1" style="width:0%; display: none;"></td>
-									<td id="<?echo htmlspecialchars($name);?>_cEditor" width="100%" height="100%"></td>
-									<td id="<?echo htmlspecialchars($name);?>_taskBarSet2" style="width:0%; display: none;"></td>
+									<td id="<?echo htmlspecialcharsex($name);?>_taskBarSet1" style="width:0%; display: none;"></td>
+									<td id="<?echo htmlspecialcharsex($name);?>_cEditor" width="100%" height="100%"></td>
+									<td id="<?echo htmlspecialcharsex($name);?>_taskBarSet2" style="width:0%; display: none;"></td>
 								</tr>
 								<tr style="height:0%; display: none;">
-									<td id="<?echo htmlspecialchars($name);?>_taskBarSet3" colspan="3"></td>
+									<td id="<?echo htmlspecialcharsex($name);?>_taskBarSet3" colspan="3"></td>
 								</tr>
 							</table>
 						</td>
-						<td id="<?echo htmlspecialchars($name);?>_toolBarSet2" style="width:0%; display: none;"></td>
+						<td id="<?echo htmlspecialcharsex($name);?>_toolBarSet2" style="width:0%; display: none;"></td>
 					</tr>
 					<tr style="height:0%; display: none;">
-						<td id="<?echo htmlspecialchars($name);?>_toolBarSet3" colspan="3"></td>
+						<td id="<?echo htmlspecialcharsex($name);?>_toolBarSet3" colspan="3"></td>
 					</tr>
 					<tr style="height:0%"><td colspan="3"></td></tr>
 				</table>
@@ -1338,25 +1339,25 @@ class CFileMan
 				xStyle.appendChild(document.createTextNode(styles));
 			}
 
-			var el = BX("<?= htmlspecialchars($name)?>");
-			var r1 = BX("<?= htmlspecialchars($name).'_TYPE_0';?>");
-			var bEd = (r1 && !r1.checked && BX("<?= htmlspecialchars($name).'usehtmledit';?>").checked);
+			var el = BX("<?= htmlspecialcharsex($name)?>");
+			var r1 = BX("<?= htmlspecialcharsex($name).'_TYPE_0';?>");
+			var bEd = (r1 && !r1.checked && BX("<?= htmlspecialcharsex($name).'usehtmledit';?>").checked);
 			bEd = (bEd==null) ? true : bEd;
 			if (!bEd)
-				BX("<? echo htmlspecialchars($name).'_object';?>").style.display = "none";
+				BX("<? echo htmlspecialcharsex($name).'_object';?>").style.display = "none";
 		</script>
 		<?
 		if(!$arParams["bFromTextarea"])
-			echo '<input type="hidden" name="'.htmlspecialchars($name).'" id="'.htmlspecialchars($name).'" value="'.htmlspecialchars($content).'">';
+			echo '<input type="hidden" name="'.htmlspecialcharsex($name).'" id="'.htmlspecialcharsex($name).'" value="'.htmlspecialcharsex($content).'">';
 		if($arParams["bDisplay"]!==false)
 		{
-			setEditorEventHandlers(htmlspecialchars($name));
+			setEditorEventHandlers(htmlspecialcharsex($name));
 			?>
-			<DIV id="editor_wait_window_<? echo htmlspecialchars($name);?>" class = "waitwindow"; style="position: absolute; left: 45%; top: 40%; z-index: 3000;">
+			<DIV id="editor_wait_window_<? echo htmlspecialcharsex($name);?>" class = "waitwindow"; style="position: absolute; left: 45%; top: 40%; z-index: 3000;">
 			<? echo GetMessage("admin_lib_loading"); ?>
 			</DIV>
 			<script>
-				BX("<? echo htmlspecialchars($name);?>").pMainObj  = new BXHTMLEditor("<? echo htmlspecialchars($name);?>");
+				BX("<? echo htmlspecialcharsex($name);?>").pMainObj  = new BXHTMLEditor("<? echo htmlspecialcharsex($name);?>");
 			</script>
 			<?
 		}
@@ -1537,7 +1538,7 @@ class CFileMan
 						$arComp["FOLDER"] = $folderID;
 						$arComp["NAME"] = htmlspecialcharsex($arParams["NAME"]);
 						$arComp["DESCRIPTION"] = htmlspecialcharsex($arParams["DESCRIPTION"]);
-						$arComp["FULL_PATH"] = htmlspecialchars($arParams["REAL_PATH"]);
+						$arComp["FULL_PATH"] = htmlspecialcharsex($arParams["REAL_PATH"]);
 						$arComp["ICON"] = $arParams["ICON"];
 						$arComp["FIELDS"] = Array();
 						if(is_array($arParams["PARAMS"]))
