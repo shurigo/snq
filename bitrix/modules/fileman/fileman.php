@@ -940,7 +940,6 @@ class CFileMan
 		{
 			if(COption::GetOptionString("fileman", "use_old_version", "N")!="Y")
 			{
-			error_log($strTextValue,0);
 				$strTextValue = htmlspecialcharsback($strTextValue);
 				$curHTMLEd = (($strTextTypeValue == 'html' || !$strTextTypeValue) && $htmled == "Y");
 				$dontShowTA = (!isset($arAdditionalParams['dontshowta'])) ? false : $arAdditionalParams['dontshowta'];

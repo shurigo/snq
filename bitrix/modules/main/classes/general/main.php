@@ -568,7 +568,7 @@ class CAllMain
 			$meta_name=$id;
 		$val = $this->GetProperty($id);
 		if(!empty($val))
-			return '<meta name="'.htmlspecialchars($meta_name).'" content="'.htmlspecialchars($val).'"'.($bXhtmlStyle? ' /':'').'>'."\n";
+			return '<meta name="'.htmlspecialcharsex($meta_name).'" content="'.htmlspecialcharsex($val).'"'.($bXhtmlStyle? ' /':'').'>'."\n";
 		return '';
 	}
 
@@ -1550,7 +1550,7 @@ if(window.BXHint)
 	{
 		if($bUnQuote)
 			$title = str_replace(array("&amp;", "&quot;", "&#039;", "&lt;", "&gt;"), array("&", "\"", "'", "<", ">"), $title);
-		$this->arAdditionalChain[] = array("TITLE"=>$title, "LINK"=>htmlspecialchars($link));
+		$this->arAdditionalChain[] = array("TITLE"=>$title, "LINK"=>htmlspecialcharsex($link));
 	}
 
 	function GetNavChain($path=false, $iNumFrom=0, $sNavChainPath=false, $bIncludeOnce=false, $bShowIcons = true)
@@ -2314,7 +2314,7 @@ if(window.BXHint)
 		$db_res = CSite::GetList($by="SORT", $order="ASC", Array("ACTIVE"=>"Y"));
 		while($ar = $db_res->Fetch())
 		{
-			$ar["NAME"] = htmlspecialchars($ar["NAME"]);
+			$ar["NAME"] = htmlspecialcharsex($ar["NAME"]);
 			$ar["SELECTED"] = ($ar["LID"]==LANG);
 
 			if($bAdmin)
@@ -2819,7 +2819,7 @@ if(window.BXHint)
 							$url = $protocol.$domain."/bitrix/spread.php?".$params;
 							$arrUrl = parse_url($url);
 							if($arrUrl["host"] != $arrCurUrl["host"])
-								$res .= '<img src="'.htmlspecialchars($url).'" alt="" style="width:0px; height:0px; position:absolute; left:-1px; top:-1px;" />'."\n";
+								$res .= '<img src="'.htmlspecialcharsex($url).'" alt="" style="width:0px; height:0px; position:absolute; left:-1px; top:-1px;" />'."\n";
 						}
 					}
 				}
@@ -4281,12 +4281,12 @@ class CAllLanguage
 		$db_res = $DB->Query("SELECT * FROM b_language WHERE ACTIVE='Y' ORDER BY SORT");
 		while($ar = $db_res->Fetch())
 		{
-			$ar["NAME"] = htmlspecialchars($ar["NAME"]);
+			$ar["NAME"] = htmlspecialcharsex($ar["NAME"]);
 			$ar["SELECTED"] = ($ar["LID"]==LANG);
 
 			global $QUERY_STRING;
 			$p = rtrim(str_replace("&#", "#", preg_replace("/lang=[^&#]*&*/", "", $QUERY_STRING)), "&");
-			$ar["PATH"] = $APPLICATION->GetCurPage()."?lang=".$ar["LID"]."&amp;".htmlspecialchars($p);
+			$ar["PATH"] = $APPLICATION->GetCurPage()."?lang=".$ar["LID"]."&amp;".htmlspecialcharsex($p);
 
 			$result[] = $ar;
 		}
