@@ -87,17 +87,18 @@
               <tr>
                 <td><ul>
                     <li><strong>Женские аксессуары</strong></li>
-                    <li><a href="/collection/wbijouteries/">Бижутерия</a></li>
-                    <li><a href="/collection/wumbrellas/">Зонты</a></li>
+                    <!--<li><a href="/collection/wbijouteries/">Бижутерия</a></li>-->
+                    <!--<li><a href="/collection/wumbrellas/">Зонты</a></li>-->
                     <li><a href="/collection/wwallets/">Кошельки</a></li>
-                    <li><a href="/collection/wgloves/">Перчатки</a></li>
+                    <!--<li><a href="/collection/wgloves/">Перчатки</a></li>-->
                     <li><a href="/collection/wshawls/">Платки/Шарфы</a></li>
                     <li><a href="/collection/wbags/">Сумки</a></li>
+                    <li><a href="/collection/wipad/">Чехлы для IPad</a></li>
                   </ul></td>
                 <td><ul>
                     <li><strong>Мужские аксессуары</strong></li>
-                    <li><a href="/collection/mgloves/">Перчатки</a></li>
-                    <li><a href="/collection/mshawls/">Шарфы</a></li>
+                    <!--<li><a href="/collection/mgloves/">Перчатки</a></li>-->
+                    <!--<li><a href="/collection/mshawls/">Шарфы</a></li>-->
                     <li><a href="/collection/mbags/">Сумки</a></li>
                   </ul></td>
               </tr>
