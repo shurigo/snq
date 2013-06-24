@@ -16,4 +16,16 @@ $APPLICATION->IncludeComponent("custom:our_shops", "", Array(
 );?>
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
 <script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850,12846&type=js"></script>
+<script language="javascript">
+var odinkod = {
+"type": "transaction",
+"order_value":"1",
+"transaction_id":"1",
+"product_list":"1"
+};
+var gcb = Math.round(Math.random() * 100000);
+document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') +
+'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
+</script>
+
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

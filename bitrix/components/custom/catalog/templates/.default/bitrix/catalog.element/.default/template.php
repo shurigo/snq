@@ -264,6 +264,14 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&t
 //echo $HUBRUS_str;
 ?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
-
+<script language="javascript">
+var odinkod = {
+"type": "product",
+"product_id":"<?=$arResult["ID"]?>"
+};
+var gcb = Math.round(Math.random() * 100000);
+document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') +
+'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
+</script>
 
 <!-- popular - to be -->
