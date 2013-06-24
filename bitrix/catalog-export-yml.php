@@ -5,7 +5,6 @@
 
 	CModule::IncludeModule('iblock'); 
 	$root_url = 'http://www.snowqueen.ru';
-
 	$xml = new XMLWriter();
 	$xml->setIndent(true);
   $xml->openMemory();
@@ -34,8 +33,7 @@
 						$ar_select,
 						false
 					);
-					while($arSec = $dbSec->GetNext())
-					{
+					while($arSec = $dbSec->GetNext()) {
 						if($arSec['DEPTH_LEVEL'] >= 3) { // Ignore the root category
 							$xml->startElement('category');
 							$xml->writeAttribute('id', $arSec['ID']);
@@ -75,6 +73,7 @@
 						'PREVIEW_PICTURE',
 						'PROPERTY_COL_MODEL_CODE',
 						'PROPERTY_COL_PRICE',
+						'PROPERTY_COL_PRICE_ORIGIN',
 						'PROPERTY_COL_TITLE',
 						'PROPERTY_COL_BRAND',
 						'PROPERTY_COL_DESCRIPTION'
@@ -87,6 +86,8 @@
 						$xml->writeElement('url', $root_url.$element['DETAIL_PAGE_URL']);
 						$price = $element['PROPERTY_COL_PRICE_VALUE'];
 						$xml->writeElement('price', $price);
+						$old_price = $element['PROPERTY_COL_PRICE_ORIGIN_VALUE'];
+						$xml->writeElement('oldPrice', $old_price);
 						$xml->writeElement('currencyId', 'RUR');
 						$xml->writeElement('categoryId', $element['IBLOCK_SECTION_ID']);
 						$xml->writeElement('picture', $root_url.CFile::GetPath($element['PREVIEW_PICTURE']));
