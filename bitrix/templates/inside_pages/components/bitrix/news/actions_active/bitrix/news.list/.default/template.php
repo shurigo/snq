@@ -123,3 +123,15 @@ else
 	)
 );?>
 </aside>
+<script language="javascript">
+var odinkod = {
+"type": "transaction",
+"order_value":"2",
+"transaction_id":"2",
+"product_list":"2"
+};
+var gcb = Math.round(Math.random() * 100000);
+document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') +
+'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
+</script>
+
