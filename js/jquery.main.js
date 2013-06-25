@@ -118,7 +118,7 @@ function ajaxLoad(){
           min.val(ui.values[0].addSpace());
           max.val(ui.values[1].addSpace());
         },
-        stop: function( event, ui ) {
+        stop: function() {
           reloadPage();
         }
       });
@@ -147,9 +147,20 @@ function ajaxLoad(){
   });
 }
 
-Number.prototype.addSpace=function(){var temp='';for(var i=this.toString().length-1;i>=0;i--){temp=this.toString().charAt(i)+temp;if(((this.toString().length-i)%3)===0)temp=' '+temp;};return temp;}
+Number.prototype.addSpace=function(){
+  "use strict";
+  var temp='';
+  for(var i=this.toString().length-1;i>=0;i--){
+    temp=this.toString().charAt(i)+temp;
+    if(((this.toString().length-i)%3)===0){
+      temp=' '+temp;
+    }
+  }
+  return temp;
+};
 
 function initLoadPage(){
+  "use strict";
   $('.mainContent .catalog').each(function(){
     var hold = $(this);
     var obj = {next: 2};
@@ -173,7 +184,7 @@ function initLoadPage(){
                 flag = false;
               }
             },
-            error: function(xhr, textStatus, thrownError){
+            error: function(){
               alert('Server is unavailable. Refresh the page within 15 seconds!');
             }
           });
@@ -195,17 +206,355 @@ function initLoadPage(){
  * http://www.opensource.org/licenses/mit-license.php
  **/
 
-jQuery.fn.gallery=function(options){return new Gallery(this.get(0),options);};function Gallery(context,options){this.init(context,options);};Gallery.prototype={options:{},init:function(context,options){this.options=jQuery.extend({infinite:false,active:'active',duration:700,slideElement:1,autoRotation:false,effect:false,listOfSlides:'ul > li',switcher:false,disableBtn:false,nextBtn:'a.link-next, a.btn-next, .next',prevBtn:'a.link-prev, a.btn-prev, .prev',circle:true,direction:false,event:'click',IE:false,autoHeight:false,easing:'swing',onChange:function(){}},options||{});var _el=jQuery(context).find(this.options.listOfSlides);if(this.options.effect)this.list=_el;else this.list=_el.parent();this.switcher=jQuery(context).find(this.options.switcher);this.nextBtn=jQuery(context).find(this.options.nextBtn);this.prevBtn=jQuery(context).find(this.options.prevBtn);this.count=_el.index(_el.filter(':last'));if(this.options.switcher)this.active=this.switcher.index(this.switcher.filter('.'+this.options.active+':eq(0)'));else this.active=_el.index(_el.filter('.'+this.options.active+':eq(0)'));if(this.active<0)this.active=0;this.last=this.active;this.woh=_el.outerWidth(true);if(!this.options.direction)this.installDirections(this.list.parent().width());else{this.woh=_el.outerHeight(true);this.installDirections(this.list.parent().height());}if(!this.options.effect){this.rew=this.count-this.wrapHolderW+1;this.list.css({position:'relative'}).css(this.dirAnimate());this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);if(this.options.autoHeight)this.list.parent().css({height:this.list.children().eq(this.active).outerHeight()});}else{this.rew=this.count;this.list.css({opacity:0}).removeClass(this.options.active).eq(this.active).addClass(this.options.active).css({opacity:1}).css('opacity','auto');this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);if(this.options.autoHeight)this.list.parent().css({height:this.list.eq(this.active).outerHeight()});}this.flag=true;if(this.options.infinite){this.count++;this.active+=this.count;this.list.append(_el.clone());this.list.append(_el.clone());this.list.css(this.dirAnimate());}this.initEvent(this,this.nextBtn,true);this.initEvent(this,this.prevBtn,false);if(this.options.disableBtn)this.initDisableBtn();if(this.options.autoRotation)this.runTimer(this);if(this.options.switcher)this.initEventSwitcher(this,this.switcher);},dirAnimate:function(){if(!this.options.direction)return{left:-(this.woh*this.active)};else return{top:-(this.woh*this.active)};},initDisableBtn:function(){this.prevBtn.removeClass('prev-'+this.options.disableBtn);this.nextBtn.removeClass('next-'+this.options.disableBtn);if(this.active==0||this.count+1==this.wrapHolderW-1)this.prevBtn.addClass('prev-'+this.options.disableBtn);if(this.active==0&&this.count+1==1||this.count+1<=this.wrapHolderW-1)this.nextBtn.addClass('next-'+this.options.disableBtn);if(this.active==this.rew)this.nextBtn.addClass('next-'+this.options.disableBtn);},installDirections:function(temp){this.wrapHolderW=Math.ceil(temp/this.woh);if(((this.wrapHolderW-1)*this.woh+this.woh/2)>temp)this.wrapHolderW--;if(this.wrapHolderW==0)this.wrapHolderW=1;},fadeElement:function(){if(jQuery.browser.msie&&this.options.IE){this.list.eq(this.last).css({opacity:0});this.list.removeClass(this.options.active).eq(this.active).addClass(this.options.active).css({opacity:'auto'});}else{this.list.eq(this.last).animate({opacity:0},{queue:false,easing:this.options.easing,duration:this.options.duration});this.list.removeClass(this.options.active).eq(this.active).addClass(this.options.active).animate({opacity:1},{queue:false,duration:this.options.duration,complete:function(){jQuery(this).css('opacity','auto');}});}if(this.options.autoHeight)this.list.parent().animate({height:this.list.eq(this.active).outerHeight()},{queue:false,duration:this.options.duration});if(this.options.switcher)this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);this.last=this.active;},scrollElement:function($this){if(!$this.options.infinite)$this.list.animate($this.dirAnimate(),{queue:false,easing:$this.options.easing,duration:$this.options.duration});else $this.list.animate($this.dirAnimate(),$this.options.duration,$this.options.easing,function(){$this.flag=true});if(this.options.autoHeight)this.list.parent().animate({height:this.list.children().eq(this.active).outerHeight()},{queue:false,duration:this.options.duration});if($this.options.switcher)$this.switcher.removeClass($this.options.active).eq($this.active/$this.options.slideElement).addClass($this.options.active);},runTimer:function($this){if($this._t)clearTimeout($this._t);$this._t=setInterval(function(){if($this.options.infinite)$this.flag=false;$this.toPrepare($this,true);$this.options.onChange();},this.options.autoRotation);},initEventSwitcher:function($this,el){el.bind($this.options.event,function(){$this.active=$this.switcher.index(jQuery(this))*$this.options.slideElement;if($this._t)clearTimeout($this._t);if($this.options.disableBtn)$this.initDisableBtn();if(!$this.options.effect)$this.scrollElement($this);else $this.fadeElement();if($this.options.autoRotation)$this.runTimer($this);$this.options.onChange();if($this.options.event=='click')return false;});},initEvent:function($this,addEventEl,dir){addEventEl.bind($this.options.event,function(){if($this.flag){if($this.options.infinite)$this.flag=false;if($this._t)clearTimeout($this._t);$this.toPrepare($this,dir);if($this.options.autoRotation)$this.runTimer($this);$this.options.onChange();}if($this.options.event=='click')return false;});},toPrepare:function($this,side){if(!$this.options.infinite){if(($this.active==$this.rew)&&$this.options.circle&&side)$this.active=-$this.options.slideElement;if(($this.active==0)&&$this.options.circle&&!side)$this.active=$this.rew+$this.options.slideElement;for(var i=0;i<$this.options.slideElement;i++){if(side){if($this.active+1<=$this.rew)$this.active++;}else{if($this.active-1>=0)$this.active--;}};}else{if($this.active>=$this.count+$this.count&&side)$this.active-=$this.count;if($this.active<=$this.count-1&&!side)$this.active+=$this.count;$this.list.css($this.dirAnimate());if(side)$this.active+=$this.options.slideElement;else $this.active-=$this.options.slideElement;}if(this.options.disableBtn)this.initDisableBtn();if(!$this.options.effect)$this.scrollElement($this);else $this.fadeElement();},reCalcWidth:function(){this.woh=this.list.children().outerWidth(true);if(!this.options.direction)this.installDirections(this.list.parent().width());else{this.woh=list.children().outerHeight(true);this.installDirections(this.list.parent().height());}this.rew=this.count-this.wrapHolderW+1;this.list.css({position:'relative'}).css(this.dirAnimate());},stop:function(){this.options.aR=this.options.autoRotation;this.options.autoRotation=false;if(this._t)clearTimeout(this._t);},play:function(){if(this._t)clearTimeout(this._t);this.options.autoRotation=this.options.aR;if(this.options.autoRotation)this.runTimer(this);}}
+jQuery.fn.gallery=function(options){
+  "use strict";
+  return new Gallery(this.get(0),options);
+};
+function Gallery(context,options){
+  "use strict";
+  this.init(context,options);
+}
+Gallery.prototype={
+  options:{},
+  init:function(context,options){
+    "use strict";
+    this.options=jQuery.extend({
+      infinite:false,
+      active:'active',
+      duration:700,
+      slideElement:1,
+      autoRotation:false,
+      effect:false,
+      listOfSlides:'ul > li',
+      switcher:false,
+      disableBtn:false,
+      nextBtn:'a.link-next, a.btn-next, .next',
+      prevBtn:'a.link-prev, a.btn-prev, .prev',
+      circle:true,
+      direction:false,
+      event:'click',
+      IE:false,
+      autoHeight:false,
+      easing:'swing',
+      onChange:function(){}},
+      options||{}
+    );
+    var _el=jQuery(context).find(this.options.listOfSlides);
+    if(this.options.effect){
+      this.list=_el;
+    } else {
+      this.list=_el.parent();
+    }
+    this.switcher=jQuery(context).find(this.options.switcher);
+    this.nextBtn=jQuery(context).find(this.options.nextBtn);
+    this.prevBtn=jQuery(context).find(this.options.prevBtn);
+    this.count=_el.index(_el.filter(':last'));
+    if(this.options.switcher) {
+      this.active=this.switcher.index(this.switcher.filter('.'+this.options.active+':eq(0)'));
+    } else {
+      this.active=_el.index(_el.filter('.'+this.options.active+':eq(0)'));
+    }    
+    if(this.active<0) {
+      this.active=0;
+    }
+    this.last=this.active;
+    this.woh=_el.outerWidth(true);
+    if(!this.options.direction) {
+      this.installDirections(this.list.parent().width());
+    } else {
+      this.woh=_el.outerHeight(true);this.installDirections(this.list.parent().height());
+    }    
+    if(!this.options.effect){
+      this.rew=this.count-this.wrapHolderW+1;
+      this.list.css({position:'relative'}).css(this.dirAnimate());
+      this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);
+      if(this.options.autoHeight) {
+        this.list.parent().css({height:this.list.children().eq(this.active).outerHeight()});
+      }
+    }  else {
+      this.rew=this.count;
+      this.list.css({opacity:0}).removeClass(this.options.active).eq(this.active).addClass(this.options.active).css({opacity:1}).css('opacity','auto');
+      this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);
+      if(this.options.autoHeight) {
+        this.list.parent().css({height:this.list.eq(this.active).outerHeight()});
+      }
+    }
+    this.flag=true;
+    if(this.options.infinite){
+      this.count++;
+      this.active+=this.count;
+      this.list.append(_el.clone());
+      this.list.append(_el.clone());
+      this.list.css(this.dirAnimate());
+    }
+    this.initEvent(this,this.nextBtn,true);
+    this.initEvent(this,this.prevBtn,false);
+    if(this.options.disableBtn){
+      this.initDisableBtn();
+    }
+    if(this.options.autoRotation){
+      this.runTimer(this);
+    }
+    if(this.options.switcher){
+      this.initEventSwitcher(this,this.switcher);
+    }
+  },
+  dirAnimate:function(){
+    "use strict";
+    if(!this.options.direction) {
+      return {left:-(this.woh*this.active)};
+    } else {
+      return{top:-(this.woh*this.active)};
+    }
+  },
+  initDisableBtn:function(){
+    "use strict";
+    this.prevBtn.removeClass('prev-'+this.options.disableBtn);
+    this.nextBtn.removeClass('next-'+this.options.disableBtn);
+    if(this.active===0||this.count+1===this.wrapHolderW-1) {
+      this.prevBtn.addClass('prev-'+this.options.disableBtn);
+    }
+    if(this.active===0&&this.count+1===1||this.count+1<=this.wrapHolderW-1) {
+      this.nextBtn.addClass('next-'+this.options.disableBtn);
+    }
+    if(this.active===this.rew) {
+      this.nextBtn.addClass('next-'+this.options.disableBtn);
+    }
+  },
+  installDirections:function(temp){
+    "use strict";
+    this.wrapHolderW=Math.ceil(temp/this.woh);
+    if(((this.wrapHolderW-1)*this.woh+this.woh/2)>temp){
+      this.wrapHolderW--;
+    }
+    if(this.wrapHolderW===0){
+      this.wrapHolderW=1;
+    }
+  },
+  fadeElement:function(){
+    "use strict";
+    if(jQuery.browser.msie&&this.options.IE){
+      this.list.eq(this.last).css({opacity:0});
+      this.list.removeClass(this.options.active).eq(this.active).addClass(this.options.active).css({opacity:'auto'});
+    } else { 
+      this.list
+        .eq(this.last)
+        .animate({opacity:0},{
+          queue:false,
+          easing:this.options.easing,
+          duration:this.options.duration});
+      this.list
+        .removeClass(this.options.active)
+        .eq(this.active)
+        .addClass(this.options.active)
+        .animate({
+          opacity:1
+          },{
+            queue:false,
+            duration:this.options.duration,
+            complete:function(){
+              jQuery(this).css('opacity','auto');
+            }
+          }
+        );
+    }
+    if(this.options.autoHeight) {
+      this.list
+        .parent()
+        .animate({
+          height:this.list.eq(this.active).outerHeight()
+          },{
+            queue:false,
+            duration:this.options.duration
+          }
+        );
+    }
+    if(this.options.switcher) {
+      this.switcher.removeClass(this.options.active).eq(this.active).addClass(this.options.active);
+    }
+    this.last=this.active;
+  },
+  scrollElement:function($this){
+    "use strict";
+    if(!$this.options.infinite) {
+      $this.list.animate(
+        $this.dirAnimate(),{
+          queue:false,
+          easing:$this.options.easing,
+          duration:$this.options.duration
+        });      
+    } else {
+      $this.list.animate(
+        $this.dirAnimate(),
+        $this.options.duration,
+        $this.options.easing,
+        function(){          
+          $this.flag=true;
+        }
+      );
+    }
+    if(this.options.autoHeight){
+      this.list.parent().animate({height:this.list.children().eq(this.active).outerHeight()},{queue:false,duration:this.options.duration});
+    }
+    if($this.options.switcher){
+      $this.switcher
+        .removeClass($this.options.active)
+        .eq($this.active/$this.options.slideElement)
+        .addClass($this.options.active);
+    }
+  },
+  runTimer:function($this){
+    "use strict";
+    if($this._t) {
+      clearTimeout($this._t);
+    }
+    $this._t=setInterval(function(){
+      if($this.options.infinite) {
+        $this.flag=false;
+      }
+      $this.toPrepare($this,true);
+      $this.options.onChange();
+    },
+    this.options.autoRotation);
+  },
+  initEventSwitcher:function($this,el){
+    "use strict";
+    el.bind(
+      $this.options.event,
+      function(){
+        $this.active=$this.switcher.index(jQuery(this))*$this.options.slideElement;
+        if($this._t){
+          clearTimeout($this._t);
+        }
+        if($this.options.disableBtn){
+          $this.initDisableBtn();
+        }
+        if(!$this.options.effect){
+          $this.scrollElement($this);
+        } else { 
+          $this.fadeElement();
+        }
+        if($this.options.autoRotation){
+          $this.runTimer($this);
+        }
+        $this.options.onChange();
+        if($this.options.event==='click') {
+          return false;
+        }
+      }
+    );
+  },
+  initEvent:function($this,addEventEl,dir){
+    "use strict";
+    addEventEl.bind(
+      $this.options.event,
+      function(){
+        if($this.flag){
+          if($this.options.infinite){
+            $this.flag=false;
+          }
+          if($this._t){
+            clearTimeout($this._t);
+          }
+          $this.toPrepare($this,dir);
+          if($this.options.autoRotation){
+            $this.runTimer($this);
+          }
+          $this.options.onChange();
+        }
+        if($this.options.event==='click'){
+          return false;
+        }
+      }
+    );
+  },
+  toPrepare:function($this,side){
+    "use strict";
+    if(!$this.options.infinite){
+      if(($this.active===$this.rew)&&$this.options.circle&&side){
+        $this.active=-$this.options.slideElement;
+      }
+      if(($this.active===0)&&$this.options.circle&&!side){
+        $this.active=$this.rew+$this.options.slideElement;
+      }
+      for(var i=0;i<$this.options.slideElement;i++){
+        if(side){
+          if($this.active+1<=$this.rew){
+            $this.active++;
+          }
+        } else {
+          if($this.active-1>=0){
+            $this.active--;
+          }
+        }
+      }
+    } else {
+      if($this.active>=$this.count+$this.count&&side){
+        $this.active-=$this.count;
+      }
+      if($this.active<=$this.count-1&&!side){
+        $this.active+=$this.count;
+      }
+      $this.list.css($this.dirAnimate());
+      if(side){
+        $this.active+=$this.options.slideElement;
+      } else {
+        $this.active-=$this.options.slideElement;
+      }
+    }  
+    if(this.options.disableBtn){
+      this.initDisableBtn();
+    }
+    if(!$this.options.effect){
+      $this.scrollElement($this);
+    } else {
+      $this.fadeElement();
+    }
+  },
+  reCalcWidth:function(){
+    "use strict";
+    this.woh=this.list.children().outerWidth(true);
+    if(!this.options.direction){
+      this.installDirections(this.list.parent().width());
+    } else {
+      this.woh=this.list.children().outerHeight(true);
+      this.installDirections(this.list.parent().height());
+    }
+    this.rew=this.count-this.wrapHolderW+1;
+    this.list.css({position:'relative'}).css(this.dirAnimate());
+  },
+  stop:function(){
+    "use strict";
+    this.options.aR=this.options.autoRotation;
+    this.options.autoRotation=false;
+    if(this._t){
+      clearTimeout(this._t);
+    }
+  },
+  play:function(){
+    "use strict";
+    if(this._t){
+      clearTimeout(this._t);
+    }
+    this.options.autoRotation=this.options.aR;
+    if(this.options.autoRotation){
+      this.runTimer(this);
+    }
+  }
+};
 
-jQuery.fn.customSelect = function(_options) {
+jQuery.fn.customSelect = function(options) {
+  "use strict";
   var _options = jQuery.extend({
-  selectStructure:'<div class="selectArea"><div class="selectIn"><div class="selectText"></div></div></div>',
-  selectText:'.selectText',
-  selectBtn:'.selectIn',
-  selectDisabled:'.disabled',
-  optStructure:'<div class="selectSub"><ul></ul></div>',
-  maxHeight:false,optList:'ul'
-}, _options);
+      selectStructure:'<div class="selectArea"><div class="selectIn"><div class="selectText"></div></div></div>',
+      selectText:'.selectText',
+      selectBtn:'.selectIn',
+      selectDisabled:'.disabled',
+      optStructure:'<div class="selectSub"><ul></ul></div>',
+      maxHeight:false,optList:'ul'
+    }, 
+    options
+  );
   return this.each(function() {
     var select = jQuery(this);
     if(!select.hasClass('outtaHere')) {
@@ -216,7 +565,9 @@ jQuery.fn.customSelect = function(_options) {
         var selectDisabled = replaced.find(_options.selectDisabled).hide();
         var optHolder = jQuery(_options.optStructure);
         var optList = optHolder.find(_options.optList);
-        if(select.attr('disabled')) selectDisabled.show();
+        if(select.attr('disabled')){
+          selectDisabled.show();
+        }
         select.find('option').each(function() {
           var selOpt = $(this);
           var _opt = jQuery('<li><a href="#">' + selOpt.html() + '</a></li>');
@@ -249,14 +600,18 @@ jQuery.fn.customSelect = function(_options) {
 
         var optTimer;
         replaced.hover(function() {
-          if(optTimer) clearTimeout(optTimer);
+          if(optTimer){
+            clearTimeout(optTimer);
+          }
         }, function() {
           optTimer = setTimeout(function() {
             optHolder.hide();
           }, 200);
         });
         optHolder.hover(function(){
-          if(optTimer) clearTimeout(optTimer);
+          if(optTimer){
+            clearTimeout(optTimer);
+          }
         }, function() {
           optTimer = setTimeout(function() {
             optHolder.hide();
@@ -273,7 +628,9 @@ jQuery.fn.customSelect = function(_options) {
               left: replaced.offset().left,
               display: 'block'
             });
-            if(_options.maxHeight && optHolder.children('ul').height() > _options.maxHeight) optHolder.children('ul').css({height:_options.maxHeight, overflow:'auto'});
+            if(_options.maxHeight && optHolder.children('ul').height() > _options.maxHeight){
+              optHolder.children('ul').css({height:_options.maxHeight, overflow:'auto'});
+            }
           }
           return false;
         });
@@ -281,15 +638,16 @@ jQuery.fn.customSelect = function(_options) {
       }
     }
   });
-}
+};
 
-jQuery.fn.customRadio = function(_options){
+jQuery.fn.customRadio = function(options){
+  "use strict";
   var _options = jQuery.extend({
     radioStructure: '<div></div>',
     radioDisabled: 'disabled',
     radioDefault: 'radioArea',
     radioChecked: 'radioAreaChecked'
-  }, _options);
+  }, options);
   return this.each(function(){
     var radio = jQuery(this);
     if(!radio.hasClass('outtaHere') && radio.is(':radio')){
@@ -298,10 +656,14 @@ jQuery.fn.customRadio = function(_options){
       this._replaced = replaced;
       if(radio.is(':disabled')) {
         replaced.addClass(_options.radioDisabled);
-        if(radio.is(':checked')) replaced.addClass('disabledChecked');
+        if(radio.is(':checked')){
+          replaced.addClass('disabledChecked');
+        }
+      } else if(radio.is(':checked')){
+        replaced.addClass(_options.radioChecked);
+      } else {
+        replaced.addClass(_options.radioDefault);
       }
-      else if(radio.is(':checked')) replaced.addClass(_options.radioChecked);
-      else replaced.addClass(_options.radioDefault);
       replaced.click(function(){
         if($(this).hasClass(_options.radioDefault)){
           radio.change();
@@ -318,20 +680,23 @@ jQuery.fn.customRadio = function(_options){
   });
   function changeRadio(_this){
     $('input:radio[name='+$(_this).attr("name")+']').not(_this).each(function(){
-      if(this._replaced && !$(this).is(':disabled')) this._replaced.removeClass().addClass(_options.radioDefault);
+      if(this._replaced && !$(this).is(':disabled')){
+        this._replaced.removeClass().addClass(_options.radioDefault);
+      }
     });
     _this._replaced.removeClass().addClass(_options.radioChecked);
     $(_this).trigger('change');
   }
-}
+};
 
-jQuery.fn.customCheckbox = function(_options){
+jQuery.fn.customCheckbox = function(options){
+  "use strict";
   var _options = jQuery.extend({
     checkboxStructure: '<div></div>',
     checkboxDisabled: 'disabled',
     checkboxDefault: 'checkboxArea',
     checkboxChecked: 'checkboxAreaChecked'
-  }, _options);
+  }, options);
   return this.each(function(){
     var checkbox = jQuery(this);
     if(!checkbox.hasClass('outtaHere') && checkbox.is(':checkbox')){
@@ -340,15 +705,22 @@ jQuery.fn.customCheckbox = function(_options){
       this._replaced = replaced;
       if(checkbox.is(':disabled')) {
         replaced.addClass(_options.checkboxDisabled);
-        if(checkbox.is(':checked')) replaced.addClass('disabledChecked');
+        if(checkbox.is(':checked')){
+          replaced.addClass('disabledChecked');
+        }
+      } else if(checkbox.is(':checked')){
+        replaced.addClass(_options.checkboxChecked);
+      } else {
+        replaced.addClass(_options.checkboxDefault);
       }
-      else if(checkbox.is(':checked')) replaced.addClass(_options.checkboxChecked);
-      else replaced.addClass(_options.checkboxDefault);
 
       replaced.click(function(){
         if(!replaced.hasClass('disabled')){
-          if(checkbox.is(':checked')) checkbox.removeAttr('checked');
-          else checkbox.attr('checked', 'checked');
+          if(checkbox.is(':checked')){
+            checkbox.removeAttr('checked');
+          } else {
+            checkbox.attr('checked', 'checked');
+          }
           changeCheckbox(checkbox);
         }
       });
@@ -360,8 +732,11 @@ jQuery.fn.customCheckbox = function(_options){
     }
   });
   function changeCheckbox(_this){
-    if(_this.is(':checked')) _this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked);
-    else _this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault);
+    if(_this.is(':checked')){
+      _this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked);
+    } else {
+      _this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault);
+    }
     _this.trigger('change');
   }
-}
+};
