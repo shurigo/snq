@@ -27,15 +27,18 @@
                     <li><a href="/collection/wtopjacket/">Куртки</a></li>
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
                     <li><a href="/collection/wtopcloak/">Плащи</a></li>
-                  </ul></td>
+                    <li><a href="/collection/wjacket/">Жакеты</a></li>
+                    <li><a href="/collection/wboots/">Обувь</a></li>
+                 </ul></td>
                 <td><ul>
+                    <li><a href="/collection/wdress/">Платья</a></li>
+                    <li><a href="/collection/wtunic/">Туники</a></li>
+                    <li><a href="/collection/wskirt/">Юбки</a></li>
+                    <li><a href="/collection/wcardigan/">Кардиганы и джемперы</a></li>
+                    <li><a href="/collection/wtshort/">Футболки и топы</a></li>
                     <li><a href="/collection/wblouse/">Блузки</a></li>
                     <li><a href="/collection/wpants/">Брюки/Джинсы</a></li>
-                    <li><a href="/collection/wjacket/">Жакеты</a></li>
-                    <li><a href="/collection/wdress/">Платья</a></li>
-                    <li><a href="/collection/wtrico/">Трикотаж</a></li>
-                    <li><a href="/collection/wskirt/">Юбки</a></li>
-                    <li><a href="/collection/wboots/">Обувь</a></li>
+                    <li><a href="/collection/wshorts/">Шорты/Комбинезоны</a></li>
                   </ul></td>
               </tr>
             </table>
