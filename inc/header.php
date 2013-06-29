@@ -2,14 +2,6 @@
 	session_start();
 	include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
 ?>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("#city-select").change(function() {
-        var sel = $("#city-select option:selected");
-        setCity(sel.val(), sel.text());
-      });
-    });
-    </script>
 	<header class="header">
       <div class="logo"><a href="/"><img src="/images/logo.png" width="200" height="57" alt="Снежная Королева"></a></div>
 			<!-- end .logo-->

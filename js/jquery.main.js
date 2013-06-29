@@ -18,6 +18,10 @@ $(window).load(function(){
     slideElement: 1,
     listOfSlides: '> div.hold > ul > li'
   });
+	$("#city-select").change(function() {
+		var sel = $("#city-select option:selected");
+		setCity(sel.val(), sel.text());
+	});
   initLoadPage();
   ajaxLoad();
   initGallery();
