@@ -161,23 +161,27 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 
 
      <div class="social-hold">
-     <!--
-        <form class="subscr" action="/" method="get">
-          <fieldset>
-            <span>Подписаться на последние новости и акции</span>
-            <input value="Ваш e-mail адрес" type="text">
-            <input value="Подписаться" type="submit">
-          </fieldset>
-        </form>
-        -->
-        <!-- end .subscr-->
-        <!--
+     <?
+     $APPLICATION->IncludeComponent("custom:subscribe.form","",Array(
+		"AJAX_MODE" => "N",
+		"SHOW_HIDDEN" => "Y",
+		"ALLOW_ANONYMOUS" => "Y",
+		"SHOW_AUTH_LINKS" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"SET_TITLE" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"AJAX_OPTION_HISTORY" => "N"
+	));
+	?>
+
         <ul class="socials">
           <li>Оставайтесь с нами</li>
-          <li><a class="vk" href="#">Вконтакте</a></li>
-          <li><a class="fb" href="#">Facebook</a></li>
-          <li><a class="tw" href="#">Twitter</a></li>
-        </ul> -->
+          <li><a class="vk" href="http://vk.com/likeaqueen">Вконтакте</a></li>
+          <li><a class="fb" href="https://facebook.com/likeaqueenru">Facebook</a></li>
+          <li><a class="tw" href="https://twitter.com/LikeAQueenBlog">Twitter</a></li>
+        </ul>
         <!-- end .socials-->
 
       </div>
