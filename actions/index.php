@@ -97,5 +97,7 @@
 ?>
 
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
-<script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850,12851&type=js"></script>
+<?if(HUBRUS_ENABLE):?>
+	<script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850,12851&type=js"></script>
+<?endif;?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -192,7 +192,9 @@ if (strlen($url_array[3]) == 0) {
 }
 ?>
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
+<?if(HUBRUS_ENABLE):?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
+<?endif;?>
 <a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->

@@ -263,7 +263,9 @@ else
 $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&type=js&varname1=481_vi&value1=".$arResult["ID"];
 //echo $HUBRUS_str;
 ?>
+<?if(HUBRUS_ENABLE):?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
+<?endif;?>
 
 
 <!-- popular - to be -->
