@@ -16,6 +16,7 @@
 <script type="text/javascript" src="/js/html5support.js"></script>
 <![endif]-->
 <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script type='text/javascript' src='/js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript" src="/js/jquery.main.js"></script>
