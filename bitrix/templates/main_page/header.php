@@ -25,51 +25,6 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
-
-<script type="text/javascript">
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-23458231-1']);
-
-    _gaq.push(['_addOrganic', 'images.yandex.ru', 'text', true]);
-    _gaq.push(['_addOrganic', 'blogsearch.google.ru', 'q', true]);
-    _gaq.push(['_addOrganic', 'blogs.yandex.ru', 'text', true]);
-    _gaq.push(['_addOrganic', 'go.mail.ru', 'q']);
-    _gaq.push(['_addOrganic', 'nova.rambler.ru', 'query']);
-    _gaq.push(['_addOrganic', 'nigma.ru', 's']);
-    _gaq.push(['_addOrganic', 'webalta.ru', 'q']);
-    _gaq.push(['_addOrganic', 'aport.ru', 'r']);
-    _gaq.push(['_addOrganic', 'poisk.ru', 'text']);
-    _gaq.push(['_addOrganic', 'km.ru', 'sq']);
-    _gaq.push(['_addOrganic', 'liveinternet.ru', 'q']);
-    _gaq.push(['_addOrganic', 'quintura.ru', 'request']);
-    _gaq.push(['_addOrganic', 'search.qip.ru', 'query']);
-    _gaq.push(['_addOrganic', 'gde.ru', 'keywords']);
-    _gaq.push(['_addOrganic', 'ru.yahoo.com', 'p']);
-
-	_gaq.push(['_trackPageview']);
-
-	(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-
-</script>
-
-<script type="text/javascript">
-function trackOutboundLink(link, category, action) {
-
-try {
-_gaq.push(['_trackEvent', category , action]);
-} catch(err){}
-
-setTimeout(function() {
-document.location.href = link.href;
-}, 100);
-}
-</script>
-
 <!-- ETargeting markers -->
 <script language="javascript">
 var odinkod = {
@@ -79,7 +34,6 @@ var gcb = Math.round(Math.random() * 100000);
 document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
 </script>
 <!-- END ETargeting markers -->
-
 </head>
 <body>
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>

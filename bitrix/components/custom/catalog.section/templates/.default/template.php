@@ -89,13 +89,6 @@
 <div id='loading_div' style='display:none' align='center'>
   <img src='/images/loading_icon.gif'/>
 </div>
-<script type='text/javascript'>
-	$('#loading_div').hide().ajaxStart(function(){
-		$(this).show();
-	}).ajaxStop(function() {
-  	$(this).hide();
-});
-</script>
 <?
 //get section description
 if (strlen($url_array[3]) == 0) {
@@ -199,7 +192,9 @@ if (strlen($url_array[3]) == 0) {
 }
 ?>
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
+<?if(HUBRUS_ENABLE):?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
+<?endif;?>
 <a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->
