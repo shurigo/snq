@@ -16,7 +16,7 @@
 				"DISCOUNT_ONLY" => $discount_only,
 				"BY_LINK" => (isset($_GET['m']) && $_GET['m']=='a') ? "Y" : "N",
 				"SHOW_TOP_ELEMENTS" => "N",
-				"PAGE_ELEMENT_COUNT" => "32",
+				"PAGE_ELEMENT_COUNT" => "12",
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => $sort_field,
 				"ELEMENT_SORT_ORDER" => $sort_order,
