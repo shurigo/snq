@@ -12,15 +12,17 @@
     "GLOBAL_ACTIVE"=>"Y",
     "IBLOCK_ID"=>"6",
     "IBLOCK_ACTIVE"=>"Y",
+    "CNT_ACTIVE"=>"Y"
   );
-  $section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, false, array('ID', 'NAME'));
+  $section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME'));
   $parent_section = $section_list->GetNext();
   $filter = array(
     "SECTION_ID"=>$parent_section['ID'],
     "ACTIVE"=>"Y",
     "GLOBAL_ACTIVE"=>"Y",
     "IBLOCK_ID"=>"6",
-    "IBLOCK_ACTIVE"=>"Y"
+    "IBLOCK_ACTIVE"=>"Y",
+    "CNT_ACTIVE"=>"Y"
   );
   $office_section_list = CIBlockSection::GetList(array("NAME"=>"ASC"), $filter, true, array('ID', 'NAME', 'DESCRIPTION'));
   while($arSection = $office_section_list->GetNext()) {
