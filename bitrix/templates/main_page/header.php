@@ -132,9 +132,11 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 
         <ul class="socials">
           <li>ќставайтесь с нами</li>
-          <li><a class="vk" href="http://vk.com/likeaqueen">¬контакте</a></li>
-          <li><a class="fb" href="https://facebook.com/likeaqueenru">Facebook</a></li>
-          <li><a class="tw" href="https://twitter.com/LikeAQueenBlog">Twitter</a></li>
+          <li><a class="vk" href="http://vk.com/likeaqueen" rel="nofollow" target="_blank">¬контакте</a></li>
+          <li><a class="fb" href="https://facebook.com/likeaqueenru" rel="nofollow" target="_blank">Facebook</a></li>
+          <li><a class="tw" href="https://twitter.com/LikeAQueenBlog" rel="nofollow" target="_blank">Twitter</a></li>
+          <li><a class="ok" href="http://www.odnoklassniki.ru/group/51951031353532" rel="nofollow" target="_blank">ќдноклассники</a></li>
+          <li><a class="ig" href="http://instagram.com/likeaqueenblog" rel="nofollow" target="_blank">Instagram</a></li>
         </ul>
         <!-- end .socials-->
 

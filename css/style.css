@@ -1204,7 +1204,7 @@ table .sep {
 	display:block;
 	text-align:left;
 	text-indent:-9999px;
-	background:url(../images/socials.png) no-repeat;
+	background:url(../images/socials_extended.png) no-repeat;
 	width:21px;
 	height:20px;
 	overflow:hidden;
@@ -1221,7 +1221,12 @@ table .sep {
 .socials .tw {
 	background-position:-58px 0;
 }
-
+.socials .ok {
+	background-position:-87px 0;
+}
+.socials .ig {
+	background-position:-116px 0;
+}
 .info-links {
 	list-style:none;
 	zoom:1;

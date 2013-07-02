@@ -22,11 +22,11 @@ $ID = $subscr->Add($arFields);
 if($ID>0)
 {
         CSubscription::Authorize($ID);
-        echo "Вы успешно подписались на нашу рассылку! Следите за нашими новостями и будьте в курсе последних событий!";
+        echo " СПАСИБО! ТЕПЕРЬ ВЫ БУДЕТЕ В КУРСЕ НАШИХ НОВОСТЕЙ И АКЦИЙ.";
 }
 else
 {
-        $strWarning .= "Ошибка подписки: ".$subscr->LAST_ERROR."<br>. Попробуйте еще раз.<br>";
+        $strWarning .= $subscr->LAST_ERROR;
         echo $strWarning;
 }
 }
