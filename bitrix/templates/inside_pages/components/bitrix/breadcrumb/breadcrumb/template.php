@@ -4,7 +4,7 @@
   if(empty($arResult))
 	return "";
 
-  $strReturn = '<a href="/">Главная</a> / ';
+  $strReturn = '<a href="/" rel="nofollow">Главная</a> / ';
   for($index = 0, $itemSize = count($arResult); $index < $itemSize; $index++)
   {
   	  if($index > 0)
@@ -12,7 +12,7 @@
 
 	  $title = htmlspecialcharsex($arResult[$index]["TITLE"]);
 	  if($arResult[$index]["LINK"] <> CMain::GetCurDir())
-		$strReturn .= '<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" >'.$title.'</a>';
+		$strReturn .= '<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" '.($str=($index < 1)?('rel="nofollow"'):('')).'>'.$title.'</a>';
 	  else
 		$strReturn .= '<h1 class="nav">'.$title.'</h1>';
   }

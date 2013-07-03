@@ -57,7 +57,7 @@
 <article itemscope itemtype="http://schema.org/Product">
 <a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
 <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-<img src="<?=$img?>" alt="<?=$arElement['NAME']?>" itemprop="image"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
+<img src="<?=$img?>" alt="<?=$arElement['NAME']?>" itemprop="image" title="<?=$arElement['NAME']?>"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
 <span class="text">
 <span class="name" itemprop="brand">
