@@ -25,15 +25,7 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
-<!-- ETargeting markers -->
-<script language="javascript">
-var odinkod = {
-"type": "homepage"
-};
-var gcb = Math.round(Math.random() * 100000);
-document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
-</script>
-<!-- END ETargeting markers -->
+
 </head>
 <body>
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
