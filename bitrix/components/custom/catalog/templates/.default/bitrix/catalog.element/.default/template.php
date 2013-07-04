@@ -51,7 +51,30 @@ false
 				 <td>
                       <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
 				 </td>
-				 <td class="sep">&nbsp;&nbsp;</td>
+
+                </tr>
+                <tr>
+                <td>
+                      <div id="ok_shareWidget"></div>
+						<script>
+						!function (d, id, did, st) {
+						  var js = d.createElement("script");
+						  js.src = "http://connect.ok.ru/connect.js";
+						  js.onload = js.onreadystatechange = function () {
+						  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+						    if (!this.executed) {
+						      this.executed = true;
+						      setTimeout(function () {
+						        OK.CONNECT.insertShareWidget(id,did,st);
+						      }, 0);
+						    }
+						  }};
+						  d.documentElement.appendChild(js);
+						}(document,"ok_shareWidget","http://www.snowqueen.ru/","{width:170,height:20,st:'rounded',sz:20,ck:2}");
+						</script>
+
+                  </td>
+                 <td class="sep">&nbsp;&nbsp;</td>
 				 <td>
                       <div class="g-plusone" data-size="medium"></div>
 					  <script type="text/javascript">
@@ -64,6 +87,8 @@ false
  								 })();
 				     </script>
                   </td>
+                   <td class="sep">&nbsp;&nbsp;</td>
+                   <td></td>
                 </tr>
               </table>
             </div>
