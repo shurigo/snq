@@ -195,6 +195,11 @@ if (strlen($url_array[3]) == 0) {
 <?if(HUBRUS_ENABLE):?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
 <?endif;?>
+
+<!-- Segment Pixel - SQ_segment - DO NOT MODIFY -->
+<img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
+<!-- End of Segment Pixel -->
+
 <a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->

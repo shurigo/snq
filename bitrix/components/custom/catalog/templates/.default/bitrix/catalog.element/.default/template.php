@@ -276,4 +276,8 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
 </script>
 
+<!-- Segment Pixel - SQ_segment - DO NOT MODIFY -->
+<img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
+<!-- End of Segment Pixel -->
+
 <!-- popular - to be -->
