@@ -45,7 +45,7 @@
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 	// Collection root / idem id undefined -> redirect to Woman collection
-	if($url_array[1] == 'collection' 
+	if($url_array[1] == 'collection'
 		&& count($url_array) == 2
 		&& (empty($url_array[2]) || !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
@@ -76,7 +76,7 @@
 				"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
 				"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
 				"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
-				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
+				"DETAIL_PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2",7=>"col_im_link"),
 				"DETAIL_META_KEYWORDS" => "col_keywords",
 				"DETAIL_META_DESCRIPTION" => "col_description",
 				"DETAIL_BROWSER_TITLE" => "col_title",

@@ -75,8 +75,8 @@ false
             </div>
             -->
             <ul class="links">
-              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;">Скидки %</a></li>
-              <li><a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, 'Outbound Links', 'our_shops_card'); return false;">Где купить?</a></li>
+              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a></li>
+              <li><?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?></li>
             </ul>
 
             <!-- end .links-->
