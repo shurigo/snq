@@ -1,4 +1,9 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+$APPLICATION->SetPageProperty("title", "Меха от Снежной Королевы. Все виды меха, рекомендации по хранению и уходу за меховыми изделиями.");
+$APPLICATION->SetPageProperty("keywords", "меха, меховые изделия, виды меха, хранение меха,износостойкость меха");
+$APPLICATION->SetPageProperty("description", "Меха от компании Снежная Королева. Богатый выбор шуб и других изделий из меха. Все виды меха, рекомендации экспертов по хранению и уходу за меховыми изделиями.");
+?>
 <section class="mainContent">
 <h1><?=$arResult["NAME"]?></h1>
 <div class="hr_red"></div>
