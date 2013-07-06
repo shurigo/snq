@@ -167,7 +167,7 @@ if (count($error_array) != 0)
 <tr><td width="30%" align="right">должность:</td><td width="70%"><input type="text"   name="job" size="70" value="<?=(isset($job))?($job):("")?>"></td></tr>
 <tr bgcolor="#EDE8EA"><td width="30%" align="right">должносные обязанности:</td><td width="70%"><textarea  name="duties" cols="72" rows="5"><?=(isset($duties))?($duties):("")?></textarea></td></tr>
 <tr><td width="30%" align="right">период работы:</td><td width="70%">c <input type="text"  name="sdate" size="28" id="sdate" value="<?=(isset($sdate))?($sdate):("")?>">&nbsp;по <input type="text"  name="edate" id="edate" value="<?=(isset($edate))?($edate):("")?>"size="28"></td></tr>
-<tr bgcolor="#EDE8EA"><td width="30%" align="right">были ли у вас подчененные?</td><td width="70%"><input type="radio" name="management" value="нет" <?=((!isset($management)) || ($management == "нет"))?("checked"):("")?>> нет<input type="radio" name="management" value="да" <?=((isset($management)) && ($management == "да"))?("checked"):("")?>> да</td></tr>
+<tr bgcolor="#EDE8EA"><td width="30%" align="right">были ли у вас подчиненные?</td><td width="70%"><input type="radio" name="management" value="нет" <?=((!isset($management)) || ($management == "нет"))?("checked"):("")?>> нет<input type="radio" name="management" value="да" <?=((isset($management)) && ($management == "да"))?("checked"):("")?>> да</td></tr>
 <tr><td width="25%">Социальный пакет на предыдущем месте работы:</td>
 <td width="70%">
 <input type="checkbox"  name="soc_package_d" <?=(isset($soc_package_d))?("checked"):("") ?>>ДМС (добровольное медецинское страхование)<br />
