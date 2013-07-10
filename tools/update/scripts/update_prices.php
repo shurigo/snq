@@ -8,10 +8,10 @@
 	define("FIELD_SEPARATOR", ",");
 	define("ID_FIELD", 0);
 	define("MODEL_CODE_FIELD", 1);
-	define("PRICE_ORIGIN_FIELD", 2);
-	define("PRICE_FIELD", 3);
+	define("PRICE_ORIGIN_FIELD", 3);
+	define("PRICE_FIELD", 4);
 	$file_dir = ".." . DIRECTORY_SEPARATOR;
-	$file_dir = "../../../../data/";
+	$file_dir = "../";
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
@@ -101,18 +101,18 @@
 		$PROP[3] = $price;
 
 		$arFieldsElement = Array(
-			"MODIFIED_BY" => 1, 
-			"IBLOCK_SECTION_ID" => $arElement["IBLOCK_SECTION_ID"], 
+			"MODIFIED_BY" => 1,
+			"IBLOCK_SECTION_ID" => $arElement["IBLOCK_SECTION_ID"],
 			"IBLOCK_ID" => 1,
 			"PROPERTY_VALUES"=> $PROP,
 			"NAME" => $arElement["NAME"],
 			"ACTIVE" => "Y",
 			"PREVIEW_TEXT" => $arElement["PREVIEW_TEXT"],
-			"DETAIL_TEXT" => $arElement["DETAIL_TEXT"], 
+			"DETAIL_TEXT" => $arElement["DETAIL_TEXT"],
 			"PREVIEW_PICTURE" => CFile::MakeFileArray($arElement["PREVIEW_PICTURE"]),
 			"DETAIL_PICTURE" => CFile::MakeFileArray($arElement["DETAIL_PICTURE"])
 		);
-		
+
 		if($update_element_id = $update_element->Update($arElement["ID"], $arFieldsElement)) {
 			writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
 			$success_cnt++;
