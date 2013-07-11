@@ -1,4 +1,6 @@
 <?
+  $_SERVER = array();
+  $_SERVER['DOCUMENT_ROOT'] = '/home/snowqueen/public_html';
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   require_once("func/func.php");
 
@@ -14,9 +16,9 @@
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
-  $rename_file_name = $file_name."_".date("Y_m_d_Hi");
+  $rename_file_name = pathinfo($file_name, PATHINFO_FILENAME)."_".date("Y_m_d_Hi");
   $rename_file_path = $file_dir.$rename_file_name;
-  $log_file = $_SERVER['DOCUMENT_ROOT'].'/tools/update/log/'.pathinfo($rename_file_name, PATHINFO_FILENAME).'.html';
+  $log_file = $_SERVER['DOCUMENT_ROOT'].'/tools/update/log/'.$rename_file_name.'.html';
   $success_cnt = 0;
   $error_cnt = 0;
   $all_cnt = 0;
