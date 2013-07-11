@@ -136,5 +136,10 @@
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+	$text = file_get_contents($log_file);
+  $headers = "MIME-Version: 1.0" . "\r\n";
+  $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
+  mail('dummy', 'snowqueen: price-update', $text, $headers);
+
+	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
