@@ -10,14 +10,13 @@
 	define("MODEL_CODE_FIELD", 1);
 	define("PRICE_ORIGIN_FIELD", 3);
 	define("PRICE_FIELD", 4);
-	$file_dir = ".." . DIRECTORY_SEPARATOR;
-	$file_dir = "../";
+	$file_dir = "/home/snqup/";
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
   $rename_file_name = $file_name."_".date("Y_m_d_Hi");
   $rename_file_path = $file_dir.$rename_file_name;
-  $log_file = pathinfo($file_name, PATHINFO_FILENAME).'.html';
+  $log_file = $_SERVER['DOCUMENT_ROOT'].'/tools/update/log/'.pathinfo($rename_file_name, PATHINFO_FILENAME).'.html';
   $success_cnt = 0;
   $error_cnt = 0;
   $all_cnt = 0;

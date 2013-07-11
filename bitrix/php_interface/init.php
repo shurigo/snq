@@ -1,6 +1,11 @@
 <?
   define("PREFIX_PATH_404", "/404.php");
 
+	function UpdatePrice() {
+		require_once($_SERVER['DOCUMENT_ROOT'].'/tools/update/scripts/update_prices.php');
+		return "UpdatePrice();";
+	}
+
   AddEventHandler("main", "OnAfterEpilog", "Prefix_FunctionName");
 
   function Prefix_FunctionName() {
