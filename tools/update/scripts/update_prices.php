@@ -7,12 +7,12 @@
   set_time_limit(21600); // 6 часов
   $writeToFile = 1;
 
-	define("FIELD_SEPARATOR", ",");
-	define("ID_FIELD", 0);
-	define("MODEL_CODE_FIELD", 1);
-	define("PRICE_ORIGIN_FIELD", 3);
-	define("PRICE_FIELD", 4);
-	$file_dir = "/home/snqup/";
+  define("FIELD_SEPARATOR", ",");
+  define("ID_FIELD", 0);
+  define("MODEL_CODE_FIELD", 1);
+  define("PRICE_ORIGIN_FIELD", 3);
+  define("PRICE_FIELD", 4);
+  $file_dir = "/home/snqup/";
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
@@ -22,7 +22,7 @@
   $success_cnt = 0;
   $error_cnt = 0;
   $all_cnt = 0;
-  writeToLogFile($log_file, "<strong>Начало обновления.</strong>", "black", $writeToFile);
+  $mail_text = writeToLogFile($log_file, "<strong>Начало обновления.</strong>", "black", $writeToFile);
 	if(!file_exists($file_path)) {
 		writeToLogFile($log_file, "Файл ".$file_name." не существует. Обновление завершено.", "red", $writeToFile);
 		die();
@@ -123,7 +123,7 @@
 		}
 	}
 
-	writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
+	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
 
 	//После завершения обновления файла, переименовываем исходный файл
 	if (rename($file_path, $rename_file_path)) {
@@ -136,10 +136,9 @@
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
-	$text = file_get_contents($log_file);
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
-  mail('dummy', 'snowqueen: price-update', $text, $headers);
-
-	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+  mail('dummy', 'snowqueen: price-update', $mail_text, $headers);
+  
+  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
