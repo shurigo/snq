@@ -126,16 +126,17 @@
 	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
 
 	//После завершения обновления файла, переименовываем исходный файл
-	if (rename($file_path, $rename_file_path)) {
-		writeToLogFile($log_file, "Файл ".$file_name." успешно переименован в ".$rename_file_name.".", "green", $writeToFile);
+	if (copy($file_path, $rename_file_path)) {
+		writeToLogFile($log_file, "Файл ".$file_name." успешно скопирован в ".$rename_file_name.".", "green", $writeToFile);
 	}
 	else {
-		writeToLogFile($log_file, "Ошибка при переименовании файла ".$file_name.". Обратитесь к разработчику.", "red", $writeToFile);
+		writeToLogFile($log_file, "Ошибка при копировании файла ".$file_name.". Обратитесь к разработчику.", "red", $writeToFile);
 	}
 
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
+	$mail_text .= 'server-name./'.$rename_file_name.'.html';
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
   mail('dummy', 'snowqueen: price-update', $mail_text, $headers);
