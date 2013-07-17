@@ -49,7 +49,16 @@ false
 				 </td>
 				 <td class="sep">&nbsp;&nbsp;</td>
 				 <td>
-                      <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
+                       <div class="g-plusone" data-size="medium"></div>
+					  <script type="text/javascript">
+					  window.___gcfg = {lang: 'ru'};
+
+  					 (function() {
+								    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+								    po.src = 'https://apis.google.com/js/plusone.js';
+								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ 								 })();
+				     </script>
 				 </td>
 
                 </tr>
@@ -76,16 +85,7 @@ false
                   </td>
                  <td class="sep">&nbsp;&nbsp;</td>
 				 <td>
-                      <div class="g-plusone" data-size="medium"></div>
-					  <script type="text/javascript">
-					  window.___gcfg = {lang: 'ru'};
-
-  					 (function() {
-								    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-								    po.src = 'https://apis.google.com/js/plusone.js';
-								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
- 								 })();
-				     </script>
+                    <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
                   </td>
                    <td class="sep">&nbsp;&nbsp;</td>
                    <td></td>
@@ -306,3 +306,40 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 <!-- End of Segment Pixel -->
 
 <!-- popular - to be -->
+<aside class="aside2">
+<h4>Популярные вещи</h4>
+<nav class="catalog2">
+<?
+$section_code=str_replace("/collection/","",$APPLICATION->GetCurDir());
+$section_code=substr($section_code,0,strpos($section_code,"/"));
+
+$arSelect = Array("ID", "NAME", "DETAIL_PICTURE","PROPERTY_*");
+$arFilter = Array(
+       				'IBLOCK_ID' => '1',
+       				"SECTION_CODE"=>$section_code,
+       				"ACTIVE_DATE"=>"Y",
+       				"ACTIVE"=>"Y",
+		            Array(
+							'LOGIC' => 'OR',
+							'PROPERTY_col_availability' => '1',
+			                'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+		                  )
+  			      );
+
+$res = CIBlockElement::GetList(Array("SHOW_COUNTER"=>"DESC"), $arFilter, false, Array("nPageSize"=>6), $arSelect);
+while($ob = $res->GetNextElement()){
+$arFields = $ob->GetFields();
+$arFile = CFile::GetFileArray($arFields['DETAIL_PICTURE']);
+$file = CFile::ResizeImageGet($arFile, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+$img = $file['src'];
+?>
+<article><a href="/collection/<?=$section_code;?>/<?=$arFields['ID'];?>/"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
+            <img src="<?=$img;?>" width="75" height="103" alt="<?=$arFields['NAME'];?>"  title="<?=$arFields['NAME'];?>">
+            <!--[if lte IE 7]></span></span><![endif]--></span>
+</a></article>
+<!-- end article-->
+<?}?>
+</nav>
+<!-- end .catalog2-->
+</aside>
+<!-- end .aside2-->
