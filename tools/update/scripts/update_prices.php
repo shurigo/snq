@@ -11,7 +11,8 @@
   define("ID_FIELD", 0);
   define("MODEL_CODE_FIELD", 1);
   define("PRICE_ORIGIN_FIELD", 3);
-  define("PRICE_FIELD", 4);
+	define("PRICE_FIELD", 4);
+	define("MAIL_TO", 'dummyemailaddress');
   $file_dir = "/home/snqup/";
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
@@ -95,7 +96,7 @@
 		$PROP = array();
 
 		foreach($arElement["PROPERTIES"] as $arProperty) {
-      $PROP[$arProperty["ID"]] = $arProperty["VALUE"];
+			$PROP[$arProperty["ID"]] = $arProperty['PROPERTY_TYPE'] == 'F' ? CFile::MakeFileArray($arProperty['VALUE']) : $arProperty["VALUE"];
 		}
 
 		$PROP[13] = $price_origin;
@@ -118,7 +119,7 @@
 			writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
 			$success_cnt++;
 		} else {
-			writeToLogFile($log_file, "Неизвестная ошибка при обновлении позиции с артикулом «".$model_code."», пожалуйста обратитесь к разработчику.".print_r($update_element, true), "red", $writeToFile);
+			writeToLogFile($log_file, "Неизвестная ошибка при обновлении позиции с артикулом «".$model_code."», пожалуйста обратитесь к разработчику.".$update_element->LAST_ERROR, "red", $writeToFile);
 			$error_cnt++;
 		}
 	}
@@ -139,7 +140,7 @@
 	$mail_text .= 'server-name./'.$rename_file_name.'.html';
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
-  mail('dummy', 'snowqueen: price-update', $mail_text, $headers);
+  mail(MAIL_TO, 'snowqueen: price-update', $mail_text, $headers);
   
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
