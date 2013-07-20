@@ -118,7 +118,7 @@
 			writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
 			$success_cnt++;
 		} else {
-			writeToLogFile($log_file, "Неизвестная ошибка при обновлении позиции с артикулом «".$model_code."», пожалуйста обратитесь к разработчику.", "red", $writeToFile);
+			writeToLogFile($log_file, "Неизвестная ошибка при обновлении позиции с артикулом «".$model_code."», пожалуйста обратитесь к разработчику.".print_r($update_element, true), "red", $writeToFile);
 			$error_cnt++;
 		}
 	}
