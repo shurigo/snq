@@ -307,7 +307,7 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 
 <!-- popular - to be -->
 <aside class="aside2">
-<h4>Популярные вещи</h4>
+<h4>Популярные модели</h4>
 <nav class="catalog2">
 <?
 $section_code=str_replace("/collection/","",$APPLICATION->GetCurDir());
@@ -330,11 +330,11 @@ $res = CIBlockElement::GetList(Array("SHOW_COUNTER"=>"DESC"), $arFilter, false, 
 while($ob = $res->GetNextElement()){
 $arFields = $ob->GetFields();
 $arFile = CFile::GetFileArray($arFields['DETAIL_PICTURE']);
-$file = CFile::ResizeImageGet($arFile, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+$file = CFile::ResizeImageGet($arFile, array('width'=>95, 'height'=>125), BX_RESIZE_IMAGE_PROPORTIONAL, true);
 $img = $file['src'];
 ?>
 <article><a href="/collection/<?=$section_code;?>/<?=$arFields['ID'];?>/"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-            <img src="<?=$img;?>" width="75" height="103" alt="<?=$arFields['NAME'];?>"  title="<?=$arFields['NAME'];?>">
+            <img src="<?=$img;?>" alt="<?=$arFields['NAME'];?>"  title="<?=$arFields['NAME'];?>">
             <!--[if lte IE 7]></span></span><![endif]--></span>
 </a></article>
 <!-- end article-->
