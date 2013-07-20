@@ -96,7 +96,11 @@
 		$PROP = array();
 
 		foreach($arElement["PROPERTIES"] as $arProperty) {
-			$PROP[$arProperty["ID"]] = $arProperty['PROPERTY_TYPE'] == 'F' ? CFile::MakeFileArray($arProperty['VALUE']) : $arProperty["VALUE"];
+			if($arProperty['PROPERTY_TYPE'] == 'L') {
+				$PROP[$arProperty['ID']] = array('VALUE' => $arProperty['VALUE_ENUM_ID']);
+			} else {
+				$PROP[$arProperty["ID"]] = $arProperty['PROPERTY_TYPE'] == 'F' ? CFile::MakeFileArray($arProperty['VALUE']) : $arProperty["VALUE"];
+			}
 		}
 
 		$PROP[13] = $price_origin;
