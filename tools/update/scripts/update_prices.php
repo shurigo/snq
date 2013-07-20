@@ -141,7 +141,7 @@
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
-	$mail_text .= 'server-name./'.$rename_file_name.'.html';
+	$mail_text .= SERVER_NAME .'/'.$rename_file_name.'.html';
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
   mail(MAIL_TO, 'snowqueen: price-update', $mail_text, $headers);
