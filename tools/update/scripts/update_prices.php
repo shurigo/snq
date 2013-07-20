@@ -1,6 +1,6 @@
 <?
   $_SERVER = array();
-  $_SERVER['DOCUMENT_ROOT'] = '/home/snowqueen/public_html';
+  $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__)).'/../../..';
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
   require_once("func/func.php");
 
@@ -12,14 +12,13 @@
   define("MODEL_CODE_FIELD", 1);
   define("PRICE_ORIGIN_FIELD", 3);
 	define("PRICE_FIELD", 4);
-	define("MAIL_TO", 'dummyemailaddress');
   $file_dir = "/home/snqup/";
   $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
   $rename_file_name = pathinfo($file_name, PATHINFO_FILENAME)."_".date("Y_m_d_Hi");
   $rename_file_path = $file_dir.$rename_file_name;
-  $log_file = $_SERVER['DOCUMENT_ROOT'].'/tools/update/log/'.$rename_file_name.'.html';
+  $log_file = $_SERVER['DOCUMENT_ROOT'] . UPDATE_LOG_PATH . $rename_file_name.'.html';
   $success_cnt = 0;
   $error_cnt = 0;
   $all_cnt = 0;
@@ -131,17 +130,18 @@
 	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
 
 	//После завершения обновления файла, переименовываем исходный файл
+/*
 	if (copy($file_path, $rename_file_path)) {
 		writeToLogFile($log_file, "Файл ".$file_name." успешно скопирован в ".$rename_file_name.".", "green", $writeToFile);
 	}
 	else {
 		writeToLogFile($log_file, "Ошибка при копировании файла ".$file_name.". Обратитесь к разработчику.", "red", $writeToFile);
 	}
-
+ */
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
-	$mail_text .= SERVER_NAME .'/'.$rename_file_name.'.html';
+	$mail_text .= SERVER_NAME . UPDATE_LOG_PATH . $rename_file_name.'.html';
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
   mail(MAIL_TO, 'snowqueen: price-update', $mail_text, $headers);
