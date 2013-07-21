@@ -9,7 +9,7 @@
   <tr>
 <?foreach($headers as $header):?>
     <td width="33%" align="center">
-    <?=($title == $header['title'] ? '<h1 style="color:white">' : '<a href="'.$header['href'].'" style="color:white">')?>
+    <?=($title == $header['title'] ? '<h1 style="color:white">' : '<a href="'.$header['href'].'" style="font-size:18px;color:#c8dfff;text-decoration:none;">')?>
       <?=$header['title']?>
     <?=($title == $header['title'] ? '</h1>' : '</a>')?>
     </td>
