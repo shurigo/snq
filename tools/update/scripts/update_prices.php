@@ -130,14 +130,14 @@
 	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
 
 	//После завершения обновления файла, переименовываем исходный файл
-/*
-	if (copy($file_path, $rename_file_path)) {
+
+	if (copy($file_path, PRICE_ARCHIVE_PATH . $rename_file_name .$extension)) {
 		writeToLogFile($log_file, "Файл ".$file_name." успешно скопирован в ".$rename_file_name.".", "green", $writeToFile);
 	}
 	else {
 		writeToLogFile($log_file, "Ошибка при копировании файла ".$file_name.". Обратитесь к разработчику.", "red", $writeToFile);
 	}
- */
+
 	//Финализация файла лога
   writeToLogFile($log_file, "<strong>Завершение обновления.</strong>", "black", $writeToFile);
 
