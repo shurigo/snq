@@ -1,27 +1,32 @@
 <?php
   $_SERVER = array();
-  $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../');
-	include($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
-//  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
-	require_once($_SERVER['DOCUMENT_ROOT'].'/lib/log4php/Logger.php');
+  $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../..');
+	
+	require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/log4php/Logger.php');
+	
 	$config_path = realpath($_SERVER['DOCUMENT_ROOT'].'/config/log4php.xml');
-  Logger::configure($config_path);
+	Logger::configure($config_path);
 
 	abstract class BaseLoader {
 		private $file_name;
 		private $extension;
+    private $skip_first_row;
 		
-		protected $error_count;
+		protected $error_count = 0;
+		protected $success_count = 0;
 		protected $logger;
 		protected $fields;
 
 		const FIELD_SEPARATOR = ',';
 		const MAX_LINE_LENGTH = 1000;
 
-		protected function __construct($file_name) {
+		protected function __construct($file_name, $skip_first_row = false) {
 			$this->file_name = $file_name;
 			$this->extension = pathinfo($file_name, PATHINFO_EXTENSION);
+      $this->skip_first_row = $skip_first_row;
 			$fields = array();
+			if(!CModule::IncludeModule('iblock')) die('failed to include iblock module');
 		}
 
 		protected function validate(array $data) {
@@ -55,7 +60,6 @@
 
 		function Load() {
 			$this->logger->info("Loading data...");
-			//$this->logger->info('Field mapping:'.print_r($this->fields, true));
 			$this->logger->info($this->fields);
 			if(!(file_exists($this->file_name) && is_readable($this->file_name))) {
 				$this->error_count++;
@@ -70,11 +74,11 @@
 					$this->logger->error("Failed to open file for reading: $this->file_name");
 					return;
 				}
-				if(!CModule::IncludeModule('iblock')) {
-					$this->logger->fatal('Cannot include the iblock module');
-					return;
-				}
 				while(($data = fgetcsv($file_handle, self::MAX_LINE_LENGTH, self::FIELD_SEPARATOR))) {
+          if($this->skip_first_row) {
+            $this->skip_first_row = false;
+					  continue;	
+          }
 					if(!($this->validate($data) && $this->update($data))) {
 						$this->logger->error('Failed to update an item. Data:'.print_r($data, true));
 						$this->error_count++;
@@ -86,7 +90,7 @@
 			} catch(Exception $e) {
 				$this->logger->error('Failed to open file for reading:'.$this->file_name, $e);
 			}
-			$this->logger->info("error count: $this->error_count");
+			$this->logger->info("Load complete. Successful: $this->success_count, Errors: $this->error_count");
 		}
 
 		protected function validateNumber($input) {
@@ -148,16 +152,12 @@
 			$id           = $data[$this->fields['ID']->column];
 			$price_origin = $data[$this->fields['PRICE_ORIGIN']->column];
 			$price        = $data[$this->fields['PRICE_FIELD']->column];
-			if(!CModule::IncludeModule("iblock")) {
-			  $this->logger->debug('iblock error');
-			}
-    	$update_element = new CIBlockElement;
 			$db_elements = CIBlockElement::GetList( 
 				array(),
 				array(
-					"IBLOCK_ID" => "1",
-					"PROPERTY_col_model_code" => $model_code,
-					"ID" => $id
+					'IBLOCK_ID' => 1,
+					'PROPERTY_col_model_code' => $model_code,
+					'ID' => IntVal($id)
 				)
 		  );
 			if(!$db_element = $db_elements->GetNextElement()) {
@@ -194,7 +194,7 @@
 			);
 
 			if($update_element_id = $update_element->Update($element["ID"], $db_element_fields)) {
-				$this->logger->info("Successfully updated: model code:$model_code, id=$update_element_id, old price=$price_origin, new price=$price");
+				$this->logger->info("Successfully updated: model code:$model_code, id=".$element['ID'].", old price=$price_origin, new price=$price");
 				return true;
 			}
 
@@ -203,11 +203,77 @@
 			return false;
 		}
 	}
+  
+	class NomenclatureLoader extends BaseLoader {
+		public function __construct($file_name, $skip_first_row = false) {
+			parent::__construct($file_name, $skip_first_row);
+			$this->logger = Logger::getLogger(__CLASS__);
+			$this->logger->debug('ctor()');
+			$this->fields['ID']     = new FieldInfo('ID',           1, FieldInfo::NUMBER_TYPE);
+			$this->fields['ART_NO'] = new FieldInfo('ART_NO',   3, FieldInfo::NUMBER_TYPE);
+			$this->fields['SIZE']   = new FieldInfo('SIZE', 4, FieldInfo::STRING_TYPE);
+		}
 
-	set_time_limit(21600); // 6 часов
+		public function init() {
+			$this->logger->debug('init');
+      $iblock_id = getIblockIdByName('collection', 'nomenclature');
+			$elements = CIBlockElement::GetList( 
+				array(),
+				array(
+					'IBLOCK_ID' => $iblock_id,
+				)
+		  );
+			while($element = $elements->Fetch()) CIBlockElement::Delete($element['ID']);
+		}
+
+		public function validate(array $data) {
+			$this->logger->debug('validate');
+			return parent::validate($data);
+		}
+
+		public function update(array $data) {
+			$this->logger->debug('update');
+			$id     = $data[$this->fields['ID']->column];
+			$art_no = $data[$this->fields['ART_NO']->column];
+			$size   = $data[$this->fields['SIZE']->column];
+			
+			$iblock_id = getIblockIdByName('collection', 'nomenclature');
+      
+      $props_db = CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblock_id, 'ACTIVE' => 'Y'));
+
+      $props = array();
+      while($prop = $props_db->GetNext()) {
+        if($prop['CODE'] == 'col_item_id') $props[$prop['ID']] = $id;
+        if($prop['CODE'] == 'col_size')    $props[$prop['ID']] = $size;
+      }
+
+			$item = Array(
+				"MODIFIED_BY"    => 1,
+				"IBLOCK_SECTION_ID" => false,
+				"IBLOCK_ID"      => $iblock_id,
+				"PROPERTY_VALUES"=> $props,
+				"NAME"           => $art_no,
+				"ACTIVE"         => "Y",
+			);
+			
+      $element = new CIBlockElement;
+      if($item_id = $element->Add($item)) {
+				$this->logger->info("Successfully added: id=$item_id, site id=$id, art no=$art_no, size=$size");
+        return true;
+      }
+
+			$this->logger->error("Failed to add an item: site id=$id, art no: $art_no, size: $size. Error: $item_id->LAST_ERROR");
+
+			return false;
+		}
+	}
+
+	set_time_limit(21600); // 6 hours
 
 	// Example usage
-	$l = new PriceLoader('price.csv');
-	$l->Load();
-  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');
+//	$l = new PriceLoader('price.csv');
+//	$l->Load();
+	$n = new NomenclatureLoader('nomenclature.csv', true);
+	$n->init();
+	$n->Load();
 ?>

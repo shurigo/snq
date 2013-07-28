@@ -8,7 +8,7 @@
 		<param name="append" value="true" />
   </appender>
 	<root>
-	  <level value="DEBUG" />
+	  <level value="INFO" />
     <appender_ref ref="consoleAppender" />
     <appender_ref ref="fileAppender" />
 	</root>
