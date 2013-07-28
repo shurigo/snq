@@ -2,7 +2,7 @@
   spl_autoload_register('__autoload');
 
   define("PREFIX_PATH_404", "/404.php");
-	function getIblockIdByName($type, $iblock_name) {
+	function getIblockIdByName($iblock_name) {
 		$iblocks = CIBlock::GetList(array(), array('CODE' => $iblock_name, 'CHECK_PERMISSIONS' => 'N'), false);
 		if($iblock = $iblocks->Fetch()) {
 			return $iblock['ID'];

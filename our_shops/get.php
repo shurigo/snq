@@ -5,7 +5,7 @@
   $remainder = CIBlockElement::GetList(
 	  array(),
 		array(
-			'IBLOCK_ID' => IntVal(getIblockIdByName('collection', 'remainder')),
+			'IBLOCK_ID' => IntVal(getIblockIdByName('remainder')),
 			'PROPERTY_col_nomenclature_id' => $_GET['nid']
 	  )
 	);
@@ -17,7 +17,7 @@
 		$quantity = $props['col_quantity']['VALUE'];
 		$rem[$shop_id] = $quantity;
 	}
-	$our_shops_iblock_id = getIblockIdByName('our_shops', 'our_shops');
+	$our_shops_iblock_id = getIblockIdByName('our_shops');
 	$sections = CIBlockSection::GetList(
 		array(),
 		array('IBLOCK_ID' => IntVal($our_shops_iblock_id), 'NAME' => $_SESSION['city_name']),

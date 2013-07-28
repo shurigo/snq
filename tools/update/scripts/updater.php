@@ -58,7 +58,7 @@
 
 		abstract function update(array $data);
 
-		function Load() {
+		function load() {
 			$this->logger->info("Loading data...");
 			$this->logger->info($this->fields);
 			if(!(file_exists($this->file_name) && is_readable($this->file_name))) {
@@ -205,6 +205,8 @@
 	}
   
 	class NomenclatureLoader extends BaseLoader {
+		const iblock_code = 'nomenclature';
+
 		public function __construct($file_name, $skip_first_row = false) {
 			parent::__construct($file_name, $skip_first_row);
 			$this->logger = Logger::getLogger(__CLASS__);
@@ -216,7 +218,7 @@
 
 		public function init() {
 			$this->logger->debug('init');
-      $iblock_id = getIblockIdByName('collection', 'nomenclature');
+      $iblock_id = getIblockIdByName(self::iblock_code);
 			$elements = CIBlockElement::GetList( 
 				array(),
 				array(
@@ -240,7 +242,7 @@
 			$art_no = $data[$this->fields['ART_NO']->column];
 			$size   = $data[$this->fields['SIZE']->column];
 			
-			$iblock_id = getIblockIdByName('collection', 'nomenclature');
+			$iblock_id = getIblockIdByName(self::iblock_code);
       
       $props_db = CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblock_id, 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'N'));
 
@@ -269,13 +271,85 @@
 			return false;
 		}
 	}
+	
+	class RemainderLoader extends BaseLoader {
+		const iblock_code = 'remainder';
+
+		public function __construct($file_name, $skip_first_row = false) {
+			parent::__construct($file_name, $skip_first_row);
+			$this->logger = Logger::getLogger(__CLASS__);
+			$this->logger->debug('ctor()');
+			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 1, FieldInfo::NUMBER_TYPE);
+			$this->fields['SHOP_EXT_ID'] = new FieldInfo('SHOP_EXT_ID', 2, FieldInfo::NUMBER_TYPE);
+			$this->fields['QUANTITY']   = new FieldInfo('QUANTITY', 3, FieldInfo::STRING_TYPE);
+		}
+
+		public function init() {
+			$this->logger->debug('init');
+      $iblock_id = getIblockIdByName(self::iblock_code);
+			$elements = CIBlockElement::GetList( 
+				array(),
+				array('IBLOCK_ID' => $iblock_id)
+		  );
+			while($element = $elements->Fetch()) {
+				$this->logger->info('Deleting id='.$element['ID']);
+				CIBlockElement::Delete($element['ID']);
+			}
+		}
+
+		public function validate(array $data) {
+			$this->logger->debug('validate');
+			return parent::validate($data);
+		}
+
+		public function update(array $data) {
+			$this->logger->debug('update');
+			$art_no = $data[$this->fields['ART_NO']->column];
+			$shop_ext_id = $data[$this->fields['SHOP_EXT_ID']->column];
+			$quantity = $data[$this->fields['QUANTITY']->column];
+			
+			$iblock_id = getIblockIdByName(self::iblock_code);
+      
+      $props_db = CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblock_id, 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'N'));
+
+      $props = array();
+			while($prop = $props_db->GetNext()) {
+				if($prop['CODE'] == 'col_nomenclature_id') $props[$prop['ID']] = $art_no;
+        if($prop['CODE'] == 'col_quantity')        $props[$prop['ID']] = $quantity;
+				if($prop['CODE'] == 'col_shop_id') 				 $props[$prop['ID']] = $shop_ext_id;
+			}
+			$item = Array(
+				'MODIFIED_BY'    => 1,
+				'IBLOCK_SECTION_ID' => false,
+				'IBLOCK_ID'      => IntVal($iblock_id),
+				'PROPERTY_VALUES'=> $props,
+				'NAME'           => join('-', array($art_no, $shop_ext_id, $quantity)),
+				'ACTIVE'         => 'Y',
+			);
+      $element = new CIBlockElement;
+      if($item_id = $element->Add($item)) {
+				$this->logger->info("Successfully added: id=$item_id, art no=$art_no, shop id=$shop_ext_id, quantity=$quantity");
+        return true;
+      }
+
+			$this->logger->error("Failed to add an item: site id=$id, art no=$art_no, shop id=$shop_ext_id, quantity=$quantity. Error: $item_id->LAST_ERROR");
+
+			return false;
+		}
+	}
 
 	set_time_limit(21600); // 6 hours
 
-	// Example usage
-//	$l = new PriceLoader('price.csv');
-//	$l->Load();
-//	$n = new NomenclatureLoader('nomenclature.csv', true);
-//	$n->init();
-//	$n->Load();
+//  Example usage:
+
+//  $price_loader = new PriceLoader('price.csv');
+//	$price_loader->load();
+	
+//	$nomenclature_loader = new NomenclatureLoader('nomenclature.csv', true);
+//	$nomenclature_loader->init();
+//	$nomenclature_loader->load();
+
+//  $remainder_loader = new RemainderLoader('remainder.csv', true);
+//	$remainder_loader->init();
+//	$remainder_loader->load();
 ?>
