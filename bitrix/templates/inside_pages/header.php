@@ -23,6 +23,7 @@
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript" src="/js/ga_social_tracking.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
+<script type="text/javascript" src="/js/get-shops.js"></script>
 <script type="text/javascript" src="/js/lightbox.js"></script>
 
 <link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">

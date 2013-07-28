@@ -1,9 +1,11 @@
 <?
   define("PREFIX_PATH_404", "/404.php");
-
-	function UpdatePrice() {
-		require_once($_SERVER['DOCUMENT_ROOT'].'/tools/update/scripts/update_prices.php');
-		return "UpdatePrice();";
+	function getIblockIdByName($type, $iblock_name) {
+		$iblocks = GetIBlockList($type, array($iblock_name));
+		if($iblock = $iblocks->GetNext()) {
+			return $iblock['ID'];
+		}
+		return -1;
 	}
 
   AddEventHandler("main", "OnAfterEpilog", "Prefix_FunctionName");
@@ -37,5 +39,5 @@
       header('X-Accel-Redirect: '.$redirect_url);
       exit();
     }
-}
+  }
 ?>

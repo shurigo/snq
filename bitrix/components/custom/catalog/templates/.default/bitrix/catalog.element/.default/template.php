@@ -26,8 +26,18 @@ false
             <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del> </div>
             <?}  else { ?>
             <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
-            <!-- end .price-->
-
+						<!-- end .price-->
+						<div class="sizes">
+							<select id="size-select" class="customSelect">
+                <option>Выберите размер</option>
+								<?foreach($arResult['SIZES'] as $size):?>
+									<option value="<?=$size['NOM_ID']?>"><?=$size['SIZE']?></option>
+								<?endforeach?>
+							</select>
+						</div>
+						</br>
+            <div id="availability"></div>
+            <!-- end .sizes -->
             <div class="likes">
               <table>
                 <tr>

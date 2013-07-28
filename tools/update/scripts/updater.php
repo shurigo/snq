@@ -1,7 +1,7 @@
 <?php
   $_SERVER = array();
   $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../');
-//	require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
+	include($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
 //  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 	require_once($_SERVER['DOCUMENT_ROOT'].'/lib/log4php/Logger.php');
 	$config_path = realpath($_SERVER['DOCUMENT_ROOT'].'/config/log4php.xml');
@@ -70,7 +70,7 @@
 					$this->logger->error("Failed to open file for reading: $this->file_name");
 					return;
 				}
-				if(!CModule::IncludeModule("iblock")) {
+				if(!CModule::IncludeModule('iblock')) {
 					$this->logger->fatal('Cannot include the iblock module');
 					return;
 				}
@@ -78,7 +78,9 @@
 					if(!($this->validate($data) && $this->update($data))) {
 						$this->logger->error('Failed to update an item. Data:'.print_r($data, true));
 						$this->error_count++;
+						continue;
 					}
+					$this->success_count++;
 				}
 				fclose($file_handle);
 			} catch(Exception $e) {
@@ -142,18 +144,22 @@
 
 		public function update(array $data) {
 			$this->logger->debug('update');
-			$model_code = $data[$this->fields['MODEL_CODE']->column];
-			$id = $data[$this->fields['ID']->column];
+			$model_code   = $data[$this->fields['MODEL_CODE']->column];
+			$id           = $data[$this->fields['ID']->column];
 			$price_origin = $data[$this->fields['PRICE_ORIGIN']->column];
-			$price = $data[$this->fields['PRICE_FIELD']->column];
-			$db_elements = CIBlockElement::GetList(
+			$price        = $data[$this->fields['PRICE_FIELD']->column];
+			if(!CModule::IncludeModule("iblock")) {
+			  $this->logger->debug('iblock error');
+			}
+    	$update_element = new CIBlockElement;
+			$db_elements = CIBlockElement::GetList( 
 				array(),
 				array(
 					"IBLOCK_ID" => "1",
 					"PROPERTY_col_model_code" => $model_code,
 					"ID" => $id
 				)
-			);
+		  );
 			if(!$db_element = $db_elements->GetNextElement()) {
 				$this->logger->warn("Cannot find an item with model code=$model_code, id=$id");
 				return false;
@@ -171,31 +177,37 @@
 				}
 			}
 
-		$prop[13] = $price_origin;
-		$prop[3] = $price;
+			$prop[13] = $price_origin;
+			$prop[3]  = $price;
 
-		$db_element_fields = Array(
-			'MODIFIED_BY' => 1,
-			'IBLOCK_SECTION_ID' => $element['IBLOCK_SECTION_ID'],
-			'IBLOCK_ID' => 1,
-			'PROPERTY_VALUES'=> $prop,
-			'NAME' => $element['NAME'],
-			'ACTIVE' => 'Y',
-			'PREVIEW_TEXT' => $element['PREVIEW_TEXT'],
-			'DETAIL_TEXT' => $element['DETAIL_TEXT'],
-			'PREVIEW_PICTURE' => CFile::MakeFileArray($element['PREVIEW_PICTURE']),
-			'DETAIL_PICTURE' => CFile::MakeFileArray($element['DETAIL_PICTURE'])
-		);
+			$db_element_fields = Array(
+				      'MODIFIED_BY' => 1,
+				'IBLOCK_SECTION_ID' => $element['IBLOCK_SECTION_ID'],
+				        'IBLOCK_ID' => 1,
+			 	 'PROP ERTY_VALUES' => $prop,
+			 	             'NAME' => $element['NAME'],
+				           'ACTIVE' => 'Y',
+			 	     'PREVIEW_TEXT' => $element['PREVIEW_TEXT'],
+				      'DETAIL_TEXT' => $element['DETAIL_TEXT'],
+				  'PREVIEW_PICTURE' => CFile::MakeFileArray($element['PREVIEW_PICTURE']),
+			 	   'DETAIL_PICTURE' => CFile::MakeFileArray($element['DETAIL_PICTURE'])
+			);
 
-		if($update_element_id = $update_element->Update($element["ID"], $db_element_fields)) {
-			$this->logger->info("Item with model code:$model_code has been updated. id=$element['ID'], price_origin=$price_origin, price=$price");
-			return true;
+			if($update_element_id = $update_element->Update($element["ID"], $db_element_fields)) {
+				$this->logger->info("Successfully updated: model code:$model_code, id=$update_element_id, old price=$price_origin, new price=$price");
+				return true;
+			}
+
+			$this->logger->error("Failed to update an item with model code:$model_code. Error: $update_element->LAST_ERROR");
+
+			return false;
 		}
-
-		return false;
 	}
+
+	set_time_limit(21600); // 6 часов
 
 	// Example usage
 	$l = new PriceLoader('price.csv');
 	$l->Load();
+  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');
 ?>

@@ -22,6 +22,10 @@ $(window).load(function(){
 		var sel = $("#city-select option:selected");
 		setCity(sel.val(), sel.text());
 	});
+	$("#size-select").change(function() {
+		var sel = $("#size-select option:selected");
+		getShops(sel.val());
+	});
   initLoadPage();
   ajaxLoad();
   initGallery();
