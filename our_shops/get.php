@@ -26,7 +26,6 @@
 	);
 	if(!$sections) die();
 	$section_id = $sections->GetNext()['ID'];
-	error_log($section_id,0);
 ?>
 	<?if(count($rem) > 0):?>
     <?$items_found = false;?>
