@@ -223,7 +223,10 @@
 					'IBLOCK_ID' => $iblock_id,
 				)
 		  );
-			while($element = $elements->Fetch()) CIBlockElement::Delete($element['ID']);
+			while($element = $elements->Fetch()) {
+				$this->logger->info('Deleting id='.$element['ID']);
+				CIBlockElement::Delete($element['ID']);
+			}
 		}
 
 		public function validate(array $data) {
@@ -239,21 +242,20 @@
 			
 			$iblock_id = getIblockIdByName('collection', 'nomenclature');
       
-      $props_db = CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblock_id, 'ACTIVE' => 'Y'));
+      $props_db = CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblock_id, 'ACTIVE' => 'Y', 'CHECK_PERMISSIONS' => 'N'));
 
       $props = array();
-      while($prop = $props_db->GetNext()) {
-        if($prop['CODE'] == 'col_item_id') $props[$prop['ID']] = $id;
+			while($prop = $props_db->GetNext()) {
+				if($prop['CODE'] == 'col_item_id') $props[$prop['ID']] = $id;
         if($prop['CODE'] == 'col_size')    $props[$prop['ID']] = $size;
-      }
-
+			}
 			$item = Array(
-				"MODIFIED_BY"    => 1,
-				"IBLOCK_SECTION_ID" => false,
-				"IBLOCK_ID"      => $iblock_id,
-				"PROPERTY_VALUES"=> $props,
-				"NAME"           => $art_no,
-				"ACTIVE"         => "Y",
+				'MODIFIED_BY'    => 1,
+				'IBLOCK_SECTION_ID' => false,
+				'IBLOCK_ID'      => IntVal($iblock_id),
+				'PROPERTY_VALUES'=> $props,
+				'NAME'           => $art_no,
+				'ACTIVE'         => 'Y',
 			);
 			
       $element = new CIBlockElement;
@@ -273,7 +275,7 @@
 	// Example usage
 //	$l = new PriceLoader('price.csv');
 //	$l->Load();
-	$n = new NomenclatureLoader('nomenclature.csv', true);
-	$n->init();
-	$n->Load();
+//	$n = new NomenclatureLoader('nomenclature.csv', true);
+//	$n->init();
+//	$n->Load();
 ?>
