@@ -211,9 +211,9 @@
 			parent::__construct($file_name, $skip_first_row);
 			$this->logger = Logger::getLogger(__CLASS__);
 			$this->logger->debug('ctor()');
-			$this->fields['ID']     = new FieldInfo('ID',           1, FieldInfo::NUMBER_TYPE);
-			$this->fields['ART_NO'] = new FieldInfo('ART_NO',   3, FieldInfo::NUMBER_TYPE);
-			$this->fields['SIZE']   = new FieldInfo('SIZE', 4, FieldInfo::STRING_TYPE);
+			$this->fields['IDMFC']  = new FieldInfo('IDMFC',  2, FieldInfo::NUMBER_TYPE);
+			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 3, FieldInfo::NUMBER_TYPE);
+			$this->fields['SIZE']   = new FieldInfo('SIZE',   4, FieldInfo::STRING_TYPE);
 		}
 
 		public function init() {
@@ -238,7 +238,7 @@
 
 		public function update(array $data) {
 			$this->logger->debug('update');
-			$id     = $data[$this->fields['ID']->column];
+			$idmfc  = $data[$this->fields['IDMFC']->column];
 			$art_no = $data[$this->fields['ART_NO']->column];
 			$size   = $data[$this->fields['SIZE']->column];
 			
@@ -248,7 +248,7 @@
 
       $props = array();
 			while($prop = $props_db->GetNext()) {
-				if($prop['CODE'] == 'col_item_id') $props[$prop['ID']] = $id;
+				if($prop['CODE'] == 'col_idmfc')   $props[$prop['ID']] = $idmfc;
         if($prop['CODE'] == 'col_size')    $props[$prop['ID']] = $size;
 			}
 			$item = Array(
@@ -259,14 +259,14 @@
 				'NAME'           => $art_no,
 				'ACTIVE'         => 'Y',
 			);
-			
-      $element = new CIBlockElement;
+
+			$element = new CIBlockElement;
       if($item_id = $element->Add($item)) {
-				$this->logger->info("Successfully added: id=$item_id, site id=$id, art no=$art_no, size=$size");
+				$this->logger->info("Successfully added: id=$item_id, idmfc=$idmfc, art no=$art_no, size=$size");
         return true;
       }
 
-			$this->logger->error("Failed to add an item: site id=$id, art no: $art_no, size: $size. Error: $item_id->LAST_ERROR");
+			$this->logger->error("Failed to add an item: idmfc=$idmfc, art no: $art_no, size: $size. Error: $item_id->LAST_ERROR");
 
 			return false;
 		}
@@ -304,9 +304,9 @@
 
 		public function update(array $data) {
 			$this->logger->debug('update');
-			$art_no = $data[$this->fields['ART_NO']->column];
+			$art_no      = $data[$this->fields['ART_NO']->column];
 			$shop_ext_id = $data[$this->fields['SHOP_EXT_ID']->column];
-			$quantity = $data[$this->fields['QUANTITY']->column];
+			$quantity    = $data[$this->fields['QUANTITY']->column];
 			
 			$iblock_id = getIblockIdByName(self::iblock_code);
       
@@ -319,12 +319,12 @@
 				if($prop['CODE'] == 'col_shop_id') 				 $props[$prop['ID']] = $shop_ext_id;
 			}
 			$item = Array(
-				'MODIFIED_BY'    => 1,
+				'MODIFIED_BY'       => 1,
 				'IBLOCK_SECTION_ID' => false,
-				'IBLOCK_ID'      => IntVal($iblock_id),
-				'PROPERTY_VALUES'=> $props,
-				'NAME'           => join('-', array($art_no, $shop_ext_id, $quantity)),
-				'ACTIVE'         => 'Y',
+				'IBLOCK_ID'         => IntVal($iblock_id),
+				'PROPERTY_VALUES'   => $props,
+				'NAME'              => join('-', array($art_no, $shop_ext_id, $quantity)),
+				'ACTIVE'            => 'Y',
 			);
       $element = new CIBlockElement;
       if($item_id = $element->Add($item)) {
@@ -332,7 +332,7 @@
         return true;
       }
 
-			$this->logger->error("Failed to add an item: site id=$id, art no=$art_no, shop id=$shop_ext_id, quantity=$quantity. Error: $item_id->LAST_ERROR");
+			$this->logger->error("Failed to add an item: art no=$art_no, shop id=$shop_ext_id, quantity=$quantity. Error: $item_id->LAST_ERROR");
 
 			return false;
 		}
@@ -345,8 +345,8 @@
 //  $price_loader = new PriceLoader('price.csv');
 //	$price_loader->load();
 	
-//	$nomenclature_loader = new NomenclatureLoader('nomenclature.csv', true);
-//	$nomenclature_loader->init();
+//  $nomenclature_loader = new NomenclatureLoader('nomenclature.csv', true);
+// 	$nomenclature_loader->init();
 //	$nomenclature_loader->load();
 
 //  $remainder_loader = new RemainderLoader('remainder.csv', true);
