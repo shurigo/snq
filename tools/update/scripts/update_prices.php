@@ -13,9 +13,10 @@
   define("PRICE_ORIGIN_FIELD", 3);
 	define("PRICE_FIELD", 4);
   $file_dir = "/home/snqup/";
-  $file_name = "price.csv";
+  $file_name = "price1.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
+	$file_path = dirname(__FILE__).'/'.$file_name;
   $rename_file_name = pathinfo($file_name, PATHINFO_FILENAME)."_".date("Y_m_d_Hi");
   $rename_file_path = $file_dir.$rename_file_name;
   $log_file = $_SERVER['DOCUMENT_ROOT'] . UPDATE_LOG_PATH . $rename_file_name.'.html';
@@ -87,44 +88,10 @@
 			$error_cnt++;
 			continue;
 		}
-		$arElement = $objElement->GetFields();
-		$arElement["PROPERTIES"] = $objElement->GetProperties();
-
-    $update_element = new CIBlockElement;
-
-		$PROP = array();
-
-		foreach($arElement["PROPERTIES"] as $arProperty) {
-			if($arProperty['PROPERTY_TYPE'] == 'L') {
-				$PROP[$arProperty['ID']] = array('VALUE' => $arProperty['VALUE_ENUM_ID']);
-			} else {
-				$PROP[$arProperty["ID"]] = $arProperty['PROPERTY_TYPE'] == 'F' ? CFile::MakeFileArray($arProperty['VALUE']) : $arProperty["VALUE"];
-			}
-		}
-
-		$PROP[13] = $price_origin;
-		$PROP[3] = $price;
-
-		$arFieldsElement = Array(
-			"MODIFIED_BY" => 1,
-			"IBLOCK_SECTION_ID" => $arElement["IBLOCK_SECTION_ID"],
-			"IBLOCK_ID" => 1,
-			"PROPERTY_VALUES"=> $PROP,
-			"NAME" => $arElement["NAME"],
-			"ACTIVE" => "Y",
-			"PREVIEW_TEXT" => $arElement["PREVIEW_TEXT"],
-			"DETAIL_TEXT" => $arElement["DETAIL_TEXT"],
-			"PREVIEW_PICTURE" => CFile::MakeFileArray($arElement["PREVIEW_PICTURE"]),
-			"DETAIL_PICTURE" => CFile::MakeFileArray($arElement["DETAIL_PICTURE"])
-		);
-
-		if($update_element_id = $update_element->Update($arElement["ID"], $arFieldsElement)) {
-			writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
-			$success_cnt++;
-		} else {
-			writeToLogFile($log_file, "Неизвестная ошибка при обновлении позиции с артикулом «".$model_code."», пожалуйста обратитесь к разработчику.".$update_element->LAST_ERROR, "red", $writeToFile);
-			$error_cnt++;
-		}
+		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price_origin'=> $price_origin));
+		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price'=> $price));
+		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
+		$success_cnt++;
 	}
 
 	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
