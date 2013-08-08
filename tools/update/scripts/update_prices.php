@@ -13,10 +13,9 @@
   define("PRICE_ORIGIN_FIELD", 3);
 	define("PRICE_FIELD", 4);
   $file_dir = "/home/snqup/";
-  $file_name = "price1.csv";
+  $file_name = "price.csv";
   $extension = pathinfo($file_name, PATHINFO_EXTENSION);
   $file_path = $file_dir . DIRECTORY_SEPARATOR . $file_name;
-	$file_path = dirname(__FILE__).'/'.$file_name;
   $rename_file_name = pathinfo($file_name, PATHINFO_FILENAME)."_".date("Y_m_d_Hi");
   $rename_file_path = $file_dir.$rename_file_name;
   $log_file = $_SERVER['DOCUMENT_ROOT'] . UPDATE_LOG_PATH . $rename_file_name.'.html';
