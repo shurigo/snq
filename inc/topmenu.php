@@ -95,6 +95,7 @@
                     <li><a href="/collection/wwallets/">Кошельки</a></li>
                     <!--<li><a href="/collection/wgloves/">Перчатки</a></li>-->
                     <li><a href="/collection/wshawls/">Платки/Шарфы</a></li>
+                    <li><a href="/collection/wbelts/">Ремни</a></li>
                     <li><a href="/collection/wbags/">Сумки</a></li>
                     <li><a href="/collection/wglasses/">Очки</a></li>
                     <li><a href="/collection/wipad/">Чехлы для IPad</a></li>
@@ -102,8 +103,9 @@
                 <td><ul>
                     <li><strong>Мужские аксессуары</strong></li>
                     <!--<li><a href="/collection/mgloves/">Перчатки</a></li>-->
-                    <!--<li><a href="/collection/mshawls/">Шарфы</a></li>-->
+                    <li><a href="/collection/mshawls/">Шарфы</a></li>
                     <li><a href="/collection/mbags/">Сумки</a></li>
+                    <li><a href="/collection/mbelts/">Ремни</a></li>
                   </ul></td>
               </tr>
             </table>
