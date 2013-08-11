@@ -211,8 +211,8 @@
       <br>
       <hr class="hr_red">
       <ul class="info-links2">
-        <li><a href="/upload/SNQ_SS_13_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_ss2013.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="http://www.youtube.com/embed/Gzr3N7JkG-k" allowfullscreen=""></iframe></li>
+        <li><a href="/upload/SNQ_AW_1314_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201314.jpg" alt="" border="0"></a></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/iAM2MQ9aWAY" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->
