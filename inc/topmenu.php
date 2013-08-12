@@ -75,6 +75,7 @@
                 <td><ul>
                     <li><a href="/collection/wmink/">Шубы норковые</a></li>
                     <li><a href="/collection/wfox/">Шубы из лисы</a></li>
+                    <li><a href="/collection/wkarakul/">Шубы из каракуля</a></li>
                     <li><a href="/collection/wrabbit/">Шубы из кролика</a></li>
                     <li><a href="/collection/wfurvest/">Меховые жилеты</a></li>
                     <li><a href="/collection/wfurother/">Другой мех</a></li>
