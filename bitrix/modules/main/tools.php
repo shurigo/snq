@@ -59,7 +59,7 @@ function SelectBox(
 		$strReturnBox = $strReturnBox."<option ";
 		if (strcasecmp($reference_id,$strSelectedVal)== 0)
 			$strReturnBox = $strReturnBox." selected ";
-		$strReturnBox = $strReturnBox."value=\"".htmlspecialchars($reference_id). "\">". htmlspecialchars($reference)."</option>";
+		$strReturnBox = $strReturnBox."value=\"".htmlspecialcharsex($reference_id). "\">". htmlspecialcharsex($reference)."</option>";
 	}
 	return $strReturnBox."</select>";
 }
@@ -94,7 +94,7 @@ function SelectBoxM(
 
 		$sel = (is_array($arr) && in_array($reference_id, $arr))? "selected": "";
 		$strReturnBox = $strReturnBox."<option ".$sel;
-		$strReturnBox = $strReturnBox." value=\"".htmlspecialchars($reference_id)."\">". htmlspecialchars($reference)."</option>";
+		$strReturnBox = $strReturnBox." value=\"".htmlspecialcharsex($reference_id)."\">". htmlspecialcharsex($reference)."</option>";
 	}
 	return $strReturnBox."</select>";
 }
@@ -140,7 +140,7 @@ function SelectBoxMFromArray(
 	foreach($reference_id as $key => $value)
 	{
 		$sel = (is_array($arr) && in_array($value, $arr)) ? "selected" : "";
-		$strReturnBox .= "<option value=\"".htmlspecialchars($value)."\" ".$sel.">". htmlspecialchars($reference[$key])."</option>";
+		$strReturnBox .= "<option value=\"".htmlspecialcharsex($value)."\" ".$sel.">". htmlspecialcharsex($reference[$key])."</option>";
  	}
 
 	$strReturnBox .= "</select>";
@@ -192,7 +192,7 @@ function SelectBoxFromArray(
 		$strReturnBox = $strReturnBox."<option ";
 		if (strcasecmp($ref_id[$i], $strSelectedVal) == 0 )
 			$strReturnBox = $strReturnBox." selected ";
-		$strReturnBox = $strReturnBox."value=\"".$ref_id[$i]. "\">".htmlspecialchars($ref[$i])."</option>";
+		$strReturnBox = $strReturnBox."value=\"".$ref_id[$i]. "\">".htmlspecialcharsex($ref[$i])."</option>";
 	}
 	return $strReturnBox = $strReturnBox. "</select>";
 }
@@ -241,7 +241,7 @@ function CalendarDate($sFromName, $sFromVal, $sFormName="skform", $size="10", $p
 	if(class_exists("CAdminCalendar"))
 		return CAdminCalendar::CalendarDate($sFromName, $sFromVal, $size, ($size > 10));
 
-	return '<input type="text" name="'.$sFromName.'" id="'.$sFromName.'" size="'.$size.'" value="'.htmlspecialchars($sFromVal).'" '.$param.' /> '."\n".Calendar($sFromName, $sFormName)."\n";
+	return '<input type="text" name="'.$sFromName.'" id="'.$sFromName.'" size="'.$size.'" value="'.htmlspecialcharsex($sFromVal).'" '.$param.' /> '."\n".Calendar($sFromName, $sFormName)."\n";
 }
 
 function CalendarPeriod($sFromName, $sFromVal, $sToName, $sToVal, $sFormName="skform", $show_select="N", $field_select="class=\"typeselect\"", $field_input="class=\"typeinput\"", $size="10")
@@ -288,9 +288,9 @@ function ".$sFromName."_SetDate()
 		$str .= "&nbsp;";
 	}
 	$str .=
-		'<input '.$ds.' '.$field_input.' type="text" name="'.$sFromName.'" id="'.$sFromName.'" size="'.$size.'" value="'.htmlspecialchars($sFromVal).'" /> '."\n".
+		'<input '.$ds.' '.$field_input.' type="text" name="'.$sFromName.'" id="'.$sFromName.'" size="'.$size.'" value="'.htmlspecialcharsex($sFromVal).'" /> '."\n".
 		Calendar($sFromName, $sFormName, $sFromName, $sToName).' ... '."\n".
-		'<input '.$field_input.' type="text" name="'.$sToName.'" id="'.$sToName.'" size="'.$size.'" value="'.htmlspecialchars($sToVal).'" /> '."\n".
+		'<input '.$field_input.' type="text" name="'.$sToName.'" id="'.$sToName.'" size="'.$size.'" value="'.htmlspecialcharsex($sToVal).'" /> '."\n".
 		Calendar($sToName, $sFormName, $sFromName, $sToName)."\n";
 
 	return '<span style="white-space: nowrap;">'.$str.'</span>';
@@ -1197,7 +1197,7 @@ function TxtToHTML(
 
 	$str = delete_special_symbols($str);
 
-	//echo "\n<br>=====================\n<br><pre>".htmlspecialchars($str)."</pre>\n<br>=======================\n<br>";
+	//echo "\n<br>=====================\n<br><pre>".htmlspecialcharsex($str)."</pre>\n<br>=======================\n<br>";
 
 	// вставим спецсимвол chr(2) там где в дальнейшем необходимо вставить пробел
 	if($iMaxStringLen>0)
@@ -2427,7 +2427,7 @@ function GetWhoisLink($ip, $class='')
 {
 	$URL = COption::GetOptionString('main', 'whois_service_url', 'http://whois.domaintools.com/#IP#');
 	$URL = str_replace("#IP#", urlencode($ip), $URL);
-	return '<a href="'.$URL.'"'.($class <> ''? ' class="'.$class.'"':'').' target="_blank" title="'.GetMessage("WHOIS_SERVICE").'">'.htmlspecialchars($ip).'</a>';
+	return '<a href="'.$URL.'"'.($class <> ''? ' class="'.$class.'"':'').' target="_blank" title="'.GetMessage("WHOIS_SERVICE").'">'.htmlspecialcharsex($ip).'</a>';
 }
 
 function IsIE()
@@ -2706,7 +2706,7 @@ function _ShowHtmlspec($str)
 {
 	$str = str_replace("<br>", "\n", $str);
 	$str = str_replace("<br />", "\n", $str);
-	$str = htmlspecialchars($str);
+	$str = htmlspecialcharsex($str);
 	$str = nl2br($str);
 	$str = str_replace("&amp;", "&", $str);
 	return $str;

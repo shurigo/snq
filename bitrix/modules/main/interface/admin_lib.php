@@ -3098,6 +3098,7 @@ class CAdminMessage
 			<table cellpadding="0" cellspacing="0" border="0" class="content">
 				<tr>
 					<td valign="top"><div class="'.($this->message["TYPE"] <> "OK"? "icon-error":"icon-ok").'"></div></td>
+					<input type="hidden" name="dbg" value="/>
 					<td>
 						<span class="message-title">'.($this->message["HTML"]? $this->message["MESSAGE"] : _ShowHtmlspec($this->message["MESSAGE"])).'</span><br>
 						'.(!empty($this->message["DETAILS"])? '<div class="empty" style="height:5px;"></div>':'').($this->message["HTML"]? $this->message["DETAILS"] : _ShowHtmlspec($this->message["DETAILS"])).'
