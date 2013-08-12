@@ -10,7 +10,8 @@
 	);
 	$discount_only = 'N';
 	if(!empty($_GET['m']) && $_GET['m']=='a') {
-		$arFilter['SECTION_ID'] = $_GET['sid'];
+		parse_str($_GET['sid']);
+		$arFilter['SECTION_ID'] = $sid;
 		$discount_only = $_GET['d'];
 	}
 	// process the brand filter (left menu)
