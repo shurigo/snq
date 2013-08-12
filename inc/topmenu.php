@@ -26,7 +26,7 @@
                     <li><a href="/collection/wtopjacket/">Куртки</a></li>
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
                     <li><a href="/collection/wtopcloak/">Плащи</a></li>
-                    <li><a href="/collection/wjacket/">Жакеты</a></li>
+                    <li><a href="/collection/wjacket/">Жакеты/Жилеты</a></li>
                     <li><a href="/collection/wboots/">Обувь</a></li>
                  </ul></td>
                 <td><ul>
