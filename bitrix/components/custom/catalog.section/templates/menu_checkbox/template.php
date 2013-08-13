@@ -27,6 +27,11 @@
 				<input type="text" name="max" readonly class="r" value="<?=$arResult['PRICE_MAX']?>" />
 			</div>
 			<!-- end .slider-values-->
+      <br>
+			<div>
+        <input type="checkbox" name="d" />
+				<label style="display:inline-block;" for="d" class="label">Только со скидкой</label>
+		 </div>
 		</section>
 	</fieldset>
 </form>
