@@ -18,6 +18,12 @@
 		$arFilter['SECTION_ID'] = $sid;
 		$discount_only = $_GET['d'];
 	}
+
+   // filter only items with discount
+	if($discount_only == 'Y') {
+			$arFilter[] = Array('PROPERTY_col_discount' => 1);
+	}
+
 	// process the brand filter (left menu)
 	$filter_brand = Array();
   foreach($_GET as $key=>$value) {

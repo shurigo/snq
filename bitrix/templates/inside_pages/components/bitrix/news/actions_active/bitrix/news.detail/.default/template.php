@@ -22,8 +22,14 @@
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
 	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да' ? 'Y' : 'N';
+
+	  // filter only items with discount
+	if($discount_only == 'Y') {
+			$action_catalog_filter[] = Array('PROPERTY_col_discount' => 1);
+	}
+
 ?>
-	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>  
+	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
 		<br>
 		<h1>Вещи, участвующие в акции</h1>
 		<hr>
@@ -99,7 +105,7 @@
 					),
 					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 					"ADD_SECTIONS_CHAIN" => "N",
-					"JSON" => "n" 
+					"JSON" => "n"
 				)
 		);?>
 	<hr>

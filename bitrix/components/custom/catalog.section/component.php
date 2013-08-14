@@ -62,7 +62,7 @@ else
 {
 	global $$arParams["FILTER_NAME"];
 	$arrFilter = ${$arParams["FILTER_NAME"]};
-	if(!is_array($arrFilter)) 
+	if(!is_array($arrFilter))
 		$arrFilter = array();
 }
 $arParams["SECTION_URL"]=trim($arParams["SECTION_URL"]);
@@ -136,7 +136,7 @@ $arNavParams = array(
 	"nPageSize" => $arParams["PAGE_ELEMENT_COUNT"],
 	"bDescPageNumbering" => $arParams["PAGER_DESC_NUMBERING"],
 	"bShowAll" => $arParams["PAGER_SHOW_ALL"],
-); 
+);
 $arNavigation = CDBResult::GetNavParams($arNavParams);
 if($arNavigation["PAGEN"]==0 && $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]>0)
 	$arParams["CACHE_TIME"] = $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"];
@@ -366,15 +366,15 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arFilter["SECTION_ACTIVE"] = "Y";
 
 	$filter_final = array_merge($arFilter, $arrFilter);
-	
+
 	// Brands (for the filter in the left menu)
 	if($arParams['INCLUDE_BRANDS'] == 'Y') {
 		$arResult['BRANDS'] = array();
 		$rsElements = CIBlockElement::GetList(
-			Array('PROPERTY_COL_BRAND.NAME' => 'ASC'), 
-			$filter_final,	
-			Array('PROPERTY_COL_BRAND'), 
-			false, 
+			Array('PROPERTY_COL_BRAND.NAME' => 'ASC'),
+			$filter_final,
+			Array('PROPERTY_COL_BRAND'),
+			false,
 			Array('IBLOCK_ID', 'ID', 'NAME', 'PROPERTY_COL_BRAND')
 		);
 		while($element = $rsElements->GetNextElement())
@@ -382,26 +382,26 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 			$arItem = $element->GetFields();
 			if($item_element = CIBlockElement::GetById($arItem['PROPERTY_COL_BRAND_VALUE']))
 			{
-				if($item = $item_element->GetNext()) { 
+				if($item = $item_element->GetNext()) {
 					$brand = Array();
 					$brand['ID'] = $item['ID'];
 					$brand['NAME'] = $item['NAME'];
-					$brand['CNT'] = $arItem['CNT'];	
+					$brand['CNT'] = $arItem['CNT'];
 					$arResult['BRANDS'][] = $brand;
 				}
 			}
 		}
 	} // if($arParams['INCLUDE_BRANDS'] == 'Y')
 
-	// Price: min, max	
+	// Price: min, max
 	// consider a direct database query to improve the performance
 	if(!function_exists('get_price_min_max')) {
 		function get_price_min_max($asc_desc, $filter) {
 			$elements = CIBlockElement::GetList(
 				Array('PROPERTY_COL_PRICE'.$price => $asc_desc),
-				$filter,	
-				false, 
-				false, 
+				$filter,
+				false,
+				false,
 				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE'));
 			if($element = $elements->GetNextElement()) {
 				$price_p = $element->GetProperty('COL_PRICE');
@@ -412,8 +412,8 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		}
 	}
 	if($arParams['INCLUDE_PRICE_MIN_MAX'] == 'Y') {
-		$price_min = get_price_min_max('ASC', $filter_final); 
-		$price_max = get_price_min_max('DESC', $filter_final); 
+		$price_min = get_price_min_max('ASC', $filter_final);
+		$price_max = get_price_min_max('DESC', $filter_final);
 		$arResult['PRICE_MIN'] = $price_min['PRICE'];
 		$arResult['PRICE_MAX'] = $price_max['PRICE'];
 	} // end Price: min, max
@@ -490,13 +490,17 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 				$arItem["SECTION"]["PATH"][]=$arPath;
 			}
 		}
-		if($arParams['DISCOUNT_ONLY'] == 'Y') { 
+
+		/*
+		if($arParams['DISCOUNT_ONLY'] == 'Y') {
 			if($arItem['PROPERTIES']['col_price']['VALUE'] < $arItem['PROPERTIES']['col_price_origin']['VALUE']) {
 				$arResult["ITEMS"][]=$arItem;
 			}
 		} else {
 			$arResult["ITEMS"][]=$arItem;
 		}
+		*/
+		$arResult["ITEMS"][]=$arItem;
 	}
 
 	$arResult["PRICE_SORT"] = $arParams["PRICE_SORT"];
