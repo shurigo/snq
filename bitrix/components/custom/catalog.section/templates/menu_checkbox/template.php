@@ -29,7 +29,7 @@
 			<!-- end .slider-values-->
       <br>
 			<div>
-        <input type="checkbox" name="d" />
+				<input type="checkbox" name="d" onclick="setDiscount(this);" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
 				<label style="display:inline-block;" for="d" class="label">Только со скидкой</label>
 		 </div>
 		</section>

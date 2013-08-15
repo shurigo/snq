@@ -8,12 +8,14 @@
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 		)
 	);
-	$discount_only = 'N';
-	if(!empty($_GET['d']) && (strtolower($_GET['d']) == 'y' || strtolower($_GET['d']) == 'on')) {
-	  $discount_only = 'Y';
+	
+	if(!empty($_GET['d']) && strtolower($_GET['d'])==='y') {
+  	$_SESSION['discount_only'] = 'Y';
 	}
 
-	if(!empty($_GET['m']) && strtolower($_GET['m']) == 'a') {
+ $discount_only = empty($_SESSION['discount_only']) ? 'N' : $_SESSION['discount_only'];
+
+	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
 		if(!empty($_GET['sid'])) {
 			parse_str($_GET['sid']);
 			$arFilter['SECTION_ID'] = $sid;
