@@ -13,9 +13,11 @@
 	  $discount_only = 'Y';
 	}
 
-	if(!empty($_GET['m']) && $_GET['m']=='a') {
-		parse_str($_GET['sid']);
-		$arFilter['SECTION_ID'] = $sid;
+	if(!empty($_GET['m']) && strtolower($_GET['m']) == 'a') {
+		if(!empty($_GET['sid'])) {
+			parse_str($_GET['sid']);
+			$arFilter['SECTION_ID'] = $sid;
+		}
 	}
 
    // filter only items with discount

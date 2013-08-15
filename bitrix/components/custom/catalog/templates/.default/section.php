@@ -9,7 +9,6 @@
 			"USE_SORT"	=> $arParams["USE_SORT"], // show the filter combo box
 			"NOT_SHOW_NAV_CHAIN" => $arParams["NOT_SHOW_NAV_CHAIN"],
 			"VIEW_MODDE" => $arParams["VIEW_MODDE"], // show catalog on the actions/brands page
-			"DISCOUNT_ONLY" => $arParams["DISCOUNT_ONLY"], // show only discounted items
 			"BY_LINK" => $arParams["BY_LINK"],
 			"ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
 			"ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],

@@ -10,7 +10,6 @@ if(!isset($arParams["CACHE_TIME"]))
 
 $arParams["IBLOCK_TYPE"] = trim($arParams["IBLOCK_TYPE"]);
 $arParams["IBLOCK_ID"] = intval($arParams["IBLOCK_ID"]);
-$arParams['DISCOUNT_ONLY'] = empty($arParams['DISCOUNT_ONLY']) ? "N" : $arParams['DISCOUNT_ONLY'];
 if (isset($arParams["PRICE_SORT"]) && ($arParams["PRICE_SORT"] == "asc" || $arParams["PRICE_SORT"] == "desc"))
 {
 	if ($arParams["PRICE_SORT"] == "asc")
@@ -420,8 +419,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList($arSort, $filter_final, false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
-	if($arParams["BY_LINK"]!=="Y" && !$arParams["SHOW_ALL_WO_SECTION"])
-		$rsElements->SetSectionContext($arResult);
 	$arResult["ITEMS"] = array();
 	while($obElement = $rsElements->GetNextElement()) {
 		$arItem = $obElement->GetFields();
@@ -491,15 +488,6 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 			}
 		}
 
-		/*
-		if($arParams['DISCOUNT_ONLY'] == 'Y') {
-			if($arItem['PROPERTIES']['col_price']['VALUE'] < $arItem['PROPERTIES']['col_price_origin']['VALUE']) {
-				$arResult["ITEMS"][]=$arItem;
-			}
-		} else {
-			$arResult["ITEMS"][]=$arItem;
-		}
-		*/
 		$arResult["ITEMS"][]=$arItem;
 	}
 
