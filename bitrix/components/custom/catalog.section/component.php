@@ -398,7 +398,7 @@ if($this->StartResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		function get_price_min_max($asc_desc, $filter) {
 			$elements = CIBlockElement::GetList(
 				Array('PROPERTY_COL_PRICE'.$price => $asc_desc),
-				$filter,
+				array_merge($filter, array('!PROPERTY_COL_PRICE' => false)),
 				false,
 				false,
 				Array('IBLOCK_ID', 'SECTION_ID', 'ID', 'NAME', 'PROPERTY_COL_PRICE'));

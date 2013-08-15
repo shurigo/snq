@@ -7,6 +7,7 @@
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 			"USE_SORT"	=> $arParams["USE_SORT"], // show the filter combo box
+			"DISCOUNT_ONLY" => $arParams['DISCOUNT_ONLY'],
 			"NOT_SHOW_NAV_CHAIN" => $arParams["NOT_SHOW_NAV_CHAIN"],
 			"VIEW_MODDE" => $arParams["VIEW_MODDE"], // show catalog on the actions/brands page
 			"BY_LINK" => $arParams["BY_LINK"],
