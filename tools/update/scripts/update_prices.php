@@ -90,7 +90,7 @@
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price_origin'=> $price_origin));
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price'=> $price));
 		$discount = 0;
-		if($price_origin !=== $price) {
+		if($price_origin !== $price) {
 			$discount = 1;
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_discount' => $discount));
