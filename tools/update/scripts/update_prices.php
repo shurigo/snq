@@ -89,7 +89,12 @@
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price_origin'=> $price_origin));
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price'=> $price));
-		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена».", "green", $writeToFile);
+		$discount = 0;
+		if($price_origin !=== $price) {
+			$discount = 1;
+		}
+		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_discount' => $discount));
+		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? "скидки нет" : "cкидка"), "green", $writeToFile);
 		$success_cnt++;
 	}
 
