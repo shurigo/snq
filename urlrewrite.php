@@ -19,16 +19,16 @@ $arUrlRewrite = array(
 		"PATH"	=>	"/about/vacancies/shops.php",
 	),
 	array(
-		"CONDITION"	=>	"#^/collection/#",
-		"RULE"	=>	"",
-		"ID"	=>	"custom:catalog",
-		"PATH"	=>	"/collection/index.php",
-	),
-	array(
 		"CONDITION"	=>	"#^/actions/#",
 		"RULE"	=>	"",
 		"ID"	=>	"bitrix:news",
 		"PATH"	=>	"/actions/index.php",
+	),
+	array(
+		"CONDITION"	=>	"#^/collection/#",
+		"RULE"	=>	"",
+		"ID"	=>	"custom:catalog",
+		"PATH"	=>	"/collection/index.php",
 	),
 );
 

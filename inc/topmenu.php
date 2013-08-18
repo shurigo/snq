@@ -113,10 +113,11 @@
           </div>
           <!-- end .sub-->
         </li>
-        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru'); return false;">Блог</a></li>
+        <!--<li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru'); return false;">Блог</a></li>-->
         <li><a class="red" href="/actions/" onClick="trackOutboundLink(this, 'Outbound Links', 'actions'); return false;">Акции</a></li>
-        <li><a class="red" href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru'); return false;">Интернет-магазин</a></li>
-      </ul>
+		<li><a class="red" href="/collection/woman/?d=y" rel="nofollow"><b>Sale</b></a></li>
+		<li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru'); return false;">Интернет-магазин</a></li>
+		</ul>
       <!-- end .menu-->
     </nav>
     <!-- end .menu-hold-->
