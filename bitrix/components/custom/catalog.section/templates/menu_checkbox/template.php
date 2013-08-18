@@ -3,7 +3,13 @@
 	<fieldset>
 		<section class="filter">
 			<div class="hr"></div>
-			<label class="label">Бренд</label>
+			<div style="vertical-align: middle;">
+				<label for="d" class="label red" style="display:inline-block;">
+				<input type="checkbox" name="d" onclick="setDiscount(this);" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
+				Только со скидкой
+				</label>
+		    </div>
+			<!--<label class="label">Бренд</label>  -->
 			<div class="checks">
 				<ul>
 					<?foreach($arResult['BRANDS'] as $item):?>
@@ -27,12 +33,7 @@
 				<input type="text" name="max" readonly class="r" value="<?=$arResult['PRICE_MAX']?>" />
 			</div>
 			<!-- end .slider-values-->
-      <br>
-			<div>
-				<input type="checkbox" name="d" onclick="setDiscount(this);" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
-				<label style="display:inline-block;" for="d" class="label">Только со скидкой</label>
-		 </div>
 		</section>
 	</fieldset>
 </form>
-<!-- end .filter--> 
+<!-- end .filter-->
