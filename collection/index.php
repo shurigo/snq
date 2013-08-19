@@ -8,13 +8,19 @@
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 		)
 	);
+  
+  if(!empty($_GET['d'])) {
+    if(strtolower($_GET['d'])==='y' || strtolower($_GET['d']) === 'on') {
+      $_SESSION['discount_only'] = 'Y';
+    } else {
+      $_SESSION['discount_only'] = 'N';
+    }
+  } else {
+    if(empty($_SESSION['discount_only'])) {
+      $_SESSION['discount_only'] = 'N'; 
+		}
+  }
 	
-	if(!empty($_GET['d']) && strtolower($_GET['d'])==='y') {
-  	$_SESSION['discount_only'] = 'Y';
-	}
-
- $discount_only = empty($_SESSION['discount_only']) ? 'N' : $_SESSION['discount_only'];
-
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
 		if(!empty($_GET['sid'])) {
 			parse_str($_GET['sid']);
@@ -23,7 +29,7 @@
 	}
 
    // filter only items with discount
-	if($discount_only == 'Y') {
+	if($_SESSION['discount_only'] === 'Y') {
 			$arFilter[] = Array('PROPERTY_col_discount' => 1);
 	}
 
@@ -78,7 +84,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "Y",
-				"DISCOUNT_ONLY" => $discount_only,
+				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
 				"NOT_SHOW_NAV_CHAIN" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "12",

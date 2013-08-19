@@ -5,7 +5,7 @@
 			<div class="hr"></div>
 			<div style="vertical-align: middle;">
 				<label for="d" class="label red" style="display:inline-block;">
-				<input type="checkbox" name="d" onclick="setDiscount(this);" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
+				<input type="checkbox" name="d" <?=strtolower($_SESSION['discount_only']) === 'y' ? 'value="on" checked' : '';?> />
 				Только со скидкой
 				</label>
 		    </div>
