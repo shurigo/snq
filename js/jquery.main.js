@@ -1,4 +1,4 @@
-$(window).load(function(){
+$(window).on("load", function(){
     "use strict";
   $('input.customCheckbox').customCheckbox();
   $('select.customSelect').customSelect();
