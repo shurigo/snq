@@ -15,10 +15,8 @@
   if(!empty($_GET['d'])) {
     if(strtolower($_GET['d'])==='y' || strtolower($_GET['d']) === 'on') {
       $_SESSION['discount_only'] = 'Y';
-			error_log('p1',0);
     } else {
       $_SESSION['discount_only'] = 'N';
-			error_log('p2',0);
 		}
 	}
 	
