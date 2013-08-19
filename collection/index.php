@@ -16,9 +16,7 @@
       $_SESSION['discount_only'] = 'N';
     }
   } else {
-    if(empty($_SESSION['discount_only'])) {
-      $_SESSION['discount_only'] = 'N'; 
-		}
+		$_SESSION['discount_only'] = 'N'; 
   }
 	
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
