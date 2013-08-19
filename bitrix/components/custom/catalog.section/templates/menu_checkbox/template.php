@@ -4,9 +4,9 @@
 		<section class="filter">
 			<div class="hr"></div>
 			<div style="vertical-align: middle;">
-				<label for="d" class="label red" style="display:inline-block;">
-				<input type="hidden" name="d" value="<?=(empty($_SESSION['discount_only']) ? 'n' : $_SESSION['discount_only'])?>" />
-				<input type="checkbox" name="d" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
+				<label for="d_cb" class="label red" style="display:inline-block;">
+				<input type="checkbox" class="discount_only" id="d_cb" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
+				<input type="hidden" name="d" id="d_o" value="<?=$_SESSION['discount_only'];?>" />
 				Только со скидкой
 				</label>
 		    </div>

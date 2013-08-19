@@ -26,6 +26,13 @@ $(window).load(function(){
 		var sel = $("#size-select option:selected");
 		getShops(sel.val());
 	});
+	$("#d_cb").change(function() {
+    if($(this).prop("checked")) {
+			$("#d_o").val("Y");
+		} else {
+			$("#d_o").val("N");
+		}
+	});
   initLoadPage();
   ajaxLoad();
   initGallery();
@@ -138,7 +145,7 @@ function ajaxLoad(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
       $.ajax({
-        data: filter_form.serialize() + '&' + sort_form.serialize()+"&json=y",
+        data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
         dataType: 'json',
         url: hold.attr('action'),
         success: function(obj){
