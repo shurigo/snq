@@ -9,15 +9,18 @@
 		)
 	);
   
+	if(empty($_SESSION['discount_only'])) {
+		$_SESSION['discount_only'] = 'N'; 
+	}
   if(!empty($_GET['d'])) {
     if(strtolower($_GET['d'])==='y' || strtolower($_GET['d']) === 'on') {
       $_SESSION['discount_only'] = 'Y';
+			error_log('p1',0);
     } else {
       $_SESSION['discount_only'] = 'N';
-    }
-  } else {
-		$_SESSION['discount_only'] = 'N'; 
-  }
+			error_log('p2',0);
+		}
+	}
 	
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
 		if(!empty($_GET['sid'])) {
