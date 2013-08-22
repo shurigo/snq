@@ -1,3 +1,37 @@
+<script>
+$(document).ready(function(){
+		$(".z-preview_image").live("hover", function(){
+			if($(this).attr("data-img")!=""){
+				data=$(this).attr("data-img");
+				src=$(this).find("img").attr("src");
+				$(this).attr("data-img", src).find("img").attr("src", data);
+			}
+		}, function(){
+			if($(this).attr("data-img")!=""){
+				data=$(this).attr("data-img");
+				src=$(this).find("img").attr("src");
+				$(this).attr("data-img", src).find("img").attr("src", data);
+			}
+
+		});
+
+		$('.thief').not(".init").addClass("init").etalage({
+			thumb_image_width: 310,
+			thumb_image_height: 500,
+
+			zoom_area_width: 700,
+			zoom_area_height: 500,
+			zoom_area_distance: 3,
+			small_thumbs: 4,
+			smallthumb_inactive_opacity: 0.3,
+			smallthumbs_position: 'left',
+			show_icon: false,
+			autoplay: false,
+			keyboard: false,
+			zoom_easing: false
+		});
+	});
+</script>
 <?if(!isset($arParams["JSON"]) || $arParams["JSON"]=="n"): //normal page ?>
 <?
   if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
@@ -52,10 +86,15 @@
  $resizer = $arElement['DETAIL_PICTURE'];
  $file = CFile::ResizeImageGet($resizer, array('width'=>170, 'height'=>240), BX_RESIZE_IMAGE_PROPORTIONAL, true);
  $img = $file['src'];
+
+ $resizer2 = $arElement['PROPERTIES']['add_pic_1']['VALUE'];
+ $file2 = CFile::ResizeImageGet($resizer2, array('width'=>170, 'height'=>240), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+ $img2 = $file2['src'];
+
 ?>
 
 <article itemscope itemtype="http://schema.org/Product">
-<a href="<?=$arElement["DETAIL_PAGE_URL"]?>">
+<a  class="z-preview_image"  data-img="<?=$img2?>" href="<?=$arElement["DETAIL_PAGE_URL"]?>">
 <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
 <img src="<?=$img?>" alt="<?=$arElement['NAME']?>" itemprop="image" title="<?=$arElement['NAME']?>"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
