@@ -35,44 +35,28 @@ $(window).on("load", function(){
 	});
   initLoadPage();
   ajaxLoad();
-	//initPreview();
+	initPreview();
   initGallery();
   initNav();
 });
 
 function initPreview() {
-  //$(document).ready(function(){
-		$(".z-preview_image").live("hover", function(){
-			if($(this).attr("data-img")!=""){
-				data=$(this).attr("data-img");
-				src=$(this).find("img").attr("src");
-				$(this).attr("data-img", src).find("img").attr("src", data);
-			}
-		}, function(){
-			if($(this).attr("data-img")!=""){
-				data=$(this).attr("data-img");
-				src=$(this).find("img").attr("src");
-				$(this).attr("data-img", src).find("img").attr("src", data);
-			}
-
-		});
-
-		$(".thief").not(".init").addClass("init").etalage({
-			thumb_image_width: 310,
-			thumb_image_height: 500,
-
-			zoom_area_width: 700,
-			zoom_area_height: 500,
-			zoom_area_distance: 3,
-			small_thumbs: 4,
-			smallthumb_inactive_opacity: 0.3,
-			smallthumbs_position: 'left',
-			show_icon: false,
-			autoplay: false,
-			keyboard: false,
-			zoom_easing: false
-		});
+	"use strict";
+	$(".z-preview_image").live("hover", function() {
+		if($(this).attr("data-img") != "") {
+			var data = $(this).attr("data-img");
+			var src = $(this).find("img").attr("src");
+			$(this).attr("data-img", src).find("img").attr("src", data);
+		}
+	}, function(){
+		if($(this).attr("data-img") != "") {
+			var data = $(this).attr("data-img");
+			var src = $(this).find("img").attr("src");
+			$(this).attr("data-img", src).find("img").attr("src", data);
+		}
+	});
 }
+
 function initNav(){
     "use strict";
   $('.menu-hold').each(function(){
