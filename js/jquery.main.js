@@ -34,11 +34,22 @@ $(window).on("load", function(){
 		}
 	});
   initLoadPage();
+	initLoadingAnimation();
   ajaxLoad();
 	initPreview();
   initGallery();
   initNav();
 });
+
+function initLoadingAnimation() {
+	$('#loading_div').hide().ajaxStart(function() {
+		$(this).show();
+		$('.mainContent .catalog').css('opacity', '0.6');
+	}).ajaxStop(function() {
+		$(this).hide();
+		$('.mainContent .catalog').css('opacity', '1.0');
+	});
+}
 
 function initPreview() {
 	"use strict";
@@ -126,7 +137,7 @@ function initGallery(){
 }
 
 function ajaxLoad(){
-    "use strict";
+  "use strict";
   $('.ajax-load').each(function(){
     var hold = $(this);
     var input = hold.find('input:checkbox');
@@ -192,43 +203,42 @@ Number.prototype.addSpace=function(){
   return temp;
 };
 
-function initLoadPage(){
+function initLoadPage() {
   "use strict";
-  $('.mainContent .catalog').each(function(){
-    var hold = $(this);
-    var obj = {next: 2};
-    var flag = true;
-    var page = 2;
-    $(window).scroll(function(){
-      if(obj.next) {
-        if($(window).scrollTop() > hold.offset().top + hold.outerHeight(true)-1000 && flag){
-          flag = false;
-          $.ajax({
-            dataType: 'json',
-            url: hold.attr('data-page'),
-            data: 'PAGEN_1='+page+'&json=y&'+$('.ajax-load').serialize(),
-            success: function(obj){
-              flag = true;
-              if(obj !== null && obj.data.next) {
-                hold.append(obj.data.html);
-                page++;
-              }
-              else {
-                flag = false;
-              }
-            },
-            error: function(){
-              alert('Server is unavailable. Refresh the page within 15 seconds!');
-            }
-          });
-        }
-      }
-    }).bind('loadFirst', function(){
-      obj.next = 2;
-      page = 2;
-      flag = true;
-    });
-  });
+	var hold = $('.mainContent .catalog');
+	var obj = {next: 2};
+	var flag = true;
+	var page = 1;
+	var pages = $('#pages').val();
+	$('#loadmore').on('click', function() {
+		page++;
+		console.log('click ' + page + ',' + pages);
+		if(page == pages) {
+			$(this).remove();
+		}
+		$.ajax({
+			dataType: 'json',
+			url: hold.attr('data-page'),
+			data: 'PAGEN_1=' + page + '&json=y&' + $('.ajax-load').serialize(),
+			success: function(obj){
+				flag = true;
+				if(obj !== null && obj.data.next) {
+					hold.append(obj.data.html);
+				}
+				else {
+					flag = false;
+				}
+			},
+			error: function(){
+				$(this).remove();
+				alert('Server is unavailable. Refresh the page within 15 seconds!');
+			}
+		});
+	}).bind('loadFirst', function(){
+		obj.next = 2;
+		page = 2;
+		flag = true;
+	});
 }
 /**
  * jQuery gallery min v1.1.0

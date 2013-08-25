@@ -90,6 +90,10 @@
 <?endforeach; // foreach($arResult["ITEMS"] as $arElement):?>
 <?if(!isset($arParams['JSON']) || $arParams['JSON'] == "n"): //normal page ?>
 </section>
+<?if($page_count > 1):?>
+	<input id="loadmore" type="button" value="Показать больше...">
+	<input id="pages" type="hidden" value="<?=$page_count;?>">
+<?endif;?>
 <!-- end .catalog-->
 <div id='loading_div' style='display:none' align='center'>
   <img src='/images/loading_icon.gif'/>
