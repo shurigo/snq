@@ -1,3 +1,6 @@
+$(window).on("unload", function() {
+	console.log('unload');
+});
 $(window).on("load", function(){
   "use strict";
   $('input.customCheckbox').customCheckbox();
@@ -212,7 +215,6 @@ function initLoadPage() {
 	var pages = $('#pages').val();
 	$('#loadmore').on('click', function() {
 		page++;
-		console.log('click ' + page + ',' + pages);
 		if(page == pages) {
 			$(this).remove();
 		}
@@ -220,6 +222,12 @@ function initLoadPage() {
 			dataType: 'json',
 			url: hold.attr('data-page'),
 			data: 'PAGEN_1=' + page + '&json=y&' + $('.ajax-load').serialize(),
+			beforeSend: function() {
+			  $(this).hide();
+			},
+			complete: function() {
+			  $(this).show();
+			},
 			success: function(obj){
 				flag = true;
 				if(obj !== null && obj.data.next) {
