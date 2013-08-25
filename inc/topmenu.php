@@ -61,7 +61,7 @@
                     <li><a href="/collection/mpants/">Брюки/Джинсы</a></li>
                     <li><a href="/collection/mtshort/">Футболки</a></li>
                     <li><a href="/collection/mshorts/">Шорты</a></li>
-                    <li><a href="/collection/mtrico/">Трикотаж</a></li>
+                    <li><a href="/collection/mtrico/">Кардиганы и джемперы</a></li>
                   </ul></td>
               </tr>
             </table>
