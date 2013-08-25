@@ -23,19 +23,22 @@ $PIC2   =$line[2];
 $arSelect = Array("ID");
 $arFilter = Array("XML_ID"=>$XML_ID);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-$ob = $res->GetNextElement();
-$arFields = $ob->GetFields();
+//print_r();
+while ($ob = $res->GetNextElement()) {$arFields = $ob->GetFields();
 $ELEMENT_ID=($arFields['ID']);
 
+echo $ELEMENT_ID."<br>";
+
 //upload image 1
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2013/".$PIC1);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20132014/looks/".$PIC1);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 
 //upload image 2
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2013/".$PIC2);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20132014/looks/".$PIC2);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_2", $arFile);
+}
 
 $i++;
 
