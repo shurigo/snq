@@ -91,8 +91,10 @@
 <?if(!isset($arParams['JSON']) || $arParams['JSON'] == "n"): //normal page ?>
 </section>
 <?if($page_count > 1):?>
-	<input id="loadmore" type="button" value="Показать больше...">
+    <table width="100%"><tr><td align="middle">
+	<input id="loadmore" type="button" value="Показать еще" style="background:white;border:1px solid #cbcbcb;height:27px;width:504px;color:#222;font-size: 11px;font-weight: bold;">
 	<input id="pages" type="hidden" value="<?=$page_count;?>">
+	</td></tr></table><br />
 <?endif;?>
 <!-- end .catalog-->
 <div id='loading_div' style='display:none' align='center'>
