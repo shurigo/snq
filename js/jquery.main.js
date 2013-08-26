@@ -1,6 +1,3 @@
-$(window).on("unload", function() {
-	console.log('unload');
-});
 $(window).on("load", function(){
   "use strict";
   $('input.customCheckbox').customCheckbox();
