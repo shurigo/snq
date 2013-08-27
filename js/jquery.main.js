@@ -173,6 +173,8 @@ function ajaxLoad(){
     function reloadPage(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
+			$('#page').val('1');
+			$('#loadmore').show();
       $.ajax({
         data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
         dataType: 'json',
@@ -182,6 +184,7 @@ function ajaxLoad(){
             $('.mainContent .catalog').empty().append(obj.data.html);
           } else {
             $('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
+						$('#loadmore').hide();
           }  
           $(window).trigger('loadFirst');
         },
@@ -208,12 +211,13 @@ function initLoadPage() {
 	var hold = $('.mainContent .catalog');
 	var obj = {next: 2};
 	var flag = true;
-	var page = 1;
 	var pages = $('#pages').val();
 	$('#loadmore').on('click', function() {
+	  var page = $('#page').val();
 		page++;
+		$('#page').val(page);
 		if(page == pages) {
-			$(this).remove();
+			$(this).hide();
 		}
 		$.ajax({
 			dataType: 'json',
