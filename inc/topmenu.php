@@ -57,11 +57,12 @@
                     <li><a href="/collection/mtopcloak/">Плащи</a></li>
                   </ul></td>
                 <td><ul>
+                    <li><a href="/collection/mtrico/">Кардиганы и джемперы</a></li>
+                    <li><a href="/collection/mblazer/">Пиджаки</a></li>
                     <li><a href="/collection/mshirt/">Рубашки</a></li>
                     <li><a href="/collection/mpants/">Брюки/Джинсы</a></li>
                     <li><a href="/collection/mtshort/">Футболки</a></li>
                     <li><a href="/collection/mshorts/">Шорты</a></li>
-                    <li><a href="/collection/mtrico/">Кардиганы и джемперы</a></li>
                   </ul></td>
               </tr>
             </table>
