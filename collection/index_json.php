@@ -15,7 +15,7 @@
 				"USE_SORT" => "N",
 				"DISCOUNT_ONLY" => $_SERVER['discount_only'],
 				"SHOW_TOP_ELEMENTS" => "N",
-				"PAGE_ELEMENT_COUNT" => "12",
+				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => $sort_field,
 				"ELEMENT_SORT_ORDER" => $sort_order,
