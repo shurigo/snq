@@ -33,6 +33,7 @@ $(window).on("load", function(){
 			$("#d_o").val("N");
 		}
 	});
+	initScrollUp();
   initLoadPage();
 	initLoadingAnimation();
   ajaxLoad();
@@ -40,6 +41,20 @@ $(window).on("load", function(){
   initGallery();
   initNav();
 });
+
+function initScrollUp() {
+	$(window).scroll(function(){
+	 if ($(this).scrollTop() > 100) {
+				$('.scrollup').fadeIn();
+		} else {
+				$('.scrollup').fadeOut();
+		}
+  });
+	$('.scrollup').click(function(){
+		$("html, body").animate({ scrollTop: 0 }, 600);
+		return false;
+	});
+}
 
 function initLoadingAnimation() {
 	$('#loading_div').hide().ajaxStart(function() {
@@ -68,29 +83,27 @@ function initPreview() {
 	});
 }
 
-function initNav(){
-    "use strict";
-  $('.menu-hold').each(function(){
+function initNav() {
+  "use strict";
+  $('.menu-hold').each(function() {
     var hold = $(this);
     var place = $('.menu-place');
     hold.removeClass('top');
     place.removeClass('top');
     var top = hold.offset().top;
-      if($(window).scrollTop() > top){
+      if($(window).scrollTop() > top) {
         hold.addClass('top');
         place.addClass('top');
-      }
-      else{
+      } else {
         hold.removeClass('top');
         place.removeClass('top');
       }
 
-    $(window).scroll(function(){
-      if($(window).scrollTop() > top){
+    $(window).scroll(function() {
+      if($(window).scrollTop() > top) {
         hold.addClass('top');
         place.addClass('top');
-      }
-      else{
+      } else {
         hold.removeClass('top');
         place.removeClass('top');
       }
@@ -98,7 +111,7 @@ function initNav(){
   });
 }
 
-function initGallery(){
+function initGallery() {
     "use strict";
   jQuery('div.slider').gallery({
     duration: 500,
