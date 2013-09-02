@@ -94,6 +94,7 @@
     <table width="100%"><tr><td align="middle">
 	<input id="loadmore" type="button" value="Показать еще" style="background:white;border:1px solid #cbcbcb;height:27px;width:504px;color:#222;font-size: 11px;font-weight: bold;">
 	<input id="pages" type="hidden" value="<?=$page_count;?>">
+	<input id="page" type="hidden" value="1">
 	</td></tr></table><br />
 <?endif;?>
 <!-- end .catalog-->
