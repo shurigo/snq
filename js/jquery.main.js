@@ -199,7 +199,6 @@ function ajaxLoad(){
             $('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
 						$('#loadmore').hide();
           }  
-          $(window).trigger('loadFirst');
         },
         error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
       });
@@ -222,15 +221,12 @@ Number.prototype.addSpace=function(){
 function initLoadPage() {
   "use strict";
 	var hold = $('.mainContent .catalog');
-	var obj = {next: 2};
-	var flag = true;
+	hold.find('article').slice(12).remove();
 	var pages = $('#pages').val();
 	$('#loadmore').on('click', function() {
 	  var page = $('#page').val();
-		page++;
-		$('#page').val(page);
-		if(page == pages) {
-			$(this).hide();
+		if(page == 1) {
+		  hold.empty();
 		}
 		$.ajax({
 			dataType: 'json',
@@ -243,23 +239,20 @@ function initLoadPage() {
 			  $(this).show();
 			},
 			success: function(obj){
-				flag = true;
-				if(obj !== null && obj.data.next) {
+				if(obj != null) {
 					hold.append(obj.data.html);
+				} 
+				if(page == pages) {
+					$('#loadmore').remove();
 				}
-				else {
-					flag = false;
-				}
+				page++;
+				$('#page').val(page);
 			},
 			error: function(){
 				$(this).remove();
 				alert('Server is unavailable. Refresh the page within 15 seconds!');
 			}
 		});
-	}).bind('loadFirst', function(){
-		obj.next = 2;
-		page = 2;
-		flag = true;
 	});
 }
 /**
