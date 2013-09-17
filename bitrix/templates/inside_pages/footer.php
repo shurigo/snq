@@ -171,5 +171,35 @@ _tmr.push({id: "2402486", type: "pageView", start: (new Date()).getTime()});
 </div></noscript>
 <!-- //Rating@Mail.ru counter -->
 
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 992334598;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/992334598/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 988640537;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/988640537/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
 </body>
 </html>
