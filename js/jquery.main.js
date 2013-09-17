@@ -221,9 +221,8 @@ Number.prototype.addSpace=function(){
 function initLoadPage() {
   "use strict";
 	var hold = $('.mainContent .catalog');
-	hold.find('article').slice(12).remove();
-	var pages = $('#pages').val();
 	$('#loadmore').on('click', function() {
+		var pages = $('#pages').val();
 	  var page = $('#page').val();
 		if(page == 1) {
 		  hold.empty();

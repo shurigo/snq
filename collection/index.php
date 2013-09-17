@@ -86,7 +86,7 @@
 				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
 				"NOT_SHOW_NAV_CHAIN" => "N",
 				"SHOW_TOP_ELEMENTS" => "N",
-				"PAGE_ELEMENT_COUNT" => "32",
+				"PAGE_ELEMENT_COUNT" => "12",
 				"LINE_ELEMENT_COUNT" => "4",
 				"ELEMENT_SORT_FIELD" => $sort_field,
 				"ELEMENT_SORT_ORDER" => $sort_order,

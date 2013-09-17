@@ -41,9 +41,10 @@
 		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage().'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
 	<?endif;?>
 <?endif; //end normal page?>
+<?$page_count = $arResult['NAV_RESULT']->NavPageCount;?>
+	<input id="pages" type="hidden" value="<?=$page_count;?>">
 <?
   // don't go beyound the last page
-	$page_count = $arResult['NAV_RESULT']->NavPageCount;
 	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
 ?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
@@ -93,7 +94,6 @@
 <?if($page_count > 1):?>
     <table width="100%"><tr><td align="middle">
 	<input id="loadmore" type="button" value="Показать еще" style="background:white;border:1px solid #cbcbcb;height:27px;width:504px;color:#222;font-size: 11px;font-weight: bold;">
-	<input id="pages" type="hidden" value="<?=$page_count;?>">
 	<input id="page" type="hidden" value="1">
 	</td></tr></table><br />
 <?endif;?>
