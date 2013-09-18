@@ -187,6 +187,9 @@ function ajaxLoad(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
 			$('#page').val('1');
+			if($('#pages').val() <= 1) {
+        $('#loadmore').hide();
+      }
 			$('#loadmore').show();
       $.ajax({
         data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
@@ -224,6 +227,9 @@ function initLoadPage() {
 	$('#loadmore').on('click', function() {
 		var pages = $('#pages').val();
 	  var page = $('#page').val();
+		if(pages <= 1) {
+			$('#loadmore').remove();
+		}
 		if(page == 1) {
 		  hold.empty();
 		}
@@ -235,13 +241,17 @@ function initLoadPage() {
 			  $(this).hide();
 			},
 			complete: function() {
-			  $(this).show();
+				if($('#pages').val() <= 1) {
+					$('#loadmore').remove();
+        } else {
+					$(this).show();
+				}
 			},
 			success: function(obj){
 				if(obj != null) {
 					hold.append(obj.data.html);
 				} 
-				if(page == pages) {
+				if(page === pages) {
 					$('#loadmore').remove();
 				}
 				page++;
