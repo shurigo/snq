@@ -189,8 +189,9 @@ function ajaxLoad(){
 			$('#page').val('1');
 			if($('#pages').val() <= 1) {
         $('#loadmore').hide();
-      }
-			$('#loadmore').show();
+      } else {
+				$('#loadmore').show();
+			}
       $.ajax({
         data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
         dataType: 'json',
@@ -204,7 +205,7 @@ function ajaxLoad(){
 				},
         success: function(obj){
           if(obj != null) {
-						if(page === pages) {
+						if(page == pages) {
 							$('#loadmore').hide();
 						}
             $('.mainContent .catalog').empty().append(obj.data.html);
@@ -238,11 +239,15 @@ function initLoadPage() {
 		var pages = $('#pages').val();
 	  var page = $('#page').val();
 		if(pages <= 1) {
-			$('#loadmore').remove();
+			$('#loadmore').hide();
 		}
 		if(page == 1) {
-		  hold.empty();
-		}
+		  if($('article').length == 12) {
+				hold.empty();
+			} else {
+			  $('#page').val(++page)
+			}
+		} 
 		$.ajax({
 			dataType: 'json',
 			url: hold.attr('data-page'),
@@ -251,7 +256,7 @@ function initLoadPage() {
 			  $('#loadmore').hide();
 			},
 			complete: function() {
-				if($('#pages').val() <= 1) {
+				if(pages <= 1 || page >= pages) {
 					$('#loadmore').hide();
         } else {
 					$('#loadmore').show();
@@ -261,14 +266,13 @@ function initLoadPage() {
 				if(obj != null) {
 					hold.append(obj.data.html);
 				} 
-				if(page === pages) {
-					$('#loadmore').remove();
+				if(page >= pages) {
+					$('#loadmore').hide();
 				}
-				page++;
-				$('#page').val(page);
+				$('#page').val(++page);
 			},
 			error: function(){
-				$(this).remove();
+				$('#loadmore').hide();
 				alert('Server is unavailable. Refresh the page within 15 seconds!');
 			}
 		});
