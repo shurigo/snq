@@ -118,6 +118,20 @@ false
 
             <!-- end .links-->
 <p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+ <?
+     $APPLICATION->IncludeComponent("custom:subscribe.form","",Array(
+		"AJAX_MODE" => "N",
+		"SHOW_HIDDEN" => "Y",
+		"ALLOW_ANONYMOUS" => "Y",
+		"SHOW_AUTH_LINKS" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"SET_TITLE" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"AJAX_OPTION_HISTORY" => "N"
+	));
+	?>
 </section>
 <!-- end .text-->
 <section class="gallery">
@@ -195,9 +209,9 @@ false
           <!-- end .gallery-->
 </article>
 <!-- end .item-->
+
 </section>
 <!-- end .mainContent2-->
-
 
 
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
