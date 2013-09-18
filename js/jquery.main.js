@@ -195,8 +195,18 @@ function ajaxLoad(){
         data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
         dataType: 'json',
         url: hold.attr('action'),
+				complete: function() {
+					if($('#pages').val() <= 1) {
+						$('#loadmore').hide();
+					} else {
+						$('#loadmore').show();
+					}
+				},
         success: function(obj){
-          if(obj.data.next) {
+          if(obj != null) {
+						if(page === pages) {
+							$('#loadmore').hide();
+						}
             $('.mainContent .catalog').empty().append(obj.data.html);
           } else {
             $('.mainContent .catalog').empty().append('<p>Ничего не найдено</p>');
@@ -238,13 +248,13 @@ function initLoadPage() {
 			url: hold.attr('data-page'),
 			data: 'PAGEN_1=' + page + '&json=y&' + $('.ajax-load').serialize(),
 			beforeSend: function() {
-			  $(this).hide();
+			  $('#loadmore').hide();
 			},
 			complete: function() {
 				if($('#pages').val() <= 1) {
-					$('#loadmore').remove();
+					$('#loadmore').hide();
         } else {
-					$(this).show();
+					$('#loadmore').show();
 				}
 			},
 			success: function(obj){
