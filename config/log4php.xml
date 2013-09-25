@@ -1,15 +1,56 @@
 <configuration xmlns="http://logging.apache.org/log4php/">
-  <appender name="consoleAppender" class="LoggerAppenderConsole" />
-  <appender name="fileAppender" class="LoggerAppenderDailyFile">
+	
+	<appender name="consoleAppender" class="LoggerAppenderConsole" />
+	
+	<appender name="fileAppender" class="LoggerAppenderDailyFile">
     <layout class="LoggerLayoutPattern">
       <param name="conversionPattern" value="%date %logger %-5level %message%n" />
     </layout>
 		<param name="file" value="snq.log" />
 		<param name="append" value="true" />
   </appender>
+	
+	<appender name="nomenclatureAppender" class="LoggerAppenderDailyFile">
+    <layout class="LoggerLayoutPattern">
+      <param name="conversionPattern" value="%date %logger %-5level %message%n" />
+    </layout>
+		<param name="file" value="log/nomenclature-%s.log" />
+		<param name="append" value="true" />
+  </appender>
+	
+	<appender name="remainderAppender" class="LoggerAppenderDailyFile">
+    <layout class="LoggerLayoutPattern">
+      <param name="conversionPattern" value="%date %logger %-5level %message%n" />
+    </layout>
+		<param name="file" value="log/remainder-%s.log" />
+		<param name="append" value="true" />
+  </appender>
+
+  <appender name="mailAppender" class="LoggerAppenderMail">
+    <layout class="LoggerLayoutPattern">
+      <param name="conversionPattern" value="%date %logger %-5level %message%n" />
+    </layout>
+	 <param name="to" value="igor.shurshin@gmail.com" />
+	 <param name="from" value="snowqueen@snowqueen.com" />
+	 <param name="subject" value="daily load"/>
+  </appender>
+	
+	<logger name="NomenclatureLoader">
+		<appender-ref ref="nomenclatureAppender" />
+	</logger>
+
+	<logger name="RemainderLoader">
+		<appender-ref ref="remainderAppender" />
+	</logger>
+
+	<logger name="mailer">
+		<appender-ref ref="mailAppender" />
+	</logger>
+
 	<root>
 	  <level value="INFO" />
     <appender_ref ref="consoleAppender" />
     <appender_ref ref="fileAppender" />
 	</root>
+
 </configuration>

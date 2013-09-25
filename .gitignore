@@ -8,4 +8,5 @@ bitrix/php_interface/dbconn.php
 bitrix/stack_cache/
 restore.php
 upload/
+config/
 

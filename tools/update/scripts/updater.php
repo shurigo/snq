@@ -94,6 +94,7 @@
 			}
 			$msg = "Load complete. Successful: $this->success_count, Errors: $this->error_count";
 			$this->logger->info($msg);
+			$this->mailer->getAppender('mailAppender')->setSubject($this->logger->getName());
 			$this->mailer->info($msg);
 		}
 
@@ -282,6 +283,7 @@
 		public function __construct($file_name, $skip_first_row = false) {
 			parent::__construct($file_name, $skip_first_row);
 			$this->logger = Logger::getLogger(__CLASS__);
+			$this->mailer = Logger::getLogger('mailer');
 			$this->logger->debug('ctor()');
 			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 0, FieldInfo::NUMBER_TYPE);
 			$this->fields['SHOP_EXT_ID'] = new FieldInfo('SHOP_EXT_ID', 1, FieldInfo::NUMBER_TYPE);
