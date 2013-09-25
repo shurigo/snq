@@ -128,7 +128,7 @@
 		  return "FieldInfo[name=$name,column=$column,type=$type]";
 		}
 	}
-
+/*
 	class PriceLoader extends BaseLoader {
 
 		public function __construct($file_name) {
@@ -203,17 +203,17 @@
 			return false;
 		}
 	}
-  
-	class NomenclatureLoader extends BaseLoader {
+ */ 
+  class NomenclatureLoader extends BaseLoader {
 		const iblock_code = 'nomenclature';
 
 		public function __construct($file_name, $skip_first_row = false) {
 			parent::__construct($file_name, $skip_first_row);
 			$this->logger = Logger::getLogger(__CLASS__);
 			$this->logger->debug('ctor()');
-			$this->fields['IDMFC']  = new FieldInfo('IDMFC',  2, FieldInfo::NUMBER_TYPE);
-			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 3, FieldInfo::NUMBER_TYPE);
-			$this->fields['SIZE']   = new FieldInfo('SIZE',   4, FieldInfo::STRING_TYPE);
+			$this->fields['IDMFC']  = new FieldInfo('IDMFC',  1, FieldInfo::NUMBER_TYPE);
+			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 2, FieldInfo::NUMBER_TYPE);
+			$this->fields['SIZE']   = new FieldInfo('SIZE',   3, FieldInfo::STRING_TYPE);
 		}
 
 		public function init() {
@@ -279,9 +279,9 @@
 			parent::__construct($file_name, $skip_first_row);
 			$this->logger = Logger::getLogger(__CLASS__);
 			$this->logger->debug('ctor()');
-			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 1, FieldInfo::NUMBER_TYPE);
-			$this->fields['SHOP_EXT_ID'] = new FieldInfo('SHOP_EXT_ID', 2, FieldInfo::NUMBER_TYPE);
-			$this->fields['QUANTITY']   = new FieldInfo('QUANTITY', 3, FieldInfo::STRING_TYPE);
+			$this->fields['ART_NO'] = new FieldInfo('ART_NO', 0, FieldInfo::NUMBER_TYPE);
+			$this->fields['SHOP_EXT_ID'] = new FieldInfo('SHOP_EXT_ID', 1, FieldInfo::NUMBER_TYPE);
+			$this->fields['QUANTITY']   = new FieldInfo('QUANTITY', 2, FieldInfo::STRING_TYPE);
 		}
 
 		public function init() {
@@ -349,7 +349,4 @@
 // 	$nomenclature_loader->init();
 //	$nomenclature_loader->load();
 
-//  $remainder_loader = new RemainderLoader('remainder.csv', true);
-//	$remainder_loader->init();
-//	$remainder_loader->load();
 ?>
