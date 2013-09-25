@@ -16,6 +16,7 @@
 		protected $error_count = 0;
 		protected $success_count = 0;
 		protected $logger;
+		protected $mailer;
 		protected $fields;
 
 		const FIELD_SEPARATOR = ';';
@@ -27,6 +28,7 @@
       $this->skip_first_row = $skip_first_row;
 			$fields = array();
 			if(!CModule::IncludeModule('iblock')) die('failed to include iblock module');
+			$this->mailer = Logger::getLogger('mailer');
 		}
 
 		protected function validate(array $data) {
@@ -90,7 +92,9 @@
 			} catch(Exception $e) {
 				$this->logger->error('Failed to open file for reading:'.$this->file_name, $e);
 			}
-			$this->logger->info("Load complete. Successful: $this->success_count, Errors: $this->error_count");
+			$msg = "Load complete. Successful: $this->success_count, Errors: $this->error_count";
+			$this->logger->info($msg);
+			$this->mailer->info($msg);
 		}
 
 		protected function validateNumber($input) {
