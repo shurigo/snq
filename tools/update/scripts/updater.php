@@ -18,7 +18,7 @@
 		protected $logger;
 		protected $fields;
 
-		const FIELD_SEPARATOR = ',';
+		const FIELD_SEPARATOR = ';';
 		const MAX_LINE_LENGTH = 1000;
 
 		protected function __construct($file_name, $skip_first_row = false) {
