@@ -1,6 +1,8 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
+  require($_SERVER['DOCUMENT_ROOT'] . '/ipgeo/geohelper.php');
   if(!isset($_GET['nid'])) die();
+	if(!isset($_GET['city_name'])) die();
   if(!CModule::IncludeModule('iblock')) die();
   $remainder = CIBlockElement::GetList(
 	  array(),
@@ -18,14 +20,8 @@
 		$rem[$shop_id] = $quantity;
 	}
 	$our_shops_iblock_id = getIblockIdByName('our_shops');
-	$sections = CIBlockSection::GetList(
-		array(),
-		array('IBLOCK_ID' => IntVal($our_shops_iblock_id), 'NAME' => $_SESSION['city_name']),
-		false,
-		array('ID', 'IBLOCK_ID', 'NAME')
-	);
-	if(!$sections) die();
-	$section_id = $sections->GetNext()['ID'];
+	$city_name = iconv('utf-8', 'cp1251', $_GET['city_name']);
+	$section_id = get_city_by_name($city_name);
 ?>
 	<?if(count($rem) > 0):?>
     <?$items_found = false;?>

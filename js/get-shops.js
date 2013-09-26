@@ -1,9 +1,10 @@
-function getShops(nom_id) {
+function getShops(nom_id, city) {
   "use strict";
   $.ajax({
 		type: "GET",
     data: {
-      nid: nom_id
+      nid: nom_id,
+		  city_name: city
     },
     url: "/our_shops/get.php",
     success: function(obj) {

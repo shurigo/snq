@@ -94,7 +94,7 @@
 			$discount = 1;
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_discount' => $discount));
-		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$arElement["ID"]."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? "скидки нет" : "cкидка"), "green", $writeToFile);
+		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$id."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? "скидки нет" : "cкидка"), "green", $writeToFile);
 		$success_cnt++;
 	}
 

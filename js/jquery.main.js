@@ -24,7 +24,8 @@ $(window).on("load", function(){
 	});
 	$("#size-select").change(function() {
 		var sel = $("#size-select option:selected");
-		getShops(sel.val());
+		var city = $("#city-select option:selected").text();
+		getShops(sel.val(), city);
 	});
 	$("#d_cb").change(function() {
     if($(this).prop("checked")) {
