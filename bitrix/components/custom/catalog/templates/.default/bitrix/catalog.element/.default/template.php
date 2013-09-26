@@ -27,18 +27,8 @@ false
             <?}  else { ?>
             <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
 						<!-- end .price-->
-			<!--
-			<div class="sizes">
-							<select id="size-select" class="customSelect">
-                <option>Выберите размер</option>
-								<?foreach($arResult['SIZES'] as $size):?>
-									<option value="<?=$size['NOM_ID']?>"><?=$size['SIZE']?></option>
-								<?endforeach?>
-							</select>
-						</div>
-						</br>
-            <div id="availability"></div>
-            -->
+
+
             <!-- end .sizes -->
             <div class="likes">
               <table>
@@ -103,6 +93,7 @@ false
                    <td></td>
                 </tr>
               </table>
+
             </div>
 
             <!-- end .likes-->
@@ -116,8 +107,22 @@ false
               <li><?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?></li>
             </ul>
 
+            <hr size="1" noshade>
+            <span style="font-size:8pt;font-weight: bold;">Наличие в магазинах вашего города:</span>
+			<div class="sizes">
+							<select id="size-select" class="customSelect">
+                <option>Выберите размер</option>
+								<?foreach($arResult['SIZES'] as $size):?>
+									<option value="<?=$size['NOM_ID']?>"><?=$size['SIZE']?></option>
+								<?endforeach?>
+							</select>
+						</div>
+						</br>
+            <div id="availability"></div>
+
             <!-- end .links-->
-<p class="grey">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+<p class="grey"  style="font-size:8pt;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+
  <?
      $APPLICATION->IncludeComponent("custom:subscribe.form","",Array(
 		"AJAX_MODE" => "N",

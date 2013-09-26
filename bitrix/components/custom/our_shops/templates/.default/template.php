@@ -66,11 +66,13 @@
                         $second_column_showed = 1;
                     }
                     ?>
+                    <a id="<?=$arElement["ID"]?>">
                     <li style="margin:20px 0 0 20px;">
                         <div style="color:#191a1e; font-weight:bold; font-size:14px;"><?=$arElement["NAME"]?></div>
                         <div style="margin:10px 0 0 0; font-weight:bold;">Адрес:</div>
                         <div><?=$arElement["PREVIEW_TEXT"]?></div>
                     </li>
+                    </a>
                     <?
                     $shop_counter++;
                 }
