@@ -29,8 +29,7 @@
 ?>
 	<?if(count($rem) > 0):?>
     <?$items_found = false;?>
-		<p>Наличие в магазинах:</p>
-		<table>
+		<table width="100%">
 		<?foreach($rem as $kais_id => $quantity):?>
 		  <?$shops = CIBlockElement::GetList(
 				array(),
@@ -45,13 +44,13 @@
 					<?if(!$items_found):?>
 						<?$items_found = true;?>
 						<tr>
-              <td>Магазин</td>
-              <td>Количество</td>
+              <td style="font-weight: bold;" width="80%">Магазин</td>
+              <td width="20%"></td>
             </tr>
           <?endif?>
 					<tr>
-						<td><?=$fields['NAME']?></td>
-						<td><?=$quantity?></td>
+						<td><a href="/our_shops/#<?=$fields['ID'];?>"><?=$fields['NAME']?></a></td>
+						<td><?=($quantity>0)?("В наличии"):("Отсутствует")?></td>
 					</tr>
 					<?$props = $e->GetProperties();?>
 				<?endif?>
@@ -59,7 +58,7 @@
 		<?endforeach?>
 		</table>
 	 <?if(!$items_found):?>
-		 <p>В магазинах вашего города данного размера нет.</p>
-     <p> Выбирите другой размер или город.</p>
+		 <p style="font-color:red;">В магазинах вашего города данного размера нет. Выбирите другой размер или город.</p>
    <?endif?>
   <?endif?>
+<br>
