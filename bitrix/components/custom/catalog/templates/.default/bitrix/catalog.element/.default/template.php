@@ -121,7 +121,7 @@ false
             <div id="availability"></div>
 
             <!-- end .links-->
-<p class="grey"  style="font-size:8pt;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</p>
+<div class="grey"  style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</div>
 
  <?
      $APPLICATION->IncludeComponent("custom:subscribe.form","",Array(

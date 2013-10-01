@@ -351,6 +351,7 @@ table .sep {
 	left:0;
 	font:normal 17px/17px "PT Sans Narrow", "Arial Narrow", Arial, Helvetica, sans-serif;
 	z-index:100;
+	text-transform: uppercase;
 }
 
 .menu li {
@@ -586,6 +587,7 @@ table .sep {
 	line-height:normal;
 	margin:0 0 5px 0;
 	z-index:5;
+	text-transform: uppercase;
 }
 
 .catalog {
@@ -900,9 +902,12 @@ table .sep {
 	overflow: hidden;
 	font-size: 0;
 }
-
+.item h1 {
+text-transform: uppercase;
+}
 .item p {
-	margin:0 0 15px 0;
+	margin:0 0 5px 0;
+	font-size: 11px;
 }
 
 .item strong {
@@ -1430,4 +1435,6 @@ float:left; width:140px; margin:0px 0 0px 0px;
 	text-overflow:ellipsis; 
 	white-space:nowrap; 
 }
+
+
 
