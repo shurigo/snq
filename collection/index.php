@@ -27,6 +27,25 @@
 		}
 	}
 
+	// search query
+	if(!empty($_GET['q'])) {
+		$name_filter_raw = htmlspecialchars($_GET['q'], ENT_QUOTES | ENT_HTML5 | ENT_DISALLOWED | ENT_SUBSTITUTE, 'UTF-8');
+		$name_filter_raw = iconv('UTF-8', 'cp1251', $name_filter_raw);
+		$name_filter_raw = mysql_real_escape_string($name_filter_raw);
+		$name_filter_raw = '%'.str_replace(' ', '% %', trim($name_filter_raw)).'%';
+		$name_filter_array = explode(' ', $name_filter_raw);
+		error_log(print_r($name_filter_array, true), 0);
+		if(is_array($name_filter_array)) {
+			if(count($name_filter_array) > 0) {
+				$filter_name = Array();
+				foreach($name_filter_array as $key=>$value) {
+					$filter_name[] = Array('NAME' => $value);
+				}
+				$arFilter[] = $filter_name;
+			}
+		}
+	}
+
    // filter only items with discount
 	if($_SESSION['discount_only'] === 'Y') {
 			$arFilter[] = Array('PROPERTY_col_discount' => 1);
