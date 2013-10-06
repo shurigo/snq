@@ -39,7 +39,7 @@
 	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
   <?elseif($arParams['VIEW_MODE'] === 'search'):?>
-		<section class="catalog" data-page="<?=$currentPage.'?q='.$arParams['SEARCH_QUERY']?>">
+		<section class="catalog" data-page="<?=$currentPage.'?q='.iconv('cp1251', 'utf-8', $arParams['SEARCH_QUERY'])?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$currentPage.'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
 	<?endif;?>
@@ -50,6 +50,9 @@
   // don't go beyound the last page
 	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
 ?>
+<?if(count($arResult['ITEMS'] == 0)): ?>
+  <p>По вашему запросу товары не найдены</p>
+<?endif;?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?
  //image resizing
