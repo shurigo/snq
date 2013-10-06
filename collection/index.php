@@ -1,5 +1,6 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
 	$arFilter =	Array(
 		'IBLOCK_ID' => '1',
 		Array(
@@ -8,7 +9,7 @@
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
 		)
 	);
-  
+
 	if(empty($_SESSION['discount_only'])) {
 		$_SESSION['discount_only'] = 'N'; 
 	}
@@ -20,6 +21,7 @@
 		}
 	}
 	
+	// actions mode
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
 		if(!empty($_GET['sid'])) {
 			parse_str($_GET['sid']);
@@ -32,23 +34,20 @@
 		$name_filter_raw = htmlspecialchars($_GET['q'], ENT_QUOTES | ENT_HTML5 | ENT_DISALLOWED | ENT_SUBSTITUTE, 'UTF-8');
 		$name_filter_raw = iconv('UTF-8', 'cp1251', $name_filter_raw);
 		$name_filter_raw = mysql_real_escape_string($name_filter_raw);
-		$name_filter_raw = '%'.str_replace(' ', '% %', trim($name_filter_raw)).'%';
 		$name_filter_array = explode(' ', $name_filter_raw);
-		error_log(print_r($name_filter_array, true), 0);
 		if(is_array($name_filter_array)) {
 			if(count($name_filter_array) > 0) {
-				$filter_name = Array();
-				foreach($name_filter_array as $key=>$value) {
-					$filter_name[] = Array('NAME' => $value);
+				$filter_search = Array();
+				foreach($name_filter_array as $key => $value) {
+					$arFilter[]= array('?PROPERTY_col_title' => $value);
 				}
-				$arFilter[] = $filter_name;
 			}
 		}
 	}
 
    // filter only items with discount
 	if($_SESSION['discount_only'] === 'Y') {
-			$arFilter[] = Array('PROPERTY_col_discount' => 1);
+    $arFilter[] = Array('PROPERTY_col_discount' => 1);
 	}
 
 	// process the brand filter (left menu)
@@ -88,6 +87,7 @@
 		&& (empty($url_array[2]) || !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
 	}
+	error_log(print_r($arFilter,true),0);
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
