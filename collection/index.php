@@ -20,6 +20,10 @@
       $_SESSION['discount_only'] = 'N';
 		}
 	}
+  // filter only items with discount
+	if($_SESSION['discount_only'] === 'Y') {
+    $arFilter[] = Array('PROPERTY_col_discount' => 1);
+	}
 	
 	// actions mode
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
@@ -29,6 +33,7 @@
 		}
 	}
 
+	$name_filter_raw = '';
 	// search query
 	if(!empty($_GET['q'])) {
 		$name_filter_raw = htmlspecialchars($_GET['q'], ENT_QUOTES | ENT_HTML5 | ENT_DISALLOWED | ENT_SUBSTITUTE, 'UTF-8');
@@ -45,11 +50,6 @@
 		}
 	}
 
-   // filter only items with discount
-	if($_SESSION['discount_only'] === 'Y') {
-    $arFilter[] = Array('PROPERTY_col_discount' => 1);
-	}
-
 	// process the brand filter (left menu)
 	$filter_brand = Array();
   foreach($_GET as $key=>$value) {
@@ -60,10 +60,12 @@
 	if(count($filter_brand) > 0) {
 		$arFilter[] = array_merge(array('LOGIC' => 'OR'), $filter_brand);
 	}
+
 	// brand ID filter
 	if(!empty($_GET['BRAND_ID'])) {
 		$arFilter[] = Array('PROPERTY_col_brand' => $_GET['BRAND_ID']);
 	}
+
 	// process price
 	if(isset($_GET['min'])) {
 		$price_min = str_replace(' ', '', $_GET['min']);
@@ -87,7 +89,7 @@
 		&& (empty($url_array[2]) || strtolower($url_array[2]) !== 'q' || !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
 	}
-
+	$view_mode = (empty($name_filter_raw) ? '' : 'search');
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -99,6 +101,8 @@
 				"USE_FILTER" => "Y",
 				"FILTER_NAME" => "arFilter",
 				"INCLUDE_BRANDS" => "Y",
+				"SEARCH_QUERY" => $name_filter_raw,
+				"VIEW_MODE" => $view_mode,
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => "Y",

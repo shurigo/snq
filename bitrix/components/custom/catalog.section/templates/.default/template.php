@@ -33,12 +33,15 @@
 	}
 ?>
 	<? global $action_catalog_filter; ?>
-	<?if($arParams['VIEW_MODE'] == 'actions'):?>
+	<? $currentPage = $APPLICATION->GetCurPage(); ?>
+	<?if($arParams['VIEW_MODE'] === 'actions'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
-	<?elseif($arParams['VIEW_MODE'] == 'brands'):?>
+	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
+  <?elseif($arParams['VIEW_MODE'] === 'search'):?>
+		<search class="catalog" data-page="<?=$currentPage.'q='.$arParams['SEARCH_QUERY']?>">
 	<?else:?>
-		<section class="catalog" data-page="<?=$APPLICATION->GetCurPage().'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
+		<section class="catalog" data-page="<?=$currentPage.'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
 	<?endif;?>
 <?endif; //end normal page?>
 <?$page_count = $arResult['NAV_RESULT']->NavPageCount;?>
