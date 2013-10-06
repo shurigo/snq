@@ -39,7 +39,7 @@
 			if(count($name_filter_array) > 0) {
 				$filter_search = Array();
 				foreach($name_filter_array as $key => $value) {
-					$arFilter[]= array('?PROPERTY_col_title' => $value);
+					$arFilter[] = array('?PROPERTY_col_title' => $value);
 				}
 			}
 		}
@@ -84,10 +84,10 @@
 	// Collection root / idem id undefined -> redirect to Woman collection
 	if($url_array[1] == 'collection'
 		&& count($url_array) == 2
-		&& (empty($url_array[2]) || !is_numeric($url_array[2]))) {
+		&& (empty($url_array[2]) || strtolower($url_array[2]) !== 'q' || !is_numeric($url_array[2]))) {
     LocalRedirect('/collection/woman/', true);
 	}
-	error_log(print_r($arFilter,true),0);
+
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
