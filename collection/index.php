@@ -91,6 +91,7 @@
 	}
 
 	$view_mode = (empty($name_filter_raw) ? '' : 'search');
+	$use_sort = $view_mode === 'search' ? 'N' : 'Y';
 	$APPLICATION->IncludeComponent(
 		"custom:catalog",
 		"",
@@ -106,7 +107,7 @@
 			"VIEW_MODE" => $view_mode,
 			"USE_REVIEW" => "N",
 			"USE_COMPARE" => "N",
-			"USE_SORT" => "Y",
+			"USE_SORT" => $use_sort,
 			"DISCOUNT_ONLY" => $_SESSION['discount_only'],
 			"NOT_SHOW_NAV_CHAIN" => "N",
 			"SHOW_TOP_ELEMENTS" => "N",
@@ -165,7 +166,7 @@
 			"JSON" => $json
 		)
 	);
-	if($view_mode != 'search' && empty($url_array[3])) {
+	if($view_mode != 'search' && empty($url_array[3])):
 		$dbSec = CIBlockSection::GetList(
 			array(),
 			array(
@@ -173,61 +174,59 @@
 				"CODE" => $url_array[2],
 			)
 		);
-		if ($arSec = $dbSec->GetNext()) {
-?>
+		if ($arSec = $dbSec->GetNext()):?>
 	<aside class="aside">
-<?
-    $APPLICATION->IncludeComponent(
-			"custom:catalog.section.list",
-			"collection_mainpage",
-			Array(
-				"IBLOCK_TYPE" => "collection",
-				"IBLOCK_ID" => "1",
-				"SECTION_ID" => $arSec["ID"],
-				"DISPLAY_PANEL" => "N",
-				"CACHE_TYPE" => "A",
-				"CACHE_TIME" => "3600",
-				"CACHE_GROUPS" => "Y",
-				"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-				"TOP_DEPTH" => 4,
-				"LEFT_MENU_FLAG" => 1,
-				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-				"ADD_SECTIONS_CHAIN" => "N"
-			)
-		);
-	$filter_brand =	Array(
-		Array(
-			'LOGIC' => 'OR',
-			'PROPERTY_col_availability' => '1',
-			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-		)
-	);
-	$APPLICATION->IncludeComponent(
-		"custom:catalog.section",
-		"menu_checkbox",
-		Array(
-			"IBLOCK_ID" => "1",
-			"SECTION_ID" => $arSec["ID"],
-			"USE_FILTER" => "Y",
-			"INCLUDE_BRANDS" => "Y", // retrieve a brand list specific to the selected elements (see $arResult['BRANDS'] array)
-			"INCLUDE_PRICE_MIN_MAX" => "Y",
-			"FILTER_NAME" => "filter_brand",
-			"PAGE_ELEMENT_COUNT" => "1000",
-			"IBLOCK_TYPE" => "collection",
-			"SECTION_ID_VARIABLE" => "SECTION_ID",
-			"DISPLAY_PANEL" => "N",
-			"CACHE_TYPE" => "A",
-			"CACHE_TIME" => "3600",
-			"CACHE_GROUPS" => "Y",
-			"LEFT_MENU_FLAG" => 1,
-			"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-			"ADD_SECTIONS_CHAIN" => "N"
-		)
-	);
-?>
+	<?
+			$APPLICATION->IncludeComponent(
+				"custom:catalog.section.list",
+				"collection_mainpage",
+				Array(
+					"IBLOCK_TYPE" => "collection",
+					"IBLOCK_ID" => "1",
+					"SECTION_ID" => $arSec["ID"],
+					"DISPLAY_PANEL" => "N",
+					"CACHE_TYPE" => "A",
+					"CACHE_TIME" => "3600",
+					"CACHE_GROUPS" => "Y",
+					"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+					"TOP_DEPTH" => 4,
+					"LEFT_MENU_FLAG" => 1,
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+					"ADD_SECTIONS_CHAIN" => "N"
+				)
+			);
+			$filter_brand =	Array(
+				Array(
+					'LOGIC' => 'OR',
+					'PROPERTY_col_availability' => '1',
+					'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+				)
+			);
+			$APPLICATION->IncludeComponent(
+				"custom:catalog.section",
+				"menu_checkbox",
+				Array(
+					"IBLOCK_ID" => "1",
+					"SECTION_ID" => $arSec["ID"],
+					"USE_FILTER" => "Y",
+					"INCLUDE_BRANDS" => "Y", // retrieve a brand list specific to the selected elements (see $arResult['BRANDS'] array)
+					"INCLUDE_PRICE_MIN_MAX" => "Y",
+					"FILTER_NAME" => "filter_brand",
+					"PAGE_ELEMENT_COUNT" => "1000",
+					"IBLOCK_TYPE" => "collection",
+					"SECTION_ID_VARIABLE" => "SECTION_ID",
+					"DISPLAY_PANEL" => "N",
+					"CACHE_TYPE" => "A",
+					"CACHE_TIME" => "3600",
+					"CACHE_GROUPS" => "Y",
+					"LEFT_MENU_FLAG" => 1,
+					"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+					"ADD_SECTIONS_CHAIN" => "N"
+				)
+			);
+	?>
 	</aside>
 	<!-- end .aside-->
-<?
-		}
-	}
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
+	<?endif;?>
+<?endif;?>
+<? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>
