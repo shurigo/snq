@@ -39,7 +39,7 @@
 	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
   <?elseif($arParams['VIEW_MODE'] === 'search'):?>
-		<search class="catalog" data-page="<?=$currentPage.'q='.$arParams['SEARCH_QUERY']?>">
+		<section class="catalog" data-page="<?=$currentPage.'q='.$arParams['SEARCH_QUERY']?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$currentPage.'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
 	<?endif;?>
