@@ -1,17 +1,13 @@
  <div class="menu-place"></div>
     <nav class="menu-hold">
-      <div onclick="return {'bg': 'transparent', 'target': '_blank', 'language': 'ru', 'suggest': true, 'tld': 'ru', 'site_suggest': true, 'action': 'http://yandex.ru/sitesearch', 'webopt': true, 'fontsize': 12, 'arrow': false, 'fg': '#000000', 'searchid': '2020669', 'logo': 'rb', 'websearch': false, 'type': 2}">
-      <form class="search" action="http://yandex.ru/sitesearch" method="get" target="_blank">
-        <fieldset>
-          <input type="hidden" name="searchid" value="2020669" />
-          <input type="hidden" name="l10n" value="ru" />
-		  <input type="hidden" name="reqenc" value="" />
-		  <input type="text" name="text" value="" />
-		  <input type="submit" value="Найти" />
-        </fieldset>
-      </form>
+      <div>
+				<form class="search" action="/collection/" method="get" accept-charset="utf-8">
+					<fieldset>
+						<input type="text" name="q" value="" />
+						<input type="submit" value="Найти" />
+					</fieldset>
+				</form>
       </div>
-      <style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style>
       <!-- end .search-->
       <ul class="menu">
         <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>

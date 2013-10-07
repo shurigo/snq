@@ -18,27 +18,28 @@
 	</form>
 </div>
 <?endif;?>
-<?
-	if($arParams['NOT_SHOW_NAV_CHAIN'] == 'N') {
-		$APPLICATION->IncludeComponent(
-			"bitrix:breadcrumb",
-			"breadcrumb",
-			Array(
-				"START_FROM" => "1",
-				"PATH" => "",
-				"SITE_ID" => "-"
-			),
-			false
-		);
-	}
+<?if($arParams['VIEW_MODE'] === 'search'):?>
+	<nav class="path"><a href="/" rel="nofollow">Главная</a> / <span>Поиск</span></nav> <!-- end .path-->
+<?elseif($arParams['NOT_SHOW_NAV_CHAIN'] == 'N'):
+	$APPLICATION->IncludeComponent(
+		"bitrix:breadcrumb",
+		"breadcrumb",
+		Array(
+			"START_FROM" => "1",
+			"PATH" => "",
+			"SITE_ID" => "-"
+		),
+		false
+	);
+endif;
 ?>
-	<? global $action_catalog_filter; ?>
-	<? $currentPage = $APPLICATION->GetCurPage(); ?>
-	<?if($arParams['VIEW_MODE'] === 'actions'):?>
-		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
-	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
-		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
-  <?elseif($arParams['VIEW_MODE'] === 'search'):?>
+<? global $action_catalog_filter; ?>
+<? $currentPage = $APPLICATION->GetCurPage(); ?>
+<?if($arParams['VIEW_MODE'] === 'actions'):?>
+	<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
+<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
+	<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
+<?elseif($arParams['VIEW_MODE'] === 'search'):?>
 		<section class="catalog" data-page="<?='/collection/?q='.iconv('CP1251//IGNORE', 'UTF-8', $arParams['SEARCH_QUERY'])?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$currentPage.'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
@@ -51,7 +52,7 @@
 	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
 ?>
 <?if(count($arResult['ITEMS']) == 0):?>
-  <p>По вашему запросу товары не найдены</p>
+  <p>По вашему запросу ничего не найдено</p>
 <?endif;?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?

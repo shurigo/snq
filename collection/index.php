@@ -42,6 +42,10 @@
 		$name_filter_array = explode(' ', $name_filter_raw);
 		if(is_array($name_filter_array)) {
 			if(count($name_filter_array) > 0) {
+				// Search query is too short
+				if(count($name_filter_array) === 1 && strlen($name_filter_array[0]) <= 3) {
+					LocalRedirect('/collection/woman/', true);
+				}
 				$filter_search = Array();
 				foreach($name_filter_array as $key => $value) {
 					$arFilter[] = array('?PROPERTY_col_title' => $value);
