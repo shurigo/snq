@@ -19,12 +19,11 @@
   <?$pm_name='pm_'.$city['ID'];?>
       var <?=$pm_name?>=new ymaps.Placemark([<?=$city["UF_MAP_COORDINATE"]?>], {
         balloonContent:'<br/><?foreach($city['ITEMS'] as $vacancy):?><a href="/about/vacancies/detail.php?id=<?=$vacancy['ID']?>&c=<?=$city['ID']?>"><?=$vacancy['NAME']?></a><br/><?endforeach;?>',
-        iconContent:'<strong style="white-space:nowrap;"><?=$city['NAME'].' ('.count($city['ITEMS']).')'?></strong>',
+        iconContent:'<strong><?=count($city['ITEMS'])?></strong>',
 				zIndexHover:<?=$city['SORT']?>,
 				balloonContentHeader: '<strong>Вакансии в г.<?=$city['NAME']?>:</strong>',
 			}, {
-				iconShadow: true, 
-				iconContentSize: 100
+				iconShadow: true 
 			});
       map.geoObjects.add(<?=$pm_name?>);
   <?endif;?>
