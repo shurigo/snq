@@ -30,6 +30,11 @@ $arUrlRewrite = array(
 		"ID"	=>	"custom:catalog",
 		"PATH"	=>	"/collection/index.php",
 	),
+  array(
+    "CONDITION" => "#^/(user)/([a-zA-Z]+)/?#",
+    "RULE" => "$1/$2",
+    "PATH" => "/kohana/index.php"
+	),
 );
 
 ?>
