@@ -257,7 +257,7 @@ function initLoadPage() {
 			  $('#loadmore').hide();
 			},
 			complete: function() {
-				if(pages <= 1 || page >= pages) {
+				if(pages <= 1 || page > pages) {
 					$('#loadmore').hide();
         } else {
 					$('#loadmore').show();
@@ -267,7 +267,7 @@ function initLoadPage() {
 				if(obj != null) {
 					hold.append(obj.data.html);
 				} 
-				if(page >= pages) {
+				if(page > pages) {
 					$('#loadmore').hide();
 				}
 				$('#page').val(++page);

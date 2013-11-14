@@ -1,56 +1,53 @@
 <?if(!isset($arParams["JSON"]) || $arParams["JSON"]=="n"): //normal page ?>
-<?
-  if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-  $url_array = explode("/", $APPLICATION->GetCurPage());
-?>
-<section class="mainContent">
-<?if($arParams['USE_SORT'] == 'Y'):?>
-<div class="sort">
-	<form class="ajax-load" id="sort_form" action="<?=$APPLICATION->GetCurPage();?>">
-		<fieldset>
-			<span>Сортировать по</span>
-			<select class="customSelect" name="sort">
-				<option value="sort">По умолчанию</option>
-				<option value="price_asc">Цене (возр.)</option>
-				<option value="price_desc">Цене (убыв.)</option>
-			</select>
-		</fieldset>
-	</form>
-</div>
-<?endif;?>
-<?if($arParams['VIEW_MODE'] === 'search'):?>
-	<nav class="path"><a href="/" rel="nofollow">Главная</a> / <span>Поиск</span></nav> <!-- end .path-->
-<?elseif($arParams['NOT_SHOW_NAV_CHAIN'] == 'N'):
-	$APPLICATION->IncludeComponent(
-		"bitrix:breadcrumb",
-		"breadcrumb",
-		Array(
-			"START_FROM" => "1",
-			"PATH" => "",
-			"SITE_ID" => "-"
-		),
-		false
-	);
-endif;
-?>
-<? global $action_catalog_filter; ?>
-<? $currentPage = $APPLICATION->GetCurPage(); ?>
-<?if($arParams['VIEW_MODE'] === 'actions'):?>
-	<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
-<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
-	<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
-<?elseif($arParams['VIEW_MODE'] === 'search'):?>
+	<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+		$url_array = explode("/", $APPLICATION->GetCurPage());
+	?>
+	<section class="mainContent">
+	<?if($arParams['USE_SORT'] == 'Y'):?>
+		<div class="sort">
+			<form class="ajax-load" id="sort_form" action="<?=$APPLICATION->GetCurPage();?>">
+				<fieldset>
+					<span>Сортировать по</span>
+					<select class="customSelect" name="sort">
+						<option value="sort">По умолчанию</option>
+						<option value="price_asc">Цене (возр.)</option>
+						<option value="price_desc">Цене (убыв.)</option>
+					</select>
+				</fieldset>
+			</form>
+		</div>
+	<?endif;?>
+	<?if($arParams['VIEW_MODE'] === 'search'):?>
+		<nav class="path"><a href="/" rel="nofollow">Главная</a> / <span>Поиск</span></nav> <!-- end .path-->
+	<?elseif($arParams['NOT_SHOW_NAV_CHAIN'] == 'N'):
+		$APPLICATION->IncludeComponent(
+			"bitrix:breadcrumb",
+			"breadcrumb",
+			Array(
+				"START_FROM" => "1",
+				"PATH" => "",
+				"SITE_ID" => "-"
+			),
+			false
+		);
+	endif;?>
+	<? global $action_catalog_filter; ?>
+	<? $currentPage = $APPLICATION->GetCurPage(); ?>
+	<?if($arParams['VIEW_MODE'] === 'actions'):?>
+		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
+	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
+		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
+	<?elseif($arParams['VIEW_MODE'] === 'search'):?>
 		<section class="catalog" data-page="<?='/collection/?q='.iconv('CP1251//IGNORE', 'UTF-8', $arParams['SEARCH_QUERY'])?>">
 	<?else:?>
 		<section class="catalog" data-page="<?=$currentPage.'?d='.$arParams['DISCOUNT_ONLY'].(!empty($_GET['m']) ? '&m='.$_GET['m'] : '' )?>">
 	<?endif;?>
 <?endif; //end normal page?>
-<?$page_count = $arResult['NAV_RESULT']->NavPageCount;?>
+	<?$page_count = $arResult['NAV_RESULT']->NavPageCount;?>
 	<input id="pages" type="hidden" value="<?=$page_count;?>">
-<?
-  // don't go beyound the last page
-	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; }
-?>
+<?// don't go beyound the last page
+	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; 
+}?>
 <?if(count($arResult['ITEMS']) == 0):?>
   <p>По вашему запросу ничего не найдено</p>
 <?endif;?>
