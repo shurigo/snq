@@ -11,7 +11,7 @@
 	);
 
 	if(empty($_SESSION['discount_only'])) {
-		$_SESSION['discount_only'] = 'N'; 
+		$_SESSION['discount_only'] = 'N';
 	}
   if(!empty($_GET['d'])) {
     if(strtolower($_GET['d'])==='y' || strtolower($_GET['d']) === 'on') {
@@ -24,7 +24,7 @@
 	if($_SESSION['discount_only'] === 'Y') {
     $arFilter[] = Array('PROPERTY_col_discount' => 1);
 	}
-	
+
 	// actions mode
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
 		if(!empty($_GET['sid'])) {
@@ -84,7 +84,7 @@
 		}
 	}
   $url_array = explode("/", $APPLICATION->GetCurPage());
-	require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
+  require($_SERVER['DOCUMENT_ROOT'].'/collection/init.php');
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 	// Collection root / idem id undefined -> redirect to Woman collection

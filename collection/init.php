@@ -13,9 +13,19 @@
 		}
 	}
   // sort field selector
-  $sort_field = 'sort';
-  $sort_order = 'asc';
-	if(isset($_GET['sort'])){
+  $url_array = explode("/", $APPLICATION->GetCurPage());
+  $category_price_sort_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
+  if (in_array($url_array[2], $category_price_sort_array))
+  {    $sort_field = 'property_col_price';
+    $sort_order = 'asc';
+  }
+  else
+  {
+    $sort_field = 'sort';
+    $sort_order = 'asc';
+  }
+
+  if(isset($_GET['sort'])){
 		if($_GET['sort'] == 'sort') { $sort_field = 'sort'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_asc') { $sort_field = 'property_col_price'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_desc') { $sort_field = 'property_col_price'; $sort_order = 'desc'; }
