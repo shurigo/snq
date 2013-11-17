@@ -20,10 +20,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(127) NOT NULL,
   `password` varchar(64) NOT NULL,
+	`first_name` varchar(127) NOT NULL,
+  `last_name` varchar(127) NOT NULL,
+  `patronymic` varchar(127) NOT NULL,
+  `birthday` date NOT NULL,
+  `phone` varchar(10) NOT NULL,
   `logins` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `last_login` int(10) UNSIGNED,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

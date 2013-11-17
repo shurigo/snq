@@ -187,7 +187,6 @@ function ajaxLoad(){
     function reloadPage(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
-			//$('#page').val('1');
 			if($('#pages').val() <= 1) {
         $('#loadmore').hide();
       } else {

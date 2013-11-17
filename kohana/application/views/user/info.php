@@ -1,9 +1,55 @@
-<h2>Личный кабинет: "<?= $user->email; ?>"</h2>
-
-<ul>
-	<li>e-mail: <?= $user->email; ?></li>
-	<li>Number of logins: <?= $user->logins; ?></li>
-	<li>Last Login: <?= Date::fuzzy_span($user->last_login); ?></li>
-</ul>
-
+<h2>Личный кабинет: "<?= "$user->first_name $user->last_name $user->email"; ?>"</h2>
+<? echo HTML::script('/js/jquery.js'), "\n"; ?>
+<? echo HTML::script('/js/jquery-ui.js'); ?>
+<? echo HTML::script('/js/user.js'); ?>
+<? echo HTML::style('/css/style.css'); ?>
+<? if ($message) : ?>
+	<h3 class="message">
+		<?= $message; ?>
+	</h3>
+<? endif; ?>
+<?= Form::open('user/index'); ?>
+<p>
+	<?= Form::label('email', 'e-mail'); ?>
+	<?= Form::input('email', $user->email, array('readonly')); ?>
+</p>
+<p>
+	<?= Form::label('first_name', 'Имя'); ?>
+	<?= Form::input('first_name', $user->first_name); ?>
+</p>
+<p>
+	<?= Form::label('last_name', 'Фамилия'); ?>
+	<?= Form::input('last_name', $user->last_name); ?>
+</p>
+<p>
+	<?= Form::label('patronymic', 'Отчество'); ?>
+	<?= Form::input('patronymic', $user->patronymic); ?>
+</p>
+<p>
+	<?= Form::label('birthday', 'Дата рождения'); ?>
+	<?= Form::input('birthday', $user->birthday, array('id'=>'birthday', 'type'=>'text', 'readonly')); ?>
+</p>
+<p>
+	<?= Form::label('phone', 'Телефон (10 цифр) +7:'); ?>
+	<?= Form::input('phone', $user->phone); ?>
+</p>
+<p>
+	<?= Form::label('password', 'Пароль'); ?>
+	<?= Form::password('password'); ?>
+	<div class="error">
+		<?= Arr::get($errors, '_external.password'); ?>
+	</div>
+</p>
+<p>
+	<?= Form::label('password_confirm', 'Подтвердите пароль'); ?>
+	<?= Form::password('password_confirm'); ?>
+	<div class="error">
+		<?= Arr::path($errors, '_external.password_confirm'); ?>
+	</div>
+</p>
+<p>Последний вход: <?= Date::fuzzy_span($user->last_login); ?></p>
+<p>
+	<?= Form::submit('index', 'Сохранить'); ?>
+	<?= Form::close(); ?>
+</p>
 <?= HTML::anchor('user/logout', 'Выйти'); ?>

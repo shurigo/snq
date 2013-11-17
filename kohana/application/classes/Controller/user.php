@@ -5,6 +5,8 @@ class Controller_User extends Controller_Template {
 	public function action_index()
 	{
 		$this->template->content = View::factory('user/info')
+			->bind('errors', $errors)
+			->bind('message', $message)
 			->bind('user', $user);
 		
 		// Load the user information
@@ -14,6 +16,39 @@ class Controller_User extends Controller_Template {
 		if (!$user)
 		{
 			Request::current()->redirect('user/login');
+		}
+
+		if (HTTP_Request::POST == $this->request->method()) 
+		{			
+			try 
+			{
+				$user->update_user($_POST, array(
+					'first_name',
+					'last_name',
+					'patronymic',
+					'birthday',
+					'phone',
+					'password'
+				));
+				$_POST = array(); // Reset values so form is not sticky
+				$message = "Данные сохранены";
+				if ($user) 
+				{
+					Request::current()->redirect('user/index');
+				} 
+				else 
+				{
+					$message = 'Неправильный логин/пароль';
+				}
+			} 
+			catch (ORM_Validation_Exception $e) 
+			{
+				// Set failure message
+				$message = 'Ошибки при сохранении данных';
+
+				// Set errors using custom messages
+				$errors = $e->errors('models');
+			}
 		}
 	}
 
@@ -25,7 +60,8 @@ class Controller_User extends Controller_Template {
 			
 		if (HTTP_Request::POST == $this->request->method()) 
 		{			
-			try {
+			try 
+			{
 				// Create the user using form values
 				$user = ORM::factory('user')
 					->create_user($_POST, array('password', 'email'));
@@ -40,9 +76,10 @@ class Controller_User extends Controller_Template {
 				$message = "Вы зарегистрировались как '{$user->email}'";
 				
 				$this->action_login();
-			} catch (ORM_Validation_Exception $e) {
+			} 
+			catch (ORM_Validation_Exception $e) 
+			{
 				
-				error_log(print_r($e->errors('models'),true),0);
 				// Set failure message
 				$message = 'Ошибки при регистрации';
 				
