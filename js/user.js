@@ -3,6 +3,6 @@ $(function() {
 		changeMonth: true,
 		changeYear: true,
 		yearRange: "1920:",
-	  dateFormat: 'dd.mm.yy'
+	  dateFormat: 'yy-mm-dd'
 	});
 });
