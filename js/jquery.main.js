@@ -187,7 +187,7 @@ function ajaxLoad(){
     function reloadPage(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
-			$('#page').val('1');
+			//$('#page').val('1');
 			if($('#pages').val() <= 1) {
         $('#loadmore').hide();
       } else {
@@ -242,12 +242,9 @@ function initLoadPage() {
 		if(pages <= 1) {
 			$('#loadmore').hide();
 		}
-		if(page == 1) {
-		  if($('article').length == 12) {
-				hold.empty();
-			} else {
-			  $('#page').val(++page)
-			}
+		if(page == 0) {
+			hold.empty();
+			$('#page').val(++page);
 		} 
 		$.ajax({
 			dataType: 'json',
@@ -257,7 +254,7 @@ function initLoadPage() {
 			  $('#loadmore').hide();
 			},
 			complete: function() {
-				if(pages <= 1 || page >= pages) {
+				if(pages <= 1 || page > pages) {
 					$('#loadmore').hide();
         } else {
 					$('#loadmore').show();
@@ -267,7 +264,7 @@ function initLoadPage() {
 				if(obj != null) {
 					hold.append(obj.data.html);
 				} 
-				if(page >= pages) {
+				if(page > pages) {
 					$('#loadmore').hide();
 				}
 				$('#page').val(++page);
