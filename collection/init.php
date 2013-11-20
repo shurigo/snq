@@ -14,7 +14,7 @@
 	}
   // sort field selector
   $url_array = explode("/", $APPLICATION->GetCurPage());
-  $category_price_sort_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
+  $category_price_sort_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
   if (in_array($url_array[2], $category_price_sort_array))
   {    $sort_field = 'property_col_price';
     $sort_order = 'asc';
