@@ -31,7 +31,7 @@
 </p>
 <p>
 	<?= Form::label('phone', 'Телефон (10 цифр) +7:'); ?>
-	<?= Form::input('phone', $user->phone); ?>
+	<?= Form::input('phone', $user->phone, array('maxlength' => '10')); ?>
 </p>
 <p>
 	<?= Form::label('password', 'Пароль'); ?>
@@ -47,7 +47,6 @@
 		<?= Arr::path($errors, '_external.password_confirm'); ?>
 	</div>
 </p>
-<p>Последний вход: <?= Date::fuzzy_span($user->last_login); ?></p>
 <p>
 	<?= Form::submit('index', 'Сохранить'); ?>
 	<?= Form::close(); ?>

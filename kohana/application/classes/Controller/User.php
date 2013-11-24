@@ -62,12 +62,18 @@ class Controller_User extends Controller_Template {
 		{			
 			try 
 			{
-				// Create the user using form values
 				$user = ORM::factory('user')
-					->create_user($_POST, array('password', 'email'));
+					->create_user($_POST, array(
+						'first_name',
+						'last_name',
+						'patronymic',
+						'birthday',
+						'phone',
+						'password',
+						'email'));
 
 				// Grant user login role
-				$user->add('roles', ORM::factory('role', array('name' => 'login')));
+				$user->add('roles', ORM::factory('Role', array('name' => 'login')));
 				
 				// Reset values so form is not sticky
 				$_POST = array();
