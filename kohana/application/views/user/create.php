@@ -65,6 +65,18 @@
 		<?= Arr::path($errors, '_external.password_confirm'); ?>
 	</div>
 </p>
+<?if(!$captcha->promoted()):?>
+<p>
+  <?= $captcha->render(); ?>
+</p>
+<p>
+	<?= Form::label('captcha', 'Код с картинки'); ?>
+  <?= Form::input('captcha', ''); ?>
+	<div class="error">
+		<?= Arr::get($errors, 'captcha'); ?>
+	</div>
+</p>
+<?endif;?>
 <p>
 	<?= Form::submit('create', 'Регистрация'); ?>
 	<?= Form::close(); ?>

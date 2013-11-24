@@ -71,6 +71,7 @@ if ( ! is_dir($system) AND is_dir(DOCROOT.$system))
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
+define('MODPATH_KOHANA', realpath($modules));
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 
 // Clean up the configuration vars

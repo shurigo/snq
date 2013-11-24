@@ -54,7 +54,9 @@ class Controller_User extends Controller_Template {
 
 	public function action_create() 
 	{
+		$captcha = Captcha::instance();
 		$this->template->content = View::factory('user/create')
+			->bind('captcha', $captcha)
 			->bind('errors', $errors)
 			->bind('message', $message);
 			
@@ -62,6 +64,10 @@ class Controller_User extends Controller_Template {
 		{			
 			try 
 			{
+				if(!Captcha::valid($_POST['captcha'])) {
+					$errors['captcha'] = 'Введите правильный код с картинки';
+					return;
+				}
 				$user = ORM::factory('user')
 					->create_user($_POST, array(
 						'first_name',
@@ -77,6 +83,7 @@ class Controller_User extends Controller_Template {
 				
 				// Reset values so form is not sticky
 				$_POST = array();
+				Session::instance()->delete('captcha');
 				
 				// Set success message
 				$message = "Вы зарегистрировались как '{$user->email}'";
@@ -85,7 +92,6 @@ class Controller_User extends Controller_Template {
 			} 
 			catch (ORM_Validation_Exception $e) 
 			{
-				
 				// Set failure message
 				$message = 'Ошибки при регистрации';
 				
