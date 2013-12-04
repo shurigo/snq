@@ -21,6 +21,7 @@ Disallow: /collection/mclothes/*
 Disallow: /collection/maccessories/*
 Disallow: /collection/mleathertopjacket/index.php?PAGEN_1=*
 Disallow: /collection/wleathertopjacket/index.php?PAGEN_1=*
+Disallow: /collection/wleathertopjacket/?SHOWALL_1=1
 Disallow: /ipgeo/*
 Disallow: /collection/check_furcoat/
 # settings
