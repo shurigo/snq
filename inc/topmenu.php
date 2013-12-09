@@ -49,6 +49,7 @@
                     <li><a href="/collection/mpaddedcoat/">Пуховики</a></li>
                     <li><a href="/collection/mleathertopjacket/">Кожаные куртки</a></li>
                     <li><a href="/collection/mtopjacket/">Куртки</a></li>
+                    <li><a href="/collection/mwleathertopjacket/">Зимние кожаные куртки</a></li>
                     <li><a href="/collection/mtopcoat/">Пальто</a></li>
                     <li><a href="/collection/mtopcloak/">Плащи</a></li>
                   </ul></td>
