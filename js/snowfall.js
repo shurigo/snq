@@ -7,7 +7,7 @@
   //Configure below to change URL path to the snow image
   var snowsrc="/images/snow.gif"
   // Configure below to change number of snow to render
-  var no = 10;
+  var no = 20;
   // Configure whether snow should disappear after x seconds (0=never):
   var hidesnowtime = 0;
   // Configure how much snow should drop down before fading ("windowheight" or "pageheight")
@@ -59,7 +59,8 @@
 
   function snowIE_NS6() {  // IE and NS6 main animation function
     doc_width = ns6up?window.innerWidth-10 : iecompattest().clientWidth-10;
-        doc_height=(window.innerHeight && snowdistance=="windowheight")? window.innerHeight : (ie4up && snowdistance=="windowheight")?  iecompattest().clientHeight : (ie4up && !window.opera && snowdistance=="pageheight")? iecompattest().scrollHeight : iecompattest().offsetHeight;
+        //doc_height=(document.height && snowdistance=="windowheight")? document.height : (ie4up && snowdistance=="windowheight")?  iecompattest().clientHeight : (ie4up && !window.opera && snowdistance=="pageheight")? iecompattest().scrollHeight : iecompattest().offsetHeight;
+				doc_height = $(document).height();
     for (i = 0; i < no; ++ i) {  // iterate for every dot
       yp[i] += sty[i];
       if (yp[i] > doc_height-50) {
