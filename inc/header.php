@@ -2,6 +2,14 @@
 	session_start();
 	include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
 ?>
+    <script type="text/javascript">
+    $(function() {
+     $('.nyroModal').nyroModal();
+    });
+    </script>
+
+	<div><a class="nyroModal" id="nyroModal" href="/user/login/">КОРОЛЕВСКИЙ КЛУБ</a></div>
+
 	<header class="header">
       <div class="logo"><a href="/"><img src="/images/logo.png" width="400" height="57" alt="Снежная Королева"></a></div>
 			<!-- end .logo-->
