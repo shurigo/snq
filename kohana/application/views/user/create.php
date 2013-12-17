@@ -1,4 +1,4 @@
-<h2>Р РµРіРёСЃС‚СЂР°С†РёСЏ</h2>
+<h2>Регистрация</h2>
 <? echo HTML::script('/js/jquery.js'), "\n"; ?>
 <? echo HTML::script('/js/jquery-ui.js'); ?>
 <? echo HTML::script('/js/user.js'); ?>
@@ -10,35 +10,35 @@
 <? endif; ?>
 <?= Form::open('user/create'); ?>
 <p>
-	<?= Form::label('first_name', 'РРјСЏ'); ?>
+	<?= Form::label('first_name', 'Имя'); ?>
 	<?= Form::input('first_name', HTML::chars(Arr::get($_POST, 'first_name'))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'first_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('last_name', 'Р¤Р°РјРёР»РёСЏ'); ?>
+	<?= Form::label('last_name', 'Фамилия'); ?>
 	<?= Form::input('last_name', HTML::chars(Arr::get($_POST, 'last_name'))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('patronymic', 'РћС‚С‡РµСЃС‚РІРѕ'); ?>
+	<?= Form::label('patronymic', 'Отчество'); ?>
 	<?= Form::input('patronymic', HTML::chars(Arr::get($_POST, 'patronymic'))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'patronymic'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('birthday', 'Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ'); ?>
+	<?= Form::label('birthday', 'Дата рождения'); ?>
 	<?= Form::input('birthday', HTML::chars(Arr::get($_POST, 'birthday')), array('id'=>'birthday', 'type'=>'text', 'readonly')); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'birthday'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('phone', 'РўРµР»РµС„РѕРЅ (10 С†РёС„СЂ) +7:'); ?>
+	<?= Form::label('phone', 'Телефон (10 цифр) +7:'); ?>
 	<?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone')), array('maxlength' => '10')); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'phone'); ?>
@@ -52,14 +52,14 @@
 	</div>
 </p>
 <p>
-	<?= Form::label('password', 'РџР°СЂРѕР»СЊ'); ?>
+	<?= Form::label('password', 'Пароль'); ?>
 	<?= Form::password('password'); ?>
 	<div class="error">
 		<?= Arr::path($errors, '_external.password'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('password_confirm', 'РџРѕРґС‚РІРµСЂРґРёС‚Рµ РїР°СЂРѕР»СЊ'); ?>
+	<?= Form::label('password_confirm', 'Подтвердите пароль'); ?>
 	<?= Form::password('password_confirm'); ?>
 	<div class="error">
 		<?= Arr::path($errors, '_external.password_confirm'); ?>
@@ -70,7 +70,7 @@
   <?= $captcha->render(); ?>
 </p>
 <p>
-	<?= Form::label('captcha', 'РљРѕРґ СЃ РєР°СЂС‚РёРЅРєРё'); ?>
+	<?= Form::label('captcha', 'Код с картинки'); ?>
   <?= Form::input('captcha', ''); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'captcha'); ?>
@@ -78,10 +78,10 @@
 </p>
 <?endif;?>
 <p>
-	<?= Form::submit('create', 'Р РµРіРёСЃС‚СЂР°С†РёСЏ'); ?>
+	<?= Form::submit('create', 'Регистрация'); ?>
 	<?= Form::close(); ?>
 </p>
 <p>
-  <?= HTML::anchor('user/login', 'Р’РѕР№С‚Рё'); ?> 
-	РІ Р»РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚
+  <?= HTML::anchor('user/login', 'Войти'); ?> 
+	в личный кабинет
 </p>

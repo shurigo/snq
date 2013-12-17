@@ -1,4 +1,4 @@
-<h2>Р’РѕР№С‚Рё РІ Р›РёС‡РЅС‹Р№ РљР°Р±РёРЅРµС‚</h2>
+<h2>Войти в Личный Кабинет</h2>
 <? if ($message) : ?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -7,24 +7,19 @@
 <br />
 <?= Form::open('user/login'); ?>
 <p>
-	<?= Form::label('email', 'РђРґСЂРµСЃ СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕС‡С‚С‹'); ?><br />
+	<?= Form::label('email', 'Адрес электронной почты'); ?><br />
 	<?= Form::input('email', HTML::chars(Arr::get($_POST, 'email'))); ?>
 </p>
 
 <p>
-	<?= Form::label('password', 'РџР°СЂРѕР»СЊ'); ?><br />
+	<?= Form::label('password', 'Пароль'); ?><br />
 	<?= Form::password('password'); ?>
 </p>
 
 <p>
 	<?= Form::checkbox('remember'); ?>
-	<?= Form::label('remember', 'Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ'); ?>
+	<?= Form::label('remember', 'Запомнить меня'); ?>
 </p>
 
-<?= Form::submit('login', 'Р’С…РѕРґ'); ?> <?= Form::submit('register', 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ'); ?>
+<?= Form::submit('login', 'Вход'); ?> <?= Form::submit('create', 'Зарегистрироваться'); ?>
 <?= Form::close(); ?>
-<!--
-<p>
-	<?= HTML::anchor('user/create', 'Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ'); ?>
-</p>
--->

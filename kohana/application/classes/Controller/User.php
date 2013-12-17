@@ -31,20 +31,20 @@ class Controller_User extends Controller_Template {
 					'password'
 				));
 				$_POST = array(); // Reset values so form is not sticky
-				$message = "Р”Р°РЅРЅС‹Рµ СЃРѕС…СЂР°РЅРµРЅС‹";
+				$message = "Данные сохранены";
 				if ($user)
 				{
 					Request::current()->redirect('user/index');
 				}
 				else
 				{
-					$message = 'РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ/РїР°СЂРѕР»СЊ';
+					$message = 'Неправильный логин/пароль';
 				}
 			}
 			catch (ORM_Validation_Exception $e)
 			{
 				// Set failure message
-				$message = 'РћС€РёР±РєРё РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РґР°РЅРЅС‹С…';
+				$message = 'Ошибки при сохранении данных';
 
 				// Set errors using custom messages
 				$errors = $e->errors('models');
@@ -65,7 +65,7 @@ class Controller_User extends Controller_Template {
 			try
 			{
 				if(!Captcha::valid($_POST['captcha'])) {
-					$errors['captcha'] = 'Р’РІРµРґРёС‚Рµ РїСЂР°РІРёР»СЊРЅС‹Р№ РєРѕРґ СЃ РєР°СЂС‚РёРЅРєРё';
+					$errors['captcha'] = 'Введите правильный код с картинки';
 					return;
 				}
 				$user = ORM::factory('user')
@@ -86,14 +86,14 @@ class Controller_User extends Controller_Template {
 				Session::instance()->delete('captcha');
 
 				// Set success message
-				$message = "Р’С‹ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ РєР°Рє '{$user->email}'";
+				$message = "Вы зарегистрировались как '{$user->email}'";
 
 				$this->action_login();
 			}
 			catch (ORM_Validation_Exception $e)
 			{
 				// Set failure message
-				$message = 'РћС€РёР±РєРё РїСЂРё СЂРµРіРёСЃС‚СЂР°С†РёРё';
+				$message = 'Ошибки при регистрации';
 
 				// Set errors using custom messages
 				$errors = $e->errors('models');
@@ -110,6 +110,10 @@ class Controller_User extends Controller_Template {
 		{
 			return;
 		}
+		if ($this->request->post('create'))
+		{
+			Request::current()->redirect('user/create');
+		}
 
 		// Attempt to login user
 		$remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
@@ -122,7 +126,7 @@ class Controller_User extends Controller_Template {
 		}
 		else
 		{
-			$message = 'РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ/РїР°СЂРѕР»СЊ';
+			$message = 'Неправильный логин/пароль';
 		}
 	}
 
@@ -149,13 +153,13 @@ class Controller_User extends Controller_Template {
 			->find();
     if(!$user->loaded())
 		{
-      $message = 'РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ';
+      $message = 'Пользователь не найден';
       return;
 		}
     $password_reset = $this->reset_password($user);
     if($password_reset === TRUE)
 		{
-      $message = 'РџРёСЃСЊРјРѕ СЃ РёРЅСЃС‚СЂСѓРєС†РёСЏРјРё РїРѕ СЃР±СЂРѕСЃСѓ РїР°СЂРѕР»СЏ РѕС‚РїСЂР°РІР»РµРЅРѕ РЅР° СѓРєР°Р·Р°РЅРЅС‹Р№ email Р°РґСЂРµСЃ';
+      $message = 'Письмо с инструкциями по сбросу пароля отправлено на указанный email адрес';
 		}
 		else
 		{

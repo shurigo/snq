@@ -1,4 +1,4 @@
-<h2>Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚: "<?= "$user->first_name $user->last_name $user->email"; ?>"</h2>
+<h2>Личный кабинет: "<?= "$user->first_name $user->last_name $user->email"; ?>"</h2>
 <? echo HTML::script('/js/jquery.js'), "\n"; ?>
 <? echo HTML::script('/js/jquery-ui.js'); ?>
 <? echo HTML::script('/js/user.js'); ?>
@@ -14,56 +14,56 @@
 	<?= Form::input('email', $user->email, array('readonly')); ?>
 </p>
 <p>
-	<?= Form::label('first_name', 'РРјСЏ'); ?>
+	<?= Form::label('first_name', 'Имя'); ?>
 	<?= Form::input('first_name', $user->first_name); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'first_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('last_name', 'Р¤Р°РјРёР»РёСЏ'); ?>
+	<?= Form::label('last_name', 'Фамилия'); ?>
 	<?= Form::input('last_name', $user->last_name); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('patronymic', 'РћС‚С‡РµСЃС‚РІРѕ'); ?>
+	<?= Form::label('patronymic', 'Отчество'); ?>
 	<?= Form::input('patronymic', $user->patronymic); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'patronymic'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('birthday', 'Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ'); ?>
+	<?= Form::label('birthday', 'Дата рождения'); ?>
 	<?= Form::input('birthday', $user->birthday, array('id'=>'birthday', 'type'=>'text', 'readonly')); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'birthday'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('phone', 'РўРµР»РµС„РѕРЅ (10 С†РёС„СЂ) +7:'); ?>
+	<?= Form::label('phone', 'Телефон (10 цифр) +7:'); ?>
 	<?= Form::input('phone', $user->phone, array('maxlength' => '10')); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'phone'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('password', 'РџР°СЂРѕР»СЊ'); ?>
+	<?= Form::label('password', 'Пароль'); ?>
 	<?= Form::password('password'); ?>
 	<div class="error">
 		<?= Arr::get($errors, '_external.password'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('password_confirm', 'РџРѕРґС‚РІРµСЂРґРёС‚Рµ РїР°СЂРѕР»СЊ'); ?>
+	<?= Form::label('password_confirm', 'Подтвердите пароль'); ?>
 	<?= Form::password('password_confirm'); ?>
 	<div class="error">
 		<?= Arr::path($errors, '_external.password_confirm'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::submit('index', 'РЎРѕС…СЂР°РЅРёС‚СЊ'); ?>
+	<?= Form::submit('index', 'Сохранить'); ?>
 	<?= Form::close(); ?>
 </p>
-<?= HTML::anchor('user/logout', 'Р’С‹Р№С‚Рё'); ?>
+<?= HTML::anchor('user/logout', 'Выйти'); ?>
