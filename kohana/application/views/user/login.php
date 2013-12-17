@@ -1,4 +1,7 @@
-<h2>Войти в Личный Кабинет</h2>
+<?
+  require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+  $APPLICATION->SetTitle('Вход в Личный Кабинет');
+?>
 <? if ($message) : ?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -23,3 +26,4 @@
 
 <?= Form::submit('login', 'Вход'); ?> <?= Form::submit('create', 'Зарегистрироваться'); ?>
 <?= Form::close(); ?>
+<?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>

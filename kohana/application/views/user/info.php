@@ -1,8 +1,8 @@
+<?
+  require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+  $APPLICATION->SetTitle('Личный Кабинет');
+?>
 <h2>Личный кабинет: "<?= "$user->first_name $user->last_name $user->email"; ?>"</h2>
-<? echo HTML::script('/js/jquery.js'), "\n"; ?>
-<? echo HTML::script('/js/jquery-ui.js'); ?>
-<? echo HTML::script('/js/user.js'); ?>
-<? echo HTML::style('/css/style.css'); ?>
 <? if ($message) : ?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -67,3 +67,4 @@
 	<?= Form::close(); ?>
 </p>
 <?= HTML::anchor('user/logout', 'Выйти'); ?>
+<?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>

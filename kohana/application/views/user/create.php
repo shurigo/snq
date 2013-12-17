@@ -1,8 +1,7 @@
-<h2>Регистрация</h2>
-<? echo HTML::script('/js/jquery.js'), "\n"; ?>
-<? echo HTML::script('/js/jquery-ui.js'); ?>
-<? echo HTML::script('/js/user.js'); ?>
-<? echo HTML::style('/css/style.css'); ?>
+<?
+  require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+  $APPLICATION->SetTitle('Регистрация');
+?>
 <? if ($message) : ?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -85,3 +84,4 @@
   <?= HTML::anchor('user/login', 'Войти'); ?> 
 	в личный кабинет
 </p>
+<?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>
