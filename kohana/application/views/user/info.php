@@ -66,5 +66,4 @@
 	<?= Form::submit('index', 'Сохранить'); ?>
 	<?= Form::close(); ?>
 </p>
-<?= HTML::anchor('user/logout', 'Выйти'); ?>
 <?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>

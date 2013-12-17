@@ -8,7 +8,15 @@
     });
     </script>
 
-	<div><a class="nyroModal" id="nyroModal" href="/user/login/">КОРОЛЕВСКИЙ КЛУБ</a></div>
+<?$user=$_SESSION['auth_user'];?>
+	<?if($user):?>
+    <a href="/user/index/"><?="Мой профиль ({$user->first_name} {$user->last_name})";?>"</a>
+		<a href="/user/logout/">Выйти</a>
+  <?else:?>
+    <div>
+	    <a class="nyroModal" id="nyroModal" href="/user/login/">КОРОЛЕВСКИЙ КЛУБ</a>
+	  </div>
+	<?endif;?>
 
 	<header class="header">
       <div class="logo"><a href="/"><img src="/images/logo.png" width="400" height="57" alt="Снежная Королева"></a></div>

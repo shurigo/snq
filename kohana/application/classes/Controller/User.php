@@ -106,6 +106,12 @@ class Controller_User extends Controller_Template {
 		$this->template->content = View::factory('user/login')
 			->bind('message', $message);
 
+		global $user;
+		$user = Auth::instance()->get_user();
+		if($user)
+		{
+			Request::current()->redirect('user/index');
+		}
 		if (HTTP_Request::POST != $this->request->method())
 		{
 			return;
