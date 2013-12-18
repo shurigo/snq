@@ -291,33 +291,34 @@ table .sep {
 
 .header .city {
 	position:absolute;
-	top:20px;
-	left:550px;
+	top:45px;
+	left:590px;
 	color:#696969;
 }
 
 .phone {
 	white-space:nowrap;
 	position:absolute;
-	top:42px;
-	right:0;
+	top:45px;
+	left:430px;
 	font-size:15px;
-	line-height:18px;
+	line-height:21px;
 	color:#3a4147;
-	font-weight:bold;
+	font-weight:normal;
+}
+.header .search {
+	position:absolute;
+	top:45px;
+	right:0px;
+	color:#696969;
 }
 
-.search {
-	position:absolute;
-	top:5px;
-	right:0;
-}
 
 .search input[type="text"] {
 	float:left;
-	width:165px;
+	width:190px;
 	border-right:0;
-	height:15px;
+	height:21px;
 }
 
 .search input[type="submit"] {
@@ -329,8 +330,14 @@ table .sep {
 	font:normal 14px/18px "PT Sans Narrow", "Arial Narrow", Arial, Helvetica, sans-serif;
 	color:#696969;
 	position:absolute;
-	top:20px;
+	top:15px;
 	right:0;
+}
+
+.menu1 .black
+{
+color:black;
+text-decoration:underline;
 }
 
 .menu1 a {

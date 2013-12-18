@@ -24,6 +24,6 @@
 	<?= Form::label('remember', 'Çàïîìíèòü ìåíÿ'); ?>
 </p>
 
-<?= Form::submit('login', 'Âõîä'); ?> <?= Form::submit('create', 'Çàðåãèñòðèðîâàòüñÿ'); ?>
+<?= Form::submit('login', 'ÂÕÎÄ'); ?> <?= Form::submit('create', 'ÂÑÒÓÏÈÒÜ Â ÊËÓÁ'); ?>
 <?= Form::close(); ?>
 <?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>
