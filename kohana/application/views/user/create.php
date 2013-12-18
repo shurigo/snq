@@ -1,8 +1,8 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
-  $APPLICATION->SetTitle('Регистрация');
+  $APPLICATION->SetTitle('Вступить в клуб');
 ?>
-<? if ($message) : ?>
+<?if($message):?>
 	<h3 class="message">
 		<?= $message; ?>
 	</h3>
@@ -77,11 +77,6 @@
 </p>
 <?endif;?>
 <p>
-	<?= Form::submit('create', 'Регистрация'); ?>
+	<?= Form::submit('create', 'ВСТУПИТЬ В КЛУБ'); ?>
 	<?= Form::close(); ?>
 </p>
-<p>
-  <?= HTML::anchor('user/login', 'Войти'); ?> 
-	в личный кабинет
-</p>
-<?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>

@@ -1,14 +1,6 @@
  <div class="menu-place"></div>
     <nav class="menu-hold">
-      <div>
-				<form class="search" action="/collection/" method="get" accept-charset="utf-8">
-					<fieldset>
-						<input type="text" name="q" value="" />
-						<input type="submit" value="Найти" />
-					</fieldset>
-				</form>
-      </div>
-      <!-- end .search-->
+
       <ul class="menu">
         <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>
           <div class="sub">
@@ -115,6 +107,7 @@
         <li><a class="red" href="/actions/" onClick="trackOutboundLink(this, 'Outbound Links', 'actions'); return false;">Акции</a></li>
 	<!--<li><a class="red" href="/collection/woman/?d=y" rel="nofollow">Sale</a></li>-->
 		<li><a class="red" href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru'); return false;">Интернет-магазин</a></li>
+		 <li><a href="/collection/waccessories/" rel="nofollow">Королевский Клуб</a>
 		</ul>
       <!-- end .menu-->
     </nav>

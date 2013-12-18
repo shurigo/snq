@@ -3,9 +3,9 @@
   $APPLICATION->SetTitle('Вход в Личный Кабинет');
 ?>
 <?if($message):?>
-<h3 class="message">
-	<?= $message; ?>
-</h3>
+	<h3 class="message">
+		<?= $message; ?>
+	</h3>
 <? endif; ?>
 <br />
 <?= Form::open('user/login'); ?>
@@ -21,6 +21,5 @@
 	<?= Form::checkbox('remember'); ?>
 	<?= Form::label('remember', 'Запомнить меня'); ?>
 </p>
-<?= Form::submit('login', 'Вход'); ?> <?= Form::submit('create', 'Зарегистрироваться'); ?>
+<?= Form::submit('login', 'ВХОД'); ?> <?= Form::submit('create', 'ВСТУПИТЬ В КЛУБ'); ?>
 <?= Form::close(); ?>
-<?//require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>
