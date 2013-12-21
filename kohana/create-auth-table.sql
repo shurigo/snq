@@ -17,16 +17,19 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(127) NOT NULL,
   `password` varchar(64) NOT NULL,
-	`first_name` varchar(127) NOT NULL,
+  `first_name` varchar(127) NOT NULL,
   `last_name` varchar(127) NOT NULL,
   `patronymic` varchar(127) NOT NULL,
   `birthday` date NOT NULL,
   `phone` varchar(10) NOT NULL,
-  `logins` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `last_login` int(10) UNSIGNED,
+  `deliver_card_to` varchar(255) DEFAULT NULL,
+  `subscribe_sms` int(1) NOT NULL,
+  `subscribe_email` int(1) NOT NULL,
+  `logins` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_login` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

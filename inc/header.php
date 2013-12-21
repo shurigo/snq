@@ -2,11 +2,11 @@
 	session_start();
 	include($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
 ?>
-    <script type="text/javascript">
+	<script type="text/javascript">
     $(function() {
      $('.nyroModal').nyroModal();
     });
-    </script>
+	</script>
 
 	<header class="header">
       <div class="logo"><a href="/"><img src="/images/logo.png" width="400" height="57" alt="Снежная Королева"></a></div>
@@ -35,11 +35,11 @@
 	  <span>|</span>
 	  <?$user=$_SESSION['auth_user'];?>
 	  <?if($user):?>
-			<a href="/user/index/" class="black"><?="Личный кабинет ({$user->first_name} {$user->last_name})";?></a>
-		  <span>|</span><a href="/user/logout/" class="black">Выйти</a>
+			<a href="/user/index/" class="black"><?=iconv('utf-8', 'cp1251', $user->first_name . ' ' . $user->last_name);?></a>
+		  <span> | </span><a href="/user/logout/" class="black">Выйти</a>
 		<?else:?>
-       <a class="nyroModal black" id="nyroModal" href="/user/login/">Вход в личный кабинет</a>
-       <span>|</span><a href="/user/logout/" class="black">Регистрация</a>
+       <a class="nyroModal black" id="nyroModal" href="/user/login/?main">Вход в личный кабинет</a>
+       <span> | </span><a href="/user/create/" class="black">Регистрация</a>
 	  <?endif;?>
 
 	  </nav>

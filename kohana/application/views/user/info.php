@@ -2,32 +2,33 @@
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Личный Кабинет');
 ?>
-<h2>Добрый день <?= "$user->first_name $user->last_name"; ?>!</h2>
+
+<h2>Добро пожаловать, <?=iconv('utf-8', 'cp1251', "$user->first_name $user->last_name"); ?>!</h2>
 <? if ($message) : ?>
 	<h3 class="message">
 		<?= $message; ?>
 	</h3>
 <? endif; ?>
-<?= Form::open('user/index'); ?>
+<form action="/user/index" method="post" accept-charset="utf-8">
 <p>
 	<?= Form::label('first_name', 'Имя'); ?>
-	<?= Form::input('first_name', $user->first_name); ?>
+	<?= Form::input('first_name', iconv('utf-8', 'cp1251', $user->first_name)); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'first_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('patronymic', 'Отчество'); ?>
-	<?= Form::input('patronymic', $user->patronymic); ?>
+	<?= Form::label('last_name', 'Фамилия'); ?>
+	<?= Form::input('last_name', iconv('utf-8', 'cp1251', $user->last_name)); ?>
 	<div class="error">
-		<?= Arr::get($errors, 'patronymic'); ?>
+		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </p>
 <p>
-	<?= Form::label('last_name', 'Фамилия'); ?>
-	<?= Form::input('last_name', $user->last_name); ?>
+	<?= Form::label('patronymic', 'Отчество'); ?>
+	<?= Form::input('patronymic', iconv('utf-8', 'cp1251', $user->patronymic)); ?>
 	<div class="error">
-		<?= Arr::get($errors, 'last_name'); ?>
+		<?= Arr::get($errors, 'patronymic'); ?>
 	</div>
 </p>
 <p>
@@ -49,6 +50,13 @@
 	<?= Form::input('email', $user->email, array('readonly')); ?>
 </p>
 <p>
+	<?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  
+	<?= Form::label('subscribe_sms', 'SMS'); ?>
+	<?= Form::checkbox('subscribe_sms', 1, $user->subscribe_sms > 0); ?>
+	<?= Form::label('subscribe_sms', 'E-mail'); ?>
+	<?= Form::checkbox('subscribe_email', 1, $user->subscribe_email > 0); ?>
+</p>
+<p>
 	<?= Form::label('password', 'Пароль'); ?>
 	<?= Form::password('password'); ?>
 	<div class="error">
@@ -63,7 +71,6 @@
 	</div>
 </p>
 <p>
-	<?= Form::submit('index', 'Сохранить'); ?>
+<input type="submit" name="index" value="Сохранить" />
 	<?= Form::close(); ?>
 </p>
-<?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/epilog.php');?>

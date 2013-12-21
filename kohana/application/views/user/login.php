@@ -8,7 +8,7 @@
 	</h3>
 <? endif; ?>
 <br />
-<?= Form::open('user/login'); ?>
+<form action="/user/login" method="post" accept-charset="utf-8">
 <p>
 	<?= Form::label('email', 'Àäðåñ ýëåêòðîííîé ïî÷òû'); ?><br />
 	<?= Form::input('email', HTML::chars(Arr::get($_POST, 'email'))); ?>
@@ -21,5 +21,7 @@
 	<?= Form::checkbox('remember'); ?>
 	<?= Form::label('remember', 'Çàïîìíèòü ìåíÿ'); ?>
 </p>
-<?= Form::submit('login', 'ÂÕÎÄ'); ?> <?= Form::submit('create', 'ÂÑÒÓÏÈÒÜ Â ÊËÓÁ'); ?>
+<? 
+?>
+<input type="submit" name="login" value="ÂÕÎÄ" /> <input type="submit" name="create" value="ÂÑÒÓÏÈÒÜ Â ÊËÓÁ" />
 <?= Form::close(); ?>

@@ -26,6 +26,11 @@
 <script type="text/javascript" src="/js/set-discount.js"></script>
 <script type="text/javascript" src="/js/get-shops.js"></script>
 <script type="text/javascript" src="/js/lightbox.js"></script>
+<script type="text/javascript" src="/js/jquery.nyroModal.custom.js"></script>
+<!--[if IE 6]>
+		<script type="text/javascript" src="/js/jquery.nyroModal-ie6.min.js"></script>
+<![endif]-->
+<link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">
 <script type="text/javascript" src="/js/jquery.simple.accordion.js"></script>

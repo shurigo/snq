@@ -1,30 +1,31 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Вступить в клуб');
+//	echo(HTML::script('/js/user.js'));
 ?>
 <?if($message):?>
 	<h3 class="message">
 		<?= $message; ?>
 	</h3>
 <? endif; ?>
-<?= Form::open('user/create'); ?>
+<form action="/user/create" method="post" accept-charset="utf-8">
 <p>
 	<?= Form::label('first_name', 'Имя'); ?>
-	<?= Form::input('first_name', HTML::chars(Arr::get($_POST, 'first_name'))); ?>
+	<?= Form::input('first_name', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'first_name')))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'first_name'); ?>
 	</div>
 </p>
 <p>
 	<?= Form::label('last_name', 'Фамилия'); ?>
-	<?= Form::input('last_name', HTML::chars(Arr::get($_POST, 'last_name'))); ?>
+	<?= Form::input('last_name', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'last_name')))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </p>
 <p>
 	<?= Form::label('patronymic', 'Отчество'); ?>
-	<?= Form::input('patronymic', HTML::chars(Arr::get($_POST, 'patronymic'))); ?>
+	<?= Form::input('patronymic', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'patronymic')))); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'patronymic'); ?>
 	</div>
@@ -49,6 +50,16 @@
 	<div class="error">
 		<?= Arr::get($errors, 'email'); ?>
 	</div>
+</p>
+<p>
+	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?>
+</p>
+<p>
+<?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  
+<?= Form::label('subscribe_sms', 'SMS'); ?>
+<?= Form::checkbox('subscribe_sms', 1, HTML::chars(Arr::get($_POST, 'subscribe_sms')) > 0); ?>
+<?= Form::label('subscribe_sms', 'email'); ?>
+<?= Form::checkbox('subscribe_email', 1, HTML::chars(Arr::get($_POST, 'subscribe_email')) > 0); ?>
 </p>
 <p>
 	<?= Form::label('password', 'Пароль'); ?>

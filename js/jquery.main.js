@@ -34,6 +34,14 @@ $(window).on("load", function(){
 			$("#d_o").val("N");
 		}
 	});
+	$(function() {
+		$("#birthday").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "1920:",
+			dateFormat: 'yy-mm-dd'
+		});
+	});
 	initScrollUp();
   initLoadPage();
 	initLoadingAnimation();

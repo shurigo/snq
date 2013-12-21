@@ -32,6 +32,7 @@ date_default_timezone_set('Europe/Moscow');
  */
 //setlocale(LC_ALL, 'en_US.utf-8');
 setlocale(LC_ALL, 'ru_RU.CP1251');
+//setlocale(LC_ALL, 'ru_RU.utf-8');
 
 /**
  * Enable the Kohana auto-loader.
@@ -106,6 +107,7 @@ if (isset($_SERVER['KOHANA_ENV']))
 Kohana::init(array(
 	'base_url'   => '/',
 	'index_file' => false,
+//	'charset' => 'utf-8'
 	'charset' => 'cp1251'
 ));
 

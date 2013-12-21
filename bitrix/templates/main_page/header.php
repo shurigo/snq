@@ -25,10 +25,11 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
 <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/jquery.nyroModal.custom.js"></script>
+<script type="text/javascript" src="/js/jquery.nyroModal.custom.js"></script>
 <!--[if IE 6]>
-		<script type="text/javascript" src="js/jquery.nyroModal-ie6.min.js"></script>
-	<![endif]--><link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="/js/jquery.nyroModal-ie6.min.js"></script>
+<![endif]-->
+<link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>

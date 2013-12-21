@@ -20,6 +20,8 @@ class Controller_User extends Controller_Template {
 
 		if (HTTP_Request::POST == $this->request->method())
 		{
+			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
+			$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 			try
 			{
 				$user->update_user($_POST, array(
@@ -28,6 +30,8 @@ class Controller_User extends Controller_Template {
 					'patronymic',
 					'birthday',
 					'phone',
+					'subscribe_sms',
+					'subscribe_email',
 					'password'
 				));
 				$_POST = array(); // Reset values so form is not sticky
@@ -68,6 +72,8 @@ class Controller_User extends Controller_Template {
 					$errors['captcha'] = 'Введите правильный код с картинки';
 					return;
 				}
+				$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
+				$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 				$user = ORM::factory('user')
 					->create_user($_POST, array(
 						'first_name',
@@ -75,6 +81,8 @@ class Controller_User extends Controller_Template {
 						'patronymic',
 						'birthday',
 						'phone',
+						'subscribe_sms',
+						'subscribe_email',
 						'password',
 						'email'));
 
@@ -86,7 +94,7 @@ class Controller_User extends Controller_Template {
 				Session::instance()->delete('captcha');
 
 				// Set success message
-				$message = "Вы зарегистрировались как '{$user->email}'";
+				$message = "Регистрация прошла успешно";
 
 				$this->action_login();
 			}
