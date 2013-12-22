@@ -9,3 +9,5 @@ bitrix/stack_cache/
 restore.php
 upload/
 config/
+kohana/application/config/database.php
+

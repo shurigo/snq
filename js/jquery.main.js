@@ -34,6 +34,14 @@ $(window).on("load", function(){
 			$("#d_o").val("N");
 		}
 	});
+	$(function() {
+		$("#birthday").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "1920:",
+			dateFormat: 'yy-mm-dd'
+		});
+	});
 	initScrollUp();
   initLoadPage();
 	initLoadingAnimation();
@@ -187,7 +195,6 @@ function ajaxLoad(){
     function reloadPage(){
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
-			//$('#page').val('1');
 			if($('#pages').val() <= 1) {
         $('#loadmore').hide();
       } else {

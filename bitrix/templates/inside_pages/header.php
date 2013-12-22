@@ -27,14 +27,32 @@
 <script type="text/javascript" src="/js/get-shops.js"></script>
 <script type="text/javascript" src="/js/lightbox.js"></script>
 <script type="text/javascript" src="/js/snowfall.js"></script>
+<script type="text/javascript" src="/js/jquery.nyroModal.custom.js"></script>
+<!--[if IE 6]>
+		<script type="text/javascript" src="/js/jquery.nyroModal-ie6.min.js"></script>
+<![endif]-->
+<link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
 
+<script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#phone").mask("(999) 999-9999");
+
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
+</script>
 <link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">
 <script type="text/javascript" src="/js/jquery.simple.accordion.js"></script>
 
 <div id="vk_api_transport"></div>
 <div id="fb-root"></div>
 
-<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
+<link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <?$APPLICATION->ShowMeta("robots")?>
