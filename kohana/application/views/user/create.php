@@ -54,12 +54,15 @@
 	<div class="error">
 		<?= Arr::get($errors, 'email'); ?>
 	</div>
-</td></tr>
-<tr rstyle="vertical-align:top;"><td colspan=3>
-	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?>
+<br />
+</td>
+</tr>
+
+<tr bgcolor='#e6e9ee'><td colspan=3>
+	<b><?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?></b>
 </td></tr>
 
-<tr rstyle="vertical-align:top;"><td colspan=3>
+<tr style="vertical-align:top;"><td colspan=3>
 <?
 	// 0 - deliver to shop
 	// 1 - deliver to address
@@ -69,11 +72,10 @@
   <?= Form::label('dto0', 'В магазине'); ?>
   <?= Form::radio('deliver_to', 1, $deliver_to == 1); ?>
   <?= Form::label('dto1', 'Доставить по адресу'); ?>
-</p>
-</td></tr>
-<tr rstyle="vertical-align:top;"><td colspan=3>
+
+    <br />
 	<?= Form::select('deliver_to_shop', $shops, iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_shop'))), array('class' => 'delivery', 'id' => 'dto_0')); ?>
-	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_address'))), array('class' => 'delivery', 'id' => 'dto_1')); ?>
+	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_address'))), array('class' => 'delivery', 'id' => 'dto_1','size' => '90px')); ?>
 </td></tr>
 <tr style="vertical-align:top;">
 <td>

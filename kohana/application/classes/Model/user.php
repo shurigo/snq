@@ -1,7 +1,7 @@
 <?php
-  class Model_User extends Model_Auth_User 
+  class Model_User extends Model_Auth_User
   {
-		public function rules() 
+		public function rules()
 		{
 			$rules = parent::rules();
 			unset($rules['username']);
@@ -28,7 +28,7 @@
 				array('not_empty'),
 				array('phone'),
 				array('min_length', array(':value', 10)),
-				array('max_length', array(':value', 10)),
+				array('max_length', array(':value', 14)),
 			);
 			return $rules;
 		}
