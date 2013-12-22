@@ -3,7 +3,7 @@
   $APPLICATION->SetTitle('—брос парол€');
 ?>
 <?if($message):?>
-	<div class="message error">
+	<div class="message red">
 		<?= $message; ?>
 	</div>
 <? endif; ?>

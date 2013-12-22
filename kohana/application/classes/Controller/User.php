@@ -16,44 +16,45 @@ class Controller_User extends Controller_Template {
 			Request::current()->redirect('user/login');
 		}
 
-		if (HTTP_Request::POST == $this->request->method())
+		if (HTTP_Request::POST != $this->request->method())
 		{
-			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
-			$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
-			try
+			return;
+		}
+		$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
+		$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
+		try
+		{
+			$user->update_user($_POST, array(
+				'first_name',
+				'last_name',
+				'patronymic',
+				'birthday',
+				'phone',
+				'subscribe_sms',
+				'subscribe_email',
+				'deliver_to',
+				'deliver_to_shop',
+				'deliver_to_address',
+				'password'
+			));
+			$_POST = array(); // Reset values so form is not sticky
+			$message = "Данные сохранены";
+			if ($user)
 			{
-				$user->update_user($_POST, array(
-					'first_name',
-					'last_name',
-					'patronymic',
-					'birthday',
-					'phone',
-					'subscribe_sms',
-					'subscribe_email',
-					'deliver_to',
-					'deliver_to_shop',
-					'deliver_to_address',
-					'password'
-				));
-				$_POST = array(); // Reset values so form is not sticky
-				$message = "Данные сохранены";
-				if ($user)
-				{
-					Request::current()->redirect('user/index');
-				}
-				else
-				{
-					$message = 'Неправильный логин/пароль';
-				}
+				Request::current()->redirect('user/index');
 			}
-			catch (ORM_Validation_Exception $e)
+			else
 			{
-				// Set failure message
-				$message = 'Ошибки при сохранении данных';
+				$message = 'Неправильный логин/пароль';
+			}
+		}
+		catch (ORM_Validation_Exception $e)
+		{
+			// Set failure message
+			$message = 'Ошибки при сохранении данных';
 
-				// Set errors using custom messages
-				$errors = $e->errors('models');
-			}
+			// Set errors using custom messages
+			$errors = $e->errors('models');
 		}
 	}
 
@@ -71,8 +72,9 @@ class Controller_User extends Controller_Template {
 		}
 		try
 		{
-			if(!Captcha::valid($_POST['captcha'])) {
+			if (!Captcha::valid($_POST['captcha'])) {
 				$errors['captcha'] = 'Введите правильный код с картинки';
+				$message = 'Ошибки при регистрации';
 				return;
 			}
 			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
@@ -102,7 +104,7 @@ class Controller_User extends Controller_Template {
 			// Set success message
 			$message = "Регистрация прошла успешно";
 
-			$this->action_login();
+			//$this->action_login();
 		}
 		catch (ORM_Validation_Exception $e)
 		{
@@ -206,7 +208,6 @@ class Controller_User extends Controller_Template {
 			{
 				$errors['email'] = 'Ошибка отправки email';
 			}
-			error_log($msg_body);
 		}
 		catch (ORM_Validation_Exception $e)
 		{
