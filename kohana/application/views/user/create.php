@@ -1,7 +1,11 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Вступить в клуб');
-//	echo(HTML::script('/js/user.js'));
+	require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
+
+	$city_id = get_city_by_name($_SESSION['city_name']);
+	$shops = get_shops_by_city($city_id);
+	include($_SERVER['DOCUMENT_ROOT'].'/kohana/application/views/user/js.inc');
 ?>
 <?if($message):?>
 	<h3 class="message">
@@ -52,7 +56,23 @@
 	</div>
 </p>
 <p>
-	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?>
+	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба:'); ?>
+</p>
+<p>
+<? 
+	// 0 - deliver to shop
+	// 1 - deliver to address
+	$deliver_to = Arr::get($_POST, 'dto');
+?>
+  <?= Form::radio('dto', 0, $deliver_to == 0); ?>
+  <?= Form::label('dto0', 'В магазине'); ?>
+  <?= Form::radio('dto', 1, $deliver_to == 1); ?>
+  <?= Form::label('dto1', 'Доставить по адресу'); ?>
+</p>
+<p>
+	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($_POST, 'dto_0')), array('class' => 'delivery', 'id' => 'dto_0')); ?>
+	<?= Form::input('dto_1', HTML::chars(Arr::get($_POST, 'dto_1')), array('class' => 'delivery', 'id' => 'dto_1')); ?>
+	<?= Form::input('deliver_to', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to'))), array('type' => 'hidden', 'id' => 'deliver_to')); ?>
 </p>
 <p>
 <?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  
