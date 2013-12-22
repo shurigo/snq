@@ -62,17 +62,16 @@
 <? 
 	// 0 - deliver to shop
 	// 1 - deliver to address
-	$deliver_to = Arr::get($_POST, 'dto');
+	$deliver_to = Arr::get($_POST, 'deliver_to');
 ?>
-  <?= Form::radio('dto', 0, $deliver_to == 0); ?>
+  <?= Form::radio('deliver_to', 0, $deliver_to == 0); ?>
   <?= Form::label('dto0', 'В магазине'); ?>
-  <?= Form::radio('dto', 1, $deliver_to == 1); ?>
+  <?= Form::radio('deliver_to', 1, $deliver_to == 1); ?>
   <?= Form::label('dto1', 'Доставить по адресу'); ?>
 </p>
 <p>
-	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($_POST, 'dto_0')), array('class' => 'delivery', 'id' => 'dto_0')); ?>
-	<?= Form::input('dto_1', HTML::chars(Arr::get($_POST, 'dto_1')), array('class' => 'delivery', 'id' => 'dto_1')); ?>
-	<?= Form::input('deliver_to', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to'))), array('type' => 'hidden', 'id' => 'deliver_to')); ?>
+	<?= Form::select('deliver_to_shop', $shops, iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_shop'))), array('class' => 'delivery', 'id' => 'dto_0')); ?>
+	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_address'))), array('class' => 'delivery', 'id' => 'dto_1')); ?>
 </p>
 <p>
 <?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  

@@ -6,11 +6,7 @@ class Controller_User extends Controller_Template {
 		$this->template->content = View::factory('user/info')
 			->bind('errors', $errors)
 			->bind('message', $message)
-			->bind('user', $user)
-			->bind('dto', $dto)
-			->bind('dto_0', $dto_0)
-			->bind('dto_1', $dto_1)
-			->bind('deliver_to', $deliver_to);
+			->bind('user', $user);
 		// Load the user information
 		$user = Auth::instance()->get_user();
 
@@ -22,11 +18,6 @@ class Controller_User extends Controller_Template {
 
 		if (HTTP_Request::POST == $this->request->method())
 		{
-				//error_log(print_r($_POST, true),0);
-			$dto = Arr::get($_POST, 'dto');
-			$dto_0 = Arr::get($_POST, 'dto_0');
-			$dto_1 = Arr::get($_POST, 'dto_1');
-			$deliver_to = Arr::get($_POST, 'deliver_to');
 			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
 			$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 			try
@@ -40,9 +31,11 @@ class Controller_User extends Controller_Template {
 					'subscribe_sms',
 					'subscribe_email',
 					'deliver_to',
+					'deliver_to_shop',
+					'deliver_to_address',
 					'password'
 				));
-				//$_POST = array(); // Reset values so form is not sticky
+				$_POST = array(); // Reset values so form is not sticky
 				$message = "Данные сохранены";
 				if ($user)
 				{
@@ -80,7 +73,6 @@ class Controller_User extends Controller_Template {
 					$errors['captcha'] = 'Введите правильный код с картинки';
 					return;
 				}
-				error_log(print_r($_POST, true),0);
 				$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
 				$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 				$user = ORM::factory('user')
@@ -93,6 +85,8 @@ class Controller_User extends Controller_Template {
 						'subscribe_sms',
 						'subscribe_email',
 						'deliver_to',
+						'deliver_to_shop',
+						'deliver_to_address',
 						'password',
 						'email'));
 

@@ -1,9 +1,9 @@
 	<script type="text/javascript">
     $(document).ready(function(){ 
 			$('.delivery').hide();
-			var checked_idx = $("input[name$='dto'][checked=checked]").val();
+			var checked_idx = $("input[name='deliver_to'][checked=checked]").val();
 			$('#dto_' + checked_idx).show();
-			$("input[name$='dto']").click(function() {
+			$("input[name='deliver_to']").click(function() {
 				var input = $(this).val();
 				$(".delivery").hide();
 				$("#dto_" + input).show();

@@ -69,15 +69,14 @@
 	// 0 - deliver to shop
 	// 1 - deliver to address
 ?>
-  <?= Form::radio('dto', 0, $dto == 0); ?>
+  <?= Form::radio('deliver_to', 0, $user->deliver_to == 0); ?>
   <?= Form::label('dto0', 'В магазине'); ?>
-  <?= Form::radio('dto', 1, $dto == 1); ?>
+  <?= Form::radio('deliver_to', 1, $user->deliver_to == 1); ?>
   <?= Form::label('dto1', 'Доставить по адресу'); ?>
 </p>
 <p>
-	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($dto_0)), array('class' => 'delivery', 'id' => 'dto_0')); ?>
-	<?= Form::input('dto_1', HTML::chars(Arr::get($dto_1)), array('class' => 'delivery', 'id' => 'dto_1')); ?>
-	<?= Form::input('deliver_to', iconv('utf-8', 'cp1251', $user->deliver_to), array('type' => 'hidden', 'id' => 'deliver_to')); ?>
+	<?= Form::select('deliver_to_shop', $shops, iconv('utf-8', 'cp1251', HTML::chars($user->deliver_to_shop)), array('class' => 'delivery', 'id' => 'dto_0')); ?>
+	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars($user->deliver_to_address)), array('class' => 'delivery', 'id' => 'dto_1')); ?>
 </p>
 <p>
 	<?= Form::label('password', 'Пароль'); ?>
