@@ -1,8 +1,23 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Вступить в клуб');
-//	echo(HTML::script('/js/user.js'));
+	require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
+
+	$city_id = get_city_by_name($_SESSION['city_name']);
+	$shops = get_shops_by_city($city_id);
 ?>
+	<script type="text/javascript">
+    $(document).ready(function(){ 
+			$('.delivery').hide();
+			var checked_idx = $("input[name$='dto'][checked=checked]").val();
+			$('#dto_' + checked_idx).show();
+			$("input[name$='dto']").click(function() {
+				var input = $(this).val();
+				$(".delivery").hide();
+				$("#dto_" + input).show();
+			}); 
+		});
+	</script>
 <?if($message):?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -52,7 +67,28 @@
 	</div>
 </p>
 <p>
-	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?>
+	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба:'); ?>
+</p>
+<p>
+<? 
+	// 0 - deliver to shop
+	// 1 - deliver to address
+	$deliver_to = Arr::get($_POST, 'dto');
+?>
+  <?= Form::radio('dto', 0, $deliver_to == 0); ?>
+  <?= Form::label('dto0', 'В магазине'); ?>
+  <?= Form::radio('dto', 1, $deliver_to == 1); ?>
+  <?= Form::label('dto1', 'Доставить по адресу'); ?>
+</p>
+<p>
+	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($_POST, 'dto_0')), array('class' => 'delivery', 'id' => 'dto_0')); ?>
+	<?= Form::input('dto_1', HTML::chars(Arr::get($_POST, 'dto_1')), array('class' => 'delivery', 'id' => 'dto_1')); ?>
+<? $deliver_to_txt = 
+        $deliver_to == 0 
+        ? get_shop_by_id(Arr::get($_POST, 'dto_0'))['NAME'] 
+				: HTML::chars(Arr::get($_POST, 'dto_1'));
+?>
+<?= Form::input('dto_txt', $deliver_to_txt, array('type' => 'hidden', 'id' => 'dto_txt')); ?>
 </p>
 <p>
 <?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  

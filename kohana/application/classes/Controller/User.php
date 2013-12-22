@@ -1,5 +1,4 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
 class Controller_User extends Controller_Template {
 
 	public function action_index()
@@ -62,16 +61,20 @@ class Controller_User extends Controller_Template {
 		$this->template->content = View::factory('user/create')
 			->bind('captcha', $captcha)
 			->bind('errors', $errors)
-			->bind('message', $message);
+			->bind('message', $message)
+			->bind('shops', $shops);
 
 		if (HTTP_Request::POST == $this->request->method())
 		{
 			try
 			{
+				/*
 				if(!Captcha::valid($_POST['captcha'])) {
 					$errors['captcha'] = '¬ведите правильный код с картинки';
 					return;
 				}
+				 */
+				error_log(print_r($_POST, true),0);
 				$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
 				$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 				$user = ORM::factory('user')
@@ -83,6 +86,7 @@ class Controller_User extends Controller_Template {
 						'phone',
 						'subscribe_sms',
 						'subscribe_email',
+//						'deliver_to',
 						'password',
 						'email'));
 
