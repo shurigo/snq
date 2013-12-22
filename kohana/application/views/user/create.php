@@ -20,38 +20,38 @@
 <tr style="vertical-align:top;"><td>
 	<b><?= Form::label('first_name', 'Имя'); ?></b><br />
 	<?= Form::input('first_name', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'first_name'))),array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'first_name'); ?>
 	</div>
     </td><td>
 	<b><?= Form::label('patronymic', 'Отчество'); ?></b><br />
 	<?= Form::input('patronymic', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'patronymic'))),array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'patronymic'); ?>
 	</div>
 	</td><td>
 	<b><?= Form::label('last_name', 'Фамилия'); ?></b><br />
 	<?= Form::input('last_name', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'last_name'))),array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </td></tr>
 <tr style="vertical-align:top;"><td>
 	<b><?= Form::label('birthday', 'Дата рождения'); ?></b><br />
 	<?= Form::input('birthday', HTML::chars(Arr::get($_POST, 'birthday')), array('id'=>'birthday', 'type'=>'text', 'readonly','size' =>'40px')); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'birthday'); ?>
 	</div>
 </td><td>
 	<b><?= Form::label('phone', 'Телефон'); ?></b><br />
 	<?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone')), array('maxlength' => '10',"size" =>"40px","id" => "phone")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'phone'); ?>
 	</div>
 </td><td>
 	<b><?= Form::label('email', 'E-mail'); ?></b><br />
 	<?= Form::input('email', HTML::chars(Arr::get($_POST, 'email')),array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'email'); ?>
 	</div>
 <br />
@@ -81,14 +81,14 @@
 <td>
 	<b><?= Form::label('password', 'Пароль'); ?></b><br />
 	<?= Form::password('password',null,array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::path($errors, '_external.password'); ?>
 	</div>
 </td>
 <td colspan=2>
 	<b><?= Form::label('password_confirm', 'Подтвердите пароль'); ?></b><br />
 	<?= Form::password('password_confirm',null,array("size" =>"40px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::path($errors, '_external.password_confirm'); ?>
 	</div>
 </td>
@@ -100,7 +100,7 @@
   <br />
   <b><?= Form::label('captcha', 'Введите код с картинки'); ?></b> <br />
   <?= Form::input('captcha','',array("size" =>"22px")); ?>
-	<div class="error">
+	<div class="error red">
 		<?= Arr::get($errors, 'captcha'); ?>
 	</div>
 

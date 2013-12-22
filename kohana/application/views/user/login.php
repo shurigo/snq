@@ -3,9 +3,9 @@
   $APPLICATION->SetTitle('Âõîä â Ëè÷íûé Êàáèíåò');
 ?>
 <?if($message):?>
-	<h3 class="message">
+	<div class="message error">
 		<?= $message; ?>
-	</h3>
+	</div>
 <? endif; ?>
 <br />
 <form action="/user/login" method="post" accept-charset="utf-8">
@@ -21,7 +21,7 @@
 	<?= Form::checkbox('remember'); ?>
 	<?= Form::label('remember', 'Çàïîìíèòü ìåíÿ'); ?>
 </p>
-<? 
+<?
 ?>
 <input type="submit" name="login" value="ÂÕÎÄ" /> <input type="submit" name="create" value="ÂÑÒÓÏÈÒÜ Â ÊËÓÁ" />
 <?= Form::close(); ?>
