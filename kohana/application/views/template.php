@@ -1,6 +1,7 @@
 <?
   global $DBType; $DBType = 'mysql';
   $popup = isset($_GET['main']);
+	$popup = false; //HACK
 	if(!$popup) {
 		require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 	}

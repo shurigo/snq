@@ -114,6 +114,6 @@
 <?= Form::checkbox('subscribe_email', 1, HTML::chars(Arr::get($_POST, 'subscribe_email')) > 0,array('checked')); ?>
 </td><tr>
 <tr><td colspan=3>
-	<?= Form::submit('create', 'бярсохрэ б йкса',array('style' => 'background:#11acdc;border:1px solid #11acdc;')); ?>
+	<?= Form::submit('register', 'бярсохрэ б йкса',array('style' => 'background:#11acdc;border:1px solid #11acdc;')); ?>
 	<?= Form::close(); ?>
 </td></tr></table>

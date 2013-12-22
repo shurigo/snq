@@ -38,7 +38,7 @@
 			<a href="/user/index/" class="black"><?=iconv('utf-8', 'cp1251', $user->first_name . ' ' . $user->last_name);?></a>
 		  <span> | </span><a href="/user/logout/" class="black">Выйти</a>
 		<?else:?>
-       <a class="nyroModal black" id="nyroModal" href="/user/login/?main">Вход в личный кабинет</a>
+       <a class=" black" id="nyroModal" href="/user/login/?main">Вход в личный кабинет</a>
        <span> | </span><a href="/user/create/" class="black">Регистрация</a>
 	  <?endif;?>
 

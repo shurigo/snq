@@ -103,8 +103,8 @@ class Controller_User extends Controller_Template {
 
 			// Set success message
 			$message = "Регистрация прошла успешно";
-
-			//$this->action_login();
+			
+			$this->action_login();
 		}
 		catch (ORM_Validation_Exception $e)
 		{
@@ -135,17 +135,15 @@ class Controller_User extends Controller_Template {
 		{
 			Request::current()->redirect('user/create');
 		}
-
+		
 		// Attempt to login user
 		$remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
 		$user = Auth::instance()->login($this->request->post('email'), $this->request->post('password'), $remember);
 
-		error_log('p1', 0);
 		// If successful, redirect user
 		if ($user)
 		{
-			error_log('p2',0);
-			Request::current()->redirect('user/index');
+			$this->action_index();
 		}
 		else
 		{
