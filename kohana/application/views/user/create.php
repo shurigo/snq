@@ -44,7 +44,7 @@
 	</div>
 </td><td>
 	<b><?= Form::label('phone', 'Телефон'); ?></b><br />
-	<?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone')), array('maxlength' => '10',"size" =>"40px")); ?>
+	<?= Form::input('phone', HTML::chars(Arr::get($_POST, 'phone')), array('maxlength' => '10',"size" =>"40px","id" => "phone")); ?>
 	<div class="error">
 		<?= Arr::get($errors, 'phone'); ?>
 	</div>
