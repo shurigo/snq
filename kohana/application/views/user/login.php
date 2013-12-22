@@ -22,7 +22,8 @@
 	<?= Form::checkbox('remember'); ?>
 	<?= Form::label('remember', 'Çàïîìíèòü ìåíÿ'); ?>
 </p>
-<?
-?>
 <input type="submit" name="login" value="ÂÕÎÄ" /> <input type="submit" name="create" value="ÂÑÒÓÏÈÒÜ Â ÊËÓÁ" />
+<br/>
+<br/>
+<?= HTML::anchor('user/resetpwd', 'Ñáðîñèòü ïàðîëü'); ?>
 <?= Form::close(); ?>
