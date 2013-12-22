@@ -33,15 +33,6 @@
 	  <span>|</span> <a href="/about/contacts/" rel="nofollow">Контакты</a>
 	  <span>|</span> <a href="/about/about_fur/">Меха от А до Я</a>
 	  <span>|</span>
-	  <?$user=$_SESSION['auth_user'];?>
-	  <?if($user):?>
-			<a href="/user/index/" class="black"><?=iconv('utf-8', 'cp1251', $user->first_name . ' ' . $user->last_name);?></a>
-		  <span> | </span><a href="/user/logout/" class="black">Выйти</a>
-		<?else:?>
-       <a class=" black" id="nyroModal" href="/user/login/?main">Вход в личный кабинет</a>
-       <span> | </span><a href="/user/create/" class="black">Регистрация</a>
-	  <?endif;?>
-
 	  </nav>
 
       <!-- end .menu1-->
