@@ -26,7 +26,7 @@
 			);
 			$rules['phone'] = array(
 				array('not_empty'),
-				array('phone'),
+				//array('phone'),
 				array('min_length', array(':value', 10)),
 				array('max_length', array(':value', 14)),
 			);

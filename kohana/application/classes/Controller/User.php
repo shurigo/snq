@@ -65,51 +65,52 @@ class Controller_User extends Controller_Template {
 			->bind('errors', $errors)
 			->bind('message', $message);
 
-		if (HTTP_Request::POST == $this->request->method())
+		if (HTTP_Request::POST != $this->request->method())
 		{
-			try
-			{
-				if(!Captcha::valid($_POST['captcha'])) {
-					$errors['captcha'] = 'Введите правильный код с картинки';
-					return;
-				}
-				$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
-				$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
-				$user = ORM::factory('user')
-					->create_user($_POST, array(
-						'first_name',
-						'last_name',
-						'patronymic',
-						'birthday',
-						'phone',
-						'subscribe_sms',
-						'subscribe_email',
-						'deliver_to',
-						'deliver_to_shop',
-						'deliver_to_address',
-						'password',
-						'email'));
-
-				// Grant user login role
-				$user->add('roles', ORM::factory('Role', array('name' => 'login')));
-
-				// Reset values so form is not sticky
-				$_POST = array();
-				Session::instance()->delete('captcha');
-
-				// Set success message
-				$message = "Регистрация прошла успешно";
-
-				$this->action_login();
+			return;
+		}
+		try
+		{
+			if(!Captcha::valid($_POST['captcha'])) {
+				$errors['captcha'] = 'Введите правильный код с картинки';
+				return;
 			}
-			catch (ORM_Validation_Exception $e)
-			{
-				// Set failure message
-				$message = 'Ошибки при регистрации';
+			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
+			$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
+			$user = ORM::factory('user')
+				->create_user($_POST, array(
+					'first_name',
+					'last_name',
+					'patronymic',
+					'birthday',
+					'phone',
+					'subscribe_sms',
+					'subscribe_email',
+					'deliver_to',
+					'deliver_to_shop',
+					'deliver_to_address',
+					'password',
+					'email'));
 
-				// Set errors using custom messages
-				$errors = $e->errors('models');
-			}
+			// Grant user login role
+			$user->add('roles', ORM::factory('Role', array('name' => 'login')));
+
+			// Reset values so form is not sticky
+			$_POST = array();
+			Session::instance()->delete('captcha');
+
+			// Set success message
+			$message = "Регистрация прошла успешно";
+
+			$this->action_login();
+		}
+		catch (ORM_Validation_Exception $e)
+		{
+			// Set failure message
+			$message = 'Ошибки при регистрации';
+
+			// Set errors using custom messages
+			$errors = $e->errors('models');
 		}
 	}
 
@@ -118,7 +119,6 @@ class Controller_User extends Controller_Template {
 		$this->template->content = View::factory('user/login')
 			->bind('message', $message);
 
-		global $user;
 		$user = Auth::instance()->get_user();
 		if($user)
 		{
@@ -128,6 +128,7 @@ class Controller_User extends Controller_Template {
 		{
 			return;
 		}
+
 		if ($this->request->post('create'))
 		{
 			Request::current()->redirect('user/create');
@@ -137,9 +138,11 @@ class Controller_User extends Controller_Template {
 		$remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
 		$user = Auth::instance()->login($this->request->post('email'), $this->request->post('password'), $remember);
 
+		error_log('p1', 0);
 		// If successful, redirect user
 		if ($user)
 		{
+			error_log('p2',0);
 			Request::current()->redirect('user/index');
 		}
 		else
@@ -157,25 +160,25 @@ class Controller_User extends Controller_Template {
 		Request::current()->redirect('user/login');
 	}
 
-	public function action_resetpassword()
+	public function action_resetpwd()
 	{
-		$this->template->content = View::factory('user/password')
+		$this->template->content = View::factory('user/resetpwd')
 			->bind('message', $message);
-		if (HTTP_Request::POST != $this->request->method())
+		if(HTTP_Request::POST != $this->request->method())
 		{
 			return;
 		}
 		$user = ORM::factory('user')
-			->where('username', '=', $this->request->post('username'))
-			->where('email', '=', $this->request->post('email'))
+			->where('email', '=', HTML::chars($this->request->post('email')))
 			->find();
+		$_POST = array();
     if(!$user->loaded())
 		{
       $message = 'Пользователь не найден';
       return;
 		}
     $password_reset = $this->reset_password($user);
-    if($password_reset === TRUE)
+    if($password_reset === true)
 		{
       $message = 'Письмо с инструкциями по сбросу пароля отправлено на указанный email адрес';
 		}
@@ -183,5 +186,32 @@ class Controller_User extends Controller_Template {
 		{
 			$errors = $password_reset;
 		}
+	}
+
+	public function reset_password($user)
+	{
+		$update['email']    = $user->email;
+		$update['password'] = substr(uniqid(), 0, 8);
+
+		try
+		{
+			$user->password = $update['password'];
+			$user->update();
+		 
+			//$msg_body = file_get_contents('media/templates/forgot_password.txt');
+			$msg_body = 'Ваш новый пароль: {@PASSWORD}';
+			$msg_body = str_replace('{@PASSWORD}', $update['password'], $msg_body);
+
+			if(!mail($user->email, 'Новый пароль', $msg_body))
+			{
+				$errors['email'] = 'Ошибка отправки email';
+			}
+			error_log($msg_body);
+		}
+		catch (ORM_Validation_Exception $e)
+		{
+			$errors = $e->errors('controllers');
+		}
+		return (isset($errors)) ? $errors : TRUE;
 	}
 }
