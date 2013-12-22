@@ -5,19 +5,8 @@
 
 	$city_id = get_city_by_name($_SESSION['city_name']);
 	$shops = get_shops_by_city($city_id);
+	include($_SERVER['DOCUMENT_ROOT'].'/kohana/application/views/user/js.inc');
 ?>
-	<script type="text/javascript">
-    $(document).ready(function(){ 
-			$('.delivery').hide();
-			var checked_idx = $("input[name$='dto'][checked=checked]").val();
-			$('#dto_' + checked_idx).show();
-			$("input[name$='dto']").click(function() {
-				var input = $(this).val();
-				$(".delivery").hide();
-				$("#dto_" + input).show();
-			}); 
-		});
-	</script>
 <?if($message):?>
 	<h3 class="message">
 		<?= $message; ?>
@@ -83,12 +72,7 @@
 <p>
 	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($_POST, 'dto_0')), array('class' => 'delivery', 'id' => 'dto_0')); ?>
 	<?= Form::input('dto_1', HTML::chars(Arr::get($_POST, 'dto_1')), array('class' => 'delivery', 'id' => 'dto_1')); ?>
-<? $deliver_to_txt = 
-        $deliver_to == 0 
-        ? get_shop_by_id(Arr::get($_POST, 'dto_0'))['NAME'] 
-				: HTML::chars(Arr::get($_POST, 'dto_1'));
-?>
-<?= Form::input('dto_txt', $deliver_to_txt, array('type' => 'hidden', 'id' => 'dto_txt')); ?>
+	<?= Form::input('deliver_to', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to'))), array('type' => 'hidden', 'id' => 'deliver_to')); ?>
 </p>
 <p>
 <?= Form::label('subscribe', 'Подписка на рассылки:'); ?>  

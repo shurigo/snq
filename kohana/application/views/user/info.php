@@ -1,6 +1,11 @@
 <?
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Личный Кабинет');
+	require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
+
+	$city_id = get_city_by_name($_SESSION['city_name']);
+	$shops = get_shops_by_city($city_id);
+	include($_SERVER['DOCUMENT_ROOT'].'/kohana/application/views/user/js.inc');
 ?>
 
 <h2>Добро пожаловать, <?=iconv('utf-8', 'cp1251', "$user->first_name $user->last_name"); ?>!</h2>
@@ -55,6 +60,24 @@
 	<?= Form::checkbox('subscribe_sms', 1, $user->subscribe_sms > 0); ?>
 	<?= Form::label('subscribe_sms', 'E-mail'); ?>
 	<?= Form::checkbox('subscribe_email', 1, $user->subscribe_email > 0); ?>
+</p>
+<p>
+	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба:'); ?>
+</p>
+<p>
+<? 
+	// 0 - deliver to shop
+	// 1 - deliver to address
+?>
+  <?= Form::radio('dto', 0, $dto == 0); ?>
+  <?= Form::label('dto0', 'В магазине'); ?>
+  <?= Form::radio('dto', 1, $dto == 1); ?>
+  <?= Form::label('dto1', 'Доставить по адресу'); ?>
+</p>
+<p>
+	<?= Form::select('dto_0', $shops, HTML::chars(Arr::get($dto_0)), array('class' => 'delivery', 'id' => 'dto_0')); ?>
+	<?= Form::input('dto_1', HTML::chars(Arr::get($dto_1)), array('class' => 'delivery', 'id' => 'dto_1')); ?>
+	<?= Form::input('deliver_to', iconv('utf-8', 'cp1251', $user->deliver_to), array('type' => 'hidden', 'id' => 'deliver_to')); ?>
 </p>
 <p>
 	<?= Form::label('password', 'Пароль'); ?>
