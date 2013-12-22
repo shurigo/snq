@@ -32,6 +32,20 @@
 <![endif]-->
 <link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
 
+<script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#phone").mask("(999) 999-9999");
+
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
+
+</script>
 <link rel="stylesheet" type="text/css" href="/css/jquery.simple.accordion.css">
 <script type="text/javascript" src="/js/jquery.simple.accordion.js"></script>
 
