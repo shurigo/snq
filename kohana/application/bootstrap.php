@@ -137,11 +137,12 @@ Kohana::modules(array(
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
   //'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-  'orm'        => $mod_path .'orm',        // Object Relationship Mapping
+  'ORM'        => $mod_path .'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	//	'captcha' => MODPATH.'captcha'
-	'captcha' => $mod_path .'captcha'
+	'captcha' => $mod_path .'captcha',
+	'MySQLi' => $mod_path .'mysqli'
 ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')

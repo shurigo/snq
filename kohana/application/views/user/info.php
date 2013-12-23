@@ -93,7 +93,7 @@
 <td align="left"><?= Form::label('password', 'Пароль'); ?></td>
 <td><?= Form::password('password',null,array("size" =>"30px")); ?>
 	<div class="error red">
-		<?= Arr::get($errors, '_external.password'); ?>
+		<?= Arr::path($errors, '_external.password'); ?>
 	</div>
 </td></tr>
 <tr style="vertical-align:top;">

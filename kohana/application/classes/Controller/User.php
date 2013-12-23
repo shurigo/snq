@@ -45,7 +45,7 @@ class Controller_User extends Controller_Template {
 			}
 			else
 			{
-				$message = 'Неправильный логин/пароль';
+				$message = 'Не удалось сохранить данные';
 			}
 		}
 		catch (ORM_Validation_Exception $e)
@@ -77,9 +77,7 @@ class Controller_User extends Controller_Template {
 				$message = 'Ошибки при регистрации';
 				return;
 			}
-			$_POST['subscribe_sms'] = array_key_exists('subscribe_sms', $_POST) ? 1 : 0;
-			$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
-			$user = ORM::factory('user')
+			$user = ORM::factory('User')
 				->create_user($_POST, array(
 					'first_name',
 					'last_name',
@@ -97,13 +95,10 @@ class Controller_User extends Controller_Template {
 			// Grant user login role
 			$user->add('roles', ORM::factory('Role', array('name' => 'login')));
 
-			// Reset values so form is not sticky
-			$_POST = array();
 			Session::instance()->delete('captcha');
 
 			// Set success message
 			$message = "Регистрация прошла успешно";
-			
 			$this->action_login();
 		}
 		catch (ORM_Validation_Exception $e)
@@ -124,7 +119,7 @@ class Controller_User extends Controller_Template {
 		$user = Auth::instance()->get_user();
 		if($user)
 		{
-			Request::current()->redirect('user/index');
+			$this->action_index();
 		}
 		if (HTTP_Request::POST != $this->request->method())
 		{
@@ -140,6 +135,7 @@ class Controller_User extends Controller_Template {
 		$remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
 		$user = Auth::instance()->login($this->request->post('email'), $this->request->post('password'), $remember);
 
+		$_POST = array();
 		// If successful, redirect user
 		if ($user)
 		{
@@ -168,7 +164,7 @@ class Controller_User extends Controller_Template {
 		{
 			return;
 		}
-		$user = ORM::factory('user')
+		$user = ORM::factory('User')
 			->where('email', '=', HTML::chars($this->request->post('email')))
 			->find();
 		$_POST = array();
@@ -180,7 +176,7 @@ class Controller_User extends Controller_Template {
     $password_reset = $this->reset_password($user);
     if($password_reset === true)
 		{
-      $message = 'Письмо с инструкциями по сбросу пароля отправлено на указанный email адрес';
+      $message = 'Новый пароль отправлен на указанный email адрес';
 		}
 		else
 		{
