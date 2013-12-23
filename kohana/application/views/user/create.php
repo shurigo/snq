@@ -93,9 +93,15 @@
 	</div>
 </td>
 </tr><tr>
+<tr style="vertical-align:top;"><td colspan=3>
+<b><?= Form::label('subscribe', 'Подписка на рассылки:'); ?></b>
+&nbsp;<?= Form::label('subscribe_sms', 'SMS'); ?>
+<?= Form::checkbox('subscribe_sms', 1, true); ?>
+&nbsp;<?= Form::label('subscribe_email', 'E-mail'); ?>
+<?= Form::checkbox('subscribe_email', 1, true); ?>
+</td></tr>
 <td colspan=3>
 <?if(!$captcha->promoted()):?>
-
   <?= $captcha->render(); ?>
   <br />
   <b><?= Form::label('captcha', 'Введите код с картинки'); ?></b> <br />
@@ -103,16 +109,8 @@
 	<div class="error red">
 		<?= Arr::get($errors, 'captcha'); ?>
 	</div>
-
 <?endif;?>
 </td></tr>
-<tr style="vertical-align:top;"><td colspan=3>
-<b><?= Form::label('subscribe', 'Подписка на рассылки:'); ?></b>
-&nbsp;<?= Form::label('subscribe_sms', 'SMS'); ?>
-<?= Form::checkbox('subscribe_sms', 1, HTML::chars(Arr::get($_POST, 'subscribe_sms')) > 0,array('checked')); ?>
-&nbsp;<?= Form::label('subscribe_sms', 'E-mail'); ?>
-<?= Form::checkbox('subscribe_email', 1, HTML::chars(Arr::get($_POST, 'subscribe_email')) > 0,array('checked')); ?>
-</td><tr>
 <tr><td colspan=3>
 	<?= Form::submit('register', 'ВСТУПИТЬ В КЛУБ',array('style' => 'background:#11acdc;border:1px solid #11acdc;')); ?>
 	<?= Form::close(); ?>

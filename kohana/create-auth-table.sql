@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(127) NOT NULL,
   `patronymic` varchar(127) NOT NULL,
   `birthday` date NOT NULL,
-  `phone` varchar(10) NOT NULL,
+  `phone` varchar(14) NOT NULL,
   `subscribe_sms` int(1) NOT NULL,
   `subscribe_email` int(1) NOT NULL,
 	`deliver_to` int(10) NOT NULL DEFAULT '0',
