@@ -99,6 +99,14 @@ class Controller_User extends Controller_Template {
 
 			// Set success message
 			$message = "Регистрация прошла успешно";
+
+			//$msg_body = file_get_contents('media/templates/new_user.txt');
+			$msg_body = 'Добро пожаловать в Королевский Клуб';
+			if(!mail($user->email, 'Королевский Клуб!', $msg_body))
+			{
+				$errors['email'] = 'Ошибка отправки email';
+			}
+
 			$this->action_login();
 		}
 		catch (ORM_Validation_Exception $e)
