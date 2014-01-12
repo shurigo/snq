@@ -9,7 +9,7 @@
 	</script>
 
 <header class="header">
-	<div class="logo"><a href="/"><img src="/images/logo.png" width="400" height="57" alt="Снежная Королева"></a></div>
+	<div class="logo"><a href="/"><img src="/images/logo.png" width="200" height="57" alt="Снежная Королева"></a></div>
 	<!-- end .logo-->
 <?
   if(empty($_SESSION['city_id']) || empty($_SESSION['city_name'])) { get_my_city(); }
