@@ -211,7 +211,7 @@
       <hr class="hr_red">
       <ul class="info-links2">
         <li><a href="/upload/SNQ_AW_1314_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201314.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/6Xx5ASioemw" allowfullscreen=""></iframe></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/l72tlhPweR8" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->
