@@ -39,39 +39,39 @@
 
 		$id = str_replace(' ', '', trim($work_array[ID_FIELD]));
 		if(!is_numeric($id)) {
-			writeToLogFile($log_file, "Не указан id в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Не указан id в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$model_code = trim($work_array[MODEL_CODE_FIELD]);
 		if(strlen($model_code) == 0) {
-			writeToLogFile($log_file, "Не указан артикул в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Не указан артикул в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$id_mfc = str_replace(' ', '', trim($work_array[IDMFC_FIELD]));
 		if(!is_numeric($id_mfc)) {
-			writeToLogFile($log_file, "Не указан idmfc в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Не указан idmfc в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$price_origin = str_replace(' ', '', trim($work_array[PRICE_ORIGIN_FIELD]));
 		if(!is_numeric($price_origin)) {
-			writeToLogFile($log_file, "Базовая цена должна быть числом в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Базовая цена должна быть числом в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		} elseif ($price_origin <= 0) {
-			writeToLogFile($log_file, "Базовая цена должна быть больше нуля в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Базовая цена должна быть больше нуля в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$price = str_replace(' ', '', trim($work_array[PRICE_FIELD]));
 		if(!is_numeric($price)) {
-			writeToLogFile($log_file, "Цена должна быть числом в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Цена должна быть числом в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		} elseif ($price <= 0) {
-			writeToLogFile($log_file, "Цена должна быть больше нуля в строке «$value»", "red", $writeToFile);
+			writeToLogFile($log_file, "Цена должна быть больше нуля в строке $value", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
@@ -97,7 +97,7 @@
 				)
 			);
 			if(!$objElement = $resElement->GetNextElement()) {
-				writeToLogFile($log_file, "Позиция с артикулом «$model_code», idmfc=$id_mfc (id=$id) не найдена, цена для этого артикула не обновлена.", "red", $writeToFile);
+				writeToLogFile($log_file, "Позиция с артикулом $model_code, idmfc=$id_mfc (id=$id) не найдена, цена для этого артикула не обновлена.", "red", $writeToFile);
 				$error_cnt++;
 				continue;
 			}
@@ -109,7 +109,7 @@
 			$discount = 1;
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_discount' => $discount));
-		writeToLogFile($log_file, "Позиция с артикулом «$model_code» обновлена, ID позиции на сайте «$id». Цена «$price / $price_origin» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? 'скидки нет' : 'cкидка'), 'green', $writeToFile);
+		writeToLogFile($log_file, "Позиция с артикулом $model_code обновлена, ID позиции на сайте=$id, idmfc=$id_mfc. Цена $price / $price_origin добавлена/изменена в поле Цена / Базовая цена, ".($discount === 0 ? 'скидки нет' : 'cкидка'), 'green', $writeToFile);
 		$success_cnt++;
 	}
 
