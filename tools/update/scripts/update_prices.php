@@ -10,6 +10,7 @@
   define("FIELD_SEPARATOR", ",");
   define("ID_FIELD", 0);
   define("MODEL_CODE_FIELD", 1);
+	define("IDMFC_FIELD", 2);
   define("PRICE_ORIGIN_FIELD", 3);
 	define("PRICE_FIELD", 4);
   $file_dir = "/home/snqup/";
@@ -38,33 +39,39 @@
 
 		$id = str_replace(' ', '', trim($work_array[ID_FIELD]));
 		if(!is_numeric($id)) {
-			writeToLogFile($log_file, "Не указан id в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Не указан id в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$model_code = trim($work_array[MODEL_CODE_FIELD]);
 		if(strlen($model_code) == 0) {
-			writeToLogFile($log_file, "Не указан артикул в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Не указан артикул в строке «$value»", "red", $writeToFile);
+			$error_cnt++;
+			continue;
+		}
+		$id_mfc = str_replace(' ', '', trim($work_array[IDMFC_FIELD]));
+		if(!is_numeric($id_mfc)) {
+			writeToLogFile($log_file, "Не указан idmfc в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$price_origin = str_replace(' ', '', trim($work_array[PRICE_ORIGIN_FIELD]));
 		if(!is_numeric($price_origin)) {
-			writeToLogFile($log_file, "Базовая цена должна быть числом в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Базовая цена должна быть числом в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		} elseif ($price_origin <= 0) {
-			writeToLogFile($log_file, "Базовая цена должна быть больше нуля в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Базовая цена должна быть больше нуля в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
 		$price = str_replace(' ', '', trim($work_array[PRICE_FIELD]));
 		if(!is_numeric($price)) {
-			writeToLogFile($log_file, "Цена должна быть числом в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Цена должна быть числом в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		} elseif ($price <= 0) {
-			writeToLogFile($log_file, "Цена должна быть больше нуля в строке «".$value."»", "red", $writeToFile);
+			writeToLogFile($log_file, "Цена должна быть больше нуля в строке «$value»", "red", $writeToFile);
 			$error_cnt++;
 			continue;
 		}
@@ -78,14 +85,22 @@
 			array(),
 			array(
 				"IBLOCK_ID" => "1",
-				"PROPERTY_col_model_code" => $model_code,
-				"ID" => $id
+				"PROPERTY_col_idmfc" => $id_mfc
 			)
 		);
 		if(!$objElement = $resElement->GetNextElement()) {
-			writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» (id=".$id.") не найдена, цена для этого артикула не обновлена.", "red", $writeToFile);
-			$error_cnt++;
-			continue;
+			$resElement = CIBlockElement::GetList(
+				array(),
+				array(
+					"IBLOCK_ID" => "1",
+					"PROPERTY_col_model_code" => $model_code,
+				)
+			);
+			if(!$objElement = $resElement->GetNextElement()) {
+				writeToLogFile($log_file, "Позиция с артикулом «$model_code», idmfc=$id_mfc (id=$id) не найдена, цена для этого артикула не обновлена.", "red", $writeToFile);
+				$error_cnt++;
+				continue;
+			}
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price_origin'=> $price_origin));
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_price'=> $price));
@@ -94,19 +109,19 @@
 			$discount = 1;
 		}
 		CIBlockElement::SetPropertyValuesEx($id, 1, array('col_discount' => $discount));
-		writeToLogFile($log_file, "Позиция с артикулом «".$model_code."» обновлена, ID позиции на сайте «".$id."». Цена «".$price."/".$price_origin."» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? "скидки нет" : "cкидка"), "green", $writeToFile);
+		writeToLogFile($log_file, "Позиция с артикулом «$model_code» обновлена, ID позиции на сайте «$id». Цена «$price / $price_origin» добавлена/изменена в поле «Цена / Базовая цена», ".($discount === 0 ? 'скидки нет' : 'cкидка'), 'green', $writeToFile);
 		$success_cnt++;
 	}
 
-	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций (".$all_cnt."), из них успешно (".$success_cnt."), с ошибкой (".$error_cnt.")", "black", $writeToFile);
+	$mail_text .= writeToLogFile($log_file, "<strong>Обновление завершено:</strong> всего обновлено позиций ($all_cnt), из них успешно ($success_cnt), с ошибкой ($error_cnt)", "black", $writeToFile);
 
 	//После завершения обновления файла, переименовываем исходный файл
 
 	if (copy($file_path, PRICE_ARCHIVE_PATH . $rename_file_name .$extension)) {
-		writeToLogFile($log_file, "Файл ".$file_name." успешно скопирован в ".$rename_file_name.".", "green", $writeToFile);
+		writeToLogFile($log_file, "Файл $file_name успешно скопирован в $rename_file_name.", "green", $writeToFile);
 	}
 	else {
-		writeToLogFile($log_file, "Ошибка при копировании файла ".$file_name.". Обратитесь к разработчику.", "red", $writeToFile);
+		writeToLogFile($log_file, "Ошибка при копировании файла $file_name. Обратитесь к разработчику.", "red", $writeToFile);
 	}
 
 	//Финализация файла лога
