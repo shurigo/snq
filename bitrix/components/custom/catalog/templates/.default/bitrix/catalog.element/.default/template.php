@@ -30,6 +30,12 @@ false
 
 
             <!-- end .sizes -->
+
+             <ul class="links">
+              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a></li>
+              <li><?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?></li>
+            </ul>
+
             <div class="likes">
               <table>
                 <tr>
@@ -102,10 +108,7 @@ false
               <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
             </div>
             -->
-            <ul class="links">
-              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a></li>
-              <li><?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?></li>
-            </ul>
+
 
             <hr size="1" noshade>
             <span style="font-size:8pt;font-weight: bold;">Наличие в магазинах вашего города:</span>
