@@ -159,55 +159,48 @@ false
               -->
               <div class="hold">
                 <ul>
-                   <?
-                       $resizer = $arResult['DETAIL_PICTURE'];
-                       $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img = $file['src'];
+<?
+                  $resizer = $arResult['DETAIL_PICTURE'];
+                  $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                  $img = $file['src'];
 
-                       $resizer2 = $arResult['DETAIL_PICTURE'];
-                       $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img2 = $file2['src'];
-                    ?>
+                  $resizer2 = $arResult['DETAIL_PICTURE'];
+                  $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                  $img2 = $file2['src'];
+?>
 
-                    <li><a data-big="<?=$arResult['DETAIL_PICTURE']['SRC']?>" title="" href="<?=$img2;?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-                    <img src="<?=$img;?>" alt="">
-                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
+                  <li>
+                    <a data-big="<?=$arResult['DETAIL_PICTURE']['SRC']?>" title="" href="<?=$img2;?>">
+                      <span class="cell">
+                        <!--[if lte IE 7]><span><span><![endif]-->
+                        <img src="<?=$img;?>" alt="">
+                        <!--[if lte IE 7]></span></span><![endif]-->
+                      </span>
+                    </a>
+                  </li>
+<?
+                  for($idx = 1; $idx < 4; $idx++):
+                    $resizer = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
+                    $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                    $img = $file['src'];
 
-                    <?
-                       $resizer = $arResult['PROPERTIES']['add_pic_1']['VALUE'];
-                       $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img = $file['src'];
+                    $resizer2 = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
+                    $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                    $img2 = $file2['src'];
 
-                       $resizer2 = $arResult['PROPERTIES']['add_pic_1']['VALUE'];
-                       $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img2 = $file2['src'];
-
-
-                    ?>
-
-                    <? if ($arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]!='')  { ?>
-                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_1']["FILE_VALUE"]["SRC"]?>" title="" href="<?=$img2;?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-                    <img src="<?=$img;?>" alt="">
-                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
-                    <?} ?>
-
-                    <?
-                       $resizer = $arResult['PROPERTIES']['add_pic_2']['VALUE'];
-                       $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img = $file['src'];
-
-                       $resizer2 = $arResult['PROPERTIES']['add_pic_2']['VALUE'];
-                       $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                       $img2 = $file2['src'];
-
-                    ?>
-
-                   <? if ($arResult["DISPLAY_PROPERTIES"]['add_pic_2']["FILE_VALUE"]["SRC"]!='')  { ?>
-                    <li><a data-big="<?=$arResult["DISPLAY_PROPERTIES"]['add_pic_2']["FILE_VALUE"]["SRC"]?>" title="" href="<?=$img2;?>"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
-                    <img src="<?=$img;?>" alt="">
-                    <!--[if lte IE 7]></span></span><![endif]--></span></a></li>
-                    <?} ?>
-
+                    if($arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"] != ''):
+?>
+                      <li>
+                        <a data-big="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"]?>" title="" href="<?=$img2;?>">
+                          <span class="cell">
+                            <!--[if lte IE 7]><span><span><![endif]-->
+                            <img src="<?=$img;?>" alt="">
+                            <!--[if lte IE 7]></span></span><![endif]-->
+                          </span>
+                        </a>
+                      </li>
+                    <?endif;?> 
+                  <?endfor;?>
                 </ul>
               </div>
               <!-- end .hold-->
