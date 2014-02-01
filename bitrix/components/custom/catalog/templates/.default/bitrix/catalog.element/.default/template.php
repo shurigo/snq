@@ -179,7 +179,7 @@ false
                     </a>
                   </li>
 <?
-                  for($idx = 1; $idx < 4; $idx++):
+                  for($idx = 1; $idx < 2; $idx++):
                     $resizer = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
                     $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
                     $img = $file['src'];
