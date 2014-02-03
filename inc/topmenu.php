@@ -81,7 +81,7 @@
               <tr>
                 <td><ul>
                     <li><strong>Женские аксессуары</strong></li>
-                    <!--<li><a href="/collection/wbijouteries/">Бижутерия</a></li>-->
+                    <li><a href="/collection/wbijouteries/">Бижутерия</a></li>
                     <!--<li><a href="/collection/wumbrellas/">Зонты</a></li>-->
                     <li><a href="/collection/whats/">Головные уборы</a></li>
                     <li><a href="/collection/wwallets/">Кошельки</a></li>
