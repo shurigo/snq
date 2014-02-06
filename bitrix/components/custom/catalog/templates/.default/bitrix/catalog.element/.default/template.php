@@ -16,205 +16,199 @@ false
 );
 ?>
 <article class="item" itemscope itemtype="http://schema.org/Product">
-<section class="text">
-            <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
-            <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
-            <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
-
-            <? if ($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]) {?>
-
-            <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del> </div>
-            <?}  else { ?>
-            <? echo '<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new></div>'; } ?>
-						<!-- end .price-->
-
-
-            <!-- end .sizes -->
-
-             <ul class="links">
-              <li><a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a></li>
-              <li><?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?></li>
-            </ul>
-
-            <div class="likes">
-              <table>
-                <tr>
-                  <td>
-                      <div class="vk-hack"><div id="vk_like"></div></div>
+  <section class="text">
+    <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
+    <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
+    <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
+<? 
+    if($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]):?>
+      <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del> 
+      </div>
+<?  else:?>
+      <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new>
+      </div> 
+      <!-- end .price-->
+<?  endif; ?>
+    <ul class="links">
+      <li>
+        <a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a>
+      </li>
+      <li>
+        <?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?>
+      </li>
+    </ul>
+    <!-- end .links-->
+    <div class="likes">
+      <table>
+        <tr>
+          <td>
+            <div class="vk-hack"><div id="vk_like"></div></div>
 				      <!-- Original VK block
-                      <div id="vk_like"></div>
-				      <script type="text/javascript">
-						VK.Widgets.Like("vk_like", {type: "button", height: 20});
-				      </script>
+                <div id="vk_like"></div>
+                <script type="text/javascript">
+                  VK.Widgets.Like("vk_like", {type: "button", height: 20});
+                </script>
 				      -->
-				 </td>
-				 <td class="sep">&nbsp;&nbsp;</td>
-				 <td>
-				      <!-- ORIGINAL FB
-                      <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-                      -->
-                      <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
-				 </td>
-				 <td class="sep">&nbsp;&nbsp;</td>
-				 <td>
-                       <div class="g-plusone" data-size="medium"></div>
+          </td>
+          <td class="sep">&nbsp;&nbsp;</td>
+            <td>
+              <!-- ORIGINAL FB
+                <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+              -->
+              <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
+            </td>
+          <td class="sep">&nbsp;&nbsp;</td>
+          <td>
+            <div class="g-plusone" data-size="medium"></div>
 					  <script type="text/javascript">
-					  window.___gcfg = {lang: 'ru'};
-
-  					 (function() {
-								    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-								    po.src = 'https://apis.google.com/js/plusone.js';
-								    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
- 								 })();
-				     </script>
-				 </td>
-
-                </tr>
-                <tr>
-                <td>
-                      <div id="ok_shareWidget"></div>
+              window.___gcfg = {lang: 'ru'};
+  					  (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ 							})();
+				    </script>
+				  </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="ok_shareWidget"></div>
 						<script>
-						!function (d, id, did, st) {
-						  var js = d.createElement("script");
-						  js.src = "http://connect.ok.ru/connect.js";
-						  js.onload = js.onreadystatechange = function () {
-						  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
-						    if (!this.executed) {
-						      this.executed = true;
-						      setTimeout(function () {
-						        OK.CONNECT.insertShareWidget(id,did,st);
-						      }, 0);
-						    }
-						  }};
-						  d.documentElement.appendChild(js);
-						}(document,"ok_shareWidget","http://www.snowqueen.ru/","{width:170,height:20,st:'rounded',sz:20,ck:2}");
+              !function (d, id, did, st) {
+                var js = d.createElement("script");
+                js.src = "http://connect.ok.ru/connect.js";
+                js.onload = js.onreadystatechange = function () {
+                if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+                  if (!this.executed) {
+                    this.executed = true;
+                    setTimeout(function () {
+                      OK.CONNECT.insertShareWidget(id,did,st);
+                    }, 0);
+                  }
+                }};
+                d.documentElement.appendChild(js);
+              }(document,"ok_shareWidget","http://www.snowqueen.ru/","{width:170,height:20,st:'rounded',sz:20,ck:2}");
 						</script>
-
-                  </td>
-                 <td class="sep">&nbsp;&nbsp;</td>
-				 <td>
-                    <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
-                  </td>
-                   <td class="sep">&nbsp;&nbsp;</td>
-                   <td></td>
-                </tr>
-              </table>
-
-            </div>
-
-            <!-- end .likes-->
-            <!--
-            <div itemprop="description">
-              <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
-            </div>
-            -->
-
-
-            <hr size="1" noshade>
-            <span style="font-size:8pt;font-weight: bold;">Наличие в магазинах вашего города:</span>
-			<div class="sizes">
-							<select id="size-select" class="customSelect">
-                <option>Выберите размер</option>
-								<?foreach($arResult['SIZES'] as $size):?>
-									<option value="<?=$size['NOM_ID']?>"><?=$size['SIZE']?></option>
-								<?endforeach?>
-							</select>
-						</div>
-						</br>
-            <div id="availability"></div>
-
-            <!-- end .links-->
-<div class="grey"  style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</div>
-
- <?
-     $APPLICATION->IncludeComponent("custom:subscribe.form","",Array(
-		"AJAX_MODE" => "N",
-		"SHOW_HIDDEN" => "Y",
-		"ALLOW_ANONYMOUS" => "Y",
-		"SHOW_AUTH_LINKS" => "N",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"SET_TITLE" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"AJAX_OPTION_HISTORY" => "N"
-	));
+          </td>
+          <td class="sep">&nbsp;&nbsp;</td>
+				  <td>
+            <div class="twitter-hack"><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Твитнуть</a></div>
+          </td>
+          <td class="sep">&nbsp;&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <!-- end .likes-->
+    <!--
+    <div itemprop="description">
+      <p>Красивые и качественные товары можно приобрести очень легко, достаточно оформить заказ на сайте и уже на следующий день наш курьер доставит обновку в офис или домой для примерки</p>
+    </div>
+    -->
+    <hr size="1" noshade>
+    <span style="font-size:8pt;font-weight: bold;">Наличие в магазинах вашего города:</span>
+    <div class="sizes">
+      <select id="size-select" class="customSelect">
+        <option>Выберите размер</option>
+        <?foreach($arResult['SIZES'] as $size):?>
+          <option value="<?=$size['NOM_ID']?>"><?=$size['SIZE']?></option>
+        <?endforeach?>
+      </select>
+    </div>
+    <!-- end .sizes -->
+    </br>
+    <div id="availability"></div>
+    <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</div>
+<?
+    $APPLICATION->IncludeComponent("custom:subscribe.form", "", Array(
+ 		  "AJAX_MODE" => "N",
+		  "SHOW_HIDDEN" => "Y",
+		  "ALLOW_ANONYMOUS" => "Y",
+		  "SHOW_AUTH_LINKS" => "N",
+		  "CACHE_TYPE" => "A",
+		  "CACHE_TIME" => "3600",
+		  "SET_TITLE" => "N",
+		  "AJAX_OPTION_JUMP" => "N",
+		  "AJAX_OPTION_STYLE" => "Y",
+		  "AJAX_OPTION_HISTORY" => "N"
+    ));
 	?>
 </section>
 <!-- end .text-->
 <section class="gallery">
 <?
- $resizer = $arResult['DETAIL_PICTURE'];
- $file = CFile::ResizeImageGet($resizer, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
- $img = $file['src'];
+  $resizer = $arResult['DETAIL_PICTURE'];
+  $file = CFile::ResizeImageGet($resizer, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+  $img = $file['src'];
 ?>
-
-            <div class="big"><a class="zoom-pic" title='<?=$arResult["NAME"]?>' href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"><img src="<?=$img;?>" itemprop="image" alt='<?=$arResult["NAME"]?>'><span class="zoom"></span></a></div>
-
-            <!-- end .big-->
-            <div class="slider">
-              <!--
-              <div class="prev"></div>
-              <div class="next"></div>
-              -->
-              <div class="hold">
-                <ul>
+  <div class="big">
+    <a class="zoom-pic" title='<?=$arResult["NAME"]?>' href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>">
+      <img src="<?=$img;?>" itemprop="image" alt='<?=$arResult["NAME"]?>'>
+      <span class="zoom"></span>
+    </a>
+  </div>
+  <!-- end .big-->
+  <div class="slider">
+    <!--
+    <div class="prev"></div>
+    <div class="next"></div>
+    -->
+    <div class="hold">
+      <ul>
 <?
-                  $resizer = $arResult['DETAIL_PICTURE'];
-                  $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                  $img = $file['src'];
+        $resizer = $arResult['DETAIL_PICTURE'];
+        $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+        $img = $file['src'];
 
-                  $resizer2 = $arResult['DETAIL_PICTURE'];
-                  $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                  $img2 = $file2['src'];
+        $resizer2 = $arResult['DETAIL_PICTURE'];
+        $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+        $img2 = $file2['src'];
 ?>
-
-                  <li>
-                    <a data-big="<?=$arResult['DETAIL_PICTURE']['SRC']?>" title="" href="<?=$img2;?>">
-                      <span class="cell">
-                        <!--[if lte IE 7]><span><span><![endif]-->
-                        <img src="<?=$img;?>" alt="">
-                        <!--[if lte IE 7]></span></span><![endif]-->
-                      </span>
-                    </a>
-                  </li>
+        <li>
+          <a data-big="<?=$arResult['DETAIL_PICTURE']['SRC']?>" title="" href="<?=$img2;?>">
+            <span class="cell">
+              <!--[if lte IE 7]><span><span><![endif]-->
+              <img src="<?=$img;?>" alt="">
+              <!--[if lte IE 7]></span></span><![endif]-->
+            </span>
+          </a>
+        </li>
 <?
-                  for($idx = 1; $idx < 2; $idx++):
-                    $resizer = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
-                    $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                    $img = $file['src'];
+        for($idx = 1; $idx < 5; $idx++):
+          $resizer = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
+          if(trim($resizer) == '') {
+            continue;
+          }
+          $file = CFile::ResizeImageGet($resizer, array('width'=>75, 'height'=>103), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+          $img = $file['src'];
 
-                    $resizer2 = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
-                    $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
-                    $img2 = $file2['src'];
+          $resizer2 = $arResult['PROPERTIES']["add_pic_$idx"]['VALUE'];
+          $file2 = CFile::ResizeImageGet($resizer2, array('width'=>310, 'height'=>418), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+          $img2 = $file2['src'];
 
-                    if($arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"] != ''):
-?>
-                      <li>
-                        <a data-big="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"]?>" title="" href="<?=$img2;?>">
-                          <span class="cell">
-                            <!--[if lte IE 7]><span><span><![endif]-->
-                            <img src="<?=$img;?>" alt="">
-                            <!--[if lte IE 7]></span></span><![endif]-->
-                          </span>
-                        </a>
-                      </li>
-                    <?endif;?> 
-                  <?endfor;?>
-                </ul>
-              </div>
-              <!-- end .hold-->
-            </div>
-            <!-- end .slider-->
-          </section>
-          <!-- end .gallery-->
+          if($arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"] != ''):?>
+            <li>
+              <a data-big="<?=$arResult["DISPLAY_PROPERTIES"]["add_pic_$idx"]["FILE_VALUE"]["SRC"]?>" title="" href="<?=$img2;?>">
+                <span class="cell">
+                  <!--[if lte IE 7]><span><span><![endif]-->
+                  <img src="<?=$img;?>" alt="">
+                  <!--[if lte IE 7]></span></span><![endif]-->
+                </span>
+              </a>
+            </li>
+          <?endif;?> 
+        <?endfor;?>
+      </ul>
+    </div>
+    <!-- end .hold-->
+  </div>
+  <!-- end .slider-->
+  </section>
+  <!-- end .gallery-->
 </article>
 <!-- end .item-->
-
 </section>
 <!-- end .mainContent2-->
-
-
 <!-- HUBRUS RTB Segments Pixel V2.3 -->
 <?
 $sections = array( "new" =>
