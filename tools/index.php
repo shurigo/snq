@@ -30,12 +30,12 @@ $ELEMENT_ID=($arFields['ID']);
 echo $ELEMENT_ID."<br>";
 
 //upload image 1
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20132014/looks/".$PIC1);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC1);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 
 //upload image 2
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20132014/looks/".$PIC2);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC2);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_2", $arFile);
 }
