@@ -20,15 +20,16 @@ false
     <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
     <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
     <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
-<? 
+<?
     if($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]):?>
-      <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del> 
+      <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del>
       </div>
 <?  else:?>
       <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new>
-      </div> 
+      </div>
       <!-- end .price-->
 <?  endif; ?>
+
     <ul class="links">
       <li>
         <a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a>
@@ -38,23 +39,15 @@ false
       </li>
     </ul>
     <!-- end .links-->
+    <!--
     <div class="likes">
       <table>
         <tr>
           <td>
             <div class="vk-hack"><div id="vk_like"></div></div>
-				      <!-- Original VK block
-                <div id="vk_like"></div>
-                <script type="text/javascript">
-                  VK.Widgets.Like("vk_like", {type: "button", height: 20});
-                </script>
-				      -->
           </td>
           <td class="sep">&nbsp;&nbsp;</td>
             <td>
-              <!-- ORIGINAL FB
-                <div class="fb-like" data-href="http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
-              -->
               <fb:like send="false" layout="button_count" width="450" show_faces="false" font="arial"></fb:like>
             </td>
           <td class="sep">&nbsp;&nbsp;</td>
@@ -99,6 +92,7 @@ false
         </tr>
       </table>
     </div>
+    -->
     <!-- end .likes-->
     <!--
     <div itemprop="description">
@@ -118,21 +112,8 @@ false
     <!-- end .sizes -->
     </br>
     <div id="availability"></div>
-    <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону (495) 777-8-999.</div>
-<?
-    $APPLICATION->IncludeComponent("custom:subscribe.form", "", Array(
- 		  "AJAX_MODE" => "N",
-		  "SHOW_HIDDEN" => "Y",
-		  "ALLOW_ANONYMOUS" => "Y",
-		  "SHOW_AUTH_LINKS" => "N",
-		  "CACHE_TYPE" => "A",
-		  "CACHE_TIME" => "3600",
-		  "SET_TITLE" => "N",
-		  "AJAX_OPTION_JUMP" => "N",
-		  "AJAX_OPTION_STYLE" => "Y",
-		  "AJAX_OPTION_HISTORY" => "N"
-    ));
-	?>
+    <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону 8 888 777-8-999.</div>
+
 </section>
 <!-- end .text-->
 <section class="gallery">
@@ -196,7 +177,7 @@ false
                 </span>
               </a>
             </li>
-          <?endif;?> 
+          <?endif;?>
         <?endfor;?>
       </ul>
     </div>
