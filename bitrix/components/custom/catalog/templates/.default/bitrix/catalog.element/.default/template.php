@@ -130,10 +130,8 @@ false
   </div>
   <!-- end .big-->
   <div class="slider">
-    <!--
     <div class="prev"></div>
     <div class="next"></div>
-    -->
     <div class="hold">
       <ul>
 <?
