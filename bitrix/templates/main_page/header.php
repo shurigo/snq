@@ -111,7 +111,7 @@
         <ul class="socials">
           <li>Оставайтесь с нами</li>
           <li><a class="vk" href="http://vk.com/likeaqueen" rel="nofollow" target="_blank">Вконтакте</a></li>
-          <li><a class="fb" href="https://facebook.com/likeaqueenru" rel="nofollow" target="_blank">Facebook</a></li>
+          <li><a class="fb" href="https://facebook.com/likeaqueenblog" rel="nofollow" target="_blank">Facebook</a></li>
           <li><a class="tw" href="https://twitter.com/LikeAQueenBlog" rel="nofollow" target="_blank">Twitter</a></li>
           <li><a class="ok" href="http://www.odnoklassniki.ru/group/51951031353532" rel="nofollow" target="_blank">Одноклассники</a></li>
           <li><a class="ig" href="http://instagram.com/likeaqueenblog" rel="nofollow" target="_blank">Instagram</a></li>
@@ -210,7 +210,7 @@
       <br>
       <hr class="hr_red">
       <ul class="info-links2">
-        <li><a href="/upload/SNQ_AW_1314_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201314.jpg" alt="" border="0"></a></li>
+        <li><a href="/upload/SNQ_SS_14_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_ss2014.jpg" alt="" border="0"></a></li>
         <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/8J5jF5uSTvw" allowfullscreen=""></iframe></li>
       </ul>
 
