@@ -26,7 +26,6 @@
 <script type="text/javascript" src="/js/set-discount.js"></script>
 <script type="text/javascript" src="/js/get-shops.js"></script>
 <script type="text/javascript" src="/js/lightbox.js"></script>
-<script type="text/javascript" src="/js/snowfall.js"></script>
 <script type="text/javascript" src="/js/jquery.nyroModal.custom.js"></script>
 <!--[if IE 6]>
 		<script type="text/javascript" src="/js/jquery.nyroModal-ie6.min.js"></script>

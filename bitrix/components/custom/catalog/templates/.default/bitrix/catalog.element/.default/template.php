@@ -130,10 +130,19 @@ false
   </div>
   <!-- end .big-->
   <div class="slider">
-    <!--
+<?
+	$number_of_pictures = 0;
+	for($idx = 1; $idx < 5; $idx++) {
+		if($arResult['PROPERTIES']["add_pic_$idx"]['VALUE'] != '') {
+			$number_of_pictures++;
+		}
+	}
+?>
+<?//Display prev/next buttons?
+  if($number_of_pictures > 2):?>
     <div class="prev"></div>
     <div class="next"></div>
-    -->
+<?endif;?>
     <div class="hold">
       <ul>
 <?

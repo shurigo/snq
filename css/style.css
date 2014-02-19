@@ -481,11 +481,9 @@ table .sep {
 }
 
 .aside {
-	float:left;
 	border-right:1px solid #c3c3c3;
 	padding:0 13px 0 16px;
 	margin:0 0 0 -1px;
-	left:1px;
 	position:relative;
 	width:178px;
 }
@@ -496,7 +494,7 @@ table .sep {
 
 .mainContent {
 	float:right;
-	width:776px;
+	width:777px;
 	padding:0 0 0 13px;
 	border-left:1px solid #c3c3c3;
 }
@@ -1026,7 +1024,7 @@ text-transform: uppercase;
 .slider .hold {
 	position:relative;
 	overflow:hidden;
-	height:700px;
+	height:420px;
 }
 
 .slider .hold ul {
