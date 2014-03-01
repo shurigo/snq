@@ -34,6 +34,7 @@
 <link href="/css/nyroModal.css" rel="stylesheet" type="text/css">
 
 <script src="/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="js/jquery.pjax.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function() {
         $.mask.definitions['~'] = "[+-]";

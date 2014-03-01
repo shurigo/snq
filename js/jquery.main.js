@@ -51,6 +51,8 @@ $(window).on("load", function(){
   initNav();
 });
 
+$(document).pjax('a', '.ui-slider');
+
 function initScrollUp() {
 	$(window).scroll(function(){
 	 if ($(this).scrollTop() > 100) {
