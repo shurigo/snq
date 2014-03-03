@@ -164,7 +164,7 @@ class CDatabase extends CAllDatabase
 				}
 
 				if($this->debug || (@session_start() && $_SESSION["SESS_AUTH"]["ADMIN"]))
-					echo $error_position."<br><font color=#ff0000>MySQL Query Error: ".htmlspecialchars($strSql)."</font>[".htmlspecialchars($this->db_Error)."]<br>";
+					echo $error_position."<br><font color=#ff0000>MySQL Query Error: ".htmlspecialcharsEx($strSql)."</font>[".htmlspecialcharsEx($this->db_Error)."]<br>";
 
 				$error_position = preg_replace("#<br[^>]*>#i","\n",$error_position);
 				SendError($error_position."\nMySQL Query Error:\n".$strSql." \n [".$this->db_Error."]\n---------------\n\n");
@@ -632,10 +632,10 @@ class CDatabase extends CAllDatabase
 					{
 						$$varnameTo = array();
 						foreach($$varnameFrom as $k=>$v)
-							$$varnameTo[$k] = htmlspecialchars($v);
+							$$varnameTo[$k] = htmlspecialcharsEx($v);
 					}
 					else
-						$$varnameTo = htmlspecialchars($$varnameFrom);
+						$$varnameTo = htmlspecialcharsEx($$varnameFrom);
 				}
 			}
 		}
@@ -732,7 +732,6 @@ class CDatabase extends CAllDatabase
 		}
 
 		return false;
-		//echo "<pre>",htmlspecialchars(print_r($arIndexes, true)),"</pre><hR>";
 	}
 }
 
