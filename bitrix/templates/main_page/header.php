@@ -210,7 +210,7 @@
       <hr class="hr_red">
       <ul class="info-links2">
         <li><a href="/upload/SNQ_SS_14_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_ss2014.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/rS3e5aqnGFY" allowfullscreen=""></iframe></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/u7tor824Z64" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->
