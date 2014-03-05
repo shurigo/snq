@@ -1,8 +1,3 @@
-<!-- HUBRUS RTB Segments Pixel V2.3 -->
-<?if(HUBRUS_ENABLE):?>
-<script type="text/javascript" src="http://track.hubrus.com/pixel?id=12850&type=js"></script>
-<?endif;?>
-
 <script language="javascript">
 var odinkod = {
 "type": "homepage"

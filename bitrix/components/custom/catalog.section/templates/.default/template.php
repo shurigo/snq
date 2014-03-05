@@ -46,7 +46,7 @@
 	<?$page_count = $arResult['NAV_RESULT']->NavPageCount;?>
 	<input id="pages" type="hidden" value="<?=$page_count;?>">
 <?// don't go beyound the last page
-	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die; 
+	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die;
 }?>
 <?if(count($arResult['ITEMS']) == 0):?>
   <p>По вашему запросу ничего не найдено</p>
@@ -207,14 +207,21 @@ if (strlen($url_array[3]) == 0) {
 	$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 }
 ?>
-<!-- HUBRUS RTB Segments Pixel V2.3 -->
-<?if(HUBRUS_ENABLE):?>
-<script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
-<?endif;?>
 
-<!-- Segment Pixel - SQ_segment - DO NOT MODIFY -->
-<img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
-<!-- End of Segment Pixel -->
+<!--  AdRiver code START. Type:counter(zeropixel) Site: snowqueen PZ: 0 BN: 0 -->
+<script type="text/javascript">
+(function(n){
+    var l = window.location, a = l.hostname.split('.');
+    a.splice(a.length-2, 2);
+    window[n] = (a.length ? '/' + a.join('/') : '') + l.pathname + escape(l.search);
+})('sz');
+
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write('<img src="' + ('https:' == document.location.protocol ? 'https:' : 'http:') + '//ad.adriver.ru/cgi-bin/rle.cgi?' + 'sid=196960&bt=21&pz=0&sz=' + sz +'&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail + '" border=0 width=1 height=1>')
+</script>
+<noscript><img src="//ad.adriver.ru/cgi-bin/rle.cgi?sid=196960&bt=21&pz=0&rnd=2076491944" border=0 width=1 height=1></noscript>
+<!--  AdRiver code END  -->
 
 <a href="#" class="scrollup">Scroll</a>
 </section>

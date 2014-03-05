@@ -96,5 +96,19 @@
 
 ?>
 
+<!--  AdRiver code START. Type:counter(zeropixel) Site: snowqueen PZ: 0 BN: 0 -->
+<script type="text/javascript">
+(function(n){
+    var l = window.location, a = l.hostname.split('.');
+    a.splice(a.length-2, 2);
+    window[n] = (a.length ? '/' + a.join('/') : '') + l.pathname + escape(l.search);
+})('sz');
+
+var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+document.write('<img src="' + ('https:' == document.location.protocol ? 'https:' : 'http:') + '//ad.adriver.ru/cgi-bin/rle.cgi?' + 'sid=196960&bt=21&pz=0&sz=' + sz +'&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail + '" border=0 width=1 height=1>')
+</script>
+<noscript><img src="//ad.adriver.ru/cgi-bin/rle.cgi?sid=196960&bt=21&pz=0&rnd=2076491944" border=0 width=1 height=1></noscript>
+<!--  AdRiver code END  -->
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
