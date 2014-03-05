@@ -21,13 +21,19 @@
 	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
 		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
 	}
-	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE'] == 'Да' ? 'Y' : 'N';
+	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] == 'yes' ? 'Y' : 'N';
+	$only_new = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] === 'new';
 
-	  // filter only items with discount
+	// filter only items with discount
 	if($discount_only == 'Y') {
 			$action_catalog_filter[] = Array('PROPERTY_col_discount' => 1);
+	} elseif($only_new) {
+		$action_catalog_filter[] = Array(
+			'LOGIC' => 'OR',
+			'=PROPERTY_col_discount' => 0,
+			'PROPERTY_col_discount' => false
+		);
 	}
-
 ?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
 		<br>
