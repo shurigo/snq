@@ -20,6 +20,10 @@
 				array('min_length', array(':value', 2)),
 				array('max_length', array(':value', 50))
 			);
+			$rules['gender'] = array(
+				array('not_empty'),
+				array('regex', array(':value', '/^[FM]$/')),
+			);
 			$rules['birthday'] = array(
 				array('not_empty'),
 				array('date')
