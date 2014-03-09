@@ -28,13 +28,11 @@ class Controller_User extends Controller_Template {
 				'first_name',
 				'last_name',
 				'patronymic',
+				'gender',
 				'birthday',
 				'phone',
 				'subscribe_sms',
 				'subscribe_email',
-				'deliver_to',
-				'deliver_to_shop',
-				'deliver_to_address',
 				'password'
 			));
 			$_POST = array(); // Reset values so form is not sticky
@@ -82,13 +80,11 @@ class Controller_User extends Controller_Template {
 					'first_name',
 					'last_name',
 					'patronymic',
+					'gender',
 					'birthday',
 					'phone',
 					'subscribe_sms',
 					'subscribe_email',
-					'deliver_to',
-					'deliver_to_shop',
-					'deliver_to_address',
 					'password',
 					'email'));
 

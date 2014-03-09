@@ -4,8 +4,6 @@
 	require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
 
 	$city_id = get_city_by_name($_SESSION['city_name']);
-	$shops = get_shops_by_city($city_id);
-	include($_SERVER['DOCUMENT_ROOT'].'/kohana/application/views/user/js.inc');
 ?>
 <section class="mainContent2">
 <div>Добро пожаловать, <?=iconv('utf-8', 'cp1251', "$user->first_name $user->last_name"); ?>!</div><br />
@@ -44,6 +42,14 @@
 	</div>
 </td></tr>
 <tr style="vertical-align:top;">
+<td align="left"><?= Form::label('gender', 'Пол'); ?></td>
+<td>
+	<?= Form::select('gender', array('F'=>'Женский', 'M'=>'Мужской'), $user->gender, array('class' => 'customSelect')); ?>
+	<div class="error red">
+		<?= Arr::get($errors, 'gender'); ?>
+	</div>
+</td></tr>
+<tr style="vertical-align:top;">
 <td align="left"><?= Form::label('birthday', 'Дата рождения'); ?></td>
 <td><?= Form::input('birthday', $user->birthday, array('id'=>'birthday', 'type'=>'text', 'readonly',"size" =>"30px")); ?>
 	<div class="error red">
@@ -69,26 +75,6 @@
 	<?= Form::label('subscribe_sms', 'E-mail'); ?>
 	<?= Form::checkbox('subscribe_email', 1, $user->subscribe_email > 0); ?>
 </td></tr>
-<!--
-<p>
-	<?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба:'); ?>
-</p>
-<p>
-<?
-	// 0 - deliver to shop
-	// 1 - deliver to address
-?>
-  <?= Form::radio('deliver_to', 0, $user->deliver_to == 0); ?>
-  <?= Form::label('dto0', 'В магазине'); ?>
-  <?= Form::radio('deliver_to', 1, $user->deliver_to == 1); ?>
-  <?= Form::label('dto1', 'Доставить по адресу'); ?>
-</p>
-<p>
-	<?= Form::select('deliver_to_shop', $shops, iconv('utf-8', 'cp1251', HTML::chars($user->deliver_to_shop)), array('class' => 'delivery', 'id' => 'dto_0')); ?>
-	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars($user->deliver_to_address)), array('class' => 'delivery', 'id' => 'dto_1')); ?>
-</p>
--->
-
 <tr style="vertical-align:top;">
 <td align="left"><?= Form::label('password', 'Пароль'); ?></td>
 <td><?= Form::password('password',null,array("size" =>"30px")); ?>

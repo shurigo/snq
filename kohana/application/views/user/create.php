@@ -2,10 +2,6 @@
   require($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   $APPLICATION->SetTitle('Вступить в клуб');
   require($_SERVER['DOCUMENT_ROOT'].'/ipgeo/geohelper.php');
-
-  $city_id = get_city_by_name($_SESSION['city_name']);
-  $shops = get_shops_by_city($city_id);
-  include($_SERVER['DOCUMENT_ROOT'].'/kohana/application/views/user/js.inc');
 ?>
 <p>тут надо разместить прекрасный короткий и информативный текст про преимущества которые дает Клуб.</p>
 <h2>Регистрация</h2>
@@ -36,6 +32,15 @@
 		<?= Arr::get($errors, 'last_name'); ?>
 	</div>
 </td></tr>
+<tr style="vertical-align:top;">
+  <td>
+		<b><?=Form::label('gender', 'Пол'); ?></b><br />
+    <?=Form::select('gender', array('F'=>'Женский', 'M'=>'Мужской'), 'F', array('class'=>'customSelect'));?>
+		<div class="error red">
+			<?= Arr::get($errors, 'gender'); ?>
+		</div>
+	</td>
+</tr>
 <tr style="vertical-align:top;"><td>
 	<b><?= Form::label('birthday', 'Дата рождения'); ?></b><br />
 	<?= Form::input('birthday', HTML::chars(Arr::get($_POST, 'birthday')), array('id'=>'birthday', 'type'=>'text', 'readonly','size' =>'40px')); ?>
@@ -54,29 +59,9 @@
 	<div class="error red">
 		<?= Arr::get($errors, 'email'); ?>
 	</div>
-<br />
 </td>
 </tr>
-
-<tr bgcolor='#e6e9ee'><td colspan=3>
-	<b><?= Form::label('deliver_card_to', 'Выберете предпочтительный способ получения Карты Кролевского Клуба'); ?></b>
-</td></tr>
-
-<tr style="vertical-align:top;"><td colspan=3>
-<?
-	// 0 - deliver to shop
-	// 1 - deliver to address
-	$deliver_to = Arr::get($_POST, 'deliver_to');
-?>
-  <?= Form::radio('deliver_to', 0, $deliver_to == 0); ?>
-  <?= Form::label('dto0', 'В магазине'); ?>
-  <?= Form::radio('deliver_to', 1, $deliver_to == 1); ?>
-  <?= Form::label('dto1', 'Доставить по адресу'); ?>
-
-    <br />
-	<?= Form::select('deliver_to_shop', $shops, iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_shop'))), array('class' => 'delivery', 'id' => 'dto_0')); ?>
-	<?= Form::input('deliver_to_address', iconv('utf-8', 'cp1251', HTML::chars(Arr::get($_POST, 'deliver_to_address'))), array('class' => 'delivery', 'id' => 'dto_1','size' => '90px')); ?>
-</td></tr>
+<br />
 <tr style="vertical-align:top;">
 <td>
 	<b><?= Form::label('password', 'Пароль'); ?></b><br />
