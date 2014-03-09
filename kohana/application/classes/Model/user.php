@@ -1,6 +1,12 @@
 <?php
   class Model_User extends Model_Auth_User
   {
+		public function is_active() 
+		{
+			return $this->activation_date != null && 
+						 $this->card_no > 0;
+		}
+
 		public function rules()
 		{
 			$rules = parent::rules();

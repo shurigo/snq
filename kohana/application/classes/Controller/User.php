@@ -15,6 +15,22 @@ class Controller_User extends Controller_Template {
 		{
 			Request::current()->redirect('user/login');
 		}
+		if ($user->where('id', '=', $user->id)->count_all() <= 0)
+		{
+			$this->action_logout();
+		}
+		if (!$user->is_active() )
+		{
+			if($user->logins->value() < 2) 
+			{
+				$message = 'Ваша заявка на получения карты "Королевский Клуб" создана. Обратитесь в ближайший магазин для оформления дисконтной карты. После активации карты Вам станет доступен вход в личный кабинет.';
+			}
+			else
+			{
+				$message = 'Ваша карта еще не активирована или информация об активации еще не передана на сайт.';
+			}
+			return;
+		}
 
 		if (HTTP_Request::POST != $this->request->method())
 		{
@@ -24,17 +40,22 @@ class Controller_User extends Controller_Template {
 		$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 		try
 		{
-			$user->update_user($_POST, array(
-				'first_name',
-				'last_name',
-				'patronymic',
-				'gender',
-				'birthday',
-				'phone',
-				'subscribe_sms',
-				'subscribe_email',
-				'password'
-			));
+			$extra_props = array(
+				'ip_address' => Request::$client_ip,
+			);
+			$user->update_user(
+				array_merge($_POST, $extra_props),
+				array(
+					'first_name',
+					'last_name',
+					'patronymic',
+					'gender',
+					'birthday',
+					'phone',
+					'subscribe_sms',
+					'subscribe_email',
+					'password',
+					'ip_address'));
 			$_POST = array(); // Reset values so form is not sticky
 			$message = "Данные сохранены";
 			if ($user)
@@ -75,19 +96,26 @@ class Controller_User extends Controller_Template {
 				$message = 'Ошибки при регистрации';
 				return;
 			}
+			$extra_props = array(
+				'ip_address' => Request::$client_ip,
+				'registration_date' => date(Date::$timestamp_format)
+			);
 			$user = ORM::factory('User')
-				->create_user($_POST, array(
-					'first_name',
-					'last_name',
-					'patronymic',
-					'gender',
-					'birthday',
-					'phone',
-					'subscribe_sms',
-					'subscribe_email',
-					'password',
-					'email'));
-
+				->create_user(
+					array_merge($_POST, $extra_props), 
+					array(
+						'first_name',
+						'last_name',
+						'patronymic',
+						'gender',
+						'birthday',
+						'phone',
+						'subscribe_sms',
+						'subscribe_email',
+						'password',
+						'email',
+						'ip_address',
+						'registration_date'));
 			// Grant user login role
 			$user->add('roles', ORM::factory('Role', array('name' => 'login')));
 
