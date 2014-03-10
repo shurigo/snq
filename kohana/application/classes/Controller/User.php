@@ -19,17 +19,12 @@ class Controller_User extends Controller_Template {
 		{
 			$this->action_logout();
 		}
-		if (!$user->is_active() )
+		if (!$user->is_active())
 		{
-			if($user->logins->value() < 2) 
-			{
-				$message = 'Ваша заявка на получения карты "Королевский Клуб" создана. Обратитесь в ближайший магазин для оформления дисконтной карты. После активации карты Вам станет доступен вход в личный кабинет.';
-			}
-			else
-			{
-				$message = 'Ваша карта еще не активирована или информация об активации еще не передана на сайт.';
-			}
-			return;
+			$message = 
+				((int)((string)$user->logins)) < 2
+				? 'Ваша заявка на получения карты "Королевский Клуб" создана. Обратитесь в ближайший магазин для оформления дисконтной карты. После активации карты Вам станет доступен вход в личный кабинет.'
+				: $message = 'Ваша карта еще не активирована или информация об активации еще не передана на сайт.';
 		}
 
 		if (HTTP_Request::POST != $this->request->method())
@@ -152,6 +147,7 @@ class Controller_User extends Controller_Template {
 		if($user)
 		{
 			$this->action_index();
+			return;
 		}
 		if (HTTP_Request::POST != $this->request->method())
 		{
