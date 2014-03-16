@@ -31,6 +31,7 @@ CREATE TABLE `users` (
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login` int(10) unsigned DEFAULT NULL,
   `card_no` int(12) NOT NULL,
+	`card_balance` decimal(10,4) NOT NULL DEFAULT '0.0000',
   `discount` int(11) NOT NULL,
   `ip_address` varchar(15) NOT NULL,
   `city_name` varchar(255) NOT NULL,
