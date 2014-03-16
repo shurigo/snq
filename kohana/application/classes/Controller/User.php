@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-class Controller_User extends Controller_Template {
-
+class Controller_User extends Controller_Template 
+{
 	public function action_index()
 	{
 		$this->template->content = View::factory('user/info')
@@ -26,7 +26,6 @@ class Controller_User extends Controller_Template {
 				? 'Ваша заявка на получения карты "Королевский Клуб" создана. Обратитесь в ближайший магазин для оформления дисконтной карты. После активации карты Вам станет доступен вход в личный кабинет.'
 				: $message = 'Ваша карта еще не активирована или информация об активации еще не передана на сайт.';
 		}
-
 		if (HTTP_Request::POST != $this->request->method())
 		{
 			return;
@@ -37,7 +36,9 @@ class Controller_User extends Controller_Template {
 		{
 			$extra_props = array(
 				'ip_address' => Request::$client_ip,
+				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
 			);
+
 			$user->update_user(
 				array_merge($_POST, $extra_props),
 				array(
@@ -47,6 +48,7 @@ class Controller_User extends Controller_Template {
 					'gender',
 					'birthday',
 					'phone',
+					'city_name',
 					'subscribe_sms',
 					'subscribe_email',
 					'password',
@@ -84,17 +86,22 @@ class Controller_User extends Controller_Template {
 		{
 			return;
 		}
+
 		try
 		{
-			if (!Captcha::valid($_POST['captcha'])) {
+			if (!Captcha::valid($_POST['captcha'])) 
+			{
 				$errors['captcha'] = 'Введите правильный код с картинки';
 				$message = 'Ошибки при регистрации';
 				return;
 			}
+
 			$extra_props = array(
 				'ip_address' => Request::$client_ip,
-				'registration_date' => date(Date::$timestamp_format)
+				'registration_date' => date(Date::$timestamp_format),
+				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
 			);
+
 			$user = ORM::factory('User')
 				->create_user(
 					array_merge($_POST, $extra_props), 
@@ -110,7 +117,9 @@ class Controller_User extends Controller_Template {
 						'password',
 						'email',
 						'ip_address',
-						'registration_date'));
+						'registration_date',
+						'city_name'));
+			//$_POST = array(); // Reset values so form is not sticky
 			// Grant user login role
 			$user->add('roles', ORM::factory('Role', array('name' => 'login')));
 

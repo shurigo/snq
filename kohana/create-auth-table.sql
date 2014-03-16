@@ -33,7 +33,7 @@ CREATE TABLE `users` (
   `card_no` int(12) NOT NULL,
   `discount` int(11) NOT NULL,
   `ip_address` varchar(15) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `city_name` varchar(255) NOT NULL,
   `registration_date` datetime NOT NULL,
   `activation_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
