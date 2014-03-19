@@ -1120,12 +1120,13 @@ text-transform: uppercase;
 	font-style:normal;
 	font-weight:bold;
 	background:#d72a60;
+	text-align: center;
 }
 
 .slider1 .nav li {
 	float:left;
 	cursor:pointer;
-	text-decoration:underline;
+	/*text-decoration:underline;*/
 	width:179px;
 	padding:7px 0 10px 20px;
 }
@@ -1271,6 +1272,7 @@ text-transform: uppercase;
 	color:#fff;
 	min-width:151px;
 	text-align:left;
+	text-transform: uppercase;
 }
 
 .info-links .text {
