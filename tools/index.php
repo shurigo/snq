@@ -12,7 +12,7 @@ $csv_file="add_img.csv";
 $file = fopen($csv_file, 'r');
 
 $i=0;
-
+$j=0;
 while (($line = fgetcsv($file, 1000, ";")) !== FALSE) {
 //read data from the file
 $XML_ID =$line[0];
@@ -24,10 +24,11 @@ $arSelect = Array("ID");
 $arFilter = Array("XML_ID"=>$XML_ID);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
 //print_r();
+
 while ($ob = $res->GetNextElement()) {$arFields = $ob->GetFields();
 $ELEMENT_ID=($arFields['ID']);
 
-echo $ELEMENT_ID."<br>";
+echo $ELEMENT_ID."-".$XML_ID.";".$PIC1.";".$PIC2."<br>";
 
 //upload image 1
 $arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC1);
@@ -38,6 +39,8 @@ CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 $arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC2);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_2", $arFile);
+
+$j++;
 }
 
 $i++;
@@ -45,7 +48,8 @@ $i++;
 }
 fclose($file);
 
-echo "processed rows:".$i;
+echo "processed rows:".$i,"<br>";
+echo "founded ids:".$j,"<br>";
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>

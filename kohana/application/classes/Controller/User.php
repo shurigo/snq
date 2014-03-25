@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-class Controller_User extends Controller_Template {
-
+class Controller_User extends Controller_Template 
+{
 	public function action_index()
 	{
 		$this->template->content = View::factory('user/info')
@@ -15,7 +15,17 @@ class Controller_User extends Controller_Template {
 		{
 			Request::current()->redirect('user/login');
 		}
-
+		if ($user->where('id', '=', $user->id)->count_all() <= 0)
+		{
+			$this->action_logout();
+		}
+		if (!$user->is_active())
+		{
+			$message = 
+				((int)((string)$user->logins)) < 2
+				? 'Ваша заявка на получения карты "Королевский Клуб" создана. Обратитесь в ближайший магазин для оформления дисконтной карты. После активации карты Вам станет доступен вход в личный кабинет.'
+				: $message = 'Ваша карта еще не активирована или информация об активации еще не передана на сайт.';
+		}
 		if (HTTP_Request::POST != $this->request->method())
 		{
 			return;
@@ -24,19 +34,25 @@ class Controller_User extends Controller_Template {
 		$_POST['subscribe_email'] = array_key_exists('subscribe_email', $_POST) ? 1 : 0;
 		try
 		{
-			$user->update_user($_POST, array(
-				'first_name',
-				'last_name',
-				'patronymic',
-				'birthday',
-				'phone',
-				'subscribe_sms',
-				'subscribe_email',
-				'deliver_to',
-				'deliver_to_shop',
-				'deliver_to_address',
-				'password'
-			));
+			$extra_props = array(
+				'ip_address' => Request::$client_ip,
+				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
+			);
+
+			$user->update_user(
+				array_merge($_POST, $extra_props),
+				array(
+					'first_name',
+					'last_name',
+					'patronymic',
+					'gender',
+					'birthday',
+					'phone',
+					'city_name',
+					'subscribe_sms',
+					'subscribe_email',
+					'password',
+					'ip_address'));
 			$_POST = array(); // Reset values so form is not sticky
 			$message = "Данные сохранены";
 			if ($user)
@@ -70,28 +86,40 @@ class Controller_User extends Controller_Template {
 		{
 			return;
 		}
+
 		try
 		{
-			if (!Captcha::valid($_POST['captcha'])) {
+			if (!Captcha::valid($_POST['captcha'])) 
+			{
 				$errors['captcha'] = 'Введите правильный код с картинки';
 				$message = 'Ошибки при регистрации';
 				return;
 			}
-			$user = ORM::factory('User')
-				->create_user($_POST, array(
-					'first_name',
-					'last_name',
-					'patronymic',
-					'birthday',
-					'phone',
-					'subscribe_sms',
-					'subscribe_email',
-					'deliver_to',
-					'deliver_to_shop',
-					'deliver_to_address',
-					'password',
-					'email'));
 
+			$extra_props = array(
+				'ip_address' => Request::$client_ip,
+				'registration_date' => date(Date::$timestamp_format),
+				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
+			);
+
+			$user = ORM::factory('User')
+				->create_user(
+					array_merge($_POST, $extra_props), 
+					array(
+						'first_name',
+						'last_name',
+						'patronymic',
+						'gender',
+						'birthday',
+						'phone',
+						'subscribe_sms',
+						'subscribe_email',
+						'password',
+						'email',
+						'ip_address',
+						'registration_date',
+						'city_name'));
+			//$_POST = array(); // Reset values so form is not sticky
 			// Grant user login role
 			$user->add('roles', ORM::factory('Role', array('name' => 'login')));
 
@@ -128,6 +156,7 @@ class Controller_User extends Controller_Template {
 		if($user)
 		{
 			$this->action_index();
+			return;
 		}
 		if (HTTP_Request::POST != $this->request->method())
 		{

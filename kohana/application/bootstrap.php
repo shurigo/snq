@@ -136,6 +136,7 @@ Kohana::modules(array(
 	'database'   => $mod_path . 'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
+	'minion' 		 => $mod_path . 'minion',
   //'orm'        => MODPATH.'orm',        // Object Relationship Mapping
   'ORM'        => $mod_path .'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing

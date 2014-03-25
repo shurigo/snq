@@ -16,25 +16,32 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
   KEY `fk_role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(127) NOT NULL,
   `password` varchar(64) NOT NULL,
   `first_name` varchar(127) NOT NULL,
   `last_name` varchar(127) NOT NULL,
   `patronymic` varchar(127) NOT NULL,
+  `gender` varchar(1) NOT NULL,
   `birthday` date NOT NULL,
   `phone` varchar(14) NOT NULL,
-  `subscribe_sms` int(1) NOT NULL,
+  `subscribe_sms` int(100) NOT NULL,
   `subscribe_email` int(1) NOT NULL,
-	`deliver_to` int(10) NOT NULL DEFAULT '0',
-  `deliver_to_shop` varchar(255) NOT NULL,
-  `deliver_to_address` varchar(255) NOT NULL,
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+  `card_no` int(12) NOT NULL,
+	`card_balance` decimal(10,4) NOT NULL DEFAULT '0.0000',
+  `discount` int(11) NOT NULL,
+  `ip_address` varchar(15) NOT NULL,
+  `city_name` varchar(255) NOT NULL,
+  `registration_date` datetime NOT NULL,
+  `activation_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_email` (`email`),
+  KEY `email` (`email`),
+  KEY `card_no` (`card_no`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,

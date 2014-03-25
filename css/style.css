@@ -201,7 +201,7 @@ table .sep {
 }
 
 .red {
-	color:#9a0101!important;
+	color:#d72a60!important;
 }
 
 .nowrap {
@@ -230,7 +230,7 @@ table .sep {
 	height:3px;
 	overflow:hidden;
 	margin:0px 0 20px 0;
-	background:#9a0101!important;
+	background:#d72a60!important;
 }	
 
 .grey {
@@ -518,7 +518,7 @@ table .sep {
 .footer {
 	position:relative;
 	border-width:3px;
-	border-color:#990100;
+	border-color:#d72a60;
 	padding:19px 0 0 0;
 	margin-top:-117px;
 	line-height:14px;
@@ -554,7 +554,7 @@ table .sep {
 
 .footer strong {
 	font-weight:normal;
-	color:#990100;
+	color:#d72a60;
 }
 
 .sort {
@@ -619,7 +619,7 @@ table .sep {
 	margin:13px 0 0 -10px;
 	top:1px;
 	left:5px;
-	background:#11b1e3;
+	background:#3bb5c0;
 	color:#fff;
 	border-top:1px solid #fff;
 	position:relative;
@@ -630,7 +630,7 @@ table .sep {
 
 .catalog .price.bg-red,
 .item .price.bg-red {
-	background:#9a0101;
+	background:#d72a60;
 }
 
 .catalog article a:hover,
@@ -1120,12 +1120,13 @@ text-transform: uppercase;
 	font-style:normal;
 	font-weight:bold;
 	background:#d72a60;
+	text-align: center;
 }
 
 .slider1 .nav li {
 	float:left;
 	cursor:pointer;
-	text-decoration:underline;
+	/*text-decoration:underline;*/
 	width:179px;
 	padding:7px 0 10px 20px;
 }
@@ -1264,13 +1265,14 @@ text-transform: uppercase;
 	bottom:25px;
 	left:0;
 	white-space:nowrap;
-	background:#3a4147; /*#424b56 #990100*/
+	background:#3bb5c0; /*#424b56 #990100*/
 	font-size:19px;
 	line-height:24px;
 	padding:2px 18px;
 	color:#fff;
 	min-width:151px;
 	text-align:left;
+	text-transform: uppercase;
 }
 
 .info-links .text {
@@ -1309,7 +1311,7 @@ text-transform: uppercase;
 	margin:5px 0 0 -10px;
 	padding:2px 10px;
 	min-width:167px;
-	background:#990100;
+	background:#3bb5c0;
 	color:#fff;
 }
 
