@@ -5,7 +5,7 @@
  * @param date: filter inactive users by date (default: today - 1)
  * @param out: output to directory
  */
-class Task_GetPendingActivations extends Minion_Task
+class Task_Getinactiveusers extends Minion_Task
 {
   protected $_options = array('date', 'out');
 
