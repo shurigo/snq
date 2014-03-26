@@ -36,8 +36,9 @@
 	}
 ?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
-		<br>
+		<!--<br>
 		<h1>Вещи, участвующие в акции</h1>
+		-->
 		<hr>
 		<?$APPLICATION->IncludeComponent(
 			"custom:catalog.section",
