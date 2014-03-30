@@ -2,17 +2,25 @@
 /**
  * @param in: csv to read user data from
  */
-const EMAIL_FIELD = 0;
-const CARD_NO_FIELD = 1;
-const AMOUNT_FIELD = 2;
-
 class Task_UpdateUsers extends Minion_Task
 {
+	const EMAIL_FIELD = 0;
+	const CARD_NO_FIELD = 1;
+	const AMOUNT_FIELD = 2;
+
   protected $_options = array('in');
 
   protected function _execute(array $params)
 	{
+		Minion_CLI::write('Updating users...');
+
 		$file = fopen($params['in'], 'r');
+		if(!file_exists($params['in']))
+		{
+			Minion_CLI::write('ERROR: Missing input file: '.$params['in']);
+			die();
+		}
+
 		while(($user = fgetcsv($file)) !== FALSE)
 		{
 			$db_user = ORM::factory('User')->where('email', '=', $user[EMAIL_FIELD])->find();
@@ -21,6 +29,7 @@ class Task_UpdateUsers extends Minion_Task
 				Minion_CLI::write('User not found: '.$user[EMAIL_FIELD]);
 				continue;
 			}
+			Minion_CLI::write('Updating user: '.$db_user->email);
 			$update_fields = array();
 			if(!$db_user->activation_date)
 			{
@@ -38,11 +47,11 @@ class Task_UpdateUsers extends Minion_Task
 				$update_fields['card_balance'] = $user[AMOUNT_FIELD];
 			}
 			$db_user->update();
-			print_r($update_fields);
+			Minion_CLI::write('Updated fields:');
+			Minion_CLI::write(($update_fields);
 		}
     fclose($file);
-
-    $date = new DateTime();
+		Minion_CLI::write('Done');
   }
 
   public function build_validation(Validation $validation)
