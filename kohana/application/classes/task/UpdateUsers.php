@@ -2,18 +2,25 @@
 /**
  * @param in: csv to read user data from
  */
-const EMAIL_FIELD = 0;
-const CARD_NO_FIELD = 1;
-const AMOUNT_FIELD = 2;
-
 class Task_UpdateUsers extends Minion_Task
 {
+	const EMAIL_FIELD = 0;
+	const CARD_NO_FIELD = 1;
+	const AMOUNT_FIELD = 2;
+
   protected $_options = array('in');
 
   protected function _execute(array $params)
 	{
 		Minion_CLI::write('Updating users...');
+
 		$file = fopen($params['in'], 'r');
+		if(!file_exists($params['in']))
+		{
+			Minion_CLI::write('ERROR: Missing input file: '.$params['in']);
+			die();
+		}
+
 		while(($user = fgetcsv($file)) !== FALSE)
 		{
 			$db_user = ORM::factory('User')->where('email', '=', $user[EMAIL_FIELD])->find();
