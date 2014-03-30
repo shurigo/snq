@@ -7,7 +7,7 @@
  */
 class Task_Getinactiveusers extends Minion_Task
 {
-  protected $_options = array('date', 'out');
+  protected $_options = array('date', 'out', 'copy_to');
 
   protected function _execute(array $params)
   {
@@ -54,6 +54,21 @@ class Task_Getinactiveusers extends Minion_Task
         $user->ip_address));
     }
     fclose($file);
+
+		// optional copy
+		$copy_to = $params['copy_to'];
+		if(isset($copy_to))
+		{
+			if(!copy($fname, $copy_to))
+			{
+				Minion_CLI::write("Failed to copy from '$fname' to '$copy_to'");
+			}
+			else
+			{
+				Minion_CLI::write("Successfully copied from '$fname' to '$copy_to'");
+			}
+		}
+
     Minion_CLI::write('Done');
   }
 
