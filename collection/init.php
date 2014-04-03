@@ -6,32 +6,28 @@
 		}
 	}
   // output JSON?
-	$json = "n"; // default
-	if(isset($_GET['json'])) {
-    if(in_array(strtolower($_GET['json']), array('y', 'n'))) {
-		  $json = strtolower($_GET['json']);
-		}
+	$json = 'n'; // default
+	if(isset($_GET['json']) && strtolower($_GET['json']) == 'y') {
+		$json = 'y';
 	}
-  // sort field selector
+  // sort field default selector
   $url_array = explode("/", $APPLICATION->GetCurPage());
-  $category_price_sort_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
-  if (in_array($url_array[2], $category_price_sort_array))
-  {    $sort_field = 'property_col_price';
+  $category_price_sort_array = array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
+  if(in_array($url_array[2], $category_price_sort_array)) { 
+		$sort_field = 'property_col_price';
     $sort_order = 'asc';
-  }
-  else
-  {
+  } else {
     $sort_field = 'sort';
     $sort_order = 'asc';
   }
-
-  if(isset($_GET['sort'])){
+  // read the sort parameter
+  if(isset($_GET['sort'])) {
 		if($_GET['sort'] == 'sort') { $sort_field = 'sort'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_asc') { $sort_field = 'property_col_price'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_desc') { $sort_field = 'property_col_price'; $sort_order = 'desc'; }
 	}
-	// output JSON
-	if($json=="y") {
+	// do output JSON
+	if($json == 'y') {
 		while (ob_get_level()) {
 			ob_end_clean();
 		}
@@ -52,5 +48,5 @@
 		echo json_encode(iconv('cp1251', 'utf-8',($buf))); //utf8_encode() incorrectly converts cyrillic symbols
 		echo '}}';
 		exit;
-  } // if($json=="y")
+	}
 ?>
