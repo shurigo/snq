@@ -316,6 +316,43 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 <img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
 <!-- End of Segment Pixel -->
 
+<?
+$url_array = explode("/", $APPLICATION->GetCurPage());
+?>
+
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: RU - Snowqueen - Product details - 2014 - RT
+URL of the webpage where the tag is expected to be placed: http://www.snowqueen.ru
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 03/28/2014
+-->
+<script type=""text/javascript"">
+var axel = Math.random() + """";
+var a = axel * 10000000000000;
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bosxJSEN;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/>');
+</script>
+<noscript>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bosxJSEN;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+<script>
+window.APRT_DATA = {
+         pageType : 1,
+         currentCategory: {
+                           id: <?=$MY_SEC_ID?>,
+                           name: <?=$url_array[2]?>
+                          },
+	currentProduct: {
+			   id: <?=$url_array[3]?>,
+			   name: <?=$arResult["NAME"]?>,
+			   price: <?=$arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"]?>
+			}
+};
+</script> 
+<script src="//5757yvu.ru/code/snowqueen.ru/" defer></script>
+
+
 <!-- popular - to be -->
 <aside class="aside2">
 <h4>Популярные модели</h4>
