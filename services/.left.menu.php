@@ -8,7 +8,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Дисконтная программа", 
+		"Королевский Клуб", 
 		"/services/discount/", 
 		Array(), 
 		Array("code"=>"discount"), 
