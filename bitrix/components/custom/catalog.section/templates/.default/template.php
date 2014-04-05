@@ -206,7 +206,70 @@ if (strlen($url_array[3]) == 0) {
 	//build a string
 	$HUBRUS_str="http://track.hubrus.com/pixel?id=12850,".$MY_SEC_ID."&type=js";
 }
+
+//get section description
+$code_str1="";
+$code_str2="";
+
+if (strlen($url_array[3]) == 0)
+{	switch ($url_array[2]) {
+    case "woman":
+        $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=XcYmu3lx;ord=";
+        $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=XcYmu3lx;ord=1?";
+        break;
+    case "man":
+        $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=CcWhX5hv;ord=";
+        $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=CcWhX5hv;ord=1?";
+        break;
+    case "wfurs":
+        $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=N7mn62gG;ord=";
+        $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=N7mn62gG;ord=1?";
+        break;
+    case "waccessories":
+        $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=CejX18eI;ord=";
+        $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=CejX18eI;ord=1?";
+        break;
+    default:
+        $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bjXFK5Ej;u4=".$url_array[2].";ord=";
+        $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bjXFK5Ej;u4=".$url_array[2].";ord=1?";
+        break;
+}
+}
 ?>
+
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: RU - Snowqueen - Women - 2014 - RT
+URL of the webpage where the tag is expected to be placed: http://www.snowqueen.ru
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 03/28/2014
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<img src="<?=$code_str1?>' + a + '?" width="1" height="1" alt=""/>');
+</script>
+<noscript>
+<img src="<?=$code_str2?>" width="1" height="1" alt=""/>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+<script>
+window.APRT_DATA = {
+         pageType : 3,
+	 currentCategory: {
+				id: <?=$MY_SEC_ID?>,
+                                name: <?=$url_array[2]?>
+			   },
+
+	 parentCategories: [
+				{id: <?=$url_array[1]?>, name: <?=$url_array[1]?>}
+                            ]
+};
+</script>
+
+
+<script src="//5757yvu.ru/code/snowqueen.ru/" defer></script>
+
 
 <!--  AdRiver code START. Type:counter(zeropixel) Site: snowqueen PZ: 0 BN: 0 -->
 <script type="text/javascript">

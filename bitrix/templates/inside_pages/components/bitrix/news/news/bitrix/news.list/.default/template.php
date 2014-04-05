@@ -43,3 +43,20 @@
         );
 ?>
 </aside>
+
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: RU - Snowqueen - News - 2014 - RT
+URL of the webpage where the tag is expected to be placed: http://www.snowqueen.ru
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 03/28/2014
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=wxEuyk11;ord=' + a + '?" width="1" height="1" alt=""/>');
+</script>
+<noscript>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=wxEuyk11;ord=1?" width="1" height="1" alt=""/>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->

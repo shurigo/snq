@@ -212,5 +212,39 @@ var google_remarketing_only = true;
 </div>
 </noscript>
 
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: RU - Snowqueen - Home - 2014 - RT
+URL of the webpage where the tag is expected to be placed: http://www.snowqueen.ru
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 03/28/2014
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=ty8PbsMK;ord=' + a + '?" width="1" height="1" alt=""/>');
+</script>
+<noscript>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=ty8PbsMK;ord=1?" width="1" height="1" alt=""/>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+<script>
+window.APRT_DATA = {
+         pageType : 1
+};
+</script>
+<script src="//5757yvu.ru/code/snowqueen.ru/" defer></script>
+
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PPT69B"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PPT69B');</script>
+<!-- End Google Tag Manager -->
+
 </body>
 </html>
