@@ -15,6 +15,14 @@ $APPLICATION->IncludeComponent(
 false
 );
 ?>
+<script type="text/javascript">
+function DoubleClickTagPost(tagv){
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/>');
+}
+</script>
+
 <article class="item" itemscope itemtype="http://schema.org/Product">
   <section class="text">
     <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
@@ -32,10 +40,10 @@ false
 
     <ul class="links">
       <li>
-        <a href="/actions/" title="Акции" onClick="trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a>
+        <a href="/actions/" title="Акции" onClick="DoubleClickTagPost(Gobr8Bpp); trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a>
       </li>
       <li>
-        <?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?>
+        <?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="DoubleClickTagPost(qil7ECb1); trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="DoubleClickTagPost(qil7ECb1); trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?>
       </li>
     </ul>
     <!-- end .links-->
@@ -334,6 +342,9 @@ document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=i
 </script>
 <noscript>
 <img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bosxJSEN;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=Gobr8Bpp;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=qil7ECb1;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
+
 </noscript>
 <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
 <script>
