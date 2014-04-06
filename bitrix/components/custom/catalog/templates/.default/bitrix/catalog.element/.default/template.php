@@ -19,9 +19,10 @@ false
 function DoubleClickTagPost(tagv){
 var axel = Math.random() + "";
 var a = axel * 10000000000000;
-document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/>');
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/><noscript><img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/></noscript>');
 }
 </script>
+
 
 <article class="item" itemscope itemtype="http://schema.org/Product">
   <section class="text">
@@ -342,9 +343,6 @@ document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=i
 </script>
 <noscript>
 <img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=bosxJSEN;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
-<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=Gobr8Bpp;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
-<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=qil7ECb1;u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/>
-
 </noscript>
 <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
 <script>
