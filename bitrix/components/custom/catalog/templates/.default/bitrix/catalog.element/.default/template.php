@@ -27,7 +27,7 @@ document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=i
 <article class="item" itemscope itemtype="http://schema.org/Product">
   <section class="text">
     <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
-    <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_model_code"]["VALUE"]); ?></p>
+    <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_idmfc"]["VALUE"]); ?></p>
     <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
 <?
     if($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]):?>
