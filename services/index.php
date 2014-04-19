@@ -16,7 +16,7 @@ $APPLICATION->SetTitle("Услуги");
             </tr>
              <tr align="center">
                 <td width="50%"><a href="/actions/22700630/"><img src="/images/1-04.jpg" alt="Кредитная карта Снежная Королева" width="499px" height="224px" border="0"></a></td>
-                <td width="50%"><img src="/images/1-06.jpg" width="498px" height="224px" alt="Услуги ателье" border="0"></td>
+                <td width="50%"><a href="/services/atele/"><img src="/images/1-06.jpg" width="498px" height="224px" alt="Услуги ателье" border="0"></a></td>
             </tr>
         </table>
 
