@@ -50,4 +50,21 @@ document.write('<img src="' + ('https:' == document.location.protocol ? 'https:'
 <noscript><img src="//ad.adriver.ru/cgi-bin/rle.cgi?sid=196960&bt=21&pz=0&rnd=1655705000" border=0 width=1 height=1></noscript>
 <!--  AdRiver code END  -->
 
+<!--
+Start of DoubleClick Floodlight Tag: Please do not remove
+Activity name of this tag: RU - Snowqueen - Our shops - 2014 - CV
+URL of the webpage where the tag is expected to be placed: http://www.snowqueen.ru
+This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+Creation Date: 04/21/2014
+-->
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=6zxaJpoL;ord=' + a + '?" width="1" height="1" alt=""/>');
+</script>
+<noscript>
+<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=6zxaJpoL;ord=1?" width="1" height="1" alt=""/>
+</noscript>
+<!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
