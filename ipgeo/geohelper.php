@@ -6,7 +6,7 @@
   if(!function_exists('set_def_city')) {
     function set_def_city() {
       $_SESSION['city_id'] = 2097;
-      $_SESSION['city_name'] = 'Москва';
+      $_SESSION['city_name'] = 'Москва, МО';
     }
   }
 
