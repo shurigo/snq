@@ -4,7 +4,10 @@ class Controller_FurCert extends Controller_Template
 	public function action_index()
 	{
 		// Bind the variables to the view
+		$title = 'Проверка сертификата';
 		$captcha = Captcha::instance();
+		View::set_global('show_header', true);
+		View::set_global('title', $title);
     $this->template->content = View::factory('fur_cert/info')
 			->bind('errors', $errors)
 			->bind('message', $message)
@@ -40,6 +43,10 @@ class Controller_FurCert extends Controller_Template
 			{
 				$message = 'Cертификат не найден';
 				return;
+			}
+			else
+			{
+				View::set_global('show_header', false);
 			}
 		}
 		catch (ORM_Validation_Exception $e)
