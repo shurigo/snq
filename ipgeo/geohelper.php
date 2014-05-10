@@ -52,7 +52,7 @@
         'IBLOCK_ID' => 13,
         'ACTIVE' => 'Y',
         'XML_ID' => IntVal($city_id));
-      $select = Array('ID', 'NAME', 'IBLOCK_ID');
+      $select = Array('ID', 'NAME', 'IBLOCK_ID', 'XML_ID');
       $elements = CIBlockElement::GetList(
         Array(),
         $filter,
@@ -77,7 +77,7 @@
         'IBLOCK_ID' => 7, //our shops
         'ACTIVE' => 'Y',
       );
-      $sort = Array('NAME' => 'ASC');
+      $sort = Array('SORT' => 'ASC');
       $sections = CIBlockSection::GetList($sort, $filter, false, array(), false);
       $ret = Array();
       while($section = $sections->GetNext()) {
@@ -116,7 +116,7 @@
 	      $filter,
 	  		false,
 	  		false,
-	  		array()
+	  		$select
 			);
 
 	    while($element = $elements->GetNextElement()) {
