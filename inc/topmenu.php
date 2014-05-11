@@ -98,6 +98,7 @@
                     <li><a href="/collection/wbelts/">Ремни</a></li>
                     <li><a href="/collection/wbags/">Сумки</a></li>
                     <li><a href="/collection/wglasses/">Очки</a></li>
+                    <li><a href="/collection/zheskie_kupalniki/">Пляжная одежда и купальники</a></li>
                     <li><a href="/collection/wipad/">Чехлы для IPad</a></li>
                   </ul></td>
                 <td><ul>
@@ -106,6 +107,7 @@
                     <li><a href="/collection/mshawls/">Шарфы</a></li>
                     <li><a href="/collection/mbags/">Сумки</a></li>
                     <li><a href="/collection/mbelts/">Ремни</a></li>
+                    <li><a href="/collection/muzhskie_plavki_shorti/">Пляжная одежда и купальники</a></li>
                   </ul></td>
               </tr>
             </table>
