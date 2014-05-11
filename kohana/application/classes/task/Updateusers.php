@@ -23,10 +23,10 @@ class Task_UpdateUsers extends Minion_Task
 
 		while(($user = fgetcsv($file)) !== FALSE)
 		{
-			$db_user = ORM::factory('User')->where('email', '=', $user[EMAIL_FIELD])->find();
+			$db_user = ORM::factory('User')->where('email', '=', $user[$this::EMAIL_FIELD])->find();
 			if(!$db_user->loaded())
 			{
-				Minion_CLI::write('User not found: '.$user[EMAIL_FIELD]);
+				Minion_CLI::write('User not found: '.$user[$this::EMAIL_FIELD]);
 				continue;
 			}
 			Minion_CLI::write('Updating user: '.$db_user->email);
@@ -36,19 +36,19 @@ class Task_UpdateUsers extends Minion_Task
 				$db_user->activation_date = date(Date::$timestamp_format);
 				$update_fields['activation_date'] = $db_user->activation_date;
 			}
-			if(is_numeric($user[CARD_NO_FIELD]))
+			if(is_numeric($user[$this::CARD_NO_FIELD]))
 			{
-				$db_user->card_no = $user[CARD_NO_FIELD];
+				$db_user->card_no = $user[$this::CARD_NO_FIELD];
 				$update_fields['card_no'] = $db_user->card_no;
 			}
-			if(is_numeric($user[AMOUNT_FIELD]))
+			if(is_numeric($user[$this::AMOUNT_FIELD]))
 			{
-				$db_user->card_balance = $user[AMOUNT_FIELD];
-				$update_fields['card_balance'] = $user[AMOUNT_FIELD];
+				$db_user->card_balance = $user[$this::AMOUNT_FIELD];
+				$update_fields['card_balance'] = $user[$this::AMOUNT_FIELD];
 			}
 			$db_user->update();
 			Minion_CLI::write('Updated fields:');
-			Minion_CLI::write(($update_fields);
+			Minion_CLI::write($update_fields);
 		}
     fclose($file);
 		Minion_CLI::write('Done');
