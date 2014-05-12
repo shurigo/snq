@@ -35,7 +35,7 @@
 <tr style="vertical-align:top;">
   <td>
 		<b><?=Form::label('gender', 'Пол'); ?></b><br />
-    <?=Form::select('gender', array('F'=>'Женский', 'M'=>'Мужской'), 'F', array('class'=>'customSelect'));?>
+		<?=Form::select('gender', array('F'=>'Женский', 'M'=>'Мужской'), HTML::chars(Arr::get($_POST, 'gender')), array('class'=>'customSelect'));?>
 		<div class="error red">
 			<?= Arr::get($errors, 'gender'); ?>
 		</div>
@@ -81,9 +81,9 @@
 <tr style="vertical-align:top;"><td colspan=3>
 <b><?= Form::label('subscribe', 'Подписка на рассылки:'); ?></b>
 &nbsp;<?= Form::label('subscribe_sms', 'SMS'); ?>
-<?= Form::checkbox('subscribe_sms', 1, true); ?>
+<?= Form::checkbox('subscribe_sms', 1, HTML::chars(Arr::get($_POST, 'subscribe_sms')) == 1); ?>
 &nbsp;<?= Form::label('subscribe_email', 'E-mail'); ?>
-<?= Form::checkbox('subscribe_email', 1, true); ?>
+<?= Form::checkbox('subscribe_email', 1, HTML::chars(Arr::get($_POST, 'subscribe_email')) == 1); ?>
 </td></tr>
 <td colspan=3>
 <?if(!$captcha->promoted()):?>
