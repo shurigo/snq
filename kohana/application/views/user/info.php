@@ -52,7 +52,7 @@
 	</td></tr>
 	<tr style="vertical-align:top;">
 	<td align="left"><?= Form::label('birthday', 'Дата рождения'); ?></td>
-	<td><?= Form::input('birthday', $user->birthday, array('id'=>'birthday', 'type'=>'text', 'readonly',"size" =>"30px")); ?>
+	<td><?= Form::input('birthday', (new DateTime($user->birthday))->format('d-m-Y'), array('id'=>'birthday', 'type'=>'text', 'readonly',"size" =>"30px")); ?>
 		<div class="error red">
 			<?= Arr::get($errors, 'birthday'); ?>
 		</div>

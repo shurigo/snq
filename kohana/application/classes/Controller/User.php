@@ -1,4 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
+
 class Controller_User extends Controller_Template 
 {
 	public function action_index()
@@ -36,8 +37,13 @@ class Controller_User extends Controller_Template
 		{
 			$extra_props = array(
 				'ip_address' => Request::$client_ip,
-				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
+				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name']),
 			);
+			
+			if(isset($_POST['birthday']))
+			{
+				$extra_props['birthday'] = DateTime::createFromFormat('d-m-Y', $_POST['birthday'])->format('Y-m-d');
+			}
 
 			$user->update_user(
 				array_merge($_POST, $extra_props),
@@ -99,7 +105,8 @@ class Controller_User extends Controller_Template
 			$extra_props = array(
 				'ip_address' => Request::$client_ip,
 				'registration_date' => date(Date::$timestamp_format),
-				'city_name' => iconv('cp1251', 'utf-8', $_SESSION['city_name'])
+				'city_name' => iconv('cp1251', 'utf-8', (isset($_SESSION['city_name']) ? $_SESSION['city_name'] : 'Москва, МО')),
+				'birthday' => DateTime::createFromFormat('d-m-Y', $_POST['birthday'])->format('Y-m-d')
 			);
 
 			$user = ORM::factory('User')

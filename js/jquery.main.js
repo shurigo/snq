@@ -39,7 +39,7 @@ $(window).on("load", function(){
 			changeMonth: true,
 			changeYear: true,
 			yearRange: "1920:",
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd-mm-yy'
 		});
 	});
 	initScrollUp();
