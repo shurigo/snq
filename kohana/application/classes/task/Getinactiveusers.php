@@ -22,7 +22,7 @@ class Task_Getinactiveusers extends Minion_Task
 		}
 
 		$from = $in_from->format('Y-m-d 00:00:00');
-		$to   = $in_to->format('Y-m-d 23:59:59');
+		$to   = $in_to->format('Y-m-d 00:00:00');
 
 		Minion_CLI::write("Date from:\t$from");
 		Minion_CLI::write("Date to:\t$to");
