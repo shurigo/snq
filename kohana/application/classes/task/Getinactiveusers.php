@@ -21,7 +21,7 @@ class Task_Getinactiveusers extends Minion_Task
 			$in_from = DateTime::createFromFormat('Y-m-d', $params['date'])->modify('-1 day');
 		}
 
-		$from = $in_from->format('Y-m-d 23:59:59');
+		$from = $in_from->format('Y-m-d 00:00:00');
 		$to   = $in_to->format('Y-m-d 23:59:59');
 
 		Minion_CLI::write("Date from:\t$from");
