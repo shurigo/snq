@@ -15,8 +15,6 @@ $APPLICATION->SetTitle("Контакты");
           <p>E-mail: <a href="mailto:info@snq.ru" >info@snq.ru</a></p>
 
           <p> <br /> </p>
-
-          <p><noindex><a href="http://snowqueen.ru/about/news/?ELEMENT_ID=550040" rel="nofollow"><font color="#9a0101">Телефон доверия для покупателей</font></a></noindex><font color="#9a0101">: 8 (800) 775 0880 (звонки по России бесплатно)</font></p>
  </section>
 
 <aside class="aside">
