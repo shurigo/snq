@@ -6,6 +6,13 @@
         <li><a href="/collection/wtopcoat/" title="пальто женское">Пальто</a></li>
         <li><a href="/collection/wtopcloak/" title="плащи женские">Плащи</a></li>
         <li><a href="/collection/wpaddedcoat/" title="пуховики женские">Пуховики</a></li>
+        <li><a href="/collection/wdress/">Платья</a></li>
+        <li><a href="/collection/wtunic/">Туники</a></li>
+        <li><a href="/collection/wskirt/">Юбки</a></li>
+        <li><a href="/collection/wcardigan/">Кардиганы и джемперы</a></li>
+        <li><a href="/collection/wtshort/">Футболки и топы</a></li>
+        <li><a href="/collection/wblouse/">Блузки</a></li>
+        <li><a href="/collection/wpants/">Брюки/Джинсы</a></li>
       </ul>
     </nav>
     <!-- end .fl-->
@@ -17,6 +24,12 @@
         <li><a href="/collection/mtopcoat/" title="пальто мужское">Пальто</a></li>
         <li><a href="/collection/mtopcloak/" title="плащи мужские">Плащи</a></li>
         <li><a href="/collection/mpaddedcoat/" title="пуховики мужские">Пуховики</a></li>
+        <li><a href="/collection/mtrico/">Кардиганы и джемперы</a></li>
+        <li><a href="/collection/mblazer/">Пиджаки</a></li>
+        <li><a href="/collection/mshirt/">Рубашки</a></li>
+        <li><a href="/collection/mpants/">Брюки/Джинсы</a></li>
+        <li><a href="/collection/mtshort/">Футболки</a></li>
+        <li><a href="/collection/mshorts/">Шорты</a></li>
       </ul>
     </nav>
     <!-- end .fl-->
