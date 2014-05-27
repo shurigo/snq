@@ -1,7 +1,7 @@
 <?
   $_SERVER = array();
   $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__)).'/../../..';
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+  require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
   require_once("func/func.php");
 
   set_time_limit(21600); // 6 часов
@@ -131,6 +131,4 @@
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=windows-1251" . "\r\n";
   mail(MAIL_TO, 'snowqueen: price-update', $mail_text, $headers);
-  
-  require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
 ?>
