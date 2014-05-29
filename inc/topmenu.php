@@ -34,7 +34,7 @@
                     <li><a href="/collection/wblouse/">Блузки</a></li>
                     <li><a href="/collection/wpants/">Брюки/Джинсы</a></li>
                     <li><a href="/collection/wshorts/">Шорты/Комбинезоны</a></li>
-                    <li><a href="/collection/zheskie_kupalniki/">Пляжная одежда и купальники</a></li>
+                    <li><a href="/collection/zhenskie_kupalniki/">Пляжная одежда и купальники</a></li>
                   </ul></td>
               </tr>
             </table>
