@@ -22,6 +22,7 @@ Disallow: /collection/maccessories/*
 Disallow: /collection/mleathertopjacket/index.php?PAGEN_1=*
 Disallow: /collection/wleathertopjacket/index.php?PAGEN_1=*
 Disallow: /collection/wleathertopjacket/?SHOWALL_1=1
+Disallow: /collection/wmink/?SHOWALL_1=1
 Disallow: /collection/check_furcoat/
 # settings
 Host: snowqueen.ru
