@@ -227,14 +227,16 @@
 //					$this->logger->error("Failed to open file for reading: $this->file_name");
 					return;
 				}
+				// Write header
 				fputcsv($file_handle_out, array_keys($hdr_magento), self::FIELD_SEPARATOR_MAGENTO);
 				foreach($data_new as $idfmc => $data) {
-					if(count($data) > 1) {
+					if(count($data) > 1) { // Configurable
 						$configurable = array();
+						$category2 = $data[1][$hdr_magento['_category']];
 						foreach($data as $data_row) {
 							if(!is_array($data_row) || count($data_row) <= 0) continue;
 							fputcsv($file_handle_out, $data_row, self::FIELD_SEPARATOR_MAGENTO);
-							// write main 'configurable' product
+							// create main 'configurable' product
 						  if(count($configurable) == 0) {
 								$buf = $data_row;
 								$buf[$hdr_magento['sku']] = $buf[$hdr_magento['sku']].'-c';
@@ -243,22 +245,28 @@
 								$buf[$hdr_magento['visibility']] = '4';
 								$buf[$hdr_magento['has_options']] = '1';
 								$buf[$hdr_magento['required_options']] = '1';
-							} else {
+							} else { // associated product
 								$buf = array_fill(0, count($data_row), '');
 								$buf[$hdr_magento['visibility']] = 1;
-							}
+							} // associated product attributes
 							$buf[$hdr_magento['_super_products_sku']] = $data_row[$hdr_magento['sku']];
 							$buf[$hdr_magento['_super_attribute_code']] = 'product_size';
 							$buf[$hdr_magento['_super_attribute_option']] = $data_row[$hdr_magento['product_size']];
 							ksort($buf);
 							$configurable[] = $buf; 
+							if(count($configurable) == 1) {
+								$buf = array_fill(0, count($data_row), '');
+								ksort($buf);
+							  $buf[$hdr_magento['_category']] = $category2;
+								$configurable[] = $buf;
+							}
 						}
 						foreach($configurable as $data_row) {
 							if(!is_array($data_row) || count($data_row) <= 0) continue;
-							if(empty($data_row[$hdr_magento['_super_attribute_option']])) continue;
+							if(empty($data_row[$hdr_magento['_super_attribute_option']]) && empty($data_row[$hdr_magento['_category']])) continue;
 							fputcsv($file_handle_out, $data_row, self::FIELD_SEPARATOR_MAGENTO);
 						}
-					} else {
+					} else { // Simple product
 						if(!is_array($data) || count($data) <= 0) continue;
 						$data[$hdr_snowqueen['visibility']] = '4';
 						fputcsv($file_handle_out, $data, self::FIELD_SEPARATOR_MAGENTO);
@@ -274,8 +282,8 @@
 //			$this->mailer->info($msg);
 		}
 	}
-	define('SNQ_FILE', 'Assortment_new.csv', true);
-	define('MGE_FILE', 'export.csv', true);
+	define('SNQ_FILE', '', true);
+	define('MGE_FILE', '', true);
 	$mi = new MagentoImport(SNQ_FILE, MGE_FILE);
 	$mi->SnqToMageProducts();
 ?>
