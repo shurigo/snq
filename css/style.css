@@ -1435,6 +1435,34 @@ float:left; width:140px; margin:0px 0 0px 0px;
 	text-overflow:ellipsis; 
 	white-space:nowrap; 
 }
-
-
-
+.furcert span {
+	color:black;
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+}
+.furcert .user-name {
+	position:absolute;    
+	text-align:center;	
+	top:514px;
+	width:1780px;
+}
+.furcert .cert {
+	position:absolute;    
+	text-align:center;	
+	top:584px;
+	width:1780px;
+}
+.furcert .card_no {
+	position:absolute;    
+	text-align:center;
+	top:870px;
+	left:400px;
+	width:300px;
+}
+.furcert .issue_date {
+	position:absolute;    
+	left:1070px;
+	top:870px;
+	width:300px;
+}
