@@ -23,8 +23,7 @@
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
                     <li><a href="/collection/wtopcloak/">Плащи</a></li>
                     <li><a href="/collection/wjacket/">Жакеты/Жилеты</a></li>
-                    <li><a href="/collection/wboots/">Обувь</a></li>
-                 </ul></td>
+                   </ul></td>
                 <td><ul>
                     <li><a href="/collection/wdress/">Платья</a></li>
                     <li><a href="/collection/wtunic/">Туники</a></li>
@@ -92,6 +91,7 @@
               <tr>
                 <td><ul>
                     <li><strong>Женские аксессуары</strong></li>
+                    <li><a href="/collection/wboots/">Обувь</a></li>
                     <li><a href="/collection/wbijouteries/">Бижутерия</a></li>
                     <!--<li><a href="/collection/wumbrellas/">Зонты</a></li>-->
                     <li><a href="/collection/whats/">Головные уборы</a></li>
