@@ -31,11 +31,10 @@ $arUrlRewrite = array(
         "PATH"  =>   "/collection/index.php",
     ),
   array(
-    //"CONDITION" => "#^/(user|captcha)/([a-zA-Z]+)/?#",
     "CONDITION" => "#^/(\w+)/(\w+)/?#",
     "RULE" => "$1/$2",
     "PATH" => "/kohana/index.php"
-    ),
+    )
 );
 
 ?>
