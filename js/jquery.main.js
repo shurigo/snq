@@ -50,7 +50,11 @@ $(window).on("load", function(){
   initGallery();
   initNav();
 });
-
+$(window).on('pageshow', function() {
+	var form = $('form'); 
+// let the browser natively reset defaults
+	form[0].reset();
+});
 function initScrollUp() {
 	$(window).scroll(function(){
 	 if ($(this).scrollTop() > 100) {

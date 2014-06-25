@@ -65,6 +65,9 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  */
 mb_substitute_character('none');
 
+// Set the production status by the domain.
+//define('IN_PRODUCTION', $_SERVER['SERVER_ADDR'] !== '127.0.0.1');
+
 // -- Configuration and initialization -----------------------------------------
 
 /**
@@ -84,11 +87,10 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
-if (isset($_SERVER['KOHANA_ENV']))
+if (getenv('KOHANA_ENV') !== FALSE)
 {
-	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+	Kohana::$environment = getenv('KOHANA_ENV');
 }
-
 /**
  * Initialize Kohana, setting the default options.
  *

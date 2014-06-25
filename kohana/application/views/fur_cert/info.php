@@ -9,6 +9,7 @@
 		<span class="cert"><?=$fur_cert->cert;?></span>
 		<span class="card_no"><?=$fur_cert->card_no;?></span>
 		<span class="issue_date"><?=$fur_cert->issue_date;?></span>
+		<?$fur_cert->clear();?>
 		<table width="1780" border="0" cellpadding="0" cellspacing="0" style="line-height:0;white-space:nowrap">
 			<tr>
 				<td><img src="/images/certsq/part1x1.png" width="445" height="316" border="0"/></td>
@@ -36,7 +37,7 @@
 			</tr>
 		</table>
 	<?else:?>
-		<form action="/furcert/index" method="post" target="_blank" accept-charset="utf-8">
+		<form action="/furcert/index" method="post" accept-charset="utf-8">
 			<table border=0 cellpadding="5px">
 				<tr style="vertical-align:top;">
 					<td align="left"><?= Form::label('cert', 'Номер сертификата'); ?></td>
