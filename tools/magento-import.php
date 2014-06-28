@@ -171,7 +171,7 @@
 					$buf[$hdr_magento['manufacturer']] = empty($data[$hdr_snowqueen['VTRADEMARK']]) ? 'NONAME' : $data[$hdr_snowqueen['VTRADEMARK']];
 					// Correct spelling to match magento country list
 					$buf[$hdr_magento['country_of_manufacture']] = convert($data[$hdr_snowqueen['VARTCOUNTRYRUS']]) == 'Тайланд' ? convert_cyrillic('Таиланд') : $data[$hdr_snowqueen['VARTCOUNTRYRUS']];
-					$buf[$hdr_magento['product_size']] = $data[$hdr_snowqueen['VARTSIZE']];
+					$buf[$hdr_magento['product_size']] = str_replace('.', '', $data[$hdr_snowqueen['VARTSIZE']]);
 					$buf[$hdr_magento['price']] = $data[$hdr_snowqueen['PLPRICE']];
 					$buf[$hdr_magento['special_price']] = $data[$hdr_snowqueen['ZPRICE']];
 					$buf[$hdr_magento['description']] = $data[$hdr_snowqueen['VHUDDESCR']];
