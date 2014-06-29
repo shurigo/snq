@@ -38,6 +38,9 @@
 		const FIELD_SEPARATOR_MAGENTO = ',';
 		const MAX_LINE_LENGTH = 5000;
 
+		public $image_folder = '';
+		public $has_header;
+
 		// Magento required fields
     private $magento_fields = array(
       'sku',
@@ -66,6 +69,7 @@
 			'manage_stock',
 			'qty',
 			'_root_category',
+			'image',
 			'_super_products_sku',
 			'_super_attribute_code', // = 'product_size'
 			'_super_attribute_option',
@@ -94,10 +98,12 @@
 			'VCOLLECTION'
 		);
 
-		public function __construct($file_name, $output_file_name) {
+		public function __construct($file_name, $output_file_name, $has_header = false) {
 			$this->file_name = $file_name;
 			$this->extension = pathinfo($file_name, PATHINFO_EXTENSION);
 			$this->output_file_name = $output_file_name;
+			$this->has_header = $has_header;
+			print "Input:$this->file_name\nOutput:$this->output_file_name\nHas header:$this->has_header";
 		}
 
 		function SnqToMageProducts() {
@@ -116,10 +122,10 @@
 						'Поло' =>  'Футболки',
 						'Рубашка' =>  'Рубашки',
 						'Толстовка' =>  'Куртки',
-						'Топ' =>  'Футболки и топы',
+						'Топ' =>  'Футболки',
 						'Туника' =>  'Туники',
-						'Футболка' =>  'Футболки и топы',
-						'Футболка с длинным рукавом' =>  'Футболки и топы',
+						'Футболка' =>  'Футболки',
+						'Футболка с длинным рукавом' =>  'Футболки',
 						'Шорты' =>  'Шорты',
 						'Юбка' =>  'Юбки'
 					);
@@ -149,7 +155,7 @@
 
 				// Get column numbers from header, skip empty columns
 				$hdr_snowqueen = array();
-				$hdr_raw = fgetcsv($file_handle, self::MAX_LINE_LENGTH, self::FIELD_SEPARATOR_SNQ);
+				$hdr_raw = $this->has_header ? fgetcsv($file_handle, self::MAX_LINE_LENGTH, self::FIELD_SEPARATOR_SNQ) : $this->snq_fields;
 				for($hdr_i = 0; $hdr_i < count($hdr_raw); ++$hdr_i) {
 					if(!empty($hdr_raw[$hdr_i])) {
 						$hdr_snowqueen[$hdr_raw[$hdr_i]] = $hdr_i;
@@ -164,6 +170,7 @@
 					$buf[$hdr_magento['sku']] = $data[$hdr_snowqueen['IDSCU']];
 					$buf[$hdr_magento['product_idfmc']] = $data[$hdr_snowqueen['IDMARTCARD']];
 					$idfmc = $buf[$hdr_magento['product_idfmc']];
+					print "$idfmc\n";
 					$buf[$hdr_magento['product_articule']] = $data[$hdr_snowqueen['VSARTMODEL']];
 					$buf[$hdr_magento['color']] = $data[$hdr_snowqueen['VSARTCOLORDESC']];
 					$buf[$hdr_magento['name']] = $data[$hdr_snowqueen['VARTLABEL']];
@@ -245,6 +252,7 @@
 								$buf[$hdr_magento['visibility']] = '4';
 								$buf[$hdr_magento['has_options']] = '1';
 								$buf[$hdr_magento['required_options']] = '1';
+								$buf[$hdr_magento['image']] = "$this->image_folder/$idfmc.jpg";
 							} else { // associated product
 								$buf = array_fill(0, count($data_row), '');
 								$buf[$hdr_magento['visibility']] = 1;
@@ -282,8 +290,7 @@
 //			$this->mailer->info($msg);
 		}
 	}
-	define('SNQ_FILE', '', true);
-	define('MGE_FILE', '', true);
-	$mi = new MagentoImport(SNQ_FILE, MGE_FILE);
+	$mi = new MagentoImport($argv[1], $argv[2], $argv[3] == 1);
+	$mi->image_folder = 'ss2014';
 	$mi->SnqToMageProducts();
 ?>
