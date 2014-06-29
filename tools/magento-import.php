@@ -25,10 +25,6 @@
 	}
 
   class MagentoImport {
-		private $file_name;
-		private $extension;
-		private $output_file_name;
-
 		protected $error_count = 0;
 		protected $success_count = 0;
 		//protected $logger;
@@ -39,10 +35,9 @@
 		const MAX_LINE_LENGTH = 5000;
 
 		public $image_folder = '';
-		public $has_header;
 
 		// Magento required fields
-    private $magento_fields = array(
+    private $magento_fields_product = array(
       'sku',
       '_attribute_set',
       '_type',
@@ -60,7 +55,6 @@
       'product_idfmc',
       'product_size',
       'short_description',
-//			'collection',
       'status',
       'visibility',
       'is_in_stock',
@@ -70,6 +64,8 @@
 			'qty',
 			'_root_category',
 			'image',
+			'small_image',
+			'thumbnail',
 			'_super_products_sku',
 			'_super_attribute_code', // = 'product_size'
 			'_super_attribute_option',
@@ -98,55 +94,71 @@
 			'VCOLLECTION'
 		);
 
-		public function __construct($file_name, $output_file_name, $has_header = false) {
-			$this->file_name = $file_name;
-			$this->extension = pathinfo($file_name, PATHINFO_EXTENSION);
-			$this->output_file_name = $output_file_name;
-			$this->has_header = $has_header;
-			print "Input:$this->file_name\nOutput:$this->output_file_name\nHas header:$this->has_header";
+		// rename SNQ categories
+		private $product_category_map = array(
+			'Платье' => 'Платья',
+			'Блузка' =>	'Блузки',
+			'Брюки' =>  'Брюки/Джинсы',
+			'Джемпер' =>  'Кардиганы и джемперы',
+			'Джинсы' =>  'Брюки/Джинсы',
+			'Жакет' =>  'Куртки',
+			'Жилет' =>  'Куртки',
+			'Кардиган' =>  'Кардиганы и джемперы',
+			'Комбинезон' =>  'Шорты и комбинезоны',
+			'Пиджак' =>  'Пиджаки',
+			'Платье' =>  'Платья',
+			'Поло' =>  'Футболки и топы',
+			'Рубашка' =>  'Рубашки',
+			'Толстовка' =>  'Куртки',
+			'Топ' =>  'Футболки',
+			'Туника' =>  'Туники',
+			'Футболка' =>  'Футболки и топы',
+			'Футболка с длинным рукавом' =>  'Футболки и топы',
+			'Шорты' =>  'Шорты',
+			'Юбка' =>  'Юбки'
+		);
+
+		// SNQ price update csv file columns
+		private $snq_fields_price = array(
+			'IDFMC',
+			'PRICE',
+			'SALEPRICE',
+			'QTY'
+		);
+
+		// Magento price update csv file columns
+		private $magento_fields_price = array(
+			'sku',
+			'price',
+			'special_price',
+			'qty'
+		);
+
+		public function __construct() {
 		}
 
-		function SnqToMageProducts() {
-					$category_map = array(
-						'Платье' => 'Платья',
-						'Блузка' =>	'Блузки',
-						'Брюки' =>  'Брюки/Джинсы',
-						'Джемпер' =>  'Кардиганы и джемперы',
-						'Джинсы' =>  'Брюки/Джинсы',
-						'Жакет' =>  'Куртки',
-						'Жилет' =>  'Куртки',
-						'Кардиган' =>  'Кардиганы и джемперы',
-						'Комбинезон' =>  'Шорты и комбинезоны',
-						'Пиджак' =>  'Пиджаки',
-						'Платье' =>  'Платья',
-						'Поло' =>  'Футболки',
-						'Рубашка' =>  'Рубашки',
-						'Толстовка' =>  'Куртки',
-						'Топ' =>  'Футболки',
-						'Туника' =>  'Туники',
-						'Футболка' =>  'Футболки',
-						'Футболка с длинным рукавом' =>  'Футболки',
-						'Шорты' =>  'Шорты',
-						'Юбка' =>  'Юбки'
-					);
-//			$this->logger->info("Loading data...");
-//			$this->logger->info($this->fields);
-			if(!(file_exists($this->file_name) && is_readable($this->file_name))) {
+		function SnqToMagePrice($file_name, $output_file_name, $has_header = false) {
+		}
+
+		function SnqToMageProducts($file_name, $output_file_name, $has_header = false, $image_dir) {
+			print "Loading data...\n";
+			print "Input:$file_name\nOutput:$output_file_name\nHas header:$has_header\n";
+			if(!(file_exists($file_name) && is_readable($file_name))) {
 				$this->error_count++;
-//				$this->logger->error("File does not exist or not readable: $this->file_name");
+				print "File does not exist or not readable: $file_name\n";
 				return;
 			}
-//			$this->logger->info("File exists. Loading from: $this->file_name");
+			print "File exists. Loading from: $file_name\n";
 
 			// Build indexed array with magento headers
 			$hdr_magento = array();
-			for($hdr_i = 0; $hdr_i < count($this->magento_fields); ++$hdr_i) {
-				$hdr_magento[$this->magento_fields[$hdr_i]] = $hdr_i;
+			for($hdr_i = 0; $hdr_i < count($this->magento_fields_product); ++$hdr_i) {
+				$hdr_magento[$this->magento_fields_product[$hdr_i]] = $hdr_i;
 			}
 
 			$data_new = array();
 			try {
-				$file_handle = fopen($this->file_name, 'r');
+				$file_handle = fopen($file_name, 'r');
 				if(!$file_handle) {
 				  $this->error_count++;
 //					$this->logger->error("Failed to open file for reading: $this->file_name");
@@ -155,7 +167,7 @@
 
 				// Get column numbers from header, skip empty columns
 				$hdr_snowqueen = array();
-				$hdr_raw = $this->has_header ? fgetcsv($file_handle, self::MAX_LINE_LENGTH, self::FIELD_SEPARATOR_SNQ) : $this->snq_fields;
+				$hdr_raw = $has_header ? fgetcsv($file_handle, self::MAX_LINE_LENGTH, self::FIELD_SEPARATOR_SNQ) : $this->snq_fields;
 				for($hdr_i = 0; $hdr_i < count($hdr_raw); ++$hdr_i) {
 					if(!empty($hdr_raw[$hdr_i])) {
 						$hdr_snowqueen[$hdr_raw[$hdr_i]] = $hdr_i;
@@ -170,7 +182,6 @@
 					$buf[$hdr_magento['sku']] = $data[$hdr_snowqueen['IDSCU']];
 					$buf[$hdr_magento['product_idfmc']] = $data[$hdr_snowqueen['IDMARTCARD']];
 					$idfmc = $buf[$hdr_magento['product_idfmc']];
-					print "$idfmc\n";
 					$buf[$hdr_magento['product_articule']] = $data[$hdr_snowqueen['VSARTMODEL']];
 					$buf[$hdr_magento['color']] = $data[$hdr_snowqueen['VSARTCOLORDESC']];
 					$buf[$hdr_magento['name']] = $data[$hdr_snowqueen['VARTLABEL']];
@@ -201,7 +212,7 @@
 					} else if($data[$hdr_snowqueen['S163']] == convert_cyrillic('Мужской')) {
 						$category = convert_cyrillic('Мужчины');
 					}
-					$category2 = convert_cyrillic($category_map[trim(convert($data[$hdr_snowqueen['VARTLABEL']]))]);
+					$category2 = convert_cyrillic($this->product_category_map[trim(convert($data[$hdr_snowqueen['VARTLABEL']]))]);
 					$buf[$hdr_magento['_category']] = $category;
 					$buf[$hdr_magento['qty']] = 1;
 					$buf[$hdr_magento['_root_category']] = 'Default Category';
@@ -222,13 +233,13 @@
 				}
 				fclose($file_handle);
 			} catch(Exception $e) {
-				echo('Failed to open file for reading:'.$this->file_name . ':'.$e);
+				echo('Failed to open file for reading:'.$file_name . ':'.$e);
 //				$this->logger->error('Failed to open file for reading:'.$this->file_name, $e);
 			}
 
 			// Write to magento file
 			try {
-				$file_handle_out = fopen($this->output_file_name, 'w+');
+				$file_handle_out = fopen($output_file_name, 'w+');
 				if(!$file_handle_out) {
 					$this->error_count++;
 //					$this->logger->error("Failed to open file for reading: $this->file_name");
@@ -252,7 +263,9 @@
 								$buf[$hdr_magento['visibility']] = '4';
 								$buf[$hdr_magento['has_options']] = '1';
 								$buf[$hdr_magento['required_options']] = '1';
-								$buf[$hdr_magento['image']] = "$this->image_folder/$idfmc.jpg";
+								$buf[$hdr_magento['image']] = "/$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['small_image']] = "/$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['thumbnail']] = "/$image_dir/$idfmc.jpg";
 							} else { // associated product
 								$buf = array_fill(0, count($data_row), '');
 								$buf[$hdr_magento['visibility']] = 1;
@@ -284,13 +297,15 @@
 				echo('Failed to open file for writing:'.$this->output_file_name . ':'.$e);
 			}
 			fclose($file_handle_out);
-//			$msg = "Load complete. Successful: $this->success_count, Errors: $this->error_count";
-//			$this->logger->info($msg);
-//			$this->mailer->getAppender('mailAppender')->setSubject($this->logger->getName());
-//			$this->mailer->info($msg);
+			$msg = "Load complete. Successful: $this->success_count, Errors: $this->error_count";
+			print "$msg\n";
 		}
 	}
-	$mi = new MagentoImport($argv[1], $argv[2], $argv[3] == 1);
-	$mi->image_folder = 'ss2014';
-	$mi->SnqToMageProducts();
+	$mi = new MagentoImport();
+	// argv:
+	// 1: input file
+	// 2: output file
+	// 3: has header (1-yes)
+	// 4: image import directory
+	$mi->SnqToMageProducts($argv[1], $argv[2], $argv[3] == 1, $argv[4]);
 ?>
