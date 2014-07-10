@@ -24,6 +24,52 @@
 		return (substr($haystack, -$length) === $needle);
 	}
 
+	// http://htmlweb.ru/php/example/translit.php
+	function rus2translit($string) {
+		$converter = array(
+			'а' => 'a',   'б' => 'b',   'в' => 'v',
+			'г' => 'g',   'д' => 'd',   'е' => 'e',
+			'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+			'и' => 'i',   'й' => 'y',   'к' => 'k',
+			'л' => 'l',   'м' => 'm',   'н' => 'n',
+			'о' => 'o',   'п' => 'p',   'р' => 'r',
+			'с' => 's',   'т' => 't',   'у' => 'u',
+			'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+			'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+			'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
+			'э' => 'e',   'ю' => 'yu',  'я' => 'ya',
+			'А' => 'A',   'Б' => 'B',   'В' => 'V',
+			'Г' => 'G',   'Д' => 'D',   'Е' => 'E',
+			'Ё' => 'E',   'Ж' => 'Zh',  'З' => 'Z',
+			'И' => 'I',   'Й' => 'Y',   'К' => 'K',
+			'Л' => 'L',   'М' => 'M',   'Н' => 'N',
+			'О' => 'O',   'П' => 'P',   'Р' => 'R',
+			'С' => 'S',   'Т' => 'T',   'У' => 'U',
+			'Ф' => 'F',   'Х' => 'H',   'Ц' => 'C',
+			'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
+			'Ь' => '\'',  'Ы' => 'Y',   'Ъ' => '\'',
+			'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
+		);
+		return strtr($string, $converter);
+	}
+
+	function str2url($str) {
+		// переводим в транслит
+
+		$str = rus2translit($str);
+
+		// в нижний регистр
+		$str = strtolower($str);
+
+		// заменям все ненужное нам на "-"
+		$str = preg_replace('~[^-a-z0-9_]+~u', '-', $str);
+
+		// удаляем начальные и конечные '-'
+		$str = trim($str, "-");
+
+		return $str;
+	}
+
   class MagentoImport {
 		protected $error_count = 0;
 		protected $success_count = 0;
@@ -33,10 +79,11 @@
 		const FIELD_SEPARATOR_SNQ = ';';
 		const FIELD_SEPARATOR_MAGENTO = ',';
 		const MAX_LINE_LENGTH = 5000;
+		const READ_BUFFER = 4096;
 
 		public $image_folder = '';
 
-		// Magento required fields
+		// Magento fields
     private $magento_fields_product = array(
       'sku',
       '_attribute_set',
@@ -53,6 +100,7 @@
       'product_articule',
       'product_collection',
       'product_idfmc',
+//			'url_key',
       'product_size',
       'short_description',
       'status',
@@ -70,7 +118,14 @@
 			'_super_attribute_code', // = 'product_size'
 			'_super_attribute_option',
 			'has_options',
-			'required_options'
+			'_custom_option_is_required',
+			'_custom_option_type',
+			'_media_attribute_id', //default=88, determine select attribute_id from eav_attribute where attribute_code = 'media_gallery';
+			'_media_position',
+			'_media_image',
+			'_media_is_disabled',
+			'_media_lable',
+			'_custom_option_row_title'
     );
 
 		// Snowqueen export fields
@@ -99,12 +154,17 @@
 			'Платье' => 'Платья',
 			'Блузка' =>	'Блузки',
 			'Брюки' =>  'Брюки/Джинсы',
+			'Водолазка' => 'Кардиганы и джемперы',
 			'Джемпер' =>  'Кардиганы и джемперы',
 			'Джинсы' =>  'Брюки/Джинсы',
 			'Жакет' =>  'Куртки',
 			'Жилет' =>  'Куртки',
 			'Кардиган' =>  'Кардиганы и джемперы',
 			'Комбинезон' =>  'Шорты и комбинезоны',
+			'Куртка' => 'Куртки',
+			'Куртка утепленная' => 'Куртки',
+			'Пальто шерстяное' => 'Пальто',
+			'Полупальто' => 'Пальто',
 			'Пиджак' =>  'Пиджаки',
 			'Платье' =>  'Платья',
 			'Поло' =>  'Футболки и топы',
@@ -115,6 +175,7 @@
 			'Футболка' =>  'Футболки и топы',
 			'Футболка с длинным рукавом' =>  'Футболки и топы',
 			'Шорты' =>  'Шорты',
+			'Шуба' => 'Шубы и меха',
 			'Юбка' =>  'Юбки'
 		);
 
@@ -175,7 +236,7 @@
 				}
 
 				// Read data lines
-				while(($data_str = fgets($file_handle, 4096)) !== false) {
+				while(($data_str = fgets($file_handle, self::READ_BUFFER)) !== false) {
 					$data = str_getcsv($data_str, self::FIELD_SEPARATOR_SNQ);
 					// Assign data to known fields
 					$buf = array();
@@ -212,7 +273,20 @@
 					} else if($data[$hdr_snowqueen['S163']] == convert_cyrillic('Мужской')) {
 						$category = convert_cyrillic('Мужчины');
 					}
-					$category2 = convert_cyrillic($this->product_category_map[trim(convert($data[$hdr_snowqueen['VARTLABEL']]))]);
+					$category2 = null;
+					//$src_category = trim(convert($data[$hdr_snowqueen['VARTLABEL']]));
+					$src_category = trim($data[$hdr_snowqueen['VARTLABEL']]);
+					if(empty($src_category)) {
+						print "ERROR: category is empty";
+					}
+					if(!isset($this->product_category_map[convert($src_category)])) {
+						print "ERROR: Failed to map category:\t$src_category\n";
+					} else {
+						$category2 = convert_cyrillic($this->product_category_map[convert($src_category)]);
+					}
+					if(convert($category2) == 'Шубы и меха') {
+						$category = $category2;
+					}
 					$buf[$hdr_magento['_category']] = $category;
 					$buf[$hdr_magento['qty']] = 1;
 					$buf[$hdr_magento['_root_category']] = 'Default Category';
@@ -222,14 +296,15 @@
 					$buf = array_map('trim', $buf);
 					$buf = array_map('convert', $buf);
 					ksort($buf);
-
 					$data_new[$idfmc][] = $buf;
-					$buf = array_fill(0, count($buf), null);
-					$buf[$hdr_magento['_category']] = "$category/$category2";
-					$buf = array_map('convert', $buf);
-					ksort($buf);
 
-					$data_new[$idfmc][] = $buf;
+					if($category != $category2) {
+						$buf = array_fill(0, count($buf), null);
+						$buf[$hdr_magento['_category']] = "$category/$category2";
+						$buf = array_map('convert', $buf);
+						ksort($buf);
+						$data_new[$idfmc][] = $buf;
+					}
 				}
 				fclose($file_handle);
 			} catch(Exception $e) {
@@ -260,12 +335,20 @@
 								$buf[$hdr_magento['sku']] = $buf[$hdr_magento['sku']].'-c';
 								$buf[$hdr_magento['_type']] = 'configurable';
 								$buf[$hdr_magento['product_size']] = '';
-								$buf[$hdr_magento['visibility']] = '4';
+//								$buf[$hdr_magento['url_key']] = str2url($buf[$hdr_magento['name']].'-'.$idfmc.'-'.$buf[$hdr_magento['manufacturer']]);
 								$buf[$hdr_magento['has_options']] = '1';
-								$buf[$hdr_magento['required_options']] = '1';
-								$buf[$hdr_magento['image']] = "/$image_dir/$idfmc.jpg";
-								$buf[$hdr_magento['small_image']] = "/$image_dir/$idfmc.jpg";
-								$buf[$hdr_magento['thumbnail']] = "/$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['_custom_option_is_required']] = '1';
+								$buf[$hdr_magento['_custom_option_type']] = 'drop_down';
+								$buf[$hdr_magento['visibility']] = '4';
+								$buf[$hdr_magento['_custom_option_row_title']] = 'title';
+								$buf[$hdr_magento['_media_attribute_id']] = '88';
+								$buf[$hdr_magento['_media_lable']] = 'image1';
+								$buf[$hdr_magento['_media_position']] = '0';
+								$buf[$hdr_magento['_media_is_disabled']] = '0';
+								$buf[$hdr_magento['image']] = "$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['_media_image']] = "$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['small_image']] = "$image_dir/$idfmc.jpg";
+							$buf[$hdr_magento['thumbnail']] = "$image_dir/$idfmc.jpg";
 							} else { // associated product
 								$buf = array_fill(0, count($data_row), '');
 								$buf[$hdr_magento['visibility']] = 1;
@@ -290,6 +373,8 @@
 					} else { // Simple product
 						if(!is_array($data) || count($data) <= 0) continue;
 						$data[$hdr_snowqueen['visibility']] = '4';
+						$data[$hdr_magento['has_options']] = '1';
+						$data[$hdr_magento['_custom_option_is_required']] = '1';
 						fputcsv($file_handle_out, $data, self::FIELD_SEPARATOR_MAGENTO);
 					}
 				}
