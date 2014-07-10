@@ -9,9 +9,9 @@
 				<fieldset>
 					<span>Сортировать по</span>
 					<select class="customSelect" name="sort">
-						<option value="sort">По умолчанию</option>
-						<option value="price_asc">Цене (возр.)</option>
-						<option value="price_desc">Цене (убыв.)</option>
+            <option value="sort"<?=($_GET['sort']=='sort' ? ' selected' : '')?>>По умолчанию</option>
+						<option value="price_asc"<?=($_GET['sort']=='price_asc' ? ' selected' : '')?>>Цене (возр.)</option>
+						<option value="price_desc"<?=($_GET['sort']=='price_desc' ? ' selected' : '')?>>Цене (убыв.)</option>
 					</select>
 				</fieldset>
 			</form>
