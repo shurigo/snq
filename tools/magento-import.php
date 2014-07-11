@@ -100,7 +100,10 @@
       'product_articule',
       'product_collection',
       'product_idfmc',
-//			'url_key',
+			'url_key',
+			'meta_title',
+			'meta_keyword',
+			'meta_description',
       'product_size',
       'short_description',
       'status',
@@ -335,7 +338,10 @@
 								$buf[$hdr_magento['sku']] = $buf[$hdr_magento['sku']].'-c';
 								$buf[$hdr_magento['_type']] = 'configurable';
 								$buf[$hdr_magento['product_size']] = '';
-//								$buf[$hdr_magento['url_key']] = str2url($buf[$hdr_magento['name']].'-'.$idfmc.'-'.$buf[$hdr_magento['manufacturer']]);
+								$buf[$hdr_magento['url_key']] = str2url($buf[$hdr_magento['name']].'-'.$idfmc.'-'.$buf[$hdr_magento['manufacturer']]);
+								$buf[$hdr_magento['meta_title']] = $buf[$hdr_magento['name']].' (артикул:'.$idfmc.') '.$buf[$hdr_magento['manufacturer']];
+								$buf[$hdr_magento['meta_keyword']] = $buf[$hdr_magento['name']].';'.$buf[$hdr_magento['_category']].';'.explode('/', $category2)[1].';'.$buf[$hdr_magento['manufacturer']].';'.$idfmc;
+								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['description']];
 								$buf[$hdr_magento['has_options']] = '1';
 								$buf[$hdr_magento['_custom_option_is_required']] = '1';
 								$buf[$hdr_magento['_custom_option_type']] = 'drop_down';
