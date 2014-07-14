@@ -38,7 +38,10 @@ document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=i
       </div>
       <!-- end .price-->
 <?  endif; ?>
+    <?
+    if (isset($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]) && ($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]!=0))  echo '<p style="color:red;">мю дюммсч лндекэ опедсялнрпеммю днонкмхрекэмюъ яйхдйю - '.$arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"].'%. ондпнамнярх с опндюбжнб-йнмяскэрюмрнб.</p>';
 
+    ?>
     <ul class="links">
       <li>
         <a href="/actions/" title="юЙЖХХ" onClick="DoubleClickTagPost('Gobr8Bpp'); trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">яЙХДЙХ %</a>
