@@ -39,8 +39,12 @@ document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=i
       <!-- end .price-->
 <?  endif; ?>
     <?
-    if (isset($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]) && ($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]!=0))  echo '<p style="color:red;">мю дюммсч лндекэ опедсялнрпеммю днонкмхрекэмюъ яйхдйю - '.$arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"].'%. ондпнамнярх с опндюбжнб-йнмяскэрюмрнб.</p>';
-
+    if (isset($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]) && ($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]!=0))
+    {
+    echo '<p style="color:red;">опедсялнрпеммю днонкмхрекэмюъ яйхдйю - '.$arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"].'%</p>';
+    echo '<div style="padding:0px 0 5px 0;""><div style="display:inline;">хрнцнбюъ жемю:</div> <div style="border: 1px solid red; color:#a0a0a0; font-size:16px; text-align:center;display:inline; padding:1px 20px 1px 20px;">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_last_price"]["VALUE"], 0, '.', ' ').' пса.</div></div>';
+    echo '<p>ондпнамнярх с опндюбжнб-йнмяскэрюмрнб.</p>';
+   }
     ?>
     <ul class="links">
       <li>

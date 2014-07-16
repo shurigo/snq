@@ -124,7 +124,7 @@
 			"LIST_META_KEYWORDS" => "UF_SEC_KEYWORDS",
 			"LIST_META_DESCRIPTION" => "UF_SEC_DESCRIPTON",
 			"LIST_BROWSER_TITLE" => "UF_SEC_TITLE",
-			"DETAIL_PROPERTY_CODE" => array(0=>"col_idmfc",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2",7=>"add_pic_3",8=>"add_pic_4",9=>"col_im_link",10=>"col_add_discount"),
+			"DETAIL_PROPERTY_CODE" => array(0=>"col_idmfc",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2",7=>"add_pic_3",8=>"add_pic_4",9=>"col_im_link",10=>"col_add_discount",11=>"col_last_price"),
 			"DETAIL_META_KEYWORDS" => "col_keywords",
 			"DETAIL_META_DESCRIPTION" => "col_description",
 			"DETAIL_BROWSER_TITLE" => "col_title",
