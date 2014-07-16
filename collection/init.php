@@ -15,18 +15,24 @@
   // sort field selector
   $url_array = explode("/", $APPLICATION->GetCurPage());
   $category_price_sort_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
-  if(isset($_GET['sort'])) 
+  $category_show_banner=array('wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
+
+  if (in_array($url_array[2], $category_show_banner))
+
+  echo '<div style="padding:0 0 5px 0;"><img src="/images/banners/banner_from_15_to_31_july.jpg" alt="" border="0"></div>';
+
+  if(isset($_GET['sort']))
   {
 		if($_GET['sort'] == 'sort') { $sort_field = 'sort'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_asc') { $sort_field = 'property_col_price'; $sort_order = 'asc'; }
 		if($_GET['sort'] == 'price_desc') { $sort_field = 'property_col_price'; $sort_order = 'desc'; }
-	} 
-  else 
+	}
+  else
   {
     $sort_field = 'sort';
     $sort_order = 'asc';
   }
-  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && in_array($url_array[2], $category_price_sort_array)) { 
+  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && in_array($url_array[2], $category_price_sort_array)) {
 		$sort_field = 'property_col_price';
     $_GET['sort'] = 'price_asc';
     $sort_order = 'asc';
