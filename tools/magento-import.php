@@ -242,7 +242,7 @@
 				while(($data_str = fgets($file_handle, self::READ_BUFFER)) !== false) {
 					$data = str_getcsv($data_str, self::FIELD_SEPARATOR_SNQ);
 					// Assign data to known fields
-					$buf = array();
+					$buf = array_fill(0, count($hdr_magento), null);
 					$buf[$hdr_magento['sku']] = $data[$hdr_snowqueen['IDSCU']];
 					$buf[$hdr_magento['product_idfmc']] = $data[$hdr_snowqueen['IDMARTCARD']];
 					$idfmc = $buf[$hdr_magento['product_idfmc']];
@@ -294,6 +294,14 @@
 					$buf[$hdr_magento['qty']] = 1;
 					$buf[$hdr_magento['_root_category']] = 'Default Category';
 					$buf[$hdr_magento['_product_websites']] = 'base';
+					$buf[$hdr_magento['url_key']] = str2url(
+						implode('-', 
+						array(
+							convert($buf[$hdr_magento['name']]), 
+							$idfmc,
+							convert($buf[$hdr_magento['manufacturer']]),
+							$buf[$hdr_magento['product_size']]
+						)));
 
 					// convert to utf-8
 					$buf = array_map('trim', $buf);
@@ -302,7 +310,7 @@
 					$data_new[$idfmc][] = $buf;
 
 					if($category != $category2) {
-						$buf = array_fill(0, count($buf), null);
+						$buf = array_fill(0, count($hdr_magento), null);
 						$buf[$hdr_magento['_category']] = "$category/$category2";
 						$buf = array_map('convert', $buf);
 						ksort($buf);
@@ -338,10 +346,6 @@
 								$buf[$hdr_magento['sku']] = $buf[$hdr_magento['sku']].'-c';
 								$buf[$hdr_magento['_type']] = 'configurable';
 								$buf[$hdr_magento['product_size']] = '';
-								$buf[$hdr_magento['url_key']] = str2url($buf[$hdr_magento['name']].'-'.$idfmc.'-'.$buf[$hdr_magento['manufacturer']]);
-								$buf[$hdr_magento['meta_title']] = $buf[$hdr_magento['name']].' (артикул:'.$idfmc.') '.$buf[$hdr_magento['manufacturer']];
-								$buf[$hdr_magento['meta_keyword']] = $buf[$hdr_magento['name']].';'.$buf[$hdr_magento['_category']].';'.explode('/', $category2)[1].';'.$buf[$hdr_magento['manufacturer']].';'.$idfmc;
-								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['description']];
 								$buf[$hdr_magento['has_options']] = '1';
 								$buf[$hdr_magento['_custom_option_is_required']] = '1';
 								$buf[$hdr_magento['_custom_option_type']] = 'drop_down';
@@ -354,9 +358,19 @@
 								$buf[$hdr_magento['image']] = "$image_dir/$idfmc.jpg";
 								$buf[$hdr_magento['_media_image']] = "$image_dir/$idfmc.jpg";
 								$buf[$hdr_magento['small_image']] = "$image_dir/$idfmc.jpg";
-							$buf[$hdr_magento['thumbnail']] = "$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['thumbnail']] = "$image_dir/$idfmc.jpg";
+								$buf[$hdr_magento['meta_title']] = $buf[$hdr_magento['name']].' (артикул:'.$idfmc.') '.$buf[$hdr_magento['manufacturer']];
+								$buf[$hdr_magento['meta_keyword']] = $buf[$hdr_magento['name']].';'.$buf[$hdr_magento['_category']].';'.explode('/', $category2)[1].';'.$buf[$hdr_magento['manufacturer']].';'.$idfmc;
+								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['description']];
+								$buf[$hdr_magento['url_key']] = str2url(
+									implode('-', 
+									array(
+										$buf[$hdr_magento['name']], 
+										$idfmc,
+										$buf[$hdr_magento['manufacturer']]
+									)));
 							} else { // associated product
-								$buf = array_fill(0, count($data_row), '');
+								$buf = array_fill(0, count($hdr_magento), null);
 								$buf[$hdr_magento['visibility']] = 1;
 							} // associated product attributes
 							$buf[$hdr_magento['_super_products_sku']] = $data_row[$hdr_magento['sku']];
@@ -365,7 +379,7 @@
 							ksort($buf);
 							$configurable[] = $buf; 
 							if(count($configurable) == 1) {
-								$buf = array_fill(0, count($data_row), '');
+								$buf = array_fill(0, count($hdr_magento), null);
 								ksort($buf);
 							  $buf[$hdr_magento['_category']] = $category2;
 								$configurable[] = $buf;
@@ -378,9 +392,10 @@
 						}
 					} else { // Simple product
 						if(!is_array($data) || count($data) <= 0) continue;
-						$data[$hdr_snowqueen['visibility']] = '4';
+						$data[$hdr_magento['visibility']] = '4';
 						$data[$hdr_magento['has_options']] = '1';
 						$data[$hdr_magento['_custom_option_is_required']] = '1';
+						ksort($data);
 						fputcsv($file_handle_out, $data, self::FIELD_SEPARATOR_MAGENTO);
 					}
 				}
