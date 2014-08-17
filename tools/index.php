@@ -31,7 +31,7 @@ $ELEMENT_ID=($arFields['ID']);
 echo $ELEMENT_ID."-".$XML_ID.";".$PIC1.";".$PIC2."<br>";
 
 //upload image 1
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC1);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20142015/looks/".$PIC1);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 
