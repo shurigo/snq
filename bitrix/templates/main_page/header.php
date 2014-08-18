@@ -212,7 +212,7 @@
       <br>
       <hr class="hr_red">
       <ul class="info-links2">
-        <li><a href="http://ad.adriver.ru/cgi-bin/rle.cgi?sid=196960&sz=k_1&bt=2&pz=0&rnd=1812345545" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_ss2014.jpg" alt="" border="0"></a></li>
+        <li><a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a></li>
         <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/u7tor824Z64" allowfullscreen=""></iframe></li>
       </ul>
 
