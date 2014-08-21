@@ -36,7 +36,7 @@ $arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20142015/loo
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_1", $arFile);
 
 //upload image 2
-$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/ss2014/looks/".$PIC2);
+$arFile = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/upload/aw20142015/looks/".$PIC2);
 //link new ima to the element
 CIBlockElement::SetPropertyValueCode($ELEMENT_ID, "add_pic_2", $arFile);
 
