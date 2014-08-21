@@ -654,7 +654,8 @@ table .sep {
 	margin:0 0 0 50px;
 	background:#3bb5c0;
 	padding: 0 5px 0 5px;
-	color: red;
+	color: white;
+	text-transform:uppercase;
 }
 
 .catalog .name {
