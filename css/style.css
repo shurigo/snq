@@ -686,6 +686,7 @@ table .sep {
 	zoom:1;
 	display:block;
 	min-height:100px;
+	text-transform: uppercase;
 }
 
 .side-menu {
@@ -724,6 +725,7 @@ table .sep {
 	font-size:13px;
 	line-height:16px;
 	margin:0 0 7px 0;
+	text-transform: uppercase;
 }
 
 .checks {
