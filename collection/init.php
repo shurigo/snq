@@ -14,7 +14,8 @@
 	}
   // sort field selector
   $url_array = explode("/", $APPLICATION->GetCurPage());
-  $category_price_sort_array=array('wdress','mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
+  //$category_price_sort_array=array('wdress','mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
+  $category_price_sort_array=array();
   $category_show_banner=array('wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
 
   if (in_array($url_array[2], $category_show_banner))
