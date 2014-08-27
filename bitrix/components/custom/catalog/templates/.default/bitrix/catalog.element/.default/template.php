@@ -318,19 +318,30 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&t
 <?if(HUBRUS_ENABLE):?>
 <script type="text/javascript" src="<?=$HUBRUS_str;?>"></script>
 <?endif;?>
-<script language="javascript">
-var odinkod = {
-"type": "product",
-"product_id":"<?=$arResult["ID"]?>"
-};
-var gcb = Math.round(Math.random() * 100000);
-document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') +
-'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
-</script>
 
 <!-- Segment Pixel - SQ_segment - DO NOT MODIFY -->
 <img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
 <!-- End of Segment Pixel -->
+
+<?
+  // get current catalog section
+  $url_array = explode("/", $APPLICATION->GetCurPage());
+  $category_with_pixsel_array=array('mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','mpaddedcoat','wleathertopjacket','mleathertopjacket','mwleathertopjacket','wwleathertopjacket','wtopcoat','mtopcoat');
+  if (in_array($url_array[2], $category_with_pixsel_array)) {
+?>
+ <script language="javascript">
+  var odinkod = {
+  "type": "product",
+  "recomm": "true", // false - если этот товар не нужно ретаргетировать
+  "product_id":"<?=$arResult["ID"]?>"
+   };
+  var gcb = Math.round(Math.random() * 100000);
+  document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') +
+'cdn.odinkod.ru/tags/772300-390d07.js?gcb='+ gcb +'"></scr'+'ipt>');
+</script>
+<?
+}
+?>
 
 <?
 $url_array = explode("/", $APPLICATION->GetCurPage());
