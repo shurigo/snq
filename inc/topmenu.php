@@ -23,7 +23,7 @@
                     <li><a href="/collection/wtopjacket/">Куртки</a></li>
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
                     <li><a href="/collection/wtopcloak/">Плащи</a></li>
-                    <li><a href="/collection/wjacket/">Жакеты/Жилеты</a></li>
+                    <li><a href="/collection/wjacket/">Жакеты и жилеты</a></li>
                    </ul></td>
                 <td><ul>
                     <li><a href="/collection/wdress/">Платья</a></li>
@@ -31,9 +31,9 @@
                     <li><a href="/collection/wskirt/">Юбки</a></li>
                     <li><a href="/collection/wcardigan/">Кардиганы и джемперы</a></li>
                     <li><a href="/collection/wtshort/">Футболки и топы</a></li>
-                    <li><a href="/collection/wblouse/">Блузки/Рубашки</a></li>
-                    <li><a href="/collection/wpants/">Брюки/Джинсы</a></li>
-                    <li><a href="/collection/wshorts/">Шорты/Комбинезоны</a></li>
+                    <li><a href="/collection/wblouse/">Блузк и рубашки</a></li>
+                    <li><a href="/collection/wpants/">Брюки и джинсы</a></li>
+                    <li><a href="/collection/wshorts/">Шорты и комбинезоны</a></li>
                     <li><a href="/collection/zhenskie_kupalniki/">Пляжная одежда и купальники</a></li>
                   </ul></td>
               </tr>
@@ -58,7 +58,7 @@
                     <li><a href="/collection/mtrico/">Кардиганы и джемперы</a></li>
                     <li><a href="/collection/mblazer/">Пиджаки</a></li>
                     <li><a href="/collection/mshirt/">Рубашки</a></li>
-                    <li><a href="/collection/mpants/">Брюки/Джинсы</a></li>
+                    <li><a href="/collection/mpants/">Брюки и джинсы</a></li>
                     <li><a href="/collection/mtshort/">Футболки</a></li>
                     <li><a href="/collection/mshorts/">Шорты</a></li>
                     <li><a href="/collection/muzhskie_plavki_shorti/">Пляжная одежда и купальники</a></li>
