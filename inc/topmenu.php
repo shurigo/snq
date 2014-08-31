@@ -17,6 +17,7 @@
                 <td><ul>
                     <li><a href="/collection/wskincoat/">Дубленки</a></li>
                     <li><a href="/collection/wpaddedcoat/">Пуховики</a></li>
+                    <li><a href="/collection/wwleathertopjacket/">Кожаные куртки зимние</a></li>
                     <li><a href="/collection/wleathertopjacket/">Кожаные куртки</a></li>
                     <li><a href="/collection/wleathertopcoat/">Пальто из кожи</a></li>
                     <li><a href="/collection/wtopjacket/">Куртки</a></li>
@@ -30,7 +31,7 @@
                     <li><a href="/collection/wskirt/">Юбки</a></li>
                     <li><a href="/collection/wcardigan/">Кардиганы и джемперы</a></li>
                     <li><a href="/collection/wtshort/">Футболки и топы</a></li>
-                    <li><a href="/collection/wblouse/">Блузки</a></li>
+                    <li><a href="/collection/wblouse/">Блузки/Рубашки</a></li>
                     <li><a href="/collection/wpants/">Брюки/Джинсы</a></li>
                     <li><a href="/collection/wshorts/">Шорты/Комбинезоны</a></li>
                     <li><a href="/collection/zhenskie_kupalniki/">Пляжная одежда и купальники</a></li>
