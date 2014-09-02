@@ -31,7 +31,7 @@
                     <li><a href="/collection/wskirt/">Юбки</a></li>
                     <li><a href="/collection/wcardigan/">Кардиганы и джемперы</a></li>
                     <li><a href="/collection/wtshort/">Футболки и топы</a></li>
-                    <li><a href="/collection/wblouse/">Блузк и рубашки</a></li>
+                    <li><a href="/collection/wblouse/">Блузки и рубашки</a></li>
                     <li><a href="/collection/wpants/">Брюки и джинсы</a></li>
                     <li><a href="/collection/wshorts/">Шорты и комбинезоны</a></li>
                     <li><a href="/collection/zhenskie_kupalniki/">Пляжная одежда и купальники</a></li>
