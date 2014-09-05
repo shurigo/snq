@@ -73,6 +73,7 @@
             <table>
               <tr>
                 <td><ul>
+                    <li><a href="/collection/wfurs_bestsell/" class="red"><b>Выгодное предложение</b></a></li>
                     <li><a href="/collection/wmink/">Шубы норковые</a></li>
                     <li><a href="/collection/wfox/">Шубы из лисы</a></li>
                     <li><a href="/collection/wkarakul/">Шубы из каракуля</a></li>
