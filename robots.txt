@@ -24,6 +24,9 @@ Disallow: /collection/wleathertopjacket/index.php?PAGEN_1=*
 Disallow: /collection/wleathertopjacket/?SHOWALL_1=1
 Disallow: /collection/wmink/?SHOWALL_1=1
 Disallow: /collection/check_furcoat/
+Disallow: /collection/wmink/39166851/
+Disallow: /collection/wmink/39166857/
+Disallow: /unsubscribe/
 # settings
 Host: snowqueen.ru
 Sitemap: http://snowqueen.ru/sitemap.xml
