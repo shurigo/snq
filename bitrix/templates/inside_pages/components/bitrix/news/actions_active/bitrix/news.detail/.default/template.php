@@ -60,7 +60,7 @@
 					"SHOW_TOP_ELEMENTS" => "N",
 					"PAGE_ELEMENT_COUNT" => "32",
 					"LINE_ELEMENT_COUNT" => "4",
-					"ELEMENT_SORT_FIELD" => 'sort',
+					"ELEMENT_SORT_FIELD" =>  "sort",
 					"ELEMENT_SORT_ORDER" => 'asc',
 					"PROPERTY_CODE" => array(0=>"col_model_code",1=>"col_price",2=>"col_sizes",3=>"col_brand",4=>"col_price_origin",5=>"add_pic_1",6=>"add_pic_2"),
 					"INCLUDE_SUBSECTIONS" => "Y",
