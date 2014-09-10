@@ -3,6 +3,7 @@
 	<fieldset>
 		<section class="filter">
 			<div class="hr"></div>
+			<!--
 			<div style="vertical-align: middle;">
 				<label for="d_cb" class="label red" style="display:inline-block;">
 				<input type="checkbox" class="discount_only" id="d_cb" <?=$_SESSION['discount_only'] === 'Y' ? 'value="on" checked' : '';?> />
@@ -10,6 +11,7 @@
 				Только со скидкой
 				</label>
 		    </div>
+		    -->
 			<!--<label class="label">Бренд</label>  -->
 			<div class="checks">
 				<ul>
