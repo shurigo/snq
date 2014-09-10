@@ -292,7 +292,7 @@ table .sep {
 .header .city {
 	position:absolute;
 	top:20px;
-	left:500px;
+	left:530px;
 	color:#696969;
 }
 
@@ -309,8 +309,8 @@ table .sep {
 
 .search {
 	position:absolute;
-	top:5px;
-	right:0;
+	top:20px;
+	right:520px;
 }
 
 .search input[type="text"] {
