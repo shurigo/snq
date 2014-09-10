@@ -38,7 +38,8 @@
   }
   //if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && in_array($url_array[2], $category_price_sort_array)) {
 // always sort by price_asc
-  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort')) {
+  $default_sort = array('woman','man');
+  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && !in_array($url_array[2], $default_sort)) {
 		$sort_field = 'property_col_price';
     $_GET['sort'] = 'price_asc';
     $sort_order = 'asc';
