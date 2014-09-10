@@ -36,7 +36,9 @@
     $sort_field = 'sort';
     $sort_order = 'asc';
   }
-  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && in_array($url_array[2], $category_price_sort_array)) {
+  //if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort') && in_array($url_array[2], $category_price_sort_array)) {
+// always sort by price_asc
+  if ((!isset($_GET['sort']) || $_GET['sort'] == 'sort')) {
 		$sort_field = 'property_col_price';
     $_GET['sort'] = 'price_asc';
     $sort_order = 'asc';
