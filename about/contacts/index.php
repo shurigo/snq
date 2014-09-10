@@ -4,17 +4,16 @@ $APPLICATION->SetTitle("Контакты");
 ?>
 <section class="mainContent">
 <h1>Контакты</h1>
-         <p>ООО «СК Трейд»</p>
-
-          <p>ОГРН: 1057747108154</p>
-
-          <p>Юридический адрес: 141408, Московская обл., г.Химки, Ленинградское шоссе, владение 5</p>
-
-          <p>Тел.: +7 (495) 777-8-999 </p>
-
-          <p>E-mail: <a href="mailto:info@snq.ru" >info@snq.ru</a></p>
-
-          <p> <br /> </p>
+         <p>
+         ООО «СК Трейд»</br>
+         ОГРН: 1057747108154</br>
+         Юридический адрес: 141408, Московская обл., г.Химки, Ленинградское шоссе, владение 5</br></br>
+         <b>Тел.</b>: 8 (800) 777-8-999 (Бесплатный звонок по всей России)</br></br>
+         <b>E-mail:</b><br>
+         <a href="mailto:info@snq.ru">info@snq.ru</a> (ОБЩИЕ ВОПРОСЫ)</br>
+         <a href="mailto:pr@snowqueen.ru">pr@snowqueen.ru</a> (СОТРУДНИЧЕСТВО СО СМИ)<br />
+         <a href="mailto:otziv@snowqueen.ru">otziv@snowqueen.ru</a> (ОТЗЫВЫ И ПРЕДЛОЖЕНИЯ)
+         </p>
  </section>
 
 <aside class="aside">
