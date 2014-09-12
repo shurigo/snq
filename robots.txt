@@ -73,6 +73,16 @@ Allow: /collection/brands/
 Disallow: /collection/wmink/39166851/
 Disallow: /collection/wmink/39166857/
 
+#SALE
+Allow: /collection/wtopclothes_sale/
+Allow: /collection/wskincoat_sale/
+Allow: /collection/wclothes_sale/
+Allow: /collection/waccessories_sale/
+Allow: /collection/mtopclothes_sale/
+Allow: /collection/mskincoat_sale/
+Allow: /collection/mclothes_sale/
+Allow: /collection/maccessories_sale/
+
 # settings
 Host: snowqueen.ru
 Sitemap: http://snowqueen.ru/sitemap.xml
