@@ -217,6 +217,14 @@ var google_remarketing_only = true;
 </div>
 </noscript>
 
+<!-- Overlay -->
+<script language="javascript">
+var odinkod = {
+"type": "homepage"
+};
+var gcb = Math.round(Math.random() * 100000);
+document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'cdn.odinkod.ru/tags/13789918-d57cc3.js?gcb='+ gcb +'"></scr'+'ipt>');
+</script>
 
 </body>
 </html>
