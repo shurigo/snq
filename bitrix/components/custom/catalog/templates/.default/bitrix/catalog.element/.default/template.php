@@ -29,15 +29,39 @@ var a = axel * 10000000000000;
     <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
     <p>Код товара: <?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_idmfc"]["VALUE"]); ?></p>
     <p>Бренд: <strong itemprop="brand"><?=strip_tags($arResult["DISPLAY_PROPERTIES"]["col_brand"]["DISPLAY_VALUE"]); ?></strong></p>
+
 <?
-    if($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"] < $arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"]):?>
-      <div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">руб</span> <del><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price_origin"]["VALUE"], 0, '.', ' ')?></del>
-      </div>
-<?  else:?>
-      <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> <span itemprop="price"><?=number_format($arResult["DISPLAY_PROPERTIES"]["col_price"]["VALUE"], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">руб</span>&nbsp;<new>New</new>
-      </div>
-      <!-- end .price-->
-<?  endif; ?>
+//get current dir
+$url_array = explode("/", $APPLICATION->GetCurPage());
+
+if($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'] < $arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'])
+   if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell'))
+	echo '
+			<div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+			<del>'.number_format($arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.</del>
+			</div>
+		 ';
+   else
+	echo '
+			<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+			<new>Акция: - '.(100-round(($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE']*100)/$arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'])).' %</new>
+			</div>
+			<div style="border: 0px solid red; font-size:8px; text-align:left;">цена указана с учетом скидки</div>
+		 ';
+else
+echo '
+		<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<new>New</new>
+		</div>
+	 ';
+
+?>
+
+
+
     <?
     if (isset($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]) && ($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]!=0))
     {

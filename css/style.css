@@ -649,11 +649,12 @@ table .sep {
 .catalog .price new,
 .item .price new {
 	font-weight:bold;
+	float: right;
 	font-size:12px;
 	font-style:normal;
-	margin:0 0 0 40px;
+	margin: 0 0 0 0px;
 	background:#3bb5c0;
-	padding: 0 5px 0 5px;
+	padding: 0 0px 0 5px;
 	color: white;
 	text-transform:uppercase;
 }
@@ -919,7 +920,7 @@ text-transform: uppercase;
 .item .price {
 	width:173px;
 	border:0;
-	margin:22px 0 14px 0;
+	margin:22px 0 0px 0;
 	left:0;
 	top:0;
 }

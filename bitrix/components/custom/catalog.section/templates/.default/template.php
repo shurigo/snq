@@ -82,18 +82,35 @@
 <div style="height:18px;"></div>
 <?endif?>
 
-<?if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE']):?>
-<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-<del>
-<?=number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.';?>
-</del>
-<?else:?>
-<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ')?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-<new>New</new>
-<?endif?>
-</span>
+<?
+//get current dir
+$url_array = explode("/", $APPLICATION->GetCurPage());
+
+if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE'])
+   if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell'))
+	echo '
+			<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+			<del>'.number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.</del>
+			</span>
+		 ';
+   else
+	echo '
+			<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+			<new>Акция: - '.(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE'])).' %</new>
+			</span>
+			<div style="border: 0px solid red; font-size:8px; text-align:center;">цена указана с учетом скидки</div>
+		 ';
+else
+echo '
+		<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<new>New</new>
+		</span>
+	 ';
+?>
+
 <!-- end .price-->
 </a>
 </article>
