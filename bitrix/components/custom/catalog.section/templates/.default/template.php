@@ -65,7 +65,7 @@
 ?>
 
 <article itemscope itemtype="http://schema.org/Product">
-<a  class="z-preview_image"  data-img="<?=$img2?>" href="<?=$arElement["DETAIL_PAGE_URL"]?>">
+<a  class="z-preview_image"  target="_blank"  data-img="<?=$img2?>" href="<?=$arElement["DETAIL_PAGE_URL"]?>">
 <span class="photo"><span class="cell"><!--[if lte IE 7]><span><span><![endif]-->
 <img src="<?=$img?>" alt="<?=$arElement['NAME']?>" itemprop="image" title="<?=$arElement['NAME']?>"> <!--[if lte IE 7]></span></span><![endif]--></span></span> <!-- end .photo-->
 
