@@ -85,32 +85,26 @@
 <?
 //get current dir
 $url_array = explode("/", $APPLICATION->GetCurPage());
-
-if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE'])
-   if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell'))
-	echo '
-			<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-			<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-			<del>'.number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.</del>
-			</span>
-		 ';
-   else
-	echo '
-			<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-			<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-			<new>Акция: - '.(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE'])).' %</new>
-			</span>
-			<div style="border: 0px solid red; font-size:8px; text-align:center;">цена указана с учетом скидки</div>
-		 ';
-else
-echo '
-		<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<span itemprop="price">'.number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-		<new>New</new>
+// render price/discount
+if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE']):?>
+	<?if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell')):?>
+		<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<del><?=number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ');?> Руб</del>
 		</span>
-	 ';
-?>
-
+	<?else:?>
+		<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<new>Акция: - <?=(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE']));?> %</new>
+		</span>
+		<div style="border: 0px solid red; font-size:8px; text-align:center;">цена указана с учетом скидки</div>
+	<?endif;?>
+<?else:?>
+	<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+	<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+	<new>New</new>
+	</span>
+<?endif;?>
 <!-- end .price-->
 </a>
 </article>
@@ -235,7 +229,7 @@ $code_str1="";
 $code_str2="";
 
 if (strlen($url_array[3]) == 0)
-{	switch ($url_array[2]) {
+{	switch ($url_array[2]) {
     case "woman":
         $code_str1="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=XcYmu3lx;ord=";
         $code_str2="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=XcYmu3lx;ord=1?";
@@ -278,21 +272,19 @@ document.write('<img src="<?=$code_str1?>' + a + '?" width="1" height="1" alt=""
 <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
 <script>
 window.APRT_DATA = {
-         pageType : 3,
-	 currentCategory: {
-				id: <?=$MY_SEC_ID?>,
-                                name: <?=$url_array[2]?>
-			   },
-
-	 parentCategories: [
-				{id: <?=$url_array[1]?>, name: <?=$url_array[1]?>}
-                            ]
+	pageType : 3,
+	currentCategory: {
+		id: '<?=$MY_SEC_ID?>',
+		name: '<?=$url_array[2]?>'
+	}, 
+	parentCategories: [{
+		id: '<?=$url_array[1]?>', 
+		name: '<?=$url_array[1]?>'
+  }]
 };
 </script>
 
-
 <script src="//5757yvu.ru/code/snowqueen.ru/" defer></script>
-
 
 <!--  AdRiver code START. Type:counter(zeropixel) Site: snowqueen PZ: 0 BN: 0 -->
 <script type="text/javascript">
