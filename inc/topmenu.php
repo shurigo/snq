@@ -82,7 +82,7 @@
                     <li><a href="/collection/wrabbit/">Шубы из кролика</a></li>
                     <li><a href="/collection/wfurvest/">Меховые жилеты</a></li>
                     <li><a href="/collection/wfurother/">Другой мех</a></li>
-                    <!--<li><a href="/collection/home_accessories/">Предметы интерьера</a></li>-->
+                    <li><a href="/collection/home_accessories/">Предметы интерьера</a></li>
                   </ul></td>
               </tr>
             </table>
