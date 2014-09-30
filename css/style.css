@@ -39,8 +39,8 @@ input[type="reset"],
 .selectIn,
 .selectSub ul,
 .selectSub a {
-	border:1px solid #a0a0a0;
-	background:#f3f3f3;
+	border:1px solid #000000;
+	background:#ffffff;
 	margin:0;
 	padding:2px 5px;
 }
@@ -49,7 +49,7 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"] {
 	color:#fff;
-	background:#a0a0a0;
+	background:#000000;
 	overflow:visible;
 	padding:1px 7px;
 }
@@ -104,7 +104,7 @@ p {
 h1 {
 	font-size:18px;
 	line-height:22px;
-	color:#3f3f3f;
+	color:#000;
 	font-weight:normal;
 	margin:7px 0 13px 0;
 	zoom:1;
@@ -114,7 +114,7 @@ h1 {
 h2 {
 	font-size:16px;
 	font-weight:bold;
-	color:#4a4848;
+	color:#000;
 	margin:0 0 8px;
 }
 
@@ -122,7 +122,7 @@ h3 {
 	font-size:14px;
 	line-height:normal;
 	font-weight:bold;
-	color:#4a4848;
+	color:#000;
 	margin:0 0 8px 0;
 }
 
@@ -130,7 +130,7 @@ h4 {
 	font-size:12px;
 	line-height:normal;
 	font-weight:bold;
-	color:#4a4848;
+	color:#000;
 	margin:0 0 8px 0;
 }
 
@@ -223,14 +223,14 @@ table .sep {
 	height:1px;
 	overflow:hidden;
 	margin:16px 0 12px 0;
-	background:#c3c3c3;
+	background:#000;
 }
 
 .hr_red {
-	height:3px;
-	overflow:hidden;
-	margin:0px 0 20px 0;
-	background:#d72a60!important;
+	height:1px;
+	border:0;
+	margin:16px 0 12px 0;
+	background:#d72a60;
 }	
 
 .grey {
@@ -334,7 +334,7 @@ table .sep {
 }
 
 .menu1 a {
-	color:#696969;
+	color:#000000;
 	text-decoration:none;
 }
 
@@ -357,7 +357,7 @@ table .sep {
 .menu li {
 	float:left;
 	position:relative;
-	border-left:1px solid #9c9c9c;
+	border-left:1px solid #000000;
 }
 
 .menu li:first-child {
@@ -368,7 +368,7 @@ table .sep {
 .menu span {
 	float:left;
 	text-decoration:none;
-	color:#2e2c2c;
+	color:#000000;
 	padding:8px 16px;
 	background:url(../images/grey-op.png) no-repeat 0 -9999px;
 	margin:-16px 0 0 0;
@@ -451,7 +451,7 @@ table .sep {
 	position:relative;
 	z-index:100;
 	height:36px;
-	border-bottom:1px solid #c3c3c3;
+	border-bottom:1px solid #000000;
 	border-top:0;
 	background:#fff;
 }
@@ -481,7 +481,7 @@ table .sep {
 }
 
 .aside {
-	border-right:1px solid #c3c3c3;
+	/*border-right:1px solid #c3c3c3;*/
 	padding:0 13px 0 16px;
 	margin:0 0 0 -1px;
 	position:relative;
@@ -496,7 +496,7 @@ table .sep {
 	float:right;
 	width:777px;
 	padding:0 0 0 13px;
-	border-left:1px solid #c3c3c3;
+	border-left:1px solid #000;
 }
 
 .aside2 {
@@ -526,13 +526,14 @@ table .sep {
 
 .footer .bg {
 	height:250px;
-	background:#cccbcb;
+	background:#000;
 	padding:28px 24px 0 16px;
 	overflow:hidden;
+	color:#fff;
 }
 
 .footer a {
-	color:#000;
+	color:#fff;
 }
 
 .footer .fl,
@@ -635,7 +636,7 @@ table .sep {
 
 .catalog article a:hover,
 .catalog article a:hover .price {
-	border-color:#c3c3c3;
+	border-color:#000;
 }
 
 .catalog .price del,
@@ -735,7 +736,7 @@ table .sep {
 	position:relative;
 	overflow:hidden;
 	overflow-y:auto;
-	border:1px solid #c3c3c3;
+	border:1px solid #000;
 	height:205px;
 }
 
@@ -847,7 +848,7 @@ table .sep {
 .catalog2 a {
 	display:block;
 	height:127px;
-	border:1px solid #c3c3c3;
+	border:1px solid #000;
 	zoom:1;
 	position:relative;
 	overflow:hidden;
@@ -885,7 +886,7 @@ table .sep {
 	padding:3px 15px;
 	min-width:94px;
 	text-align:center;
-	background:#6a6a6a;
+	background:#000;
 }
 
 .item {
@@ -1124,7 +1125,7 @@ text-transform: uppercase;
 	line-height:17px;
 	font-style:normal;
 	font-weight:bold;
-	background:#d72a60;
+	background:#000;
 	text-align: center;
 }
 
@@ -1152,9 +1153,9 @@ text-transform: uppercase;
 .social-hold {
 	padding:14px 16px;
 	margin:0 0 12px 0;
-	border-bottom:1px solid #c3c3c3;
+	border-bottom:1px solid #000000;
 	line-height:normal;
-	color:#373737;
+	color:#000000;
 	zoom:1;
 	position:relative;
 }
@@ -1258,7 +1259,7 @@ text-transform: uppercase;
 	display:block;
 	position:relative;
 	overflow:hidden;
-	border:1px solid #bebebe;
+	border:1px solid #000000;
 	background:white;
 	height:274px;
 	text-align:right;
@@ -1270,7 +1271,7 @@ text-transform: uppercase;
 	bottom:25px;
 	left:0;
 	white-space:nowrap;
-	background:#3bb5c0; /*#424b56 #990100*/
+	background:#000000; /*#424b56 #990100*/
 	font-size:19px;
 	line-height:24px;
 	padding:2px 18px;
@@ -1356,7 +1357,7 @@ text-transform: uppercase;
 	display:block;
 	position:relative;
 	overflow:hidden;
-	border:1px solid #bebebe;
+	border:1px solid #000000;
 	background:white;
 	height:274px;
 	text-align:right;
