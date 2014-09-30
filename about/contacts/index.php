@@ -12,7 +12,8 @@ $APPLICATION->SetTitle("йНМРЮЙРШ");
          <b>E-mail:</b><br>
          <a href="mailto:info@snq.ru">info@snq.ru</a> (наыхе бнопняш)</br>
          <a href="mailto:pr@snowqueen.ru">pr@snowqueen.ru</a> (янрпсдмхвеярбн ян ялх)<br />
-         <a href="mailto:otziv@snowqueen.ru">otziv@snowqueen.ru</a> (нргшбш х опедкнфемхъ)
+         <a href="mailto:otziv@snowqueen.ru">otziv@snowqueen.ru</a> (нргшбш х опедкнфемхъ) <br />
+         <a href="mailto:resume@mail.ru">resume@mail.ru</a> (нрдек онданпю оепянмюкю)
          </p>
  </section>
 
