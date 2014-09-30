@@ -152,6 +152,8 @@
           </div>
           <!-- end .sub-->
         </li>
+        <li><a href="http://www.youtube.com/channel/UCUe_7Pz-dpSAYoAHCSGMdoQ" target="_blank" rel="nofollow">Видео</a></li>
+
   		</ul>
 
       <!-- end .menu-->
