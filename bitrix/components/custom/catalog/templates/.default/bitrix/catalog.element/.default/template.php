@@ -38,14 +38,14 @@ if($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'] < $arResult['DISPLAY_PR
    if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell'))
 	echo '
 			<div class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-			<del>'.number_format($arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' Руб.</del>
+			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
+			<del>'.number_format($arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ').' <span class="rub">Р</span></del>
 			</div>
 		 ';
    else
 	echo '
 			<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
 			<new>Акция: - '.(100-round(($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE']*100)/$arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'])).' %</new>
 			</div>
 			<div style="border: 0px solid red; font-size:8px; text-align:left;">цена указана с учетом скидки</div>
@@ -53,7 +53,7 @@ if($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'] < $arResult['DISPLAY_PR
 else
 echo '
 		<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
 		<new>New</new>
 		</div>
 	 ';
