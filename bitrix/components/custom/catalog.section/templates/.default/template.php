@@ -89,19 +89,19 @@ $url_array = explode("/", $APPLICATION->GetCurPage());
 if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['col_price_origin']['VALUE']):?>
 	<?if(strstr($url_array[2], 'sale') || strstr($url_array[2], 'bestsell')):?>
 		<span class="price bg-red" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
-		<del><?=number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ');?> Руб</del>
+		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
+		<del><?=number_format($arElement['PROPERTIES']['col_price_origin']['VALUE'], 0, '.', ' ');?> <span class="rub">Р</span></del>
 		</span>
 	<?else:?>
 		<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
 		<new>Акция: - <?=(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE']));?> %</new>
 		</span>
 		<div style="border: 0px solid red; font-size:8px; text-align:center;">цена указана с учетом скидки</div>
 	<?endif;?>
 <?else:?>
 	<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-	<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency">Руб</span>.
+	<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
 	<new>New</new>
 	</span>
 <?endif;?>
@@ -276,9 +276,9 @@ window.APRT_DATA = {
 	currentCategory: {
 		id: '<?=$MY_SEC_ID?>',
 		name: '<?=$url_array[2]?>'
-	}, 
+	},
 	parentCategories: [{
-		id: '<?=$url_array[1]?>', 
+		id: '<?=$url_array[1]?>',
 		name: '<?=$url_array[1]?>'
   }]
 };
