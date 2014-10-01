@@ -38,6 +38,7 @@
 			);
 		} 
 	}
+?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
 		<!--<br>
 		<h1>Вещи, участвующие в акции</h1>
