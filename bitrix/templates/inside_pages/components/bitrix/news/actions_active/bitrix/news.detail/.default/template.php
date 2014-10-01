@@ -18,23 +18,26 @@
 			'PROPERTY_col_availability' => '1',
 			'PROPERTY_col_city_id' => strval($_SESSION['city_id']))
 	);
-	if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
-		$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
+	// Pull out individual items
+	if(is_array($arResult['PROPERTIES']['col_individual_items']['VALUE'])) {
+		$action_catalog_filter['ID'] = $arResult['PROPERTIES']['col_individual_items']['VALUE'];
+	} else { // Filter by section
+		if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])) {
+			$action_catalog_filter['SECTION_ID'] = $arResult['PROPERTIES']['col_sections']['VALUE'];
+		}
+		$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] == 'yes' ? 'Y' : 'N';
+		$only_new = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] === 'new';
+		// filter only discounted items
+		if($discount_only == 'Y') {
+				$action_catalog_filter[] = Array('PROPERTY_col_discount' => 1);
+		} elseif($only_new) {
+			$action_catalog_filter[] = Array(
+				'LOGIC' => 'OR',
+				'=PROPERTY_col_discount' => 0,
+				'PROPERTY_col_discount' => false
+			);
+		} 
 	}
-	$discount_only = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] == 'yes' ? 'Y' : 'N';
-	$only_new = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] === 'new';
-
-	// filter only items with discount
-	if($discount_only == 'Y') {
-			$action_catalog_filter[] = Array('PROPERTY_col_discount' => 1);
-	} elseif($only_new) {
-		$action_catalog_filter[] = Array(
-			'LOGIC' => 'OR',
-			'=PROPERTY_col_discount' => 0,
-			'PROPERTY_col_discount' => false
-		);
-	}
-?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
 		<!--<br>
 		<h1>Вещи, участвующие в акции</h1>
