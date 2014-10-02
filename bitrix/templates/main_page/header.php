@@ -28,6 +28,8 @@
 
 </head>
 <body>
+<!-- temp pix -->
+<img src="http://as1.emv2.com/P?emv_client_id=1101052841&emv_conversionflag=y&emv_pagename=homepage&emv_currency=rub&emv_random=<?=rand()?>" border="0" alt="" width="1" height="1">
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="wrapper">
   <div class="container">
