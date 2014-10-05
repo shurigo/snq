@@ -77,7 +77,7 @@
 </span>
 <!-- end .text -->
 <?if(isset($arElement['PROPERTIES']['col_add_discount']['VALUE']) && ($arElement['PROPERTIES']['col_add_discount']['VALUE']!=0)):?>
-<div style="border: 1px solid red; color:#a0a0a0; font-size:9px; text-align:center;">ДОПОЛНИТЕЛЬНАЯ СКИДКА - <?=$arElement['PROPERTIES']['col_add_discount']['VALUE']?>%</div>
+<div style="border: 1px solid red; color:#5a5a5a; font-size:9px; text-align:center;">СКИДКА - <?=$arElement['PROPERTIES']['col_add_discount']['VALUE']?>% НА ВТОРУЮ ВЕЩЬ</div>
 <?else:?>
 <div style="height:18px;"></div>
 <?endif?>
@@ -95,7 +95,7 @@ if($arElement['PROPERTIES']['col_price']['VALUE'] < $arElement['PROPERTIES']['co
 	<?else:?>
 		<span class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 		<span itemprop="price"><?=number_format($arElement['PROPERTIES']['col_price']['VALUE'], 0, '.', ' ');?></span>&nbsp;<span itemprop="priceCurrency"  class="rub">Р</span>
-		<new>Акция: - <?=(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE']));?> %</new>
+		<new>Акция: - <?=round(100-round(($arElement['PROPERTIES']['col_price']['VALUE']*100)/$arElement['PROPERTIES']['col_price_origin']['VALUE']),-1);?> %</new>
 		</span>
 		<div style="border: 0px solid red; font-size:8px; text-align:center;">цена указана с учетом скидки</div>
 	<?endif;?>

@@ -46,7 +46,7 @@ if($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'] < $arResult['DISPLAY_PR
 	echo '
 			<div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 			<span itemprop="price">'.number_format($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE'], 0, '.', ' ').'</span>&nbsp;<span itemprop="priceCurrency"  class="rub">п</span>
-			<new>юЙЖХЪ: - '.(100-round(($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE']*100)/$arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE'])).' %</new>
+			<new>юЙЖХЪ: - '.round(100-round(($arResult['DISPLAY_PROPERTIES']['col_price']['VALUE']*100)/$arResult['DISPLAY_PROPERTIES']['col_price_origin']['VALUE']),-1).' %</new>
 			</div>
 			<div style="border: 0px solid red; font-size:8px; text-align:left;">ЖЕМЮ СЙЮГЮМЮ Я СВЕРНЛ ЯЙХДЙХ</div>
 		 ';
@@ -65,9 +65,11 @@ echo '
     <?
     if (isset($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]) && ($arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"]!=0))
     {
-    echo '<p style="color:red;">опедсялнрпеммю днонкмхрекэмюъ яйхдйю - '.$arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"].'%</p>';
+    echo '<p><a style="color:red;" href="/actions/42114918/" target="_blank">яйхдйю - '.$arResult["DISPLAY_PROPERTIES"]["col_add_discount"]["VALUE"].'% мю брнпсч беыэ</a></p>';
+    /*
     echo '<div style="padding:0px 0 5px 0;""><div style="display:inline;">хрнцнбюъ жемю:</div> <div style="border: 1px solid red; color:#a0a0a0; font-size:16px; text-align:center;display:inline; padding:1px 20px 1px 20px;">'.number_format($arResult["DISPLAY_PROPERTIES"]["col_last_price"]["VALUE"], 0, '.', ' ').' пса.</div></div>';
     echo '<p>ондпнамнярх с опндюбжнб-йнмяскэрюмрнб.</p>';
+    */
    }
     ?>
     <ul class="links">
