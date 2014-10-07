@@ -1,4 +1,5 @@
 <?
+	set_time_limit(0);
   require_once('updater.php');
 
   $_SERVER = array();
