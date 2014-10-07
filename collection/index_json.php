@@ -13,7 +13,7 @@
 				"USE_REVIEW" => "N",
 				"USE_COMPARE" => "N",
 				"USE_SORT" => $use_sort,
-				"DISCOUNT_ONLY" => $_SERVER['discount_only'],
+				"DISCOUNT_ONLY" => $_SESSION['discount_only'],
 				"SHOW_TOP_ELEMENTS" => "N",
 				"PAGE_ELEMENT_COUNT" => "32",
 				"LINE_ELEMENT_COUNT" => "4",
