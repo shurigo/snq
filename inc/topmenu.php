@@ -78,6 +78,7 @@
                     <li><a href="/collection/wfurs_bestsell/" class="red">Выгодное предложение</a></li>
                     <li><a href="/collection/wmink/">Шубы норковые</a></li>
                     <li><a href="/collection/wfox/">Шубы из лисы</a></li>
+                    <li><a href="/collection/wlynx/">Шубы из рыси</a></li>
                     <li><a href="/collection/wkarakul/">Шубы из каракуля</a></li>
                     <li><a href="/collection/wrabbit/">Шубы из кролика</a></li>
                     <li><a href="/collection/wfurvest/">Меховые жилеты</a></li>
