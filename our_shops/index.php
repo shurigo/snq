@@ -2,6 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Наши магазины");
 ?>
+<img src="http://e.snowqueen.ru/P?emv_client_id=1101052841&emv_conversionflag=y&emv_pagename=our_shops&emv_currency=rub&emv_value=1&emv_transid=<?=rand()?>&emv_random=<?=rand()?>" border="0" alt="" width="1" height="1">
 <h1>Наши магазины</h1>
 <?
 $APPLICATION->IncludeComponent("custom:our_shops", "", Array(
