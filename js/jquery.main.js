@@ -50,11 +50,7 @@ $(window).on("load", function(){
   initGallery();
   initNav();
 });
-$(window).on('pageshow', function() {
-	var form = $('form'); 
-// let the browser natively reset defaults
-	form[0].reset();
-});
+
 function initScrollUp() {
 	$(window).scroll(function(){
 	 if ($(this).scrollTop() > 100) {
@@ -173,9 +169,11 @@ function ajaxLoad(){
     var max = hold.find('.slider-values .r');
 
     input.change(function(){
+      $('#page').val(1);
       reloadPage();
     });
     select.change(function(){
+      $('#page').val(1);
       reloadPage();
     });
     if (slider.length > 0 && typeof $.fn.slider === 'function') {
@@ -197,6 +195,7 @@ function ajaxLoad(){
     }
 
     function reloadPage(){
+	    var page = $('#page').val();
       var filter_form = $('#filter_form');
       var sort_form = $('#sort_form');
 			if($('#pages').val() <= 1) {
@@ -205,7 +204,7 @@ function ajaxLoad(){
 				$('#loadmore').show();
 			}
       $.ajax({
-        data: filter_form.serialize() + '&' + sort_form.serialize() + "&json=y",
+        data: 'PAGEN_1=' + page + '&json=y&' + $('.ajax-load').serialize(),
         dataType: 'json',
         url: hold.attr('action'),
 				complete: function() {
@@ -216,6 +215,7 @@ function ajaxLoad(){
 					}
 				},
         success: function(obj){
+          $('#page').val(++page);
           if(obj != null) {
 						if(page == pages) {
 							$('#loadmore').hide();
@@ -226,7 +226,7 @@ function ajaxLoad(){
 						$('#loadmore').hide();
           }  
         },
-        error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
+        //error: function(){alert('Server is unavailable. Refresh the page within 15 seconds.!');}
       });
     }
   });
@@ -282,7 +282,7 @@ function initLoadPage() {
 			},
 			error: function(){
 				$('#loadmore').hide();
-				alert('Server is unavailable. Refresh the page within 15 seconds!');
+//				alert('Server is unavailable. Refresh the page within 15 seconds!');
 			}
 		});
 	});
