@@ -369,9 +369,9 @@ table .sep {
 	float:left;
 	text-decoration:none;
 	color:#000000;
-	padding:8px 16px;
+	padding:8px 14px;
 	background:url(../images/grey-op.png) no-repeat 0 -9999px;
-	margin:-16px 0 0 0;
+	margin:-14px 0 0 0;
 	top:8px;
 	position:relative;
 }

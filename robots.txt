@@ -8,6 +8,8 @@ Disallow: /our_shops/?c*
 Disallow: /about/fashion_blog/*
 Disallow: /unsubscribe/*
 Disallow: /collection/*
+Disallow: /collection/new/
+
 
 Allow: /collection/wfurs_bestsell/
 Allow: /collection/wmink/

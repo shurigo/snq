@@ -12,7 +12,8 @@
       -->
       <!-- end .search-->
       <ul class="menu">
-        <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>
+       <li><a href="/collection/new/" class="red">Новинки</a></li>
+       <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>
           <div class="sub">
             <table>
               <tr>
@@ -153,7 +154,7 @@
           </div>
           <!-- end .sub-->
         </li>
-        <li><a href="http://www.youtube.com/channel/UCUe_7Pz-dpSAYoAHCSGMdoQ" target="_blank" rel="nofollow">Видео</a></li>
+       <li><a href="http://www.youtube.com/user/snowqueenru/" target="_blank" rel="nofollow">TV</a></li>
 
   		</ul>
 
