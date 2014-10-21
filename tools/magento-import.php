@@ -1,9 +1,20 @@
 <?php
+ini_set('memory_limit', '512M');
 //  include($_SERVER['DOCUMENT_ROOT'].'/lib/log4php/Logger.php');
 	
 //	$config_path = realpath($_SERVER['DOCUMENT_ROOT'].'/config/log4php.xml');
 //	Logger::configure($config_path);
+
+  // source: http://stackoverflow.com/a/2518021/1292905
+	function mb_ucfirst($string, $encoding) {
+		$strlen = mb_strlen($string, $encoding);
+		$firstChar = mb_substr($string, 0, 1, $encoding);
+		$then = mb_substr($string, 1, $strlen - 1, $encoding);
+		return mb_strtoupper($firstChar, $encoding) . $then;
+	}
+
 	function convert($input) {
+		print $input;
 		return iconv('cp1251', 'UTF-8', $input);
 	}
 
@@ -76,7 +87,7 @@
 		//protected $logger;
 		//protected $mailer;
 
-		const FIELD_SEPARATOR_SNQ = ';';
+		const FIELD_SEPARATOR_SNQ = ',';
 		const FIELD_SEPARATOR_MAGENTO = ',';
 		const MAX_LINE_LENGTH = 5000;
 		const READ_BUFFER = 4096;
@@ -147,7 +158,7 @@
 			'ZPRICE',
 			'PLPRICE',
 			'VSARTFACTURE',
-			'VCARE',
+			//'VCARE',
 			'VHUDDESCR',
 			'VCOLLECTION'
 		);
@@ -157,29 +168,63 @@
 			'Платье' => 'Платья',
 			'Блузка' =>	'Блузки',
 			'Брюки' =>  'Брюки/Джинсы',
+			'Ветровка' => 'Куртки',
 			'Водолазка' => 'Кардиганы и джемперы',
 			'Джемпер' =>  'Кардиганы и джемперы',
+			'Джемпер с коротким рукавом' => 'Кардиганы и джемперы',
 			'Джинсы' =>  'Брюки/Джинсы',
+			'Дубленка' => 'Дубленки',
 			'Жакет' =>  'Куртки',
+			'Жакет меховой' => 'Куртки',
 			'Жилет' =>  'Куртки',
+			'Жилет утепленный' => 'Куртки',
+			'Жилет меховой' => 'Куртки',
+			'Капри' => 'Брюки/Джинсы',
 			'Кардиган' =>  'Кардиганы и джемперы',
+			'Ключница из натуральной кожи' => 'Аксессуары',
 			'Комбинезон' =>  'Шорты и комбинезоны',
+			'Кошелек' => 'Аксессуары',
+			'Кошелек из натуральной кожи' => 'Аксессуары',
 			'Куртка' => 'Куртки',
+			'Куртка из меховой ткани' => 'Куртки',
+			'Куртка кожаная' => 'Куртки',
+			'Куртка меховая' => 'Куртки',
+			'Куртка овчинная' => 'Куртки',
+			'Куртка пуховая' => 'Куртки',
+			'Куртка утепленная мехом' => 'Куртки',
 			'Куртка утепленная' => 'Куртки',
+			'Куртка утепленная зимняя' => 'Куртки',
+			'Леггинсы' => 'Брюки/Джинсы',
+			'Мелкая кожгалантерея' => 'Аксессуары',
+			'Обложка на паспорт' => 'Аксессуары',
+			'Очки' => 'Аксессуары',
+			'Пальто' => 'Пальто',
+			'Пальто утепленное' => 'Пальто',
 			'Пальто шерстяное' => 'Пальто',
+			'Плащ' => 'Пальто',
+			'Пальто пуховое' => 'Пальто',
+			'Пальто утепленное зимнее' => 'Пальто',
 			'Полупальто' => 'Пальто',
-			'Пиджак' =>  'Пиджаки',
-			'Платье' =>  'Платья',
-			'Поло' =>  'Футболки и топы',
-			'Рубашка' =>  'Рубашки',
-			'Толстовка' =>  'Куртки',
-			'Топ' =>  'Футболки',
-			'Туника' =>  'Туники',
-			'Футболка' =>  'Футболки и топы',
-			'Футболка с длинным рукавом' =>  'Футболки и топы',
-			'Шорты' =>  'Шорты',
+			'Полупальто меховое' => 'Пальто',
+			'Полупальто из натуральной кожи' => 'Пальто',
+			'Портмоне' => 'Аксессуары',
+			'Пиджак' => 'Пиджаки',
+			'Платье' => 'Платья',
+			'Поло' => 'Футболки и топы',
+			'Портмоне из натуральной кожи' => 'Аксессуары',
+			'Рубашка' => 'Рубашки',
+			'Свитер' => 'Кардиганы и джемперы',
+			'Сумка' => 'Аксессуары',
+			'Толстовка' => 'Куртки',
+			'Топ' => 'Футболки и топы',
+			'Туника' => 'Туники',
+			'Футболка' => 'Футболки и топы',
+			'Футболка с длинным рукавом' => 'Футболки и топы',
+			'Чехол для ipad' => 'Аксессуары',
+			'Чехол для iPad' => 'Аксессуары',
+			'Шорты' => 'Шорты',
 			'Шуба' => 'Шубы и меха',
-			'Юбка' =>  'Юбки'
+			'Юбка' => 'Юбки'
 		);
 
 		// SNQ price update csv file columns
@@ -238,8 +283,10 @@
 					}
 				}
 
+				$line = 1;
 				// Read data lines
 				while(($data_str = fgets($file_handle, self::READ_BUFFER)) !== false) {
+					++$line; // debug
 					$data = str_getcsv($data_str, self::FIELD_SEPARATOR_SNQ);
 					// Assign data to known fields
 					$buf = array_fill(0, count($hdr_magento), null);
@@ -252,12 +299,23 @@
 					// If brand is empty default to NONAME
 					$buf[$hdr_magento['manufacturer']] = empty($data[$hdr_snowqueen['VTRADEMARK']]) ? 'NONAME' : $data[$hdr_snowqueen['VTRADEMARK']];
 					// Correct spelling to match magento country list
-					$buf[$hdr_magento['country_of_manufacture']] = convert($data[$hdr_snowqueen['VARTCOUNTRYRUS']]) == 'Тайланд' ? convert_cyrillic('Таиланд') : $data[$hdr_snowqueen['VARTCOUNTRYRUS']];
-					$buf[$hdr_magento['product_size']] = str_replace('.', '', $data[$hdr_snowqueen['VARTSIZE']]);
+					$country = mb_convert_case($data[$hdr_snowqueen['VARTCOUNTRYRUS']], MB_CASE_TITLE, 'UTF-8'); 
+					if($country == 'Тайланд') {
+						$country = 'Таиланд';
+					} else if($country == 'Гонконг') {
+						$country = 'Гонконг, Особый Административный Район Китая';
+					} else if($country == 'Республика Македония') {
+						$country = 'Македония';
+					} else if($country == 'Чешская Республика') {
+						$country = 'Чешская республика';
+					}
+					$buf[$hdr_magento['country_of_manufacture']] = $country;
+					//$buf[$hdr_magento['product_size']] = str_replace('.', '', $data[$hdr_snowqueen['VARTSIZE']]);
+					$buf[$hdr_magento['product_size']] = str_replace('.', '', $data[$hdr_snowqueen['VSARTSIZE']]);
 					$buf[$hdr_magento['price']] = $data[$hdr_snowqueen['PLPRICE']];
 					$buf[$hdr_magento['special_price']] = $data[$hdr_snowqueen['ZPRICE']];
-					$buf[$hdr_magento['description']] = $data[$hdr_snowqueen['VHUDDESCR']];
-					$buf[$hdr_magento['short_description']] = $data[$hdr_snowqueen['VHUDDESCR']];
+					$buf[$hdr_magento['description']] = empty($data[$hdr_snowqueen['VHUDDESCR']]) ? $data[$hdr_snowqueen['VARTLABEL']] . ' ' . $buf[$hdr_magento['manufacturer']] : $data[$hdr_snowqueen['VHUDDESCR']];
+					$buf[$hdr_magento['short_description']] = $buf[$hdr_magento['description']];
 					$buf[$hdr_magento['product_collection']] = $data[$hdr_snowqueen['VCOLLECTION']];
 					$buf[$hdr_magento['status']] = 1;
 					$buf[$hdr_magento['visibility']] = 1;
@@ -271,23 +329,26 @@
 					$buf[$hdr_magento['_super_attribute_code']] = '';
 					$buf[$hdr_magento['_super_attribute_option']] = '';
 					$category = null;
-					if($data[$hdr_snowqueen['S163']] == convert_cyrillic('Женский')) {
-						$category = convert_cyrillic('Женщины');
-					} else if($data[$hdr_snowqueen['S163']] == convert_cyrillic('Мужской')) {
-						$category = convert_cyrillic('Мужчины');
+					if($data[$hdr_snowqueen['S163']] == 'Женский') {
+						$category = 'Женщины';
+					} else if($data[$hdr_snowqueen['S163']] == 'Мужской') {
+						$category = 'Мужчины';
+					} else {
+						print 'WARN: Unknown category: '.$data[$hdr_snowqueen['S163']].". Ignored\n";
+						continue;
 					}
 					$category2 = null;
-					//$src_category = trim(convert($data[$hdr_snowqueen['VARTLABEL']]));
 					$src_category = trim($data[$hdr_snowqueen['VARTLABEL']]);
 					if(empty($src_category)) {
 						print "ERROR: category is empty";
 					}
-					if(!isset($this->product_category_map[convert($src_category)])) {
+					if(!isset($this->product_category_map[$src_category])) {
 						print "ERROR: Failed to map category:\t$src_category\n";
+						print $data_str;
 					} else {
-						$category2 = convert_cyrillic($this->product_category_map[convert($src_category)]);
+						$category2 = $this->product_category_map[$src_category];
 					}
-					if(convert($category2) == 'Шубы и меха') {
+					if($category2 == 'Шубы и меха') {
 						$category = $category2;
 					}
 					$buf[$hdr_magento['_category']] = $category;
@@ -297,22 +358,24 @@
 					$buf[$hdr_magento['url_key']] = str2url(
 						implode('-', 
 						array(
-							convert($buf[$hdr_magento['name']]), 
-							$idfmc,
-							convert($buf[$hdr_magento['manufacturer']]),
+							$buf[$hdr_magento['name']], 
+							//$idfmc,
+							$buf[$hdr_magento['sku']],
+							$buf[$hdr_magento['manufacturer']],
 							$buf[$hdr_magento['product_size']]
 						)));
 
 					// convert to utf-8
 					$buf = array_map('trim', $buf);
-					$buf = array_map('convert', $buf);
+					//$buf = array_map('convert', $buf);
 					ksort($buf);
 					$data_new[$idfmc][] = $buf;
 
 					if($category != $category2) {
 						$buf = array_fill(0, count($hdr_magento), null);
 						$buf[$hdr_magento['_category']] = "$category/$category2";
-						$buf = array_map('convert', $buf);
+						//$buf[$hdr_magento['_attribute_set']] = 'Default';
+						//$buf = array_map('convert', $buf);
 						ksort($buf);
 						$data_new[$idfmc][] = $buf;
 					}
@@ -373,6 +436,7 @@
 								$buf = array_fill(0, count($hdr_magento), null);
 								$buf[$hdr_magento['visibility']] = 1;
 							} // associated product attributes
+							//$buf[$hdr_magento['_attribute_set']] = 'Default';
 							$buf[$hdr_magento['_super_products_sku']] = $data_row[$hdr_magento['sku']];
 							$buf[$hdr_magento['_super_attribute_code']] = 'product_size';
 							$buf[$hdr_magento['_super_attribute_option']] = $data_row[$hdr_magento['product_size']];
@@ -385,9 +449,28 @@
 								$configurable[] = $buf;
 							}
 						}
+						// add images
+						$img_idx = 0;
+						foreach(glob($image_dir.'/'.$idfmc.'*.jpg') as $filename) {
+//print 'Found image: '.$filename."\n";
+							++$img_idx;
+							$buf = array_fill(0, count($hdr_magento), null);
+							$buf[$hdr_magento['image']] = "/".basename($filename);
+							$buf[$hdr_magento['_media_image']] = "/".basename($filename);
+							$buf[$hdr_magento['small_image']] = "/".basename($filename);
+							$buf[$hdr_magento['thumbnail']] = "/".basename($filename);
+              $buf[$hdr_magento['_media_attribute_id']] = '88';
+              $buf[$hdr_magento['_media_lable']] = 'image'.$img_idx;
+              $buf[$hdr_magento['_media_position']] = $img_idx;
+              $buf[$hdr_magento['_media_is_disabled']] = '0';
+							//$buf[$hdr_magento['_attribute_set']] = 'Default';
+							ksort($buf);
+							$configurable[] = $buf;
+						}
+
 						foreach($configurable as $data_row) {
 							if(!is_array($data_row) || count($data_row) <= 0) continue;
-							if(empty($data_row[$hdr_magento['_super_attribute_option']]) && empty($data_row[$hdr_magento['_category']])) continue;
+							if(empty($data_row[$hdr_magento['image']]) && empty($data_row[$hdr_magento['_super_attribute_option']]) && empty($data_row[$hdr_magento['_category']])) continue;
 							fputcsv($file_handle_out, $data_row, self::FIELD_SEPARATOR_MAGENTO);
 						}
 					} else { // Simple product
@@ -413,5 +496,7 @@
 	// 2: output file
 	// 3: has header (1-yes)
 	// 4: image import directory
+	
+//	print(mb_ucfirst('КИТАЙ', 'CP1251')."\n");
 	$mi->SnqToMageProducts($argv[1], $argv[2], $argv[3] == 1, $argv[4]);
 ?>
