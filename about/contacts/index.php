@@ -1,8 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("йНМРЮЙРШ");
-?>
-<section class="mainContent">
+$APPLICATION->SetTitle("");
+?><section class="mainContent">
 <h1>йНМРЮЙРШ</h1>
          <p>
          ннн ╚яй рПЕИД╩</br>
@@ -13,7 +12,7 @@ $APPLICATION->SetTitle("йНМРЮЙРШ");
          <a href="mailto:info@snq.ru">info@snq.ru</a> (наыхе бнопняш)</br>
          <a href="mailto:pr@snowqueen.ru">pr@snowqueen.ru</a> (янрпсдмхвеярбн ян ялх)<br />
          <a href="mailto:otziv@snowqueen.ru">otziv@snowqueen.ru</a> (нргшбш х опедкнфемхъ) <br />
-         <a href="mailto:resume@mail.ru">resume@mail.ru</a> (нрдек онданпю оепянмюкю)
+         <a href="mailto:resume@snq.ru">resume@snq.ru</a> (нрдек онданпю оепянмюкю)
          </p>
  </section>
 
