@@ -47,6 +47,7 @@
     <nav class="fl"> <strong>Снежная Королева</strong>
       <ul>
         <li><a href="/services/" rel="nofollow">Услуги</a></li>
+        <li><a href="/services/cards/" rel="nofollow">Подарочные карты</a></li>
         <li><a href="/our_shops/" rel="nofollow">Наши магазины</a></li>
         <li><a href="/about/" rel="nofollow">О компании</a></li>
         <li><a href="/about/news/" rel="nofollow">Новости</a></li>
