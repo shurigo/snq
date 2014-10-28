@@ -14,7 +14,7 @@
                             function fid_133707667107155769727(ymaps) {
     							var map = new ymaps.Map("ymaps-map-id_133707667107155769727", {
                                     center: [<?=$arCity["UF_MAP_COORDINATE"]?>],
-                                    zoom: <?=(is_numeric($arCity["UF_MAP_ZOOM"]) && $arCity["UF_MAP_ZOOM"] > 0)?$arCity["UF_MAP_ZOOM"]:11;?>,
+                                    zoom: <?=(is_numeric($arCity["UF_MAP_ZOOM"]) && $arCity["UF_MAP_ZOOM"] > 0)?$arCity["UF_MAP_ZOOM"]:10;?>,
                                     type: "yandex#map"
                                 });
                                 map.controls
