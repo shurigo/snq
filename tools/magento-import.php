@@ -359,8 +359,8 @@ ini_set('memory_limit', '512M');
 						implode('-', 
 						array(
 							$buf[$hdr_magento['name']], 
-							//$idfmc,
-							$buf[$hdr_magento['sku']],
+							$idfmc,
+							//$buf[$hdr_magento['sku']],
 							$buf[$hdr_magento['manufacturer']],
 							$buf[$hdr_magento['product_size']]
 						)));
@@ -444,8 +444,9 @@ ini_set('memory_limit', '512M');
 							$configurable[] = $buf; 
 							if(count($configurable) == 1) {
 								$buf = array_fill(0, count($hdr_magento), null);
-								ksort($buf);
 							  $buf[$hdr_magento['_category']] = $category2;
+                $buf[$hdr_magento['_attribute_set']] = 'Default';
+								ksort($buf);
 								$configurable[] = $buf;
 							}
 						}
