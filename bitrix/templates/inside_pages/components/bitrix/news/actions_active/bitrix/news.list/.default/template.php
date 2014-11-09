@@ -84,7 +84,7 @@ else
 		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "news",
 		"IBLOCK_ID" => "3",
-		"NEWS_COUNT" => "3",
+		"NEWS_COUNT" => "8",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "SORT",
