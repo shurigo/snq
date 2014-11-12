@@ -23,7 +23,7 @@
                     <li><a href="/collection/wwleathertopjacket/">Кожаные куртки зимние</a></li>
                     <li><a href="/collection/wleathertopjacket/">Кожаные куртки</a></li>
                     <li><a href="/collection/wleathertopcoat/">Пальто из кожи</a></li>
-                    <!--<li><a href="/collection/wtopjacket/">Куртки</a></li>-->
+                    <li><a href="/collection/wtopjacket/">Куртки</a></li>
                     <li><a href="/collection/wtopcoat/">Пальто</a></li>
                     <!--<li><a href="/collection/wtopcloak/">Плащи</a></li>-->
                     <li><a href="/collection/wjacket/">Жакеты и жилеты</a></li>
@@ -102,7 +102,7 @@
                     <!--<li><a href="/collection/wumbrellas/">Зонты</a></li>-->
                     <li><a href="/collection/whats/">Головные уборы</a></li>
                     <!--<li><a href="/collection/wwallets/">Кошельки</a></li>-->
-                    <!--<li><a href="/collection/wgloves/">Перчатки</a></li>-->
+                    <li><a href="/collection/wgloves/">Перчатки</a></li>
                     <li><a href="/collection/wshawls/">Платки/Шарфы</a></li>
                     <li><a href="/collection/wbelts/">Ремни</a></li>
                     <li><a href="/collection/wbags/">Сумки</a></li>
