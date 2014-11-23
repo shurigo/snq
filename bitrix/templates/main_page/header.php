@@ -141,7 +141,7 @@
         <li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru - big_image_main_page'); return false;"><img src="/images/img1.jpg" width="321" height="274" alt=" "><span class="text1">Интернет-магазин</span></a></li>
         <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru - big_image_main_page'); return false;"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о моде</span></a></li>
         <li>
-        <a href="/actions/34680232/"><img src="/images/img3.jpg" width="320" height="275" alt=""><span class="text1">ОСЕНЬ-ЗИМА 2014/15</span></a>
+        <a href="/collection/wmink/"><img src="/images/img3.jpg" width="320" height="275" alt=""><span class="text1">ОСЕНЬ-ЗИМА 2014/15</span></a>
                         	<?/*$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_hot_model", Array(
                     "AJAX_MODE" => "N",	// Включить режим AJAX
                     "IBLOCK_TYPE" => "collection",	// Тип инфо-блока
@@ -215,7 +215,7 @@
       <hr class="hr_red">
       <ul class="info-links2">
         <li><a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/KnwGzZ8jG50" allowfullscreen=""></iframe></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/5XA1WDkXIos" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->
