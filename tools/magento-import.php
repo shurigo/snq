@@ -311,6 +311,8 @@ ini_set('memory_limit', '512M');
 				$country = 'Македония';
 			} else if($country == 'Чешская Республика') {
 				$country = 'Чешская республика';
+			} else if($country == 'Вьетмнам') {
+				$country = 'Вьетнам';
 			}
 			return $country;
 		}
@@ -373,8 +375,8 @@ ini_set('memory_limit', '512M');
 					$buf[$hdr_magento['product_size']] = str_replace('.', '', $data[$hdr_snowqueen['VSARTSIZE']]);
 					$buf[$hdr_magento['price']] = $data[$hdr_snowqueen['PLPRICE']];
 					$buf[$hdr_magento['special_price']] = $data[$hdr_snowqueen['ZPRICE']];
-					$buf[$hdr_magento['description']] = empty($data[$hdr_snowqueen['VHUDDESCR']]) ? $data[$hdr_snowqueen['VARTLABEL']] . ' ' . $buf[$hdr_magento['manufacturer']] : $data[$hdr_snowqueen['VHUDDESCR']];
-					$buf[$hdr_magento['short_description']] = empty($data[$hdr_snowqueen['TECHDESCR']]) ? $buf[$hdr_magento['description']] : $data[$hdr_snowqueen['TECHDESCR']];
+					$buf[$hdr_magento['short_description']] = empty($data[$hdr_snowqueen['VHUDDESCR']]) ? $data[$hdr_snowqueen['VARTLABEL']] . ' ' . $buf[$hdr_magento['manufacturer']] : $data[$hdr_snowqueen['VHUDDESCR']];
+					$buf[$hdr_magento['description']] = empty($data[$hdr_snowqueen['TECHDESCR']]) ? "-" : $data[$hdr_snowqueen['TECHDESCR']];
 					$buf[$hdr_magento['product_collection']] = $data[$hdr_snowqueen['VCOLLECTION']];
 					$buf[$hdr_magento['status']] = 1;
 					$buf[$hdr_magento['visibility']] = 1;
@@ -486,7 +488,7 @@ ini_set('memory_limit', '512M');
 								$buf[$hdr_magento['thumbnail']] = '/'.$idfmc.'_1.jpg';
 								$buf[$hdr_magento['meta_title']] = $buf[$hdr_magento['name']].' (артикул:'.$idfmc.') '.$buf[$hdr_magento['manufacturer']];
 								$buf[$hdr_magento['meta_keyword']] = $buf[$hdr_magento['name']].';'.$buf[$hdr_magento['_category']].';'.explode('/', $category2)[1].';'.$buf[$hdr_magento['manufacturer']].';'.$idfmc;
-								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['description']];
+								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['short_description']];
 								$buf[$hdr_magento['url_key']] = str2url(
 									implode('-', 
 									array(
