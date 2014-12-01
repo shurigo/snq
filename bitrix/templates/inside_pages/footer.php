@@ -39,6 +39,12 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 //-->
 </script><!--/LiveInternet-->
 
+<!-- Yandex.Metrika informer -->
+<a href="https://metrika.yandex.ru/stat/?id=7080487&amp;from=informer"
+target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/7080487/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="яндекс.ћетрика" title="яндекс.ћетрика: данные за сегодн€ (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:7080487,lang:'ru'});return false}catch(e){}"/></a>
+<!-- /Yandex.Metrika informer -->
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
@@ -63,81 +69,6 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
         d.addEventListener("DOMContentLoaded", f, false);
     } else { f(); }
 })(document, window, "yandex_metrika_callbacks");
-
-  // Facebook async loading.
-  (function() {
-    var e = document.createElement('script'); e.async = true;
-    e.src = document.location.protocol +
-      '//connect.facebook.net/ru_RU/all.js';
-    $('#fb-root').append(e);
-  }());
-  window.fbAsyncInit = function() {
-    FB.init({status: true, cookie: true, xfbml: true});
-    _ga.trackFacebook();
-	};
-
-	// Twitter
-  (function(){
-    var twitterWidgets = document.createElement('script');
-    twitterWidgets.type = 'text/javascript';
-    twitterWidgets.async = true;
-    twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-
-    // Setup a callback to track once the script loads.
-    twitterWidgets.onload = _ga.trackTwitter;
-
-    $('head:first').append(twitterWidgets);
-  })();
-
-	window.vkAsyncInit = function() {
-		VK.init({apiId: 3501967 , onlyWidgets: true});
-		VK.Widgets.Like("vk_like", {type: "button", height: 20, width: 200, pageUrl: "http://snowqueen.ru<?=$APPLICATION->GetCurDir()?>"});
-		_ga.trackVkontakte();
-	};
-	setTimeout(function() {
-		var el = document.createElement("script");
-		el.type = "text/javascript";
-		el.src = "http://vkontakte.ru/js/api/openapi.js";
-		el.async = true;
-		$("#vk_api_transport").append(el);
-	}, 0);
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-23458231-1']);
-
-    _gaq.push(['_addOrganic', 'images.yandex.ru', 'text', true]);
-    _gaq.push(['_addOrganic', 'blogsearch.google.ru', 'q', true]);
-    _gaq.push(['_addOrganic', 'blogs.yandex.ru', 'text', true]);
-    _gaq.push(['_addOrganic', 'go.mail.ru', 'q']);
-    _gaq.push(['_addOrganic', 'nova.rambler.ru', 'query']);
-    _gaq.push(['_addOrganic', 'nigma.ru', 's']);
-    _gaq.push(['_addOrganic', 'webalta.ru', 'q']);
-    _gaq.push(['_addOrganic', 'aport.ru', 'r']);
-    _gaq.push(['_addOrganic', 'poisk.ru', 'text']);
-    _gaq.push(['_addOrganic', 'km.ru', 'sq']);
-    _gaq.push(['_addOrganic', 'liveinternet.ru', 'q']);
-    _gaq.push(['_addOrganic', 'quintura.ru', 'request']);
-    _gaq.push(['_addOrganic', 'search.qip.ru', 'query']);
-    _gaq.push(['_addOrganic', 'gde.ru', 'keywords']);
-    _gaq.push(['_addOrganic', 'ru.yahoo.com', 'p']);
-
-	_gaq.push(['_trackPageview']);
-
-	(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-
-	function trackOutboundLink(link, category, action) {
-		try {
-			_gaq.push(['_trackEvent', category , action]);
-		} catch(err){}
-
-		setTimeout(function() {
-			document.location.href = link.href;
-		}, 100);
-	}
 </script>
 <noscript><div><img src="//mc.yandex.ru/watch/7080487" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
