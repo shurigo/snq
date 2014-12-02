@@ -10,7 +10,7 @@ ini_set('memory_limit', '512M');
 		$strlen = mb_strlen($string, $encoding);
 		$firstChar = mb_substr($string, 0, 1, $encoding);
 		$then = mb_substr($string, 1, $strlen - 1, $encoding);
-		return mb_strtoupper($firstChar, $encoding) . $then;
+		return mb_strtoupper($firstChar, $encoding) . mb_strtolower($then);
 	}
 
 	function convert($input) {
@@ -266,6 +266,7 @@ ini_set('memory_limit', '512M');
         'Плащ' => 'Пальто',
         'Пальто пуховое' => 'Пальто',
         'Пальто утепленное зимнее' => 'Пальто',
+				'Пальто шерстяное' => 'Пальто',
         'Полупальто' => 'Пальто',
         'Полупальто меховое' => 'Пальто',
         'Полупальто из натуральной кожи' => 'Пальто',
@@ -356,10 +357,11 @@ ini_set('memory_limit', '512M');
 						$hdr_snowqueen[$hdr_raw[$hdr_i]] = $hdr_i;
 					}
 				}
-				//$line = 1; // debug
+//				$line = 1; // debug
 				// Read data lines
 				while(($data_str = fgets($file_handle, self::READ_BUFFER)) !== false) {
-					//++$line; // debug
+					//print $line . "\n"; // debug
+//					++$line; // debug
 					$data = str_getcsv($data_str, self::FIELD_SEPARATOR_SNQ);
 					// Assign data to known fields
 					$buf = array_fill(0, count($hdr_magento), null);
@@ -367,6 +369,7 @@ ini_set('memory_limit', '512M');
 					$buf[$hdr_magento['product_idfmc']] = $data[$hdr_snowqueen['IDMARTCARD']];
 					$idfmc = $buf[$hdr_magento['product_idfmc']];
 					$buf[$hdr_magento['product_articule']] = $data[$hdr_snowqueen['VSARTMODEL']];
+					#$buf[$hdr_magento['color']] = mb_ucfirst($data[$hdr_snowqueen['VSARTCOLORDESC']], 'cp1251');
 					$buf[$hdr_magento['color']] = $data[$hdr_snowqueen['VSARTCOLORDESC']];
 					$buf[$hdr_magento['name']] = $data[$hdr_snowqueen['VARTLABEL']];
 					// If brand is empty default to NONAME
@@ -564,6 +567,5 @@ ini_set('memory_limit', '512M');
 	// 3: has header (1-yes)
 	// 4: image import directory
 	
-//	print(mb_ucfirst('КИТАЙ', 'CP1251')."\n");
 	$mi->SnqToMageProducts($argv[1], $argv[2], $argv[3] == 1, $argv[4]);
 ?>
