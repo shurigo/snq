@@ -26,6 +26,16 @@
 <script type="text/javascript" src="/js/set-city.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23458231-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </head>
 <body>
 <!-- temp pix -->
@@ -215,7 +225,7 @@
       <hr class="hr_red">
       <ul class="info-links2">
         <li><a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/5XA1WDkXIos" allowfullscreen=""></iframe></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/mL1f3E60AwY" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->

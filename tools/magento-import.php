@@ -324,6 +324,28 @@ ini_set('memory_limit', '512M');
 		function SnqToMagePrice($file_name, $output_file_name, $has_header = false) {
 		}
 
+		function GetImagesByIdfmc($idfmc, $img_dir, $hdr) {
+			$img_idx = 0;
+			$ret = array();
+			foreach(glob($img_dir.'/'.$idfmc.'*.jpg') as $filename) {
+				++$img_idx;
+				//$buf = array_fill(0, count($hdr), null);
+				$buf = array();
+				$buf[$hdr['image']] = "/".basename($filename);
+				$buf[$hdr['_media_image']] = "/".basename($filename);
+				$buf[$hdr['small_image']] = "/".basename($filename);
+				$buf[$hdr['thumbnail']] = "/".basename($filename);
+				$buf[$hdr['_media_attribute_id']] = '88';
+				$buf[$hdr['_media_lable']] = $img_idx == 2 ? 'back' : 'image'.$img_idx;
+				$buf[$hdr['_media_position']] = $img_idx;
+				$buf[$hdr['_media_is_disabled']] = '0';
+				$buf[$hdr['_attribute_set']] = 'Default';
+				ksort($buf);
+				$ret[] = $buf;
+			}
+			return $ret;
+		}
+
 		function SnqToMageProducts($file_name, $output_file_name, $has_header = false, $image_dir) {
 			print "Loading data...\n";
 			print "Input:$file_name\nOutput:$output_file_name\nHas header:$has_header\n";
@@ -427,14 +449,11 @@ ini_set('memory_limit', '512M');
 						array(
 							$buf[$hdr_magento['name']], 
 							$idfmc,
-							//$buf[$hdr_magento['sku']],
 							$buf[$hdr_magento['manufacturer']],
 							$buf[$hdr_magento['product_size']]
 						)));
 
-					// convert to utf-8
 					$buf = array_map('trim', $buf);
-					//$buf = array_map('convert', $buf);
 					ksort($buf);
 					$data_new[$idfmc][] = $buf;
 
@@ -467,6 +486,7 @@ ini_set('memory_limit', '512M');
 					if(count($data) > 1) { // Configurable
 						$configurable = array();
 						$category2 = $data[1][$hdr_magento['_category']];
+						$images = $this->GetImagesByIdfmc($idfmc, $image_dir, $hdr_magento);
 						foreach($data as $data_row) {
 							if(!is_array($data_row) || count($data_row) <= 0) continue;
 							fputcsv($file_handle_out, $data_row, self::FIELD_SEPARATOR_MAGENTO);
@@ -480,15 +500,11 @@ ini_set('memory_limit', '512M');
 								$buf[$hdr_magento['_custom_option_is_required']] = '1';
 								$buf[$hdr_magento['_custom_option_type']] = 'drop_down';
 								$buf[$hdr_magento['visibility']] = '4';
+								// add default image
+								if(count($images) > 0) {
+									$buf = $images[0] + $buf;
+								}
 								$buf[$hdr_magento['_custom_option_row_title']] = 'title';
-								$buf[$hdr_magento['_media_attribute_id']] = '88';
-								$buf[$hdr_magento['_media_lable']] = 'image1';
-								$buf[$hdr_magento['_media_position']] = '0';
-								$buf[$hdr_magento['_media_is_disabled']] = '0';
-								$buf[$hdr_magento['image']] = '/'.$idfmc.'_1.jpg';
-								$buf[$hdr_magento['_media_image']] = '/'.$idfmc.'_1.jpg';
-								$buf[$hdr_magento['small_image']] = '/'.$idfmc.'_1.jpg';
-								$buf[$hdr_magento['thumbnail']] = '/'.$idfmc.'_1.jpg';
 								$buf[$hdr_magento['meta_title']] = $buf[$hdr_magento['name']].' (артикул:'.$idfmc.') '.$buf[$hdr_magento['manufacturer']];
 								$buf[$hdr_magento['meta_keyword']] = $buf[$hdr_magento['name']].';'.$buf[$hdr_magento['_category']].';'.explode('/', $category2)[1].';'.$buf[$hdr_magento['manufacturer']].';'.$idfmc;
 								$buf[$hdr_magento['meta_description']] = $buf[$hdr_magento['short_description']];
@@ -517,27 +533,13 @@ ini_set('memory_limit', '512M');
 								$configurable[] = $buf;
 							}
 						}
-						// add images
-						$img_idx = 0;
-						foreach(glob($image_dir.'/'.$idfmc.'*.jpg') as $filename) {
-							++$img_idx;
-              if($img_idx == 1) {
-                continue; // skip first default image which's been already assigned
-              }
+						// add other images
+						for($img = 1; $img < count($images); $img++) {
 							$buf = array_fill(0, count($hdr_magento), null);
-							$buf[$hdr_magento['image']] = "/".basename($filename);
-							$buf[$hdr_magento['_media_image']] = "/".basename($filename);
-							$buf[$hdr_magento['small_image']] = "/".basename($filename);
-							$buf[$hdr_magento['thumbnail']] = "/".basename($filename);
-              $buf[$hdr_magento['_media_attribute_id']] = '88';
-              $buf[$hdr_magento['_media_lable']] = 'image'.$img_idx;
-              $buf[$hdr_magento['_media_position']] = $img_idx;
-              $buf[$hdr_magento['_media_is_disabled']] = '0';
-							$buf[$hdr_magento['_attribute_set']] = 'Default';
+							$buf = $images[$img] + $buf;
 							ksort($buf);
 							$configurable[] = $buf;
 						}
-
 						foreach($configurable as $data_row) {
 							if(!is_array($data_row) || count($data_row) <= 0) continue;
 							if(empty($data_row[$hdr_magento['image']]) && empty($data_row[$hdr_magento['_super_attribute_option']]) && empty($data_row[$hdr_magento['_category']])) continue;
