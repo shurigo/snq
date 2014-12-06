@@ -26,7 +26,7 @@
                     }
                     ?>
                     .add(new ymaps.Placemark([<?=$arElement["PROPERTY_8"]?>], {
-                        balloonContent: "<?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', strip_tags($arElement["PREVIEW_TEXT"], "<br><br />")))?>",
+                        balloonContent: '<a target="_blank" href="/our_shops/detail.php?id=<?=$arElement['ID']?>"><?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', $arElement["PREVIEW_TEXT"]))?></a>',
 						iconContent: "<?=$shop_counter?>"
                     }, {
                         preset: "twirl#blackIcon"
@@ -66,7 +66,7 @@
                         $second_column_showed = 1;
                     }
                     ?>
-                    <a id="<?=$arElement["ID"]?>">
+										<a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank>
                     <li style="margin:20px 0 0 20px;">
                         <div style="color:#191a1e; font-weight:bold; font-size:14px;"><?=$arElement["NAME"]?></div>
                         <div style="margin:10px 0 0 0; font-weight:bold;">Адрес:</div>
