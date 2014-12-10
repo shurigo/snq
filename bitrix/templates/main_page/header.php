@@ -25,7 +25,19 @@
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
-
+<script type="text/javascript">
+var _advisorq = _advisorq || [];
+ 
+_advisorq.push({
+  _setAccount: {
+    endpoint: 'http://sandbox1-v3.advisor.smartfocus.com/ips',
+    username: 'snowqdev',
+    accid: '597'
+  }
+});
+  
+(function() {var s = document.getElementsByTagName('script')[0];var sr = document.createElement('script');sr.type = 'text/javascript';sr.async = true;sr.src = 'http://js.advisor.smartfocus.com/advisor.js'; s.parentNode.insertBefore(sr, s); }());
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
