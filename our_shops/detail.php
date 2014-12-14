@@ -32,7 +32,12 @@
 				<h1 id="title"><?=$props['col_title']['VALUE']?></h1>
 			<?endif;?>
 			<?if(!empty($props['col_waymark']['VALUE'])):?>
-				<div id="waymark"><?=$props['col_waymark']['VALUE']?></div>
+				<div id="waymark">
+				<?=$props['col_waymark']['VALUE']?>
+				<?if(!empty($props['col_google_tour']['VALUE'])):?>
+				&nbsp;(<a href="<?=$props['col_google_tour']['VALUE']?>"><b>виртуальный тур по магазину</b></a>)
+   			    <?endif;?>
+				</div>
 			<?endif;?>
 			<?if(!empty($props['col_web']['VALUE'])):?>
 			    <? if(substr($props['col_web']['VALUE'],7)!="http://")
