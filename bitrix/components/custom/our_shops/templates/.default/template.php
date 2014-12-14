@@ -53,26 +53,26 @@
 		<?
         foreach($arResult as $arCity)
         {
-            if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0)
+             if (is_array($arCity["ITEMS"]) && count($arCity["ITEMS"]) > 0)
             {
                 $shop_counter = 1;
                 $second_column_showed = 0;
 				?><ol><?
                 foreach($arCity["ITEMS"] as $arElement)
                 {
+                    //print_r($arElement);
+
                     if ($shop_counter > ceil(count($arCity["ITEMS"]) / 2) && !$second_column_showed)
                     {
                         ?></ol></td><td valign="top" style="width:50%; padding:0 0 0 20px;"><ol start="<?=$shop_counter?>"><?
                         $second_column_showed = 1;
                     }
                     ?>
-										<a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank>
-                    <li style="margin:20px 0 0 20px;">
-                        <div style="color:#191a1e; font-weight:bold; font-size:14px;"><?=$arElement["NAME"]?></div>
-                        <div style="margin:10px 0 0 0; font-weight:bold;">Адрес:</div>
-                        <div><?=$arElement["PREVIEW_TEXT"]?></div>
+
+                    <li>
+                        <a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank"><h3><?=$arElement['PROPERTY_60']?></h3></a>
+                        <div><b>Адрес: </b><?=$arElement["PROPERTY_63"]?></div><br />
                     </li>
-                    </a>
                     <?
                     $shop_counter++;
                 }

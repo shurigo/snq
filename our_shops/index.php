@@ -8,6 +8,8 @@ $APPLICATION->SetTitle("Наши магазины");
 $APPLICATION->IncludeComponent("custom:our_shops", "", Array(
 	"IBLOCK_TYPE" => "our_shops",	// Тип инфо-блока
 	"IBLOCK_ID" => "7",	// Инфо-блок
+	"LIST_PROPERTY_CODE" => array(0=>"col_title",1=>"col_address"),
+	"DETAIL_PROPERTY_CODE" => array(0=>"col_title",1=>"col_address"),
 	"CACHE_TYPE" => "N",	// Тип кеширования
 	"CACHE_TIME" => "3600",	// Время кеширования (сек.)
 	"CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре

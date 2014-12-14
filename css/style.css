@@ -1474,4 +1474,7 @@ float:left; width:140px; margin:0px 0 0px 0px;
 	top:870px;
 	width:300px;
 }
-.rub{ display: inline-block; font-size: 18px; line-height: 4px; border-bottom: 1px solid #000; width: 0.4em; font-weight: normal; font-family: serif;} 
+.rub{ display: inline-block; font-size: 18px; line-height: 4px; border-bottom: 1px solid #000; width: 0.4em; font-weight: normal; font-family: serif;}
+
+.shop h1 {margin: 0px 0 2px 0;}
+.shop div {padding-bottom:2px;} 
