@@ -49,7 +49,7 @@
 	if(isset($_GET['PAGEN_1']) && $_GET['PAGEN_1'] > $page_count) { die;
 }?>
 <?if(count($arResult['ITEMS']) == 0):?>
-  <p>По вашему запросу ничего не найдено</p>
+ <!-- <p>По вашему запросу ничего не найдено</p>   -->
 <?endif;?>
 <?foreach($arResult["ITEMS"] as $arElement):?>
 <?
