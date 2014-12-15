@@ -17,7 +17,7 @@
   //$category_price_sort_array=array('wdress','mskincoat','wskincoat','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wpaddedcoat','wtopjacket','mpaddedcoat','mtopjacket');
   $category_price_sort_array=array('wfurs_bestsell','wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
   $category_show_banner=array('wfurs_bestsell');
-  $category_show_banner2=array('wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs');
+  $category_show_banner2=array('wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wskincoat','wpaddedcoat','mskincoat','mpaddedcoat');
 
   if (in_array($url_array[2], $category_show_banner))
   echo '<div style="padding:0 0 5px 0;"><img src="/images/banners/banner_from_15_to_31_july.jpg" alt="" border="0"></div>';
