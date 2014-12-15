@@ -71,7 +71,9 @@
 
                     <li>
                         <a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank"><h3><?=$arElement['PROPERTY_60']?></h3></a>
-                        <div><b>Адрес: </b><?=$arElement["PROPERTY_63"]?>&nbsp;(<a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank">подробнее</a>)</div><br />
+                        <div><b>Адрес: </b><?=$arElement["PROPERTY_63"]?></div>
+                        <div><a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank">Подробнее>></a></div>
+                        <br />
                     </li>
                     <?
                     $shop_counter++;
