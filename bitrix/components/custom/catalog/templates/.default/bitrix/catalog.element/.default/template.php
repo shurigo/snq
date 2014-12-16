@@ -23,6 +23,22 @@ var a = axel * 10000000000000;
 }
 </script>
 
+<script type="text/javascript">
+var _advisorq = _advisorq || [];
+_advisorq.push({
+	_suggest: {
+		code: "product",
+		layout: {
+			selector: '.item',
+			insert:'after',
+			title: 'Рекомендуем:',
+			rows: 1,
+			cols: 4,
+			containerid: '#recommended'
+		}
+	}
+});
+</script>
 
 <article class="item" itemscope itemtype="http://schema.org/Product">
   <section class="text">
