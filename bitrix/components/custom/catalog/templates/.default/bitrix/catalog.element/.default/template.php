@@ -22,24 +22,24 @@ var a = axel * 10000000000000;
 //document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/><noscript><img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/></noscript>');
 }
 </script>
-
+<?if($arResult["ID"] == 11066):?>
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
 _advisorq.push({
-	_suggest: {
-		code: "product",
-		layout: {
-			selector: '.item',
-			insert:'after',
-			title: 'Рекомендуем:',
-			rows: 1,
-			cols: 4,
-			containerid: '#recommended'
-		}
-	}
+  _suggest: {
+    code: "product",
+    layout: {
+      selector: '.item',
+      insert:'after',
+      title: 'Рекомендуем:',
+      rows: 1,
+      cols: 4,
+      containerid: '#recommended'
+    }
+  }
 });
 </script>
-
+<?endif;?>
 <article class="item" itemscope itemtype="http://schema.org/Product">
   <section class="text">
     <h1 itemprop="name"><?=$arResult["NAME"]; ?></h1>
@@ -170,7 +170,10 @@ echo '
     <!-- end .sizes -->
     </br>
     <div id="availability"></div>
-    <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Внимание (!) Цены на сайте могут отличаться от действующих.<br>Точную цену товара узнавайте в магазинах или уточняйте по телефону 8 800 777-8-999.</div>
+    <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Информация, указанная на сайте не является публичной офертой.
+На сайте представлены избранные модели товаров, реализуемых в магазинах «Снежная Королева». 
+Цены на сайте могут отличаться от цен действующих в магазинах. Компания оставляет за собой право на изменение цены.
+Информацию о наличии товара и действующей цене уточняйте, пожалуйста, в магазинах  или по телефону 8 800 777-8-999.</div>
 
 </section>
 <!-- end .text-->
