@@ -694,6 +694,35 @@ table .sep {
 	text-align:center;
 }
 
+.desc_text {
+    position: relative;
+    overflow: hidden;
+}
+.desc_text.minimized {
+    height: 140px;
+}
+.desc_text.minimized:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff',endColorstr='#ffffffff');
+    background: -webkit-linear-gradient(rgba(255,255,255,0),#fff);
+    background: -o-linear-gradient(rgba(255,255,255,0),#fff);
+    background: linear-gradient(rgba(255,255,255,0),#fff);
+}
+.desc_text_link {
+    margin-top: 15px;
+}
+.desc_text_link span, .desc_text_link.minimized span:first-child {
+    display: none;
+}
+.desc_text_link.minimized span, .desc_text_link span:first-child {
+    display: inline-block;
+}
+
 .side-menu {
 	font-weight:bold;
 	font-size:13px;
@@ -931,6 +960,15 @@ text-transform: uppercase;
 .item .text {
 	float:right;
 	width:320px;
+}
+
+.advisor_suggestion_container .item {
+    float: left;
+}
+.advisor_suggestion_container .item_link {
+    width: 188px;
+    display: block;
+    text-align: center;
 }
 
 .gallery {

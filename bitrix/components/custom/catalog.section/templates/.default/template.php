@@ -133,7 +133,20 @@ if (strlen($url_array[3]) == 0) {
 		)
 	);
 	$arSec = $dbSec->GetNext();
-	if (strlen($arSec["DESCRIPTION"]) > 0)  echo $arSec["DESCRIPTION"];
+	if (strlen($arSec["DESCRIPTION"]) > 0)
+	echo '<div class="desc_text minimized">'.$arSec["DESCRIPTION"].'</div>
+
+	<div class="desc_text_link minimized">
+		<a id="desc_text_link" href="javascript:;"><span>Свернуть</span><span>Читать далее</span></a> »
+	</div>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+		$("#desc_text_link").click(function(){
+		$(".desc_text_link, .desc_text").toggleClass("minimized");
+		});
+		});
+		</script>';
 
 	// pixels monitor
 	$sections = array( "new" =>
