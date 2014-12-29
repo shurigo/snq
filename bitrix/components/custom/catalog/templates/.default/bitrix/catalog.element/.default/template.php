@@ -23,6 +23,7 @@ var a = axel * 10000000000000;
 }
 </script>
 <?if($arResult["ID"] == 11066):?>
+<?$section_path=end($arResult['SECTION']['PATH']);?>
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
 _advisorq.push({
@@ -36,6 +37,10 @@ _advisorq.push({
       cols: 4,
       containerid: '#recommended'
     }
+  },
+  _setConfig: {
+    sku: <?=$arResult['ID']?>,
+    currentPath: [<?=$section_path['IBLOCK_SECTION_ID'].','.$section_path['ID']?>]
   }
 });
 </script>
