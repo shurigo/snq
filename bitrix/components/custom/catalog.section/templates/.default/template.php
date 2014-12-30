@@ -317,12 +317,19 @@ document.write('<img src="' + ('https:' == document.location.protocol ? 'https:'
 <script type="text/javascript">
   _advisorq = _advisorq || [];
     _advisorq.push({
-    _setConfig: {
-      currentCategory: <?=end($arResult['PATH'])['ID'];?>,
-      currentPath: [<?=implode(',', array_column(array_slice($arResult['PATH'], -2), 'ID'));?>],
-      contentType: "category",
-      exclusionSkus: [<?=implode(',', array_column($arResult['ITEMS'], 'ID'));?>]
-  }});
+      _setConfig: {
+        currentCategory: <?=end($arResult['PATH'])['ID'];?>,
+        currentPath: [<?=implode(',', array_column(array_slice($arResult['PATH'], -2), 'ID'));?>],
+        contentType: "category",
+        exclusionSkus: [<?=implode(',', array_column($arResult['ITEMS'], 'ID'));?>]
+      }});
+<?if($arParams['VIEW_MODE'] == 'search'):?>
+  _advisorq.push({
+    _search: {
+      query: '<?=$arParams['SEARCH_QUERY'];?>'
+    }
+  });
+<?endif;?>
 </script>
 <!-- SmartFocus advisor.end -->
 <a href="#" class="scrollup">Scroll</a>
