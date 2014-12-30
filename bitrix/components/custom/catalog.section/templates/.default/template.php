@@ -313,7 +313,18 @@ document.write('<img src="' + ('https:' == document.location.protocol ? 'https:'
 </script>
 <noscript><img src="//ad.adriver.ru/cgi-bin/rle.cgi?sid=196960&bt=21&pz=0&rnd=2076491944" border=0 width=1 height=1></noscript>
 <!--  AdRiver code END  -->
-
+<!-- SmartFocus advisor -->
+<script type="text/javascript">
+  _advisorq = _advisorq || [];
+    _advisorq.push({
+    _setConfig: {
+      currentCategory: <?=end($arResult['PATH'])['ID'];?>,
+      currentPath: [<?=implode(',', array_column(array_slice($arResult['PATH'], -2), 'ID'));?>],
+      contentType: "category",
+      exclusionSkus: [<?=implode(',', array_column($arResult['ITEMS'], 'ID'));?>]
+  }});
+</script>
+<!-- SmartFocus advisor.end -->
 <a href="#" class="scrollup">Scroll</a>
 </section>
 <!-- end .mainContent-->
