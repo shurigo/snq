@@ -56,11 +56,16 @@ category_map = {
 #    "Предметы интерьера":("home_accessories",492,"collection"),
 #    "Распродажа":(495,495,"collection"),
 #    "Новинки":("new",511,"collection")}
+brands = dict()
+with open("brands.csv") as brands_csv:
+    reader = csv.reader(brands_csv, delimiter=";")
+    next(reader, None) # skip header
+    brands = dict((rows[0],rows[1]) for rows in reader)
 
 with open(sys.argv[1]) as csvfile:
     reader = csv.DictReader(csvfile, delimiter=";")
     with open(sys.argv[2], "w") as csv_out:
-        writer = csv.DictWriter(csv_out, quoting=csv.QUOTE_NONNUMERIC, fieldnames=["IE_XML_ID", "IE_NAME", "IP_PROP9", "IE_ACTIVE", "IP_PROP3", "IMAGE_URL", "URL", "ALLCAT", "LEAFCAT"], extrasaction="ignore", delimiter=";")
+        writer = csv.DictWriter(csv_out, quoting=csv.QUOTE_NONNUMERIC, fieldnames=["IE_XML_ID", "IE_NAME", "IP_PROP9", "IE_ACTIVE", "IP_PROP3", "IMAGE_URL", "URL", "ALLCATS", "LEAFCAT", "BRAND"], extrasaction="ignore", delimiter=";")
         writer.writeheader()
         for row in reader:
             if row["IC_GROUP1"] != "" and row["IC_GROUP2"] != "":
@@ -69,6 +74,7 @@ with open(sys.argv[1]) as csvfile:
                 d["IMAGE_URL"] = "http://snowqueen.ru{0}".format(d["IE_PREVIEW_PICTURE"])
                 category = category_map[row["IC_GROUP2"]]
                 d["URL"] = "http://snowqueen.ru/collection/{0}/{1}/".format(category[0], row["IE_ID"])
-                d["ALLCAT"] = "|".join(map(str, [category[2], category[1]]))
+                d["ALLCATS"] = "|".join(map(str, [category[2], category[1]]))
                 d["LEAFCAT"] = str(category[1])
+                d["BRAND"] = brands[row["IP_PROP2"]].strip() if row["IP_PROP2"] in brands else ""
                 writer.writerow(d)
