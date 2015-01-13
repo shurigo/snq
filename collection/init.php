@@ -19,12 +19,14 @@
   $category_show_banner=array('wfurs_bestsell');
   $category_show_banner2=array('wmink','wfox','wkarakul','wrabbit','wfurvest','wfurother','wfurs','wskincoat','wpaddedcoat','mskincoat','mpaddedcoat');
 
+  /*
   if (in_array($url_array[2], $category_show_banner))
   echo '<div style="padding:0 0 5px 0;"><img src="/images/banners/banner_from_15_to_31_july.jpg" alt="" border="0"></div>';
 
   if (in_array($url_array[2], $category_show_banner2))
   echo '<div style="padding:0 0 5px 0;"><img src="/images/banners/banner_furs_autumn-winter_14_15.jpg" alt="" border="0"></div>';
-
+  */
+  
   if(isset($_GET['sort']))
   {
 		if($_GET['sort'] == 'sort') { $sort_field = 'sort'; $sort_order = 'asc'; }
