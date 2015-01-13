@@ -24,6 +24,7 @@
 <script type='text/javascript' src='/js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
+<script type="text/javascript" src="/js/snowfall.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
@@ -237,7 +238,7 @@ _advisorq.push({
       <hr class="hr_red">
       <ul class="info-links2">
         <li><a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/mL1f3E60AwY" allowfullscreen=""></iframe></li>
+        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/F0Gfz3wmw4E" allowfullscreen=""></iframe></li>
       </ul>
 
       <!-- end .info-links 2-->
