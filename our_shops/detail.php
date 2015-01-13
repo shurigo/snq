@@ -92,7 +92,7 @@
 						map.geoObjects.add(
 							new ymaps.Placemark(
 								[<?=$fields["PROPERTY_8"]?>], {
-									balloonContent: '<?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', $fields["PREVIEW_TEXT"]))?>',
+									balloonContent: '<?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', $props['col_title']['VALUE']))?>',
 									iconContent: ""
 								}, {
 									preset: "twirl#blackIcon"

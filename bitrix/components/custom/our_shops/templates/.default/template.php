@@ -26,7 +26,7 @@
                     }
                     ?>
                     .add(new ymaps.Placemark([<?=$arElement["PROPERTY_8"]?>], {
-                        balloonContent: '<a target="_blank" href="/our_shops/detail.php?id=<?=$arElement['ID']?>"><?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', $arElement["PREVIEW_TEXT"]))?></a>',
+                        balloonContent: '<a target="_blank" href="/our_shops/detail.php?id=<?=$arElement['ID']?>"><?=trim(str_replace(array("\r\n", "\r", "\n"), ' ', $arElement["PROPERTY_60"]))?></a>',
 						iconContent: "<?=$shop_counter?>"
                     }, {
                         preset: "twirl#blackIcon"
