@@ -6,7 +6,11 @@ function setCity(city_id, city_name) {
     },
     url: "/ipgeo/setcity.php",
     success: function(obj) {
-      location.reload();
+			if(location.href.indexOf('/our_shops/detail') > -1) {
+				location.replace('/our_shops/');
+			} else {
+				location.reload();
+			}
     }
   });
 }

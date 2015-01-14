@@ -70,9 +70,9 @@
                     ?>
 
                     <li>
-                        <a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank"><h3><?=$arElement['PROPERTY_60']?></h3></a>
+                        <a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>"><h3><?=$arElement['PROPERTY_60']?></h3></a>
                         <div><b>Адрес: </b><?=$arElement["PROPERTY_63"]?></div>
-                        <div><a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>" target="_blank">Подробнее>></a></div>
+                        <div><a href="/our_shops/detail.php?id=<?=$arElement['ID']?>" id="<?=$arElement["ID"]?>">Подробнее>></a></div>
                         <br />
                     </li>
                     <?
