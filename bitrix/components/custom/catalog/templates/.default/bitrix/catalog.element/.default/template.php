@@ -22,7 +22,7 @@ var a = axel * 10000000000000;
 //document.write('<img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=' + a + '?" width="1" height="1" alt=""/><noscript><img src="https://ad.doubleclick.net/activity;src=4390744;type=invmedia;cat=' + tagv + ';u1=<?=$url_array[3]?>;u4=<?=$url_array[2]?>;ord=1?" width="1" height="1" alt=""/></noscript>');
 }
 </script>
-<?if($arResult["ID"] == 11066):?>
+<?if(in_array((int)$arResult["ID"], array(11066, 716039, 149292))):?>
 <?$section_path=end($arResult['SECTION']['PATH']);?>
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
