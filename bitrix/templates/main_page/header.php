@@ -31,9 +31,9 @@ var _advisorq = _advisorq || [];
  
 _advisorq.push({
   _setAccount: {
-    endpoint: 'http://sandbox1-v3.advisor.smartfocus.com/ips',
-    username: 'snowqdev',
-    accid: '597'
+    endpoint: 'http://api-eu1.advisor.smartfocus.com/ips',
+		username: 'snowqpro',
+		accid: '611'
   }
 });
   
