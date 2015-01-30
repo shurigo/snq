@@ -15,7 +15,7 @@ $(window).on("load", function(){
   jQuery('div.slider2').gallery({
     infinite: true,
     duration: 1200,
-    slideElement: 1,
+    slideElement: 3,
     listOfSlides: '> div.hold > ul > li'
   });
 	$("#city-select").change(function() {
