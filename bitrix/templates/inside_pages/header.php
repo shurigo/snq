@@ -27,6 +27,7 @@
 <script type="text/javascript" src="/js/get-shops.js"></script>
 <script type="text/javascript" src="/js/lightbox.js"></script>
 <script type="text/javascript" src="/js/jquery.nyroModal.custom.js"></script>
+<script type="text/javascript" src="/js/snowfall.js"></script>
 <!--[if IE 6]>
 		<script type="text/javascript" src="/js/jquery.nyroModal-ie6.min.js"></script>
 <![endif]-->
@@ -65,9 +66,9 @@ var _advisorq = _advisorq || [];
  
 _advisorq.push({
   _setAccount: {
-    endpoint: 'http://sandbox1-v3.advisor.smartfocus.com/ips',
-    username: 'snowqdev',
-    accid: '597'
+    endpoint: 'http://api-eu1.advisor.smartfocus.com/ips',
+		username: 'snowqpro',
+		accid: '611'
   }
 });
   
