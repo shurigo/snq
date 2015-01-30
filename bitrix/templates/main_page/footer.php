@@ -14,22 +14,24 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
 <footer class="footer">
 <!-- brands -->
 <?$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_brands", Array(
-    "DISPLAY_DATE" => "Y",	// Выводить дату элемента
+    'PAGE_ELEMENT_COUNT' => 30,
+//    "DISPLAY_DATE" => "Y",	// Выводить дату элемента
     "DISPLAY_NAME" => "Y",	// Выводить название элемента
     "DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
-    "DISPLAY_PREVIEW_TEXT" => "Y",	// Выводить текст анонса
+//    "DISPLAY_PREVIEW_TEXT" => "Y",	// Выводить текст анонса
     "AJAX_MODE" => "N",	// Включить режим AJAX
     "IBLOCK_TYPE" => "brands",	// Тип информационного блока (используется только для проверки)
     "IBLOCK_ID" => "2",	// Код информационного блока
-    "NEWS_COUNT" => "1000",	// Количество новостей на странице
+    /*"NEWS_COUNT" => "1000",	// Количество новостей на странице
     "SORT_BY1" => "ACTIVE_FROM",	// Поле для первой сортировки новостей
     "SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
     "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
     "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
     "FILTER_NAME" => "",	// Фильтр
+*/
     "FIELD_CODE" => "",	// Поля
-    "PROPERTY_CODE" => array("brands_carousel"),	// Свойства
-    "CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
+    "PROPERTY_CODE" => array("col_title", "col_keywords", "col_description", "brands_carousel"),	// Свойства
+    "CHECK_DATES" => "N",	// Показывать только активные на данный момент элементы
     "DETAIL_URL" => "/collection/brands/?BRAND_ID=#ELEMENT_ID#",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
     "PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
     "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
@@ -39,8 +41,10 @@ document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'htt
     "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",	// Включать инфоблок в цепочку навигации
     "ADD_SECTIONS_CHAIN" => "Y",	// Включать раздел в цепочку навигации
     "HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
+/*
     "PARENT_SECTION" => "",	// ID раздела
     "PARENT_SECTION_CODE" => "",	// Код раздела
+*/
     "CACHE_TYPE" => "A",	// Тип кеширования
     "CACHE_TIME" => "3600",	// Время кеширования (сек.)
     "CACHE_FILTER" => "N",	// Кэшировать при установленном фильтре
