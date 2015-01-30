@@ -12,7 +12,7 @@
       -->
       <!-- end .search-->
       <ul class="menu">
-       <li><a href="/collection/new/" class="red">Новинки</a></li>
+       <li><a href="/collection/new/">Новинки</a></li>
        <li><a href="/collection/woman/" rel="nofollow">Женщинам</a>
           <div class="sub">
             <table>
@@ -127,24 +127,24 @@
 	<!--<li><a class="red" href="/collection/woman/?d=y" rel="nofollow">Sale</a></li>-->
 		<li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru'); return false;">Интернет-магазин</a></li>
 
-		<li><a href="/collection/sale/" rel="nofollow" class="red" >Распродажа</a>
+		<li><a href="/collection/sale/" rel="nofollow">Дисконт</a>
           <div class="sub">
             <table>
               <tr>
                 <td><ul>
                     <li><strong>Женская коллекция</strong></li>
-                    <li><a href="/collection/wskincoat_sale/">Дубленки</a></li>
+                    <!--<li><a href="/collection/wskincoat_sale/">Дубленки</a></li>
                     <li><a href="/collection/wleather_sale/">Верхняя одежда из кожи</a></li>
-                    <li><a href="/collection/wtopcoat_sale/">Пальто</a></li>
+                    <li><a href="/collection/wtopcoat_sale/">Пальто</a></li>  -->
                     <li><a href="/collection/wtopclothes_sale/">Верхняя одежда</a></li>
                     <li><a href="/collection/wclothes_sale/">Одежда</a></li>
                     <li><a href="/collection/waccessories_sale/">Аксессуары</a></li>
                   </ul></td>
                 <td><ul>
                     <li><strong>Мужская коллекция</strong></li>
-                    <li><a href="/collection/mskincoat_sale/">Дубленки</a></li>
+                    <!--<li><a href="/collection/mskincoat_sale/">Дубленки</a></li>
                     <li><a href="/collection/mleather_sale/">Верхняя одежда из кожи</a></li>
-                    <li><a href="/collection/mtopcoat_sale/">Пальто</a></li>
+                    <li><a href="/collection/mtopcoat_sale/">Пальто</a></li> -->
                     <li><a href="/collection/mtopclothes_sale/">Верхняя одежда</a></li>
                     <li><a href="/collection/mclothes_sale/">Одежда</a></li>
                     <li><a href="/collection/maccessories_sale/">Аксессуары</a></li>
