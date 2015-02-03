@@ -98,7 +98,7 @@ echo '
         <a href="/actions/" title="Акции" onClick="DoubleClickTagPost('Gobr8Bpp'); trackOutboundLink(this, 'Outbound Links', 'actions_card'); return false;" rel="nofollow">Скидки %</a>
       </li>
       <li>
-        <?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="DoubleClickTagPost(\'qil7ECb1\'); trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/" title="Наши магазины" onClick="DoubleClickTagPost(\'qil7ECb1\'); trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?>
+        <?=($arResult['PROPERTIES']['col_im_link']['VALUE']!="")?('<a href="'.$arResult['PROPERTIES']['col_im_link']['VALUE'].'" onClick="DoubleClickTagPost(\'qil7ECb1\'); trackOutboundLink(this, \'Outbound Links\', \'im_card\'); return false;" rel="nofollow" target="_blank">Купить Online</a>'):('<a href="/our_shops/?product_id='.$arResult["ID"].'" title="Наши магазины" onClick="DoubleClickTagPost(\'qil7ECb1\'); trackOutboundLink(this, \'Outbound Links\', \'our_shops_card\'); return false;">Где купить?</a>');?>
       </li>
     </ul>
     <!-- end .links-->
@@ -176,7 +176,7 @@ echo '
     </br>
     <div id="availability"></div>
     <div class="grey" style="font-size:8pt;padding:0 0 10px 0;">Информация, указанная на сайте не является публичной офертой.
-На сайте представлены избранные модели товаров, реализуемых в магазинах «Снежная Королева». 
+На сайте представлены избранные модели товаров, реализуемых в магазинах «Снежная Королева».
 Цены на сайте могут отличаться от цен действующих в магазинах. Компания оставляет за собой право на изменение цены.
 Информацию о наличии товара и действующей цене уточняйте, пожалуйста, в магазинах  или по телефону 8 800 777-8-999.</div>
 
@@ -372,6 +372,15 @@ $HUBRUS_str="http://track.hubrus.com/pixel?id=12850,12856,".$MY_SEC_ID.",12893&t
 <!-- Segment Pixel - SQ_segment - DO NOT MODIFY -->
 <img src="http://ib.adnxs.com/seg?add=830761&t=2" width="1" height="1" />
 <!-- End of Segment Pixel -->
+
+<!-- e-targeting -->
+<script>
+var _soleil_product = document.createElement("script");
+_soleil_product.type = "text/javascript";
+_soleil_product.text = "var soleil_product = {identifier: "<?=$arResult["ID"]?>", container: 7}";
+document.body.appendChild(_soleil_product);
+</script>
+
 
 <?
   // get current catalog section

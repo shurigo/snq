@@ -86,3 +86,15 @@
     </tr>
 </table>
 </div>
+<?
+if (isset($_GET['product_id'])) {
+echo '
+     <!-- e-targeting -->
+     <script>
+		var _soleil_bskt = document.createElement("script");
+		_soleil_bskt.type = "text/javascript";
+		_soleil_bskt.text = "var soleil_basket = {products: [\''.$_GET['product_id'].'\'], container: 7}";
+		document.body.appendChild(_soleil_bskt);
+</script>
+     ';
+?>

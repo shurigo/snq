@@ -157,5 +157,14 @@ var gcb = Math.round(Math.random() * 100000);
 document.write('<scr'+'ipt src="'+('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'cdn.odinkod.ru/tags/13789918-d57cc3.js?gcb='+ gcb +'"></scr'+'ipt>');
 </script>
 
+<!-- e-trageting -->
+<script>
+var _soleil_mrkr = document.createElement("script");
+_soleil_mrkr.async = true;
+_soleil_mrkr.type = "text/javascript";
+_soleil_mrkr.src = "https://adsclever.ru/sl/i/mrkr/4?r=" + Math.random() * 100;
+document.body.appendChild(_soleil_mrkr);
+</script>
+
 </body>
 </html>
