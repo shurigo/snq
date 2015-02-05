@@ -87,7 +87,7 @@
 </table>
 </div>
 <?
-if (isset($_GET['product_id'])) {
+if (isset($_GET['product_id']))
 echo '
      <!-- e-targeting -->
      <script>
