@@ -4,9 +4,11 @@
 
 <?
 //get element
-$arSelect = Array("ID","NAME","PREVIEW_TEXT","PROPERTY_col_email","PROPERTY_col_phone");
+$arSelect = Array("ID","NAME","PREVIEW_TEXT","PROPERTY_44","PROPERTY_45");
+//$arSelect = Array("ID","NAME");
 $arFilter = Array("ID"=>$id);
 $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+//print_r($res);
 $ob = $res->GetNextElement();
 if(!$ob):?>
 	<span class="red">Вакансия не найдена</span><?
