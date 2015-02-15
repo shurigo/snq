@@ -24,7 +24,6 @@
 <script type='text/javascript' src='/js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript" src="/js/jquery.main.js"></script>
 <script type="text/javascript" src="/js/set-city.js"></script>
-<script type="text/javascript" src="/js/snowfall2.js"></script>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
