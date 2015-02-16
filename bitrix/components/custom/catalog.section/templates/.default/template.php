@@ -34,7 +34,7 @@
 	<? global $action_catalog_filter; ?>
 	<? $currentPage = $APPLICATION->GetCurPage(); ?>
 	<?if($arParams['VIEW_MODE'] === 'actions'):?>
-		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
+		<section class="catalog" data-page="<?='/collection/?m=a&d='.$arParams['DISCOUNT_ONLY'].'&dm='.$action_catalog_filter['PROPERTY_col_discount'].'&sid='.http_build_query(array('sid' => $action_catalog_filter['SECTION_ID']));?>">
 	<?elseif($arParams['VIEW_MODE'] === 'brands'):?>
 		<section class="catalog" data-page="<?='/collection/?m=a&BRAND_ID='.$_GET['BRAND_ID'];?>">
 	<?elseif($arParams['VIEW_MODE'] === 'search'):?>

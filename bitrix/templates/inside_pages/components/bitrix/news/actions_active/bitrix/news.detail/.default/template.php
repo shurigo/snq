@@ -10,6 +10,7 @@
 <?endif?>
 </article>
 <?
+// TODO: refactor the logic
 	global $action_catalog_filter;
 	$action_catalog_filter = Array(
 		'IBLOCK_ID' => '1',
@@ -29,20 +30,13 @@
 		$only_new = $arResult['PROPERTIES']['col_discount']['VALUE_XML_ID'] === 'new';
 		// filter only discounted items
 		if($discount_only == 'Y') {
-				$action_catalog_filter[] = Array('PROPERTY_col_discount' => 1);
+			$action_catalog_filter['PROPERTY_col_discount'] = 1;
 		} elseif($only_new) {
-			$action_catalog_filter[] = Array(
-				'LOGIC' => 'OR',
-				'=PROPERTY_col_discount' => 0,
-				'PROPERTY_col_discount' => false
-			);
+			$action_catalog_filter['PROPERTY_col_discount'] = '0';
 		} 
 	}
 ?>
 	<?if(!empty($arResult['PROPERTIES']['col_sections']['VALUE'])):?>
-		<!--<br>
-		<h1>Вещи, участвующие в акции</h1>
-		-->
 		<hr>
 		<?$APPLICATION->IncludeComponent(
 			"custom:catalog.section",

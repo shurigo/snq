@@ -1,14 +1,14 @@
 <?
   require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-	$arFilter =	Array(
-		'IBLOCK_ID' => '1',
-		Array(
-			'LOGIC' => 'OR',
-			'PROPERTY_col_availability' => '1',
-			'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
-		)
-	);
+  $arFilter = Array(
+    'IBLOCK_ID' => '1',
+    Array(
+      'LOGIC' => 'OR',
+      'PROPERTY_col_availability' => '1',
+      'PROPERTY_col_city_id' => strval($_SESSION['city_id'])
+    )
+  );
 
 	if(empty($_SESSION['discount_only'])) {
 		$_SESSION['discount_only'] = 'N';
@@ -27,6 +27,9 @@
 
 	// actions mode
 	if(!empty($_GET['m']) && strtolower($_GET['m']) === 'a') {
+        if(isset($_GET['dm']) && is_numeric($_GET['dm'])) {
+            $arFilter['PROPERTY_col_discount'] = $_GET['dm'];
+        }
 		if(!empty($_GET['sid'])) {
 			parse_str($_GET['sid']);
 			$arFilter['SECTION_ID'] = $sid;
