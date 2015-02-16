@@ -27,7 +27,7 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
- 
+
 _advisorq.push({
   _setAccount: {
     endpoint: 'http://api-eu1.advisor.smartfocus.com/ips',
@@ -35,7 +35,7 @@ _advisorq.push({
 		accid: '611'
   }
 });
-  
+
 (function() {var s = document.getElementsByTagName('script')[0];var sr = document.createElement('script');sr.type = 'text/javascript';sr.async = true;sr.src = 'http://js.advisor.smartfocus.com/advisor.js'; s.parentNode.insertBefore(sr, s); }());
 </script>
 <script>
@@ -160,10 +160,10 @@ _advisorq.push({
 
 
       <ul class="info-links">
-        <li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru - big_image_main_page'); return false;"><img src="/images/img1.jpg" width="321" height="274" alt=" "><span class="text1">Интернет-магазин</span></a></li>
-        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru - big_image_main_page'); return false;"><img src="/images/img2.jpg" width="321" height="274" alt=""><span class="text1">Блог о моде</span></a></li>
+        <li><a href="http://shop.snq.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'shop.snq.ru - big_image_main_page'); return false;"><img src="/images/img1.jpg" width="321" height="274" alt=" "><!--<span class="text1">Интернет-магазин</span>--></a></li>
+        <li><a href="http://likeaqueen.ru/" target="_blank" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'likeaqueen.ru - big_image_main_page'); return false;"><img src="/images/img2.jpg" width="321" height="274" alt=""><!--<span class="text1">Блог о моде</span>--></a></li>
         <li>
-        <a href="/collection/wmink/"><img src="/images/img3.jpg" width="320" height="275" alt=""><span class="text1">ОСЕНЬ-ЗИМА 2014/15</span></a>
+        <a href="/collection/wtopcoat/"><img src="/images/img3.jpg" width="320" height="275" alt=""><!--<span class="text1">ОСЕНЬ-ЗИМА 2014/15</span>--></a>
                         	<?/*$APPLICATION->IncludeComponent("bitrix:catalog.section", "mainpage_hot_model", Array(
                     "AJAX_MODE" => "N",	// Включить режим AJAX
                     "IBLOCK_TYPE" => "collection",	// Тип инфо-блока
