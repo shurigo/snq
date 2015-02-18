@@ -27,7 +27,7 @@
 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 <script type="text/javascript">
 var _advisorq = _advisorq || [];
-
+ 
 _advisorq.push({
   _setAccount: {
     endpoint: 'http://api-eu1.advisor.smartfocus.com/ips',
@@ -35,7 +35,7 @@ _advisorq.push({
 		accid: '611'
   }
 });
-
+  
 (function() {var s = document.getElementsByTagName('script')[0];var sr = document.createElement('script');sr.type = 'text/javascript';sr.async = true;sr.src = 'http://js.advisor.smartfocus.com/advisor.js'; s.parentNode.insertBefore(sr, s); }());
 </script>
 <script>
@@ -236,8 +236,8 @@ _advisorq.push({
       <br>
       <hr class="hr_red">
       <ul class="info-links2">
-        <li><a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a></li>
-        <li><iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/F0Gfz3wmw4E" allowfullscreen=""></iframe></li>
+        <li><a href="/collection/woman/"><img src="/images/woman.jpg"></a><!--<a href="/upload/SNQ_AW_1415_catalog.pdf" rel="nofollow" onClick="trackOutboundLink(this, 'Outbound Links', 'catalog'); return false;"><img src="/images/catalog_fw201415.jpg" alt="" border="0"></a>--></li>
+        <li><a href="/collection/man/"><img src="/images/man.jpg"></a><!--<iframe width="495" height="275" frameborder="0" src="//www.youtube.com/embed/F0Gfz3wmw4E" allowfullscreen=""></iframe>--></li>
       </ul>
 
       <!-- end .info-links 2-->
