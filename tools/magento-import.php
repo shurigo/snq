@@ -175,9 +175,10 @@ ini_set('memory_limit', '512M');
         'Брюки' =>  'Брюки и джинсы',
         'Ветровка' => 'Куртки',
         'Водолазка' => 'Кардиганы и джемперы',
+				'Головные уборы' => 'Головные уборы',
         'Джемпер' =>  'Кардиганы и джемперы',
         'Джемпер с коротким рукавом' => 'Кардиганы и джемперы',
-        'Джинсы' =>  'Брюки/Джинсы',
+        'Джинсы' =>  'Брюки и джинсы',
         'Дубленка' => 'Дубленки',
         'Жакет' =>  'Куртки',
         'Жакет меховой' => 'Куртки',
@@ -227,6 +228,7 @@ ini_set('memory_limit', '512M');
         'Футболка с длинным рукавом' => 'Футболки и топы',
         'Чехол для ipad' => 'Аксессуары',
         'Чехол для iPad' => 'Аксессуары',
+				'Шарф' => 'Аксессуары',
         'Шорты' => 'Шорты',
         'Шуба' => 'Шубы и меха',
         'Юбка' => 'Юбки'),
@@ -282,7 +284,11 @@ ini_set('memory_limit', '512M');
         'Футболка с длинным рукавом' => 'Футболки',
         'Чехол для ipad' => 'Аксессуары',
         'Чехол для iPad' => 'Аксессуары',
+				'Шарф' => 'Аксессуары',
         'Шорты' => 'Шорты'),
+			'Аксессуары' => array(
+				'Чехол для iPad' => 'Чехол для iPad' 
+			)
 		);
 
 		// SNQ price update csv file columns
@@ -405,7 +411,7 @@ ini_set('memory_limit', '512M');
 					$buf[$hdr_magento['product_collection']] = $data[$hdr_snowqueen['VCOLLECTION']];
 					$buf[$hdr_magento['status']] = 1;
 					$buf[$hdr_magento['visibility']] = 1;
-					$buf[$hdr_magento['is_in_stock']] = 1;
+					$buf[$hdr_magento['is_in_stock']] = 0;
 					$buf[$hdr_magento['weight']] = 1;
 					$buf[$hdr_magento['tax_class_id']] = 0;
 					$buf[$hdr_magento['manage_stock']] = 1;
@@ -422,6 +428,8 @@ ini_set('memory_limit', '512M');
 						$category = 'Женщины';
 					} else if($data[$hdr_snowqueen['S163']] == 'Мужской') {
 						$category = 'Мужчины';
+					} else if($data[$hdr_snowqueen['S163']] == 'Аксессуары') {
+						$category = 'Аксессуары';
 					} else {
 						print 'WARN: Unknown category: '.$data[$hdr_snowqueen['S163']].". Ignored\n";
 						continue;
@@ -441,7 +449,7 @@ ini_set('memory_limit', '512M');
 						$category = $category2;
 					}
 					$buf[$hdr_magento['_category']] = $category;
-					$buf[$hdr_magento['qty']] = 1;
+					$buf[$hdr_magento['qty']] = 0;
 					$buf[$hdr_magento['_root_category']] = 'Default Category';
 					$buf[$hdr_magento['_product_websites']] = 'base';
 					$buf[$hdr_magento['url_key']] = str2url(
@@ -452,6 +460,7 @@ ini_set('memory_limit', '512M');
 							$buf[$hdr_magento['manufacturer']],
 							$buf[$hdr_magento['product_size']]
 						)));
+					$buf[$hdr_magento['url_key']]	=	str_replace('_', '-', $buf[$hdr_magento['url_key']]);
 
 					$buf = array_map('trim', $buf);
 					ksort($buf);
